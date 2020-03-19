@@ -1,0 +1,7 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: none
+  config:
+    toc:
+    toc_depth: 2
+    toc_float: true

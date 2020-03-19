@@ -1,0 +1,10 @@
+book_filename: "ml-industry"
+rmd_files:
+  - "01-telco.Rmd"
+  - "02-finance.Rmd"
+  - "03-retail.Rmd"
+output_dir: "book"
+new_session: true
+language:
+  ui:
+    chapter_name: "Bab "
