@@ -1,0 +1,149 @@
+# Insurance
+
+```{r setup, include=FALSE}
+# clear-up the environment
+rm(list = ls())
+
+# chunk options
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  comment = "#>"
+)
+
+# scientific notation
+options(scipen = 9999)
+```
+
+```{r message=F, warning=F, echo=FALSE}
+library(tidyverse)
+library(rsample)
+library(randomForest)
+library(randomForestExplainer)
+library(MLmetrics)
+library(inspectdf)
+```
+
+## Prediction of Total Claim Amount
+
+### Background
+
+Seiring tingkat kompetisi yang semakin tinggi di industri asuransi, perusahaan dituntut untuk selalu memberikan terobosan dan strategi untuk memberikan layanan yang terbaik untuk nasabahnya. Salah satu aset utama perusahaan asuransi tentunya adalah data nasabah dan riwayat polis. Tentunya dengan adanya data yang dimiliki oleh perusahaan, dapat dimanfaatkan dalam upaya pengambilan keputusan strategis.
+
+Perusahaan memiliki kebutuhan untuk memperhitungkan pembayaran klaim di masa depan. Tanggung jawab tersebut biasa dikenal sebagai cadangan klaim. Karena cadangkan klaim adalah kewajiban yang harus dipersiapkan untuk masa yang akan datang, nilai pastinya tidak diketahui dan harus diperkirakan.
+
+Risiko yang dimiliki oleh setiap nasabah tentunya bervariasi, faktor-faktor yang berhubungan dengan risiko tentunya membantu dalam memprediksi biaya klaim yang harus dibayarkan. Tujuan dari analysis ini adalah untuk memprediksi besarnya klaim yang harus diberikan oleh perusahaan untuk setiap nasabahnya, hasil prediksi diperoleh dengan mempelajari karakteristik dan profil dari nasabah tersebut.
+
+### Modelling Analysis
+
+#### Import Data
+
+Data yang digunakan merupakan profil data nasabah asuransi kendaraan beserta total claim dari masing-masing nasabah yang diperoleh dari [link berikut.](https://github.com/ccpintoiu/Prediction-of-Claim-Amount-in-Vehicle-Insurance) Data tersebut berisikan 9134 observasi atau sebanyak jumlah nasabah yang dimiliki, beserta 26 kolom. Target variabel pada data ini adalah `Total.Claim.Amount`, kita akan memprediksi total claim amount untuk setiap nasabah, harapannya perusahaan asuransi dapat mengetahui dana yang harus disiapkan untuk membayar klaim.
+
+```{r}
+insurance <- read.csv("assets/04-insurance/Auto_Insurance_Claims_Sample.csv")  
+head(insurance)
+```
+
+#### Exploratory Data
+
+Selanjutnya melihat structure data dari masing-masing variabel, jika terdapat variabel yang belum sesuai tipe datanya perlu dilakukan `explicit coercion`.
+
+```{r}
+str(insurance)
+```
+
+Berikutnya kita perlu inspect persebaran data yang dimilih baik data kategorik dan numerik, kita dapat menggunakan package `inspectdf` untuk eksplorasi berikut ini.
+```{r}
+insurance %>% inspect_cat() %>% show_plot()
+```
+
+```{r}
+insurance %>% inspect_num() %>% show_plot()
+```
+
+Dari hasil kedua plot diatas berikutnya membuang variabel yang tidak dibutuhkan dalam model. Variabel `customer` merupakan data unique dari ID setiap customer, oleh karena itu kita akan membuang variabel tersebut. Variabel `country` tidak banyak memberikan informasi, karena semua observasi berisikan informasi yang sama. Variabel `State.Code` juga memberikan informasi yang sama dengan variabel `State`, oleh karena itu kita akan menggunakan salah satu dari kedua variabel tersebut yaitu variabel `State`. Sedangkan untuk variabel `Policy` kita hilangkan karena informasi yang diberikan juga sama dengan variabel `Policy.Type`.
+
+```{r}
+insurance <- insurance %>% 
+  select(-c(Customer, Country, State.Code,
+            Effective.To.Date, Policy))
+```
+
+
+Selanjutnya, split data menjadi data train dan data test dengan proporsi 80:20.
+
+```{r}
+set.seed(100)
+idx <- initial_split(data = insurance,prop = 0.8)
+claim_train <- training(idx)
+claim_test <- testing(idx)
+```
+
+#### Modelling
+
+Kemudian bentuk model random forest, tentukan target variabel dan prediktor yang digunakan.
+```{r, eval=FALSE}
+library(randomForest)
+forest_claim <- randomForest(Total.Claim.Amount~.,data = claim_train, localImp = TRUE)
+#saveRDS(forest_claim,"forest_claim.RDS")
+```
+
+```{r}
+forest_claim <- readRDS("assets/04-insurance/forest_claim.RDS")
+forest_claim
+```
+
+Model memiliki kemampuan menjelaskan variasi data sebesar 84.8%, sedangkan sisanya sebesar 15.2% dijelaskan oleh variabel lain yang tidak digunakan pada model. Untuk mengetahui variabel yang paling berpengaruh pada model, kita dapat melihat `variabel importance`. 
+```{r}
+varImpPlot(forest_claim, main = "Variable Importance",n.var = 5)
+```
+
+Nilai importance atau tingkat kepentingannya terdapat dua penilaian yaitu `IncMSE` dan `IncNodePurity`. Untuk `IncMSE` diperoleh dari error pada OOB (out of bag) data, kemudian di rata-ratakan untuk semua pohon, dan dinormalisasi dengan standar deviasi. Untuk `IncNodePurity` merupakan total penurunan impurity dari masing-masing variabel. Untuk kasus klasifikasi node impurity diperoleh dari nilai gini index, sedangkan untuk kasus regresi diperoleh dari SSE (Sum Square Error).
+
+Untuk mengetahui peran variabel dalam pembuatan model, kita dapat memanfaatkan package `randomForestExplainer` yang menyediakan beberapa function untuk memperoleh informasi mengenai variabel importance.
+```{r, eval=FALSE}
+mindepth_frame <- min_depth_distribution(forest_claim)
+#saveRDS(mindepth_frame, "mindepthframe.rds")
+```
+
+```{r}
+mindepth_frame <- readRDS("assets/04-insurance/mindepthframe.rds")
+plot_min_depth_distribution(mindepth_frame, mean_sample = "top_trees")
+```
+
+Plot tersebut memberikan informasi mengenai nilai `mean minimal dept` untuk setiap variabel. Semakin kecil nilai minimal depth artinya semakin penting variabel tersebut pada model. Semakin besar proporsi minimal dept pada warna merah mudah (mendekati 0), artinya variabel tersebut sering dijadikan sebagai root node, yaitu variabel utama yang digunakan untuk menentukan nilai target.
+
+```{r eval = FALSE}
+imp_frame <- measure_importance(forest_claim)
+#saveRDS(imp_frame,"imp_frame.rds")
+```
+
+```{r}
+imp_frame <- readRDS("assets/04-insurance/imp_frame.rds")
+plot_multi_way_importance(imp_frame, size_measure = "no_of_nodes",no_of_labels = 6)
+```
+
+```{r}
+plot_multi_way_importance(imp_frame, x_measure = "mse_increase",
+                          size_measure = "p_value", no_of_labels = 6)
+```
+
+Perbandingan dari ketiga plot, terdapat 5 variabel yaitu location code, monthly premium auto, vehicle class, income, dan claim amount yang selalu muncul dari ketiga plot tersebut. Artinya kelima variabel tersebut dapat dikatakan variabel yang paling berpengaruh dan banyak digunakan dalam pembuatan pohon.
+
+Berikutnya lakukan prediksi untuk data test, kemudian cari nilai error dari hasil prediksi
+```{r}
+claim_test$pred <- predict(object = forest_claim,newdata = claim_test)
+```
+
+Mencari nilai RMSE (Root Mean Squared Error)
+```{r}
+RMSE(y_pred = claim_test$pred,y_true = claim_test$Total.Claim.Amount)
+```
+
+RMSE merupakan nilai rata rata dari jumlah kuadrat error yang menyatakan ukuran besarnya kesalahan yang dihasilkan oleh model. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh model mendekasi variasi nilai observasinya. Jika dilihat dari 5 number summary variabel total claim amount, nilai RMSE yang diperoleh sebesar 119.9 dapat dikatakan sudah cukup baik.
+
+### Conclusion
+
+Untuk memprediksi nilai `Total Claim Amount` model ini memiliki kemampuan menjelaskan variasi data sebesar 84.8% dan variabel yang paling mempengaruhi target adalah variabel location code, monthly premium auto, vehicle class, income, dan claim amount. Hasil error yang diperoleh dari model tersebut cukup baik dalam memprediksi data.

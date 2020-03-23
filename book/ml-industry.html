@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>ml-industry.utf8</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="ml-industry.utf8" />
   <meta property="og:type" content="book" />
@@ -157,6 +157,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.3" data-path=""><a href="#recommendation-4"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#insurance"><i class="fa fa-check"></i><b>4</b> Insurance</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>4.1</b> Prediction of Total Claim Amount</a><ul>
+<li class="chapter" data-level="4.1.1" data-path=""><a href="#background-5"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
+<li class="chapter" data-level="4.1.2" data-path=""><a href="#modelling-analysis"><i class="fa fa-check"></i><b>4.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="4.1.3" data-path=""><a href="#conclusion"><i class="fa fa-check"></i><b>4.1.3</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -284,6 +291,157 @@ retail industry.</p>
 #&gt; 3   KNN   Precision    0.823
 #&gt; 4   KNN      Recall    0.965</code></pre>
 <p>Perfomance model yang diperoleh sudah cukup baik untuk mengkategorikan customer berasal dari kelas horeca atau retail. Langkah selanjutnya, setelah mengetahui industry dari customer tersebut pihak perusahaan dapat mengamati perilaku customer tersebut cenderung lebih banyak membeli produk pada kategori apa dan dapat dijadikan pertimbangan untuk memberikan promosi yang sesuai kebutuhan customer.</p>
+
+</div>
+</div>
+</div>
+<div id="insurance" class="section level1">
+<h1><span class="header-section-number">Bab 4</span> Insurance</h1>
+<div id="prediction-of-total-claim-amount" class="section level2">
+<h2><span class="header-section-number">4.1</span> Prediction of Total Claim Amount</h2>
+<div id="background-5" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Background</h3>
+<p>Seiring tingkat kompetisi yang semakin tinggi di industri asuransi, perusahaan dituntut untuk selalu memberikan terobosan dan strategi untuk memberikan layanan yang terbaik untuk nasabahnya. Salah satu aset utama perusahaan asuransi tentunya adalah data nasabah dan riwayat polis. Tentunya dengan adanya data yang dimiliki oleh perusahaan, dapat dimanfaatkan dalam upaya pengambilan keputusan strategis.</p>
+<p>Perusahaan memiliki kebutuhan untuk memperhitungkan pembayaran klaim di masa depan. Tanggung jawab tersebut biasa dikenal sebagai cadangan klaim. Karena cadangkan klaim adalah kewajiban yang harus dipersiapkan untuk masa yang akan datang, nilai pastinya tidak diketahui dan harus diperkirakan.</p>
+<p>Risiko yang dimiliki oleh setiap nasabah tentunya bervariasi, faktor-faktor yang berhubungan dengan risiko tentunya membantu dalam memprediksi biaya klaim yang harus dibayarkan. Tujuan dari analysis ini adalah untuk memprediksi besarnya klaim yang harus diberikan oleh perusahaan untuk setiap nasabahnya, hasil prediksi diperoleh dengan mempelajari karakteristik dan profil dari nasabah tersebut.</p>
+</div>
+<div id="modelling-analysis" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Modelling Analysis</h3>
+<div id="import-data" class="section level4">
+<h4><span class="header-section-number">4.1.2.1</span> Import Data</h4>
+<p>Data yang digunakan merupakan profil data nasabah asuransi kendaraan beserta total claim dari masing-masing nasabah yang diperoleh dari <a href="https://github.com/ccpintoiu/Prediction-of-Claim-Amount-in-Vehicle-Insurance">link berikut.</a> Data tersebut berisikan 9134 observasi atau sebanyak jumlah nasabah yang dimiliki, beserta 26 kolom. Target variabel pada data ini adalah <code>Total.Claim.Amount</code>, kita akan memprediksi total claim amount untuk setiap nasabah, harapannya perusahaan asuransi dapat mengetahui dana yang harus disiapkan untuk membayar klaim.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">insurance &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/04-insurance/Auto_Insurance_Claims_Sample.csv&quot;</span>)  </a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">head</span>(insurance)</a></code></pre></div>
+<pre><code>#&gt;   Customer Country State.Code    State Claim.Amount Response Coverage Education
+#&gt; 1  BU79786      US         KS   Kansas     276.3519       No    Basic  Bachelor
+#&gt; 2  QZ44356      US         NE Nebraska     697.9536       No Extended  Bachelor
+#&gt; 3  AI49188      US         OK Oklahoma    1288.7432       No  Premium  Bachelor
+#&gt; 4  WW63253      US         MO Missouri     764.5862       No    Basic  Bachelor
+#&gt; 5  HB64268      US         KS   Kansas     281.3693       No    Basic  Bachelor
+#&gt; 6  OC83172      US         IA     Iowa     825.6298      Yes    Basic  Bachelor
+#&gt;   Effective.To.Date EmploymentStatus Gender Income Location.Code Marital.Status
+#&gt; 1           2/24/11         Employed      F  56274      Suburban        Married
+#&gt; 2           1/31/11       Unemployed      F      0      Suburban         Single
+#&gt; 3           2/19/11         Employed      F  48767      Suburban        Married
+#&gt; 4           1/20/11       Unemployed      M      0      Suburban        Married
+#&gt; 5            2/3/11         Employed      M  43836         Rural         Single
+#&gt; 6           1/25/11         Employed      F  62902         Rural        Married
+#&gt;   Monthly.Premium.Auto Months.Since.Last.Claim Months.Since.Policy.Inception
+#&gt; 1                   69                      32                             5
+#&gt; 2                   94                      13                            42
+#&gt; 3                  108                      18                            38
+#&gt; 4                  106                      18                            65
+#&gt; 5                   73                      12                            44
+#&gt; 6                   69                      14                            94
+#&gt;   Number.of.Open.Complaints Number.of.Policies    Policy.Type       Policy
+#&gt; 1                         0                  1 Corporate Auto Corporate L3
+#&gt; 2                         0                  8  Personal Auto  Personal L3
+#&gt; 3                         0                  2  Personal Auto  Personal L3
+#&gt; 4                         0                  7 Corporate Auto Corporate L2
+#&gt; 5                         0                  1  Personal Auto  Personal L1
+#&gt; 6                         0                  2  Personal Auto  Personal L3
+#&gt;   Claim.Reason Sales.Channel Total.Claim.Amount Vehicle.Class Vehicle.Size
+#&gt; 1    Collision         Agent           384.8111  Two-Door Car      Medsize
+#&gt; 2 Scratch/Dent         Agent          1131.4649 Four-Door Car      Medsize
+#&gt; 3    Collision         Agent           566.4722  Two-Door Car      Medsize
+#&gt; 4    Collision   Call Center           529.8813           SUV      Medsize
+#&gt; 5    Collision         Agent           138.1309 Four-Door Car      Medsize
+#&gt; 6         Hail           Web           159.3830  Two-Door Car      Medsize</code></pre>
+</div>
+<div id="exploratory-data" class="section level4">
+<h4><span class="header-section-number">4.1.2.2</span> Exploratory Data</h4>
+<p>Selanjutnya melihat structure data dari masing-masing variabel, jika terdapat variabel yang belum sesuai tipe datanya perlu dilakukan <code>explicit coercion</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">str</span>(insurance)</a></code></pre></div>
+<pre><code>#&gt; &#39;data.frame&#39;:    9134 obs. of  26 variables:
+#&gt;  $ Customer                     : Factor w/ 9134 levels &quot;AA10041&quot;,&quot;AA11235&quot;,..: 601 5947 97 8017 2489 4948 8434 756 1352 548 ...
+#&gt;  $ Country                      : Factor w/ 1 level &quot;US&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ State.Code                   : Factor w/ 5 levels &quot;IA&quot;,&quot;KS&quot;,&quot;MO&quot;,..: 2 4 5 3 2 1 1 4 1 1 ...
+#&gt;  $ State                        : Factor w/ 5 levels &quot;Iowa&quot;,&quot;Kansas&quot;,..: 2 4 5 3 2 1 1 4 1 1 ...
+#&gt;  $ Claim.Amount                 : num  276 698 1289 765 281 ...
+#&gt;  $ Response                     : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 1 2 2 1 2 1 ...
+#&gt;  $ Coverage                     : Factor w/ 3 levels &quot;Basic&quot;,&quot;Extended&quot;,..: 1 2 3 1 1 1 1 3 1 2 ...
+#&gt;  $ Education                    : Factor w/ 5 levels &quot;Bachelor&quot;,&quot;College&quot;,..: 1 1 1 1 1 1 2 5 1 2 ...
+#&gt;  $ Effective.To.Date            : Factor w/ 59 levels &quot;1/1/11&quot;,&quot;1/10/11&quot;,..: 48 25 42 13 53 18 48 10 19 40 ...
+#&gt;  $ EmploymentStatus             : Factor w/ 5 levels &quot;Disabled&quot;,&quot;Employed&quot;,..: 2 5 2 5 2 2 2 5 3 2 ...
+#&gt;  $ Gender                       : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 2 2 1 1 2 2 1 ...
+#&gt;  $ Income                       : int  56274 0 48767 0 43836 62902 55350 0 14072 28812 ...
+#&gt;  $ Location.Code                : Factor w/ 3 levels &quot;Rural&quot;,&quot;Suburban&quot;,..: 2 2 2 2 1 1 2 3 2 3 ...
+#&gt;  $ Marital.Status               : Factor w/ 3 levels &quot;Divorced&quot;,&quot;Married&quot;,..: 2 3 2 2 3 2 2 3 1 2 ...
+#&gt;  $ Monthly.Premium.Auto         : int  69 94 108 106 73 69 67 101 71 93 ...
+#&gt;  $ Months.Since.Last.Claim      : int  32 13 18 18 12 14 0 0 13 17 ...
+#&gt;  $ Months.Since.Policy.Inception: int  5 42 38 65 44 94 13 68 3 7 ...
+#&gt;  $ Number.of.Open.Complaints    : int  0 0 0 0 0 0 0 0 0 0 ...
+#&gt;  $ Number.of.Policies           : int  1 8 2 7 1 2 9 4 2 8 ...
+#&gt;  $ Policy.Type                  : Factor w/ 3 levels &quot;Corporate Auto&quot;,..: 1 2 2 1 2 2 1 1 1 3 ...
+#&gt;  $ Policy                       : Factor w/ 9 levels &quot;Corporate L1&quot;,..: 3 6 6 2 4 6 3 3 3 8 ...
+#&gt;  $ Claim.Reason                 : Factor w/ 4 levels &quot;Collision&quot;,&quot;Hail&quot;,..: 1 4 1 1 1 2 1 1 1 2 ...
+#&gt;  $ Sales.Channel                : Factor w/ 4 levels &quot;Agent&quot;,&quot;Branch&quot;,..: 1 1 1 3 1 4 1 1 1 2 ...
+#&gt;  $ Total.Claim.Amount           : num  385 1131 566 530 138 ...
+#&gt;  $ Vehicle.Class                : Factor w/ 6 levels &quot;Four-Door Car&quot;,..: 6 1 6 5 1 6 1 1 1 1 ...
+#&gt;  $ Vehicle.Size                 : Factor w/ 3 levels &quot;Large&quot;,&quot;Medsize&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+<p>Berikutnya kita perlu inspect persebaran data yang dimilih baik data kategorik dan numerik, kita dapat menggunakan package <code>inspectdf</code> untuk eksplorasi berikut ini.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_cat</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_num</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Dari hasil kedua plot diatas berikutnya membuang variabel yang tidak dibutuhkan dalam model. Variabel <code>customer</code> merupakan data unique dari ID setiap customer, oleh karena itu kita akan membuang variabel tersebut. Variabel <code>country</code> tidak banyak memberikan informasi, karena semua observasi berisikan informasi yang sama. Variabel <code>State.Code</code> juga memberikan informasi yang sama dengan variabel <code>State</code>, oleh karena itu kita akan menggunakan salah satu dari kedua variabel tersebut yaitu variabel <code>State</code>. Sedangkan untuk variabel <code>Policy</code> kita hilangkan karena informasi yang diberikan juga sama dengan variabel <code>Policy.Type</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">insurance &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(Customer, Country, State.Code,</a>
+<a class="sourceLine" id="cb10-3" title="3">            Effective.To.Date, Policy))</a></code></pre></div>
+<p>Selanjutnya, split data menjadi data train dan data test dengan proporsi 80:20.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb11-2" title="2">idx &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> insurance,<span class="dt">prop =</span> <span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb11-3" title="3">claim_train &lt;-<span class="st"> </span><span class="kw">training</span>(idx)</a>
+<a class="sourceLine" id="cb11-4" title="4">claim_test &lt;-<span class="st"> </span><span class="kw">testing</span>(idx)</a></code></pre></div>
+</div>
+<div id="modelling" class="section level4">
+<h4><span class="header-section-number">4.1.2.3</span> Modelling</h4>
+<p>Kemudian bentuk model random forest, tentukan target variabel dan prediktor yang digunakan.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb12-2" title="2">forest_claim &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Total.Claim.Amount<span class="op">~</span>.,<span class="dt">data =</span> claim_train, <span class="dt">localImp =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="co">#saveRDS(forest_claim,&quot;forest_claim.RDS&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">forest_claim &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/forest_claim.RDS&quot;</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2">forest_claim</a></code></pre></div>
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt;  randomForest(formula = Total.Claim.Amount ~ ., data = claim_train,      localImp = TRUE) 
+#&gt;                Type of random forest: regression
+#&gt;                      Number of trees: 500
+#&gt; No. of variables tried at each split: 6
+#&gt; 
+#&gt;           Mean of squared residuals: 12764.93
+#&gt;                     % Var explained: 84.8</code></pre>
+<p>Model memiliki kemampuan menjelaskan variasi data sebesar 84.8%, sedangkan sisanya sebesar 15.2% dijelaskan oleh variabel lain yang tidak digunakan pada model. Untuk mengetahui variabel yang paling berpengaruh pada model, kita dapat melihat <code>variabel importance</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">varImpPlot</span>(forest_claim, <span class="dt">main =</span> <span class="st">&quot;Variable Importance&quot;</span>,<span class="dt">n.var =</span> <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Nilai importance atau tingkat kepentingannya terdapat dua penilaian yaitu <code>IncMSE</code> dan <code>IncNodePurity</code>. Untuk <code>IncMSE</code> diperoleh dari error pada OOB (out of bag) data, kemudian di rata-ratakan untuk semua pohon, dan dinormalisasi dengan standar deviasi. Untuk <code>IncNodePurity</code> merupakan total penurunan impurity dari masing-masing variabel. Untuk kasus klasifikasi node impurity diperoleh dari nilai gini index, sedangkan untuk kasus regresi diperoleh dari SSE (Sum Square Error).</p>
+<p>Untuk mengetahui peran variabel dalam pembuatan model, kita dapat memanfaatkan package <code>randomForestExplainer</code> yang menyediakan beberapa function untuk memperoleh informasi mengenai variabel importance.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">mindepth_frame &lt;-<span class="st"> </span><span class="kw">min_depth_distribution</span>(forest_claim)</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="co">#saveRDS(mindepth_frame, &quot;mindepthframe.rds&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">mindepth_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/mindepthframe.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw">plot_min_depth_distribution</span>(mindepth_frame, <span class="dt">mean_sample =</span> <span class="st">&quot;top_trees&quot;</span>)</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Plot tersebut memberikan informasi mengenai nilai <code>mean minimal dept</code> untuk setiap variabel. Semakin kecil nilai minimal depth artinya semakin penting variabel tersebut pada model. Semakin besar proporsi minimal dept pada warna merah mudah (mendekati 0), artinya variabel tersebut sering dijadikan sebagai root node, yaitu variabel utama yang digunakan untuk menentukan nilai target.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">imp_frame &lt;-<span class="st"> </span><span class="kw">measure_importance</span>(forest_claim)</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co">#saveRDS(imp_frame,&quot;imp_frame.rds&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">imp_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/imp_frame.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">size_measure =</span> <span class="st">&quot;no_of_nodes&quot;</span>,<span class="dt">no_of_labels =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">x_measure =</span> <span class="st">&quot;mse_increase&quot;</span>,</a>
+<a class="sourceLine" id="cb20-2" title="2">                          <span class="dt">size_measure =</span> <span class="st">&quot;p_value&quot;</span>, <span class="dt">no_of_labels =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="04-insurance_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Perbandingan dari ketiga plot, terdapat 5 variabel yaitu location code, monthly premium auto, vehicle class, income, dan claim amount yang selalu muncul dari ketiga plot tersebut. Artinya kelima variabel tersebut dapat dikatakan variabel yang paling berpengaruh dan banyak digunakan dalam pembuatan pohon.</p>
+<p>Berikutnya lakukan prediksi untuk data test, kemudian cari nilai error dari hasil prediksi</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">claim_test<span class="op">$</span>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> forest_claim,<span class="dt">newdata =</span> claim_test)</a></code></pre></div>
+<p>Mencari nilai RMSE (Root Mean Squared Error)</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">RMSE</span>(<span class="dt">y_pred =</span> claim_test<span class="op">$</span>pred,<span class="dt">y_true =</span> claim_test<span class="op">$</span>Total.Claim.Amount)</a></code></pre></div>
+<pre><code>#&gt; [1] 62.59351</code></pre>
+<p>RMSE merupakan nilai rata rata dari jumlah kuadrat error yang menyatakan ukuran besarnya kesalahan yang dihasilkan oleh model. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh model mendekasi variasi nilai observasinya. Jika dilihat dari 5 number summary variabel total claim amount, nilai RMSE yang diperoleh sebesar 119.9 dapat dikatakan sudah cukup baik.</p>
+</div>
+</div>
+<div id="conclusion" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Conclusion</h3>
+<p>Untuk memprediksi nilai <code>Total Claim Amount</code> model ini memiliki kemampuan menjelaskan variasi data sebesar 84.8% dan variabel yang paling mempengaruhi target adalah variabel location code, monthly premium auto, vehicle class, income, dan claim amount. Hasil error yang diperoleh dari model tersebut cukup baik dalam memprediksi data.</p>
 
 </div>
 </div>
