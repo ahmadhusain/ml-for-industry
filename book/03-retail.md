@@ -2,6 +2,11 @@
 
 
 
+<style>
+body {
+text-align: justify}
+</style>
+
 ## Customer Segmentation
 
 ### Background

@@ -25,6 +25,11 @@ library(MLmetrics)
 library(inspectdf)
 ```
 
+<style>
+body {
+text-align: justify}
+</style>
+
 ## Prediction of Total Claim Amount
 
 ### Background

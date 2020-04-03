@@ -4,6 +4,11 @@
 
 
 
+<style>
+body {
+text-align: justify}
+</style>
+
 ## Prediction of Total Claim Amount
 
 ### Background
