@@ -30,6 +30,7 @@ library(rpart)
 library(tidymodels)
 library(rattle)
 library(caret)
+library(readr)
 ```
 ## Credit Risk Analysis 
 
@@ -38,7 +39,7 @@ library(caret)
 Credit scoring membutuhkan berbagai data profil calon peminjam sehingga tingkat resiko dapat dihitung dengan tepat. Semakin benar dan lengkap data yang disediakan, maka semakin akurat perhitungan yang dilakukan. Proses tersebut tentunya merupakan hal yang baik, namun di sisi calon peminjam proses yang harus dilalui dirasa sangat merepotkan dan membutuhkan waktu untuk menunggu. Dan seiring tingkat kompetisi yang samkin tinggi di industri finansial, customer memiliki
 banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempatan untuk mendapatkan peminjam.
 
-Tantangan pun muncul, bagaimana mendapatkan pelanggan dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa datadata profil peminjam dan proses pembayaran sehingga dapat mengeluarkan rekomendasi profil pelanggan yang beresiko rendah.
+Tantangan pun muncul, bagaimana mendapatkan pelanggan dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa data - data profil peminjam dan proses pembayaran sehingga dapat mengeluarkan rekomendasi profil pelanggan yang beresiko rendah.
 
 Harapannya setelah mempunyai model machine learning dengan perfomance model yang baik, pegawai bank dapat dengan mudah mengidentifikasi karakteristik customer yang memiliki peluang besar untuk melunasi pinjaman dengan lancar. Dengan adanya model machine learning ini tentunya akan mengurangi biaya dan waktu yang lebih cepat.
 
@@ -222,4 +223,219 @@ plot_features(explanation)
 ```
 
 Hasil visualisasi tersebut adalah contoh prediksi salah satu customer, customer tersebut terprediksi yes yang memiliki arti customer tersebut berpeluang besar sebagai customer yang lancar melunasi pembayaran. Tentunya ketika hasil prediksi menyatakan customer tersebut berpeluang besar untuk kredit lancar, artinya bank akan memberikan pinjaman kepada customer tersebut. Dari hasil visual tersebut juga ditunjukkan variabel mana yang support dan contradicts terhadap hasil prediksi yang dihasilkan.
+
+## Evaluating Customer Financial Complaints
+
+### Background
+
+Penanganan complain customer pada perusahaan saat ini menjadi salah satu kunci utama suatu perusahaan dapat terus tumbuh dan berkembang, karena apabila nasabah merasa tidak mendapatkan layanan yang baik saat menyampaikan keluhan maka nasabah akan mudah berpindah ke perusahaan lain yang dianggap bisa memberikan layanan terhadap komplain dengan baik. Nasabah yang merasa tidak mendapatkan layanan baik biasanya akan mengajukan keluhan ke Consumer Financial Protection Bureau (CFPB), CFPB merupakan instansi yang bertanggung jawab atas perlindungan konsumen di sektor keuangan. CFPB menyediakan data yang berisi keluhan dari customer financial, data keluhan tersebut dapat dianalisa untuk dijadikan pertimbangan pihak perusahaan untuk mengetahui indikator yang memerlukan perbaikan demi meningkatkan kualitas layanan.
+
+### Exploratory Data Analysis
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(textclean)
+library(tidytext)
+library(wordcloud2)
+library(SnowballC)
+library(sentimentr)
+library(reshape2)
+library(widyr)
+library(igraph)
+library(ggraph)
+```
+
+```{r, eval=FALSE}
+customer <- read_csv("assets/02-finance/consumer_complaints.csv")%>%
+              mutate_if(is.character, as.factor) %>% 
+              data.frame()
+```
+
+
+Data diperoleh dari [Consumer Financial Protection Bureau (CFPB)](https://www.consumerfinance.gov/)  yang mengatur penawaran dan penyediaan produk atau layanan nasabah keuangan. CFPB menyediakan pertanyaan-pertanyaan umum dan dapat membantu nasabah terhubung dengan perusahaan keuangan yang terlibat. Data tersebut berisikan keluhan nasabah dari berbagai bank di Amerika Serikat.
+
+```{r, eval=FALSE}
+top_company <- customer %>% 
+  na.omit(Consumer.complaint.narrative) %>% 
+  group_by(Company) %>% 
+  summarise(total = n()) %>% 
+  arrange(desc(total)) %>% 
+  head(1)
+```
+
+Dari 4504 perusahaan pada data, perusahaan yang paling banyak memiliki complain adalah `Transunion Intermediate Holdings`. Perlu diketahui bahwa banyaknya complain yang diperhitungkan tidak mempertimbangkan volume perusahaan. Misalnya, perusahaan dengan lebih banyak customer tentunya memiliki kemungkinan banyak complain dibandingkan perusahaan yang lebih sedikit pelanggannya dan juga pada analisa ini kita hanya memperhitungkan complain yang dilengkapi dengan narasi dari customer tersebut.
+
+Berikutnya kita akan fokus untuk menganalisa complai dari perusahaan `Transunion Intermediate Holdings` yang memiliki paling banyak narasi complain dari data.
+
+```{r, eval=FALSE, echo = FALSE}
+data_complaint <- customer %>%
+  na.omit(Consumer.complaint.narrative) %>% 
+  filter(Company %in% top_company$Company) %>%
+  droplevels()
+```
+
+```{r, echo = FALSE}
+#write.csv(data_complaint,"assets/02-finance/data_complaint.csv", row.names = F)
+data_complaint <- read.csv("assets/02-finance/data_complaint.csv")
+```
+
+Setelah memperoleh data observasi, selanjutnya membersihkan data text:
+```{r}
+data_clean <- data_complaint %>% 
+  select(Consumer.complaint.narrative) %>% 
+  mutate(Consumer.complaint.narrative = Consumer.complaint.narrative %>% 
+  tolower() %>% 
+  str_trim() %>% 
+  str_remove_all(pattern = "[[:punct:]]") %>% 
+  str_remove_all(pattern = "[0-9]") %>% 
+  str_remove_all(pattern = "xxxx") %>% 
+  replace_contraction() %>% 
+  replace_word_elongation() %>% 
+  replace_white() %>% 
+  str_squish())
+head(data_clean)
+```
+
+Setelah membersihkan data text, selanjutnya kita akan melakukan proses `tokenization` yaitu memecah 1 kalimat menjadi beberapa `term`, pada proses berikut ini juga diperoleh frekuensi dari setiap term yang muncul.
+```{r}
+text.dat <- data_clean %>% 
+  rowid_to_column("id") %>% 
+  unnest_tokens(word, Consumer.complaint.narrative) %>% 
+  anti_join(stop_words) %>% 
+  count(word, sort = T) %>% 
+  rename(words = word,
+         freq = n) %>% 
+  filter(words != is.na(words),
+         freq > 50)
+head(text.dat)
+```
+
+Kata yang sudah diperoleh akan divisualisasikan dengan wordcloud. Semakin sering suatu kata digunakan, maka semakin besar pula ukuran kata tersebut ditampilkan dalam wordcloud. Artinya kita dapat mengetahui kata yang paling sering digunakan oleh customer `Transunion Intermediate Holdings`. Kata `credit`, `report`, dan `account` merupakan kata yang paling sering digunakan oleh customer saat complain.
+```{r}
+wordcloud2(data = text.dat, size = 1, color = 'random-dark', shuffle = 1)
+```
+
+### Comparing Sentiment Dictionaries
+
+Semakin banyak informasi yang ditampilkan, dapat membantu pihak marketing mengembangkan strategi yang efektif dalam meningkatkan pelayanan, berikutnya tidak hanya kata yang sering muncul yang akan ditampilkan, namun juga informasi mengenai kata tersebut merupakan kata positif atau negatif yang digunakan oleh customer saat mengajukan complain.
+
+```{r}
+text_dat <-  data_clean %>% 
+  rowid_to_column("id") %>% 
+  unnest_tokens(word, Consumer.complaint.narrative) %>% 
+  anti_join(stop_words) %>% 
+  mutate(word = wordStem(word)) %>% 
+  count(word, sort = T) %>% 
+  filter(word != is.na(word))
+head(text_dat,20)
+```
+
+```{r}
+bing_word <- text_dat %>% 
+  inner_join(get_sentiments("bing")) 
+head(bing_word)
+```
+
+```{r}
+library(reshape2)
+library(wordcloud)
+bing_word %>% 
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>% 
+  comparison.cloud(colors = c("gray70","gray20"), max.words = 200)
+```
+
+Sentiment Analysis yang dilakukan sebelumnya kita memperhitungan kemunculan kata positif dan negatif. Salah satu kelemahan pada pendekatan tersebut terkadang dapat disalah artikan penggunaannya pada sebuah kata, misal `correct` dan `support` akan dianggap sebagai kata positif. Namun, arti kata tersebut akan berubah jika terdapat kata `not` didepannya. Pada analisis berikut ini kita akan menggunakan n-gram untuk melihat seberapa sering `word1` diikuti oleh `word2`. Tokenisasi menggunakan n-gram berguna untuk eksplorasi kata yang memiliki hubungan. Ketika kita mengatur `n = 2` artinya kita akan menampilkan dua kata berturut-turut atau sering disebut dengam bigrams. Hasil dari visualisasi berikut ini menampilkan kata-kata yang berhubungan dengan kata `not`.
+
+```{r}
+dat_bigrams <- data_clean %>% 
+  unnest_tokens(bigram, Consumer.complaint.narrative, token = "ngrams", n= 2) %>%
+  separate(bigram, c("word1","word2"), sep = " ") %>% filter(word1 == "not") %>% 
+  inner_join(get_sentiments("afinn"), by = c(word2 = "word")) %>% 
+  count(word1,word2, value, sort = T) %>% 
+  mutate(contribution = n*value) %>% 
+  arrange(desc(abs(contribution))) %>% 
+  group_by(word1) %>% 
+  slice(seq_len(20)) %>% 
+  arrange(word1, desc(contribution)) %>% 
+  ungroup() 
+```
+
+```{r}
+graph_bigram <- dat_bigrams %>% 
+                graph_from_data_frame()
+
+set.seed(123)
+
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+
+ggraph(graph_bigram, layout = "fr") +
+  geom_edge_link(alpha = .25) +
+  geom_edge_density(aes(fill = value)) +
+  geom_node_point(color = "lightblue", size = 5) +
+  geom_node_text(aes(label = name),  repel = TRUE) +
+  theme_void() + theme(legend.position = "none",
+                       plot.title = element_text(hjust = 0.5)) +
+  ggtitle("Negation Bigram Network")
+
+```
+
+
+### Correlation Pairs
+
+Analisis berikutnya, akan dilakukan eksplorasi untuk mengetahui kata-kata yang memiliki kecenderungan muncul bersama pada complain nasabah dengan mencari nilai korelasi antar kata.
+
+```{r}
+data_clean_cor <- data_complaint %>% 
+  select(Consumer.complaint.narrative,Issue,Product) %>% 
+  mutate(Consumer.complaint.narrative = Consumer.complaint.narrative %>% 
+  tolower() %>% 
+  str_trim() %>% 
+  str_remove_all(pattern = "[[:punct:]]") %>% 
+  str_remove_all(pattern = "[0-9]") %>% 
+  str_remove_all(pattern = "xxxx") %>% 
+  replace_contraction() %>% 
+  replace_word_elongation() %>% 
+  replace_white() %>% 
+  str_squish())
+head(data_clean_cor)
+```
+
+```{r}
+text_dat_cor <-  data_clean_cor %>% 
+                rowid_to_column("id") %>% 
+                unnest_tokens(word,Consumer.complaint.narrative) %>% 
+                anti_join(stop_words)
+```
+
+
+Untuk memperoleh korelasi antar kata dapat menggunakan function `pairwise_cor()` dari package `widyr`
+```{r}
+words_cors <- text_dat_cor %>% 
+  group_by(word) %>% 
+  filter(n() > 100) %>%
+  pairwise_cor(word, Issue, sort = T)
+```
+
+Korelasi antar kata dapat kita tampilkan secar visual menggunakan package `ggraph`. Pada visualisasi berikut kita hanya ingin menampilkan kata yang memiliki korelasi lebih dari 0.9. Artinya korelasi pada visualisasi berikut memiliki kecenderungan muncul bersamaan saat nasabah mengajukan complain.
+```{r}
+set.seed(100)
+
+words_cors %>%
+  filter(correlation > .9) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+  geom_edge_link(aes(edge_alpha = correlation)) +
+  geom_node_point(color = "lightblue", size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE) +
+  theme_void() +
+  ggtitle("Correlation between Words")+
+  theme(legend.position = "none",
+                       plot.title = element_text(hjust = 0.5,face = "bold"))
+```
+
+Manfaat dari Sentiment Analysis yang telah dilakukan adalah kita dapat mengetahui pesan utama dari pendapat dan pemikiran customer terhadap suatu company atau product. Selain itu, output dari sentiment analysis dapat memberikan gambaran mengenai pelayanan atau product yang belum sesuai. Hal tersebut dapat membantu tim marketing untuk meneliti trend yang dibutuhkan customer dengan lebih baik. Seiring dengan peningkatan kualitas layanan dan pengembangan produk yang lebih baik, tentunya akan mengurangi tingkat churn customer.
+
+
+
+
 
