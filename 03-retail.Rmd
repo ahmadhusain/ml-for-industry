@@ -21,26 +21,196 @@ body {
 text-align: justify}
 </style>
 
-## Customer Segmentation
+```{r message=F, warning=F, echo=FALSE}
+library(tidyverse)
+library(textclean)
+library(tidytext)
+library(SnowballC)
+library(reshape2)
+library(rsample)
+library(tm)
+library(e1071)
+library(lime)
+library(caret)
+```
+
+##  E-Commerce Clothing Reviews
 
 ### Background
 
-FMCG (Fast Moving Consumer Goods) adalah produk-produk yang sifatnya cepat habis yang biasanya terdiri dari kebutuhan sehari-hari, sehingga dapat terjual dalam waktu singkat dan biaya yang relatif rendah. Suatu perusahaan FMCG mendistribusikan penjualannya ke berbagai macam sektor seperti hotel, restoran, kafe, dan semua macam outlet retail. Bagian CRM (Customer Relationship Management) mengumpulkan transaksi penjualan satu tahun terakhir untuk setiap kategori produk. Perusahaan ingin membuat model machine learning yang secara otomatis dapat mengkategorikan customer mereka menjadi dua kelas yaitu, horeca (Hotel, Restaurant, and Cafe) dan
-retail industry.
+Perkembangan teknologi membuat pergeseran perilaku customer dari pembelian offline menjadi pembelian online atau melalui e-commerce. 
+Perbedaan utama saat berbelanja secara online atau offline adalah
+saat akan berbelanja secara online, calon customer tidak dapat memeriksa barang yang akan dibeli secara langsung dan biasanya dibantuk oleh gambar atau deskripsi yang diberikan oleh penjual.
+Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk meminimalisir dampak negatif yang didapat. Untuk membantu customer dalam menentukan product yang akan dibeli, mayoritas e-commerce sekarang ini menyediakan fitur online customer review, dimana online customer review ini dijadikan sebagai salah satu media customer mendapatkan informasi tentang produk dari customer yang telah membeli produk tersebut. Meningkatnya e-commerce di Indonesia, kebutuhan analisa mengenai online customer review dirasa perlu dilakukan untuk mendukung agar customer dapat memiliki pengalaman belanja online yang lebih baik daripada belanja offline. Salah satu implementasi data review customer tersebut dapat dimanfaatkan untuk membuat model yang dapat memprediksi apakah product tersebut direkomendasikan atau tidak direkomendasikan. Harapannya setelah perusahaan dapat menilai product mana yang direkomendasikan dan yang tidak direkomendasikan, dapat membantu perusahaan dalam pertimbangan penentuan top seller. Untuk seller yang memiliki banyak product yang direkomendasikan, dapat dijadikan sebagai top seller.
 
-### Expected Outcome
-
-Harapannya setelah mempunyai model machine learning, pihak CRM dapat melakukan prediksi mengenai customer yang membeli product mereka berasal dari industry mana yang dilihat dari transaksi setiap customer untuk setiap kategori.
-
-### Recommendation
 
 ```{r}
-data.frame(
-  "Model" = rep("KNN", 4),
-  "Evaluation" = c("Accuracy", "Specificity", "Precision", "Recall")  ,
-  "Estimate" = c(0.920, 0.898, 0.823, 0.965)
-)
+reviews <- read.csv("assets/03- retail/Womens Clothing E-Commerce Reviews.csv")
+head(reviews)
+```
+
+Data yang digunakan merupakan data [women e-commerce clothing reviews](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews). Terdapat dua variabel yang menjadi fokus analisis ini yaitu `Review.Text` dan `Recommended.IND`. Variabel `Review.Text` merupakan review yang diberikan oleh customer terhadap product dari berbagai e-commerce, sedangkan `Recommended.IND` merupakan penilaian rekomendasi dari customer, `1` artinya product tersebut `recommended` dan `0` artinya product tersebut `not recommended`.
+
+Sebelum masuk cleaning data, kita ingin mengetahui proporsi dari target variabel:
+```{r}
+prop.table(table(reviews$Recommended.IND))
+```
+
+### Cleaning Data
+
+Untuk mengolah data text, kita perlu mengubah data teks dari vector menjadi corpus dengan function `Vcorpus()`.
+
+```{r}
+reviews_corpus <- VCorpus(VectorSource(reviews$Review.Text))
+reviews_corpus
+```
+
+Selanjutnya, kita melakukan text cleansing dengan beberapa langkah sebagai berikut:
+
+- `tolower` digunakan untuk mengubah semua karakter menjadi lowercase.
+- `removePunctuation` digunakan untuk menghilangkan semua tanda baca.
+- `removeNumbers` digunakan untuk menghilangkan semua angka.
+- `stopwords` digunakan untuk menghilangkan kata-kata umum (am,and,or,if).
+- `stripWhitespace` digunakan untuk menghapus karakter spasi yang berlebihan.
+
+```{r}
+data_clean <- reviews_corpus %>% 
+  tm_map(content_transformer(tolower)) %>% 
+  tm_map(removePunctuation) %>% 
+  tm_map(removeNumbers) %>% 
+  tm_map(removeWords, stopwords("en")) %>% 
+  tm_map(content_transformer(stripWhitespace)) 
+inspect(data_clean[[1]])
+```
+
+Setelah melakukan text cleansing, text tersebut akan diubah menjadi Document Term Matrix(DTM) melalui proses tokenization. Tokenization berfungsi memecah 1 teks atau kalimat menjadi beberapa term. Terim bisa berupa 1 kata, 2 kata, dan seterusnya. Pada format DTM, 1 kata akan menjadi 1 feature, secara default nilainya adalah jumlah kata pada dokumen tersebut. 
+```{r}
+dtm_text <- DocumentTermMatrix(data_clean)
+```
+
+Sebelum membentuk model, tentunya kita perlu split data menjadi data train dan data test dengan proporsi 80:20.
+```{r}
+set.seed(100)
+idx <- sample(nrow(dtm_text), nrow(dtm_text)*0.8)
+train <- dtm_text[idx,]
+test <- dtm_text[-idx,]
+train_label <- reviews[idx,"Recommended.IND"]
+test_label <-  reviews[-idx,"Recommended.IND"]
+```
+
+Term yang digunakan pada model ini, kita hanya mengambil term yang muncul paling sedikit 100 kali dari seluruh observasi dengan `findFreqTerms()`.
+```{r}
+freq <- findFreqTerms(dtm_text, 100)
+train_r <- train[, freq]
+test_r <- test[, freq]
+
+inspect(train_r)
+```
+
+Nilai dari setiap matrix masih berupa angka numerik, dengan range 0-inf. Naive bayes akan memiliki performa lebih bagus ketika variabel numerik diubah menjadi kategorik. Salah satu caranya dengan Bernoulli Converter, yaitu jika jumlah kata yang muncul lebih dari 1, maka kita akan anggap nilainya adalah 1, jika 0 artinya tidak ada kata tersebut.
+```{r}
+bernoulli_conv <- function(x){
+  x <- as.factor(ifelse(x > 0, 1, 0))
+  return(x)
+}
+
+train.bern <- apply(train_r, MARGIN = 2, FUN = bernoulli_conv)
+test.bern <- apply(test_r, MARGIN = 2, FUN = bernoulli_conv)
+```
+
+### Modelling
+
+Selanjutnya, pembentukan model menggunakan naive bayes dan diikuti dengan prediksi data test.
+```{r}
+model.nb <- naiveBayes(x = train.bern, 
+                       y = as.factor(train_label), 
+                       laplace = 1)
+pred.nb <- predict(object = model.nb, newdata= test.bern)
+```
+
+Dai hasil prediksi data test, kita akan menampilkan Confusion Matrix untuk mengetahui performa model.
+```{r}
+confusionMatrix(data = as.factor(pred.nb),
+                reference = as.factor(test_label),
+                positive = "1")
+```
+
+### Visualize Data Text
+
+Selanjutnya, kita akan coba lakukan prediksi terhadap data test dan juga menampilkan visualisasi text tersebut menggunakan package lime.
+
+```{r}
+set.seed(100)
+idx <- sample(nrow(reviews), nrow(reviews)*0.8)
+train_lime <- reviews[idx,]
+test_lime <- reviews[-idx,]
+```
+
+```{r}
+tokenize_text <- function(text){
+  
+  #create corpus
+  
+  data_corpus <- VCorpus(VectorSource(text))
+  
+  # cleansing
+  data_clean <- data_corpus %>% 
+  tm_map(content_transformer(tolower)) %>% 
+  tm_map(removePunctuation) %>% 
+  tm_map(removeNumbers) %>% 
+  tm_map(removeWords, stopwords("en")) %>% 
+  tm_map(content_transformer(stripWhitespace)) 
+  
+  #dtm
+  dtm_text <- DocumentTermMatrix(data_clean)
+
+  #convert to bernoulli
+  data_text <- apply(dtm_text, MARGIN = 2, FUN = bernoulli_conv)
+  
+  return(data_text)
+}
 ```
 
 
-Perfomance model yang diperoleh sudah cukup baik untuk mengkategorikan customer berasal dari kelas horeca atau retail. Langkah selanjutnya, setelah mengetahui industry dari customer tersebut pihak perusahaan dapat mengamati perilaku customer tersebut cenderung lebih banyak membeli produk pada kategori apa dan dapat dijadikan pertimbangan untuk memberikan promosi yang sesuai kebutuhan customer.
+```{r}
+model_type.naiveBayes <- function(x){
+  return("classification")
+}
+
+predict_model.naiveBayes <- function(x, newdata, type = "raw") {
+
+    # return classification probabilities only   
+    res <- predict(x, newdata, type = "raw") %>% as.data.frame()
+    
+    return(res)
+}
+
+text_train <- train_lime$Review.Text %>% 
+              as.character()
+
+```
+
+```{r}
+explainer <- lime(text_train,
+                  model = model.nb,
+                  preprocess = tokenize_text)
+```
+
+```{r}
+text_test <- test_lime$Review.Text %>% 
+            as.character()
+
+set.seed(100)
+explanation <- explain(text_test[5:10],
+                       explainer = explainer,
+                       n_labels =1,
+                       n_features = 50,
+                       single_explanation = F)
+
+```
+
+```{r}
+plot_text_explanations(explanation)
+```
+
+Dari hasil output observasi kedua terprediksi product tersebut recommended dengan probability 96.31% dan nilai explainer fit menunjukkan seberapa baik LIME dalam menginterpretasikan prediksi untuk observasi ini sebesar 0.89 artinya dapat dikatakan cukup akurat. Teks berlabel biru menunjukkan kata tersebut meningkatkan kemungkinan product tersebut untuk direkomendasikan, sedangkan teks berlabel merah berarti bahwa kata tersebut bertentangan/mengurangi kemungkinan product tersebut untuk direkomendasikan.

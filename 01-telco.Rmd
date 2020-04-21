@@ -165,10 +165,10 @@ model_forest <- readRDS("assets/01-telco/model_forest.rds")
 ```
 
 ```{r}
-model_forest$finalmodel
+model_forest
 ```
 
-Dari hasil yang diperoleh pada `model_forest`, nilai Out of Bag Error (OOB) sebesar 21.61%. Artinya accuracy pada model tersebut sebesar 78.39%. Error yang diperoleh masih cukup tinggi. Selanjutnya, akan dilakukan tuning model dengan melakukan upsample data. Artinya, kita akan membuat proporsi dari target variabel sama besar.
+Dari hasil yang diperoleh pada `model_forest`, didapatkan accuraci sebesar 0.78 dengan mtry sebanyak 2. Selanjutnya, akan dilakukan tuning model dengan melakukan upsample data. Artinya, kita akan membuat proporsi dari target variabel sama besar.
 ```{r}
 up_train <- upSample(x = data_train[,-20],
                      y = data_train$Churn,
@@ -189,10 +189,10 @@ forest_upc <- readRDS("assets/01-telco/model_caret.rds")
 
 Dari hasil model kedua diperoleh hasil sebagai berikut:
 ```{r}
-forest_upc$finalModel
+forest_upc
 ```
 
-Setelah dilakukan upsample data, terlihat nilai OOB yang diperoleh lebih kecil dibandingkan model sebelumnya yaitu sebesar 9.03%. Selanjutnya, akan dilakukan prediksi terhadap `data_test`:
+Setelah dilakukan upsample data, terlihat nilai accuracy yang diperoleh lebih besar dibandingkan model sebelumnya sebesar 0.89 dengan mtry sebanyak 16. Selanjutnya, akan dilakukan prediksi terhadap `data_test`:
 
 ```{r}
 pred <- predict(forest_upc,newdata = data_test,type = "prob")
