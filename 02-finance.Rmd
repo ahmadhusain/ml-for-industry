@@ -1,27 +1,5 @@
 # Finance
 
-```{r setup, include=FALSE}
-# clear-up the environment
-rm(list = ls())
-
-# chunk options
-knitr::opts_chunk$set(
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center",
-  comment = "#>"
-)
-
-# scientific notation
-options(scipen = 9999)
-
-```
-
-<style>
-body {
-text-align: justify}
-</style>
-
 ```{r message=F, warning=F, echo=FALSE}
 library(tidyverse)
 library(rsample)

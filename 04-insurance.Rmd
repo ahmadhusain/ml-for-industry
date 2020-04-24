@@ -1,21 +1,5 @@
 # Insurance
 
-```{r setup, include=FALSE}
-# clear-up the environment
-rm(list = ls())
-
-# chunk options
-knitr::opts_chunk$set(
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center",
-  comment = "#>"
-)
-
-# scientific notation
-options(scipen = 9999)
-```
-
 ```{r message=F, warning=F, echo=FALSE}
 library(tidyverse)
 library(rsample)
@@ -144,7 +128,7 @@ claim_test$pred <- predict(object = forest_claim,newdata = claim_test)
 
 Mencari nilai RMSE (Root Mean Squared Error)
 ```{r}
-RMSE(y_pred = claim_test$pred,y_true = claim_test$Total.Claim.Amount)
+MLmetrics::RMSE(y_pred = claim_test$pred,y_true = claim_test$Total.Claim.Amount)
 ```
 
 RMSE merupakan nilai rata rata dari jumlah kuadrat error yang menyatakan ukuran besarnya kesalahan yang dihasilkan oleh model. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh model mendekasi variasi nilai observasinya. Jika dilihat dari 5 number summary variabel total claim amount, nilai RMSE yang diperoleh sebesar 119.9 dapat dikatakan sudah cukup baik.

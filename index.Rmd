@@ -1,7 +1,27 @@
 --- 
-title: "Corporate Portfolio"
-author: "Team Algoritma"
-date: "`r format(Sys.Date(), '%B %e, %Y')`"
+title: "Machine Learning Application in Industry"
+author: "Algoritma Team"
+date: "`r format(Sys.Date(), '%d, %B %Y')`"
+site: bookdown::bookdown_site
 documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is guide for Product Team Algoritma."
 ---
 
+# Introduction
+
+
+The following bookdown is produced by the team at **Algoritma** for Machine Learning Application in Industry.
+
+**Algoritma** is a data science education center based in Jakarta. We organize workshops and training programs to help working professionals and students gain mastery in various data science sub-fields: data visualization, machine learning, data modeling, statistical inference, etc.
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

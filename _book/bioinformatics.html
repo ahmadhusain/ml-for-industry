@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Bioinformatics | Machine Learning Application in Industry</title>
+  <meta name="description" content="This is guide for Product Team Algoritma." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Bioinformatics | Machine Learning Application in Industry" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is guide for Product Team Algoritma." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Bioinformatics | Machine Learning Application in Industry" />
+  
+  <meta name="twitter:description" content="This is guide for Product Team Algoritma." />
+  
+
+<meta name="author" content="Algoritma Team" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="insurance.html"/>
+<link rel="next" href="public-health.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+<link href="libs/plot_text_explanations-0.1.0/plot_text_explanations.css" rel="stylesheet" />
+<script src="libs/plot_text_explanations-binding-0.5.1/plot_text_explanations.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets\book.css" type="text/css" />
+<link rel="stylesheet" href="https:\\use.fontawesome.com\releases\v5.3.1\css\all.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Algoritma Book</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="telecommunication.html"><a href="telecommunication.html"><i class="fa fa-check"></i><b>2</b> Telecommunication</a><ul>
+<li class="chapter" data-level="2.1" data-path="telecommunication.html"><a href="telecommunication.html#customer-churn-prediction"><i class="fa fa-check"></i><b>2.1</b> Customer Churn Prediction</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>2.1.1</b> Background</a></li>
+<li class="chapter" data-level="2.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>2.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="2.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>2.1.3</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a><ul>
+<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#credit-risk-analysis"><i class="fa fa-check"></i><b>3.1</b> Credit Risk Analysis</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
+<li class="chapter" data-level="3.1.2" data-path="finance.html"><a href="finance.html#modelling-analysis-1"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-2"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
+<li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="retail.html"><a href="retail.html"><i class="fa fa-check"></i><b>4</b> Retail</a><ul>
+<li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="retail.html"><a href="retail.html#background-3"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
+<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="retail.html"><a href="retail.html#modelling-2"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
+<li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="insurance.html"><a href="insurance.html"><i class="fa fa-check"></i><b>5</b> Insurance</a><ul>
+<li class="chapter" data-level="5.1" data-path="insurance.html"><a href="insurance.html#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>5.1</b> Prediction of Total Claim Amount</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="insurance.html"><a href="insurance.html#background-4"><i class="fa fa-check"></i><b>5.1.1</b> Background</a></li>
+<li class="chapter" data-level="5.1.2" data-path="insurance.html"><a href="insurance.html#modelling-analysis-2"><i class="fa fa-check"></i><b>5.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="5.1.3" data-path="insurance.html"><a href="insurance.html#conclusion-1"><i class="fa fa-check"></i><b>5.1.3</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bioinformatics.html"><a href="bioinformatics.html"><i class="fa fa-check"></i><b>6</b> Bioinformatics</a><ul>
+<li class="chapter" data-level="6.1" data-path="bioinformatics.html"><a href="bioinformatics.html#qtl-mapping-for-disease-resistance"><i class="fa fa-check"></i><b>6.1</b> QTL Mapping for Disease Resistance</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="bioinformatics.html"><a href="bioinformatics.html#backgorund"><i class="fa fa-check"></i><b>6.1.1</b> Backgorund</a></li>
+<li class="chapter" data-level="6.1.2" data-path="bioinformatics.html"><a href="bioinformatics.html#modelling-analysis-3"><i class="fa fa-check"></i><b>6.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="bioinformatics.html"><a href="bioinformatics.html#conclusion-2"><i class="fa fa-check"></i><b>6.1.3</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="public-health.html"><a href="public-health.html"><i class="fa fa-check"></i><b>7</b> Public Health</a><ul>
+<li class="chapter" data-level="7.1" data-path="public-health.html"><a href="public-health.html#survival-analysis-of-patients-with-lung-cancer"><i class="fa fa-check"></i><b>7.1</b> Survival Analysis of Patients with Lung Cancer</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="public-health.html"><a href="public-health.html#import-data-3"><i class="fa fa-check"></i><b>7.1.1</b> Import Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="public-health.html"><a href="public-health.html#exploratory-data-analysis-3"><i class="fa fa-check"></i><b>7.1.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="public-health.html"><a href="public-health.html#modelling-analysis-4"><i class="fa fa-check"></i><b>7.1.3</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="7.1.4" data-path="public-health.html"><a href="public-health.html#conclusion-3"><i class="fa fa-check"></i><b>7.1.4</b> Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="media.html"><a href="media.html"><i class="fa fa-check"></i><b>8</b> Media</a><ul>
+<li class="chapter" data-level="8.1" data-path="media.html"><a href="media.html#causal-impact-on-leads-generation"><i class="fa fa-check"></i><b>8.1</b> Causal Impact on Leads generation</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="media.html"><a href="media.html#background-5"><i class="fa fa-check"></i><b>8.1.1</b> Background</a></li>
+<li class="chapter" data-level="8.1.2" data-path="media.html"><a href="media.html#modelling-analysis-5"><i class="fa fa-check"></i><b>8.1.2</b> Modelling Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://algorit.ma/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Application in Industry</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bioinformatics" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Bioinformatics</h1>
+<div id="qtl-mapping-for-disease-resistance" class="section level2">
+<h2><span class="header-section-number">6.1</span> QTL Mapping for Disease Resistance</h2>
+<div id="backgorund" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Backgorund</h3>
+<p>Ketahanan pangan merupakan salah satu prioritas utama dalam Rancangan Pembangunan Jangka Panjang Menengah Nasional. Ketersediaan pangan strategis sangat diandalkan dalam upaya mewujudkan ketahanan pangan. Pangan strategis dapat diartikan sebagai komoditas pangan yang terkait dengan kebutuhan sebagian besar masyarakat. Salah satu contoh komoditas pangan strategis menurut kementerian pertanian Indonesia adalah cabai. Sering kali petani cabai mengalami gagal panen dikarenakan serangan penyakit bakteri dan jamur pada akar dan daun. Salah satu penyakit yang dominan yang menyerang tanaman cabai adalah jamur <em>Phytophthora capsici</em>.</p>
+<p>Perlu dilakukan sebuah penelitian untuk mengetahui letak gen yang mempengaruhi sifat rentan terhadap jamur <em>Phytophthora capsici</em>. Beberapa hasil penelitian telah membuktikan analisis <em>Quantitative Trait Locus</em> sukses mengidentifikasi sifat pada tanaman. Maka dari itu sebagai bahan kajian peningkatan kualitas tanaman cabai, menggunakan data sekuen DNA yang sudah tersedia, dengan pendekatan metode QTL akan diidentifikasi letak gen yang berhubungan secara signifikan terhadap penyakit <em>Phytophthora capsici</em>.</p>
+</div>
+<div id="modelling-analysis-3" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Modelling Analysis</h3>
+<div id="import-data-2" class="section level4">
+<h4><span class="header-section-number">6.1.2.1</span> Import Data</h4>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">pacman<span class="op">::</span><span class="kw">p_load</span>(<span class="st">&quot;ASMap&quot;</span>,<span class="st">&quot;qtlcharts&quot;</span>,<span class="st">&quot;qtl&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;ggpubr&quot;</span>,<span class="st">&quot;ggdendro&quot;</span>, <span class="st">&quot;dendextend&quot;</span>, <span class="st">&quot;factoextra&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;igraph&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">dataset &lt;-<span class="st"> </span><span class="kw">read.cross</span>(</a>
+<a class="sourceLine" id="cb112-2" title="2">  <span class="dt">format =</span> <span class="st">&quot;csv&quot;</span>, </a>
+<a class="sourceLine" id="cb112-3" title="3">  <span class="dt">dir =</span> <span class="st">&quot;assets/05-bioinformatics/&quot;</span>,</a>
+<a class="sourceLine" id="cb112-4" title="4">  <span class="dt">file =</span><span class="st">&quot;data.csv&quot;</span>, </a>
+<a class="sourceLine" id="cb112-5" title="5">  <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, </a>
+<a class="sourceLine" id="cb112-6" title="6">  <span class="dt">genotypes =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;h&quot;</span>,<span class="st">&quot;b&quot;</span>),</a>
+<a class="sourceLine" id="cb112-7" title="7">  <span class="dt">alleles =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>)</a>
+<a class="sourceLine" id="cb112-8" title="8">)</a></code></pre></div>
+<pre><code>#&gt;  --Read the following data:
+#&gt;   296  individuals
+#&gt;   26  markers
+#&gt;   1  phenotypes
+#&gt;  --Cross type: f2</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="kw">summary</span>(dataset)</a></code></pre></div>
+<pre><code>#&gt;     F2 intercross
+#&gt; 
+#&gt;     No. individuals:    296 
+#&gt; 
+#&gt;     No. phenotypes:     1 
+#&gt;     Percent phenotyped: 100 
+#&gt; 
+#&gt;     No. chromosomes:    1 
+#&gt;         Autosomes:      5 
+#&gt; 
+#&gt;     Total markers:      26 
+#&gt;     No. markers:        26 
+#&gt;     Percent genotyped:  100 
+#&gt;     Genotypes (%):      aa:24.0  ab:48.4  bb:27.6  not bb:0.0 
+#&gt;                         not aa:0.0</code></pre>
+<p>Diatas merupakan hasil ringkasan dari data. Populasi yang digunakan hasil persilangan tipe F2 <em>intercross</em> yang menghasilkan individu sebanyak 296 jenis. Data fenotipe menjelaskan tentang skoring ketahanan tanaman cabai terhadap <em>Phytophthora capsici</em>. Interval skornya diantara 0 sampai dengan 5. Tanaman cabai yang memiliki resisten terhadap <em>Phytophthora capsici</em> akan diberi skor 0, sedangkan yang rentan akan diberi skor 5. Sebanyak 100% data fenotipe berhasil terbaca, artinya tidak ada data yang hilang (NA). Pada data ini hanya menggunakan 1 kromosom yang diamati, yaitu kromosom ke-5 dari total 11 kromosom cabai.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset<span class="op">$</span>pheno, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>pheno<span class="op">$</span>Score)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-3" title="3"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb116-4" title="4">    <span class="dt">title =</span> <span class="st">&quot;Distribusi sebaran skor fenotipe&quot;</span>,</a>
+<a class="sourceLine" id="cb116-5" title="5">    <span class="dt">x =</span> <span class="st">&quot;Skor ketahanan *Phytophthora capsici*&quot;</span></a>
+<a class="sourceLine" id="cb116-6" title="6">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-7" title="7"><span class="st">  </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-92-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="kw">shapiro.test</span>(dataset<span class="op">$</span>pheno<span class="op">$</span>Score)</a></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Shapiro-Wilk normality test
+#&gt; 
+#&gt; data:  dataset$pheno$Score
+#&gt; W = 0.78902, p-value &lt; 0.00000000000000022</code></pre>
+<p>Berdasarkan kurva dan uji hipotesis, maka keputusannya data fenotipe tidak berdistribusi normal (distribusi bimodal). Menurut penelitian yang dilakukan <a href="https://repository.ipb.ac.id/handle/123456789/41318"><strong>Margawati (2015)</strong></a> ketika kurva fenotipe menunjukkan distribusi bimodal, maka itu merupakan indikasi terdapat gen mayor (yang signifikan mempengaruhi).</p>
+</div>
+<div id="exploratory-data-analysis-2" class="section level4">
+<h4><span class="header-section-number">6.1.2.2</span> Exploratory Data Analysis</h4>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1">cg &lt;-<span class="st"> </span><span class="kw">comparegeno</span>(dataset)</a>
+<a class="sourceLine" id="cb119-2" title="2"></a>
+<a class="sourceLine" id="cb119-3" title="3"><span class="co">#dendogram clastering</span></a>
+<a class="sourceLine" id="cb119-4" title="4">dataclust &lt;-<span class="st"> </span><span class="kw">abs</span>(cg <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb119-5" title="5"></a>
+<a class="sourceLine" id="cb119-6" title="6"><span class="co"># Dissimilarity matrix</span></a>
+<a class="sourceLine" id="cb119-7" title="7">df &lt;-<span class="st"> </span><span class="kw">scale</span>(dataclust)</a>
+<a class="sourceLine" id="cb119-8" title="8">d &lt;-<span class="st"> </span><span class="kw">dist</span>(df, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</a>
+<a class="sourceLine" id="cb119-9" title="9">hc3 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</a>
+<a class="sourceLine" id="cb119-10" title="10"></a>
+<a class="sourceLine" id="cb119-11" title="11"><span class="co">#phylogenetic tree</span></a>
+<a class="sourceLine" id="cb119-12" title="12">dend_plot &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(</a>
+<a class="sourceLine" id="cb119-13" title="13">  hc3, <span class="dt">k =</span> <span class="dv">4</span>, <span class="co"># Cut in four groups</span></a>
+<a class="sourceLine" id="cb119-14" title="14">  <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="co"># label size</span></a>
+<a class="sourceLine" id="cb119-15" title="15">  <span class="dt">k_colors =</span> <span class="st">&quot;jco&quot;</span></a>
+<a class="sourceLine" id="cb119-16" title="16">)</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1"><span class="co"># extract the dendrogram data</span></a>
+<a class="sourceLine" id="cb120-2" title="2">dend_data &lt;-<span class="st"> </span><span class="kw">attr</span>(dend_plot, <span class="st">&quot;dendrogram&quot;</span>)</a>
+<a class="sourceLine" id="cb120-3" title="3"></a>
+<a class="sourceLine" id="cb120-4" title="4"><span class="co"># Cut the dendrogram at height h = 10</span></a>
+<a class="sourceLine" id="cb120-5" title="5">dend_cuts &lt;-<span class="st"> </span><span class="kw">cut</span>(dend_data, <span class="dt">h =</span> <span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb120-6" title="6"></a>
+<a class="sourceLine" id="cb120-7" title="7"></a>
+<a class="sourceLine" id="cb120-8" title="8"><span class="co"># Plot subtree 3</span></a>
+<a class="sourceLine" id="cb120-9" title="9"><span class="kw">fviz_dend</span>(</a>
+<a class="sourceLine" id="cb120-10" title="10">  dend_cuts<span class="op">$</span>lower[[<span class="dv">3</span>]], <span class="dt">main =</span> <span class="st">&quot;Subtree 3&quot;</span>,</a>
+<a class="sourceLine" id="cb120-11" title="11">  <span class="dt">lwd =</span> <span class="fl">1.3</span>, <span class="dt">ggtheme =</span> <span class="kw">theme_bw</span>(), <span class="dt">horiz =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb120-12" title="12">)</a></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-95-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Berdasarkan hasil clusternig di atas, dapat diketahui individu cabai dengan nomor 173, 185, 202, 247, 251, 291, 14, dan 216 berada pada satu cluster yang sama. Hal ini masuk akal, karena individu tersebut berasal dari tetua yang sama tipenya, sehingga karakteristiknya hampir sama. Jika antar individu tidak memiliki kemiripan genotipe, maka akan terpisah jauh atau berada pada branch yang berbeda.</p>
+</div>
+<div id="qtl-analysis" class="section level4">
+<h4><span class="header-section-number">6.1.2.3</span> QTL Analysis</h4>
+<p>Interval Mapping atau pemetaan interval menjadi pendekatan yang populer pada analisis QTL. Dalam interval mapping, masing-masing penanda sekuen akan dihitung nilai <em>Logarithm of the Odds</em> (LOD). Mudahnya, skor LOD adalah nilai statistik yang digunakan pada data genetika untuk mengukur apakah 2 gen atau lebih yang sedang diamati cenderung terletak berdekatan satu sama lain atau tidak. Skor LOD 3 atau lebih secara umum dapat dipahami bahwa 2 gen tersebut terletak berdekatan pada kromosom.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="co"># Marker regression</span></a>
+<a class="sourceLine" id="cb121-2" title="2"></a>
+<a class="sourceLine" id="cb121-3" title="3">dataset_rf &lt;-<span class="st"> </span><span class="kw">est.rf</span>(dataset, <span class="dt">maxit =</span> <span class="dv">200</span>, <span class="dt">tol =</span> <span class="fl">1e-8</span>)</a>
+<a class="sourceLine" id="cb121-4" title="4">out.mr &lt;-<span class="st"> </span><span class="kw">scanone</span>(dataset_rf, <span class="dt">method =</span> <span class="st">&quot;mr&quot;</span>)</a>
+<a class="sourceLine" id="cb121-5" title="5"></a>
+<a class="sourceLine" id="cb121-6" title="6"><span class="co"># Harley-knott regression</span></a>
+<a class="sourceLine" id="cb121-7" title="7">datalink_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">calc.genoprob</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>, <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>)</a>
+<a class="sourceLine" id="cb121-8" title="8"></a>
+<a class="sourceLine" id="cb121-9" title="9">out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">1</span>, <span class="dt">method=</span><span class="st">&quot;hk&quot;</span>)</a>
+<a class="sourceLine" id="cb121-10" title="10"></a>
+<a class="sourceLine" id="cb121-11" title="11"></a>
+<a class="sourceLine" id="cb121-12" title="12"><span class="co"># Multiple Imputation</span></a>
+<a class="sourceLine" id="cb121-13" title="13"></a>
+<a class="sourceLine" id="cb121-14" title="14"><span class="kw">set.seed</span>(<span class="dv">1997</span>)</a>
+<a class="sourceLine" id="cb121-15" title="15">datalink_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>)</a>
+<a class="sourceLine" id="cb121-16" title="16">out.imp &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">2</span>, <span class="dt">method=</span><span class="st">&quot;imp&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb122-2" title="2"><span class="kw">plot</span>(out.imp, out.hk, out.mr, <span class="dt">ylab=</span><span class="st">&quot;LOD Score&quot;</span>,</a>
+<a class="sourceLine" id="cb122-3" title="3"> <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
+<a class="sourceLine" id="cb122-4" title="4"> <span class="dt">main =</span> <span class="st">&quot;Perbandingan metode IMP, HK, EHK&quot;</span>,</a>
+<a class="sourceLine" id="cb122-5" title="5"> <span class="dt">lwd =</span> <span class="fl">2.5</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb122-6" title="6"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Multiple Imputation&quot;</span>,</a>
+<a class="sourceLine" id="cb122-7" title="7"> <span class="st">&quot;Harley-Knott Regression&quot;</span>,<span class="st">&quot;Extented</span></a>
+<a class="sourceLine" id="cb122-8" title="8"><span class="st">HK&quot;</span>),</a>
+<a class="sourceLine" id="cb122-9" title="9"> <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">cex=</span><span class="fl">0.7</span>, lwd</a>
+<a class="sourceLine" id="cb122-10" title="10">=<span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb122-11" title="11"> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>)</a></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-97-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Pemilihan motode terbaik berdasarkan skor <em>panelized LOD</em> yang tertinggi. Hasilnya, metode Imputation memperoleh LOD yang tertinggi yaitu 11.53. Selanjutnya, mencari formula regresi menggunakan metode imputation:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1">dataqtl.step0 &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(</a>
+<a class="sourceLine" id="cb123-2" title="2">  <span class="dt">cross =</span> dataset_rf, <span class="dt">step =</span> <span class="dv">0</span>, <span class="dt">error.prob =</span> <span class="fl">0.001</span>,</a>
+<a class="sourceLine" id="cb123-3" title="3">  <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>, <span class="dt">n.draws =</span> <span class="dv">296</span></a>
+<a class="sourceLine" id="cb123-4" title="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb124-2" title="2">outsw1 &lt;-<span class="st"> </span><span class="kw">stepwiseqtl</span>(dataqtl.step0, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">method =</span> <span class="st">&quot;imp&quot;</span>)</a>
+<a class="sourceLine" id="cb124-3" title="3">outsw1</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" title="1">outsw1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;assets/05-bioinformatics/outsw1.RDS&quot;</span>)</a>
+<a class="sourceLine" id="cb125-2" title="2">chr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb125-3" title="3">pos &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">117.34</span>, <span class="fl">159.31</span>, <span class="fl">256.48</span>)</a>
+<a class="sourceLine" id="cb125-4" title="4">qtl &lt;-<span class="st"> </span><span class="kw">makeqtl</span>(dataqtl.step0, chr, pos)</a>
+<a class="sourceLine" id="cb125-5" title="5">my.formula &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>Q1 <span class="op">+</span><span class="st"> </span>Q2 <span class="op">+</span><span class="st"> </span>Q3 <span class="op">+</span><span class="st"> </span>Q1<span class="op">:</span>Q2</a>
+<a class="sourceLine" id="cb125-6" title="6">out.fitqtl &lt;-<span class="st"> </span><span class="kw">fitqtl</span>(dataqtl.step0, <span class="dt">qtl=</span>qtl, <span class="dt">formula=</span>my.formula,</a>
+<a class="sourceLine" id="cb125-7" title="7"><span class="dt">get.ests =</span> F)</a>
+<a class="sourceLine" id="cb125-8" title="8"><span class="kw">summary</span>(out.fitqtl)</a></code></pre></div>
+<pre><code>#&gt; 
+#&gt;      fitqtl summary
+#&gt; 
+#&gt; Method: multiple imputation 
+#&gt; Model:  normal phenotype
+#&gt; Number of observations : 296 
+#&gt; 
+#&gt; Full model result
+#&gt; ----------------------------------  
+#&gt; Model formula: y ~ Q1 + Q2 + Q3 + Q1:Q2 
+#&gt; 
+#&gt;        df        SS        MS      LOD    %var Pvalue(Chi2)
+#&gt; Model  10  367.1198 36.711980 24.81033 32.0229            0
+#&gt; Error 285  779.3093  2.734418                              
+#&gt; Total 295 1146.4291                                        
+#&gt;       Pvalue(F)
+#&gt; Model         0
+#&gt; Error          
+#&gt; Total          
+#&gt; 
+#&gt; 
+#&gt; Drop one QTL at a time ANOVA table: 
+#&gt; ----------------------------------  
+#&gt;                 df Type III SS    LOD   %var F value Pvalue(Chi2)
+#&gt; 5@117.3          6      207.13 15.150 18.068  12.625        0.000
+#&gt; 5@159.3          6      162.96 12.205 14.215   9.933        0.000
+#&gt; 5@256.5          2       31.26  2.528  2.726   5.715        0.003
+#&gt; 5@117.3:5@159.3  4      151.64 11.428 13.227  13.864        0.000
+#&gt;                        Pvalue(F)    
+#&gt; 5@117.3         0.00000000000125 ***
+#&gt; 5@159.3         0.00000000058772 ***
+#&gt; 5@256.5                  0.00368 ** 
+#&gt; 5@117.3:5@159.3 0.00000000024024 ***
+#&gt; ---
+#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Diperoleh formula skor ketahanan terhadap <em>phytophthora capsici</em> sebagai berikut:</p>
+<p><span class="math display">\[Formula: y \sim Q1 + Q2 + Q3 + Q1:Q2 \]</span></p>
+<p>Keterangan:</p>
+<ul>
+<li>y = Skor fenotipe ketahanan terhadap penyakit <em>phytophthora capsici</em></li>
+<li>Qi = Marka QTL ke-i</li>
+</ul>
+<p>Jika hasil summary model diatas diringkas kedalam bentuk tabel, maka informasinya seperti berikut:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb127-2" title="2">  <span class="dt">Variabel =</span> <span class="kw">c</span>(<span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;Q2&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;Q1:Q2&quot;</span>),</a>
+<a class="sourceLine" id="cb127-3" title="3">  <span class="st">`</span><span class="dt">Kode Marka</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PMMCB81&quot;</span>, <span class="st">&quot;PMMCB34&quot;</span>, <span class="st">&quot;MCA32&quot;</span>, <span class="st">&quot;PMMCB81 : PMMCB34&quot;</span>),</a>
+<a class="sourceLine" id="cb127-4" title="4">  <span class="st">`</span><span class="dt">% Var</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">18.25</span>, <span class="fl">13.36</span>, <span class="fl">2.79</span>, <span class="fl">12.62</span>)</a>
+<a class="sourceLine" id="cb127-5" title="5">)</a></code></pre></div>
+<pre><code>#&gt; # A tibble: 4 x 3
+#&gt;   Variabel `Kode Marka`      `% Var`
+#&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;dbl&gt;
+#&gt; 1 Q1       PMMCB81             18.2 
+#&gt; 2 Q2       PMMCB34             13.4 
+#&gt; 3 Q3       MCA32                2.79
+#&gt; 4 Q1:Q2    PMMCB81 : PMMCB34   12.6</code></pre>
+<p>Kolom pertama dan kedua menjelaskan tentang simbol model QTL beserta nama markanya. Kolom persentase variansi (%var) adalah estimasi dari variansi fenotipe yang dijelaskan oleh marka PMMCB81, PMMCB34, MCA32, dan interaksi marka PMMCB81:PMMCB34. Total %var sebesar 46,3%. Mempunyai makna bahwa kemampuan seluruh marka dalam model untuk menjelaskan skor variansi fenotipe ketahanan tanaman cabai terhadap bakteri <em>phytophthora capsici</em> adalah sebesar 46,3%, sedangkan sisanya dijelaskan oleh marka lain diluar penelitian.</p>
+<p>Visualisasi peta genetik dengan model QTL yang signifikan dan hasi skor LOD metode multiple imputation disajikan pada gambar dibawah ini.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb129-2" title="2"><span class="kw">plot</span>(outsw1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">justdots =</span> F, <span class="dt">show.marker.names =</span> F)</a>
+<a class="sourceLine" id="cb129-3" title="3"><span class="kw">plot</span>(out.imp<span class="op">$</span>lod, out.imp<span class="op">$</span>pos, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;LOD&quot;</span>,</a>
+<a class="sourceLine" id="cb129-4" title="4"> <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">315</span>, <span class="dv">0</span>),<span class="dt">las =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Map Position (cM)&quot;</span>,</a>
+<a class="sourceLine" id="cb129-5" title="5"> <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb129-6" title="6"> <span class="dt">main =</span> <span class="st">&quot;Interval Mapping&quot;</span>)</a>
+<a class="sourceLine" id="cb129-7" title="7"><span class="co"># abline(v=tresh[4], lty = &quot;dotted&quot;, lwd=3, col=&quot;darkgrey&quot;)</span></a>
+<a class="sourceLine" id="cb129-8" title="8"><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;Multiple Imputation&quot;</span>,</a>
+<a class="sourceLine" id="cb129-9" title="9"> <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb129-10" title="10"> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-102-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="conclusion-2" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Conclusion</h3>
+<p>Hasil model QTL yang terbentuk dengan (<span class="math inline">\(\alpha\)</span> = 5%) formulanya y ~ Q1 + Q2 + Q3 + Q1:Q2 yang secara urut merupakan penanda sekuen (marka) dengan kode PMMCB81, PMMCB34, MCA32, dan interaksi PMMCB81 x PMMCB34. Skor LOD masing-masing model sebesar 5,80 (PMMCB81), 2,74 (PMMCB34) dan 8,6 (MCA32). Model QTL tersebut mampu menjelaskan 46,3% variansi skor fenotipe ketahanan tanaman cabai terhadap jamur <em>phytophthora capsici</em>. Rekomendasi yang dapat diberikan, perlu dilakukan investigasi lebih lanjut pada ketiga marka tersebut untuk memperbaiki atau mengembangkan kultivar tanaman cabai yang resisten terhadap penyakit layu yang disebabkan oleh jamur <em>phytophthora capsici</em>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="insurance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="public-health.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"google": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"all": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

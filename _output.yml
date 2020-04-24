@@ -1,7 +1,25 @@
 bookdown::gitbook:
-  css: style.css
-  split_by: none
+  css: [assets/book.css, 'https://use.fontawesome.com/releases/v5.3.1/css/all.css']
   config:
     toc:
-    toc_depth: 2
-    toc_float: true
+      before: |
+        <li><a href="./">Algoritma Book</a></li>
+      after: |
+        <li><a href="https://algorit.ma/" target="blank">Published with bookdown</a></li>
+    download: no
+    sharing:
+      facebook: no
+      twitter: no
+      google: no
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no
+    all: null
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

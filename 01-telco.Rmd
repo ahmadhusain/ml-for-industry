@@ -1,10 +1,3 @@
---- 
-title: "Corporate Portfolio"
-author: "Team Algoritma"
-date: "`r format(Sys.Date(), '%B %e, %Y')`"
-documentclass: book
----
-
 # Telecommunication
 
 ```{r setup, include=FALSE}
@@ -32,44 +25,6 @@ library(inspectdf)
 library(caret)
 ```
 
-<style>
-body {
-text-align: justify}
-</style>
-
-## Supply Chain Analytics
-
-### Background
-
-Umumnya tiap perusahaan layanan telekomunikasi memiliki aplikasi yang digunakan untuk menyimpan data transaksi dari layanan-layanan yang diberikan. Dalam hal ini ada hubungan yang sangat kuat antara proses pemasangan baru di pelanggan dengan proses procurement atau pengadaan barang serta ketersediaan barang yang dibutuhkan.
-
-```{r}
-knitr::include_graphics(path = "assets/01-telco/supply-chain-1.png")
-```
-
-
-### Expected Outcome
-
-Yang diharapkan dari Supply Chain Management Learning Machine Model adalah selain dapat memprediksi untuk kebutuhan *set top box* atau ONT (modem) dapat juga untuk melihat gambaran setahun dari pelaksanaan pemasangan baru ONT/STB di service layanan. Dari data yang dianalisa kita dapat melihat mengenai sifat layanan yang disediakan oleh setiap transaksi dari data bulanan tersebut, apakah layanan tersebut sudah ‘mature’ karena layanan yang diberikan bukan layanan konsumsi tapi merupakan layanan instalasi sehingga terjadi kemungkinan terjadi kejenuhan di pelanggan terhadap layanan tersebut. Selain itu dari data timeseries tersebut masih dapat dilihat pertumbuhan dan pola penjualannya sehingga memungkinkan management untuk mengatur target terhadap teknisi dan target penjualan layanan tersebut dan memikirkan layanan baru yang dapat dijadikan tahap introduction/growth dan berlanjut ke proses perkembangan pemasaran product sebelum layanan atau produk tersebut benar-benar ditinggalkan.
-
-### Recommendation
-
-Setelah mengamati hasil analisa dan pengukuran serta gambaran prediksi dari hasil proses machine learning maka rekomendasi yang dapat diberikan adalah bahwa selain target dalam penjualan per bulan, barang yang harusnya dibeli jika tidak diproduksi lagi harus diback-up dengan barang/item tipe yang lain. Selain itu dari kurva yang ada dapat dilihat bahwa masa periode siklus hidup layanan tersebut masih bagus namun sebaiknya mulai disiapkan untuk layanan yang baru seperti content yang bisa dijual lewat layanan data, baik konten untuk IPTV atau TV berbayar maupun konten untuk layanan data/internetnya untuk mengantisipasi turunnya kurva life cycle product.
-
-
-## Incident Analysis
-
-### Background
-
-Indikator kepuasan pelanggan dapat ditunjukkan dengan nilai NPS (Net Promoter Score). Net Promoter Score dapat menunjukkan secara langsung tipe konsumen yang loyal dan dapat memberikan prediksi tingkah laku konsumen terhadap bisnis Telkom. Score ini menjadi indikator berapa banyak konsumen Anda yang mau merekomendasikan layanan kita ke orang lain. Selain itu, NPS Menunjukan interaksi personal berdasarkan pemahaman mendalam yang membuat konsumen menyukai produk dan layanan Telkom. Semakin tinggi nilai NPS menunjukkan tingginya indeks kepuasan konsumen.
-
-Hal paling mendasar untuk meningkatkan nilai NPS adalah memberikan customer experience yang terbaik kepada pelanggan salah satunya adalah memberikan service assurance yang excellence. Adanya Operational Support System yang saat ini sudah berjalan di operasional secara Nasional, masih perlu untuk terus dikembangkan dan disempurnakan kapabilitasnya agar mampu memberikan service assurance yang excellent untuk dapat meningkatkan customer experience, menurunkan angka gangguan (Q) sehingga dapat tercapai goal yaitu peningkatan nilai NPS.
-
-### Expected Outcome
-
-Melakukan permodelan machine learning untuk identifikasi dini pelanggan yang berpotensi akan mengalami gangguan internet, supaya dapat ditangani terlebih dahulu sehingga mengurangi angka komplain pelanggan dan dapat kepuasan pelanggan.
-
-### Recommendation
 
 ## Customer Churn Prediction
 
