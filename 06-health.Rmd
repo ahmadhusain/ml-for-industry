@@ -1,0 +1,199 @@
+# Public Health
+
+## Survival Analysis of Patients with Lung Cancer
+
+Kanker paru merupakan kanker pada organ pernapasan yang menjadi kanker pembunuh nomer satu di dunia dan Indonesia (CNN Indonesia, 2018). Data internasional dari *Globocan* 2018 menyatakan kanker paru adalah kanker yang paling banyak ditemukan di pria dan wanita di seluruh dunia dibandingkan jenis kanker lainnya. Pasien penderita kanker paru memerlukan penanganan yang terarah. Oleh karena itu akan dilakukan pengamatan, faktor apa saja yang mempengaruhi waktu ketahanan hidup pasien kanker paru. Metode yang digunakan adalah *survival analysis*, yaitu analisis statistik untuk mengambil keputusan yang berkaitan dengan waktu sampai dengan terjadinya suatu kejadian khusus (*failure event/ end point*). 
+
+Pada bidang studi kanker, hal yang sering jadi perhatian peneliti adalah:
+
+* Berapa probabilitas individu/pasien untuk survive selama 3 tahun?
+* Apakah terdapat perbedaan kemampuan survive antara kelompok demografi pasien?
+
+
+### Import Data
+
+```{r}
+library(tidyverse)
+library(survival)
+library(SurvRegCensCov)
+library(survminer)
+
+options(scipen = 9999)
+```
+
+Data yang digunakan merupakan data dummy rekam medis dari pasien kanker paru-paru. Sebanyak 137 pasien diobservasi dimana 128 mengalami *event* meninggal dan sisanya tersensor (dirujuk ke rumah sakit lain). Durasi waktu pengamatan menggukan satuan hari. 
+
+```{r}
+lung <- read.csv("assets/06-health/data-paru.csv", sep = ";")
+
+glimpse(lung)
+```
+
+Berikut adalah penjelasan mengenai beberapa informasi yang diamati:
+
+1. `treatment`: 1 (*standard*), 2 (*test*)
+2. `cell type`: 1 (*large*), 2 (*adeno*), 3 (*small*), 4 (*squamoues*)
+3. `survival`: waktu pengamatan dalam hari
+4. `status`: 1 (*cencored* / berhasil survive), 0 (meninggal)
+
+Menurut Kementerian Kesehatan, kelompok usia yang paling berisiko tinggi mencakup pasien yang berusia > 40 tahun. Maka, pada data akan dikelompokkan menjadi dua kelompok usia.
+
+
+```{r}
+lung <- lung %>% 
+  rename(time = survival) %>% 
+  mutate(
+    treatment = factor(treatment, levels = c(1,2), labels = c("standard", "test")),
+    cell = factor(cell, levels = c(1,2,3,4), labels = c("large", "adeno","small","squamous")),
+    age = case_when(
+      age > 40 ~ ">40",
+      TRUE ~ "<=40"
+    )
+  )
+```
+
+
+### Exploratory Data Analysis
+
+Variabel prediktor (treatment, age, perform, cell) akan dianalisis menggunakan regresi survival. Dimana akan dilihat faktor-faktor apa saja yang mempengaruhi ketahanan hidup pasien sampai mengalami sebuah *event*: meninggal. Namun sebelumnya akan dianalisis menggunakan pendekatan non parametrik yaitu metode *Kaplan Meier* dan *Log-Rank*. *Kaplan Meier* adalah kurva yang menggambarkan hubungan antara waktu pengamatan (survival) dengan estimasi fungsi survival pada waktu ke-t. Kurva yang terbentuk kemudian dibandingkan menggunakan uji *Log Rank*. Tujuannya untuk mengetahui apakah terdapat perbedaan peluang survive antara level di setiap variabel kategorik.
+
+```{r}
+lung_surv <- survfit(Surv(time = time, event = status) ~ 1, data = lung)
+```
+
+```{r}
+tibble(
+  time = lung_surv$time,
+  n_risk = lung_surv$n.risk,
+  n_event = lung_surv$n.event,
+  survival = lung_surv$surv
+)
+```
+
+Baris pertama output menyatakan pada waktu pengamatan hari pertama, ada 137 pasien, 2 diantaranya meninggal pada saat itu. Peluang survive diperoleh menggunakan perhitungan $(137-2)/137 = 0.985$. Pada garis kedua yang menyatakan observasi di hari ke-2, terdapat 135 pasien, dimana satu orang diantaranya meninggal pada saat itu. Peluang survivalnya diperoleh dengan perhitungan $(135-1)/137 = 0.978$. Tabel informasi diatas jika divisualisasikan tampilannya akan seperti berikut:
+
+```{r}
+ggsurvplot(
+   lung_surv,
+   color = "#2E9FDF",
+   ggtheme = ggthemes::theme_pander()) +
+  labs(title = "Kaplan-Meier Curves all variable")
+```
+
+Hasil di atas adalah kurva survival untuk kesuluruhan parameter. Sumbu vertikal merupakan peluang survival dan sumbu horizontal adalah waktu pengamatan. Berdasarkan grafik, terlihat jelas bahwa makin jauh waktu pengamatan, peluang survive akan semakin kecil. Masing-masing variabel juga dapat dicari fungsi survivalnya, untuk memperoleh insight apakah tiap kelompok variabel terdapat perbedaan peluang survive yang signifikan.
+
+```{r}
+km_cell <- survfit(Surv(time = time, event = status) ~ cell, data = lung)
+
+ggsurvplot(
+   km_cell,
+   ggtheme = ggthemes::theme_pander()) +
+  labs(title = "Kaplan-Meier Curves for Cell Type Group")
+```
+
+
+Grafik diatas cukup menjelaskan bahwa keempat kelompok *cell type* memiliki perbedaan garis yang cukup signifikan. Maka, dapat diduga bahwa kelompok *cell type* pada data observasi memiliki perbedaan yang signifikan terhadap status survive pasien kanker paru. Akan dilakukan uji eksak, menggunakan *Log-Rank* untuk memperkuat identifikasi berdasarkan grafik.
+
+
+```{r}
+# log rank cell type
+
+lr_cell <- survdiff(Surv(time ,status)~ cell, data = lung)
+lr_cell
+```
+
+Tingkat signifikansi yang digunakan adalah sebesar 5% (0.05). Berdasarkan uji *Log-Rank*, diperoleh *p-value* (0.0001) < alpha (0.05) maka kesimpulannya terdapat perbedaan yang signifikan pada fungsi survival keempat kelompok *cell*.
+
+
+```{r}
+km_treatment <- survfit(Surv(time = time, event = status) ~ treatment, data = lung)
+
+ggsurvplot(
+   km_treatment,
+   ggtheme = ggthemes::theme_pander()) +
+  labs(title = "Kaplan-Meier Curves for Treatment group")
+```
+
+
+Pada hasil grafik di atas, antara pria dan wanita memiliki jarak yang berdekatan. Artinya tidak terdapat perbedaan yang signifikan untuk waktu survivalnya. Untuk memperkuat interpretasi berdasarkan grafik, perlu dilakukan uji hipotesis dengan menggunakan perhitungan eksak, yakni metode Log-Rank.
+
+```{r}
+# log rank treatment
+
+lr_treatment <- survdiff(Surv(time ,status)~ treatment, data = lung)
+lr_treatment
+```
+
+Berdasarkan hasil uji *Log-Rank* diperoleh p-value (0.9) > alpha (0.05) sehingga kesimpulannya tidak terdapat perbedaan yang signifikan untuk kelompok variabel treatment. Artinya baik treament standard maupun treatment test, tidak mempengaruhi waktu survive dari pasien. Adapun variabel lainnya, kelompok usia dan kelompok performa setelah di uji menggunakan *Log-Rank* diperoleh kesimpulan yang sama yakni, terdapat perbedaan waktu survive yang signifikan untuk kelompok dua variabel tersebut.
+
+```{r}
+# log rank age
+
+lr_age <- survdiff(Surv(time ,status)~ age, data = lung)
+lr_age
+```
+
+
+```{r}
+# log rank perform
+
+lr_perform <- survdiff(Surv(time ,status)~ perform, data = lung)
+lr_perform
+```
+
+
+
+### Modelling Analysis
+
+Pada analisa sebelumnya, hanya dibandingkan tiap pengamatan pasien terhadap masing-masing variabelnya saja. Kali ini akan di uji apakah pasien kanker paru-paru memiliki tingkat ketahanan hidup (survive) yang berbeda berdasarkan penyebab tipe sel, performa, dan usia pasien. Pemodelan menggunakan pendekatan 2 metode, yaitu regresi weibull dan regresi log logistik. Masing-masing hasil ringkasan informasinya dapat dilihat pada output dibawah:
+
+```{r}
+regweibull <- survreg(Surv(time, status) ~ age + cell + perform, data = lung, dist = "weibull")
+summary(regweibull)
+```
+
+```{r}
+reglog <- survreg(Surv(time, status) ~ age + cell + perform, data = lung, dist = "loglogistic")
+summary(reglog)
+```
+
+Kriteria yang digunakan dalam pemilihan model terbaik dilihat dari nilai *Akaike Information Criterion* (AIC). Model yang lebih layak digunakan ketika nilai AIC yang semakin rendah. AIC sangat berguna saat harus memilih model terbaik dari himpunan data yang sama. AIC yang diperoleh dari masing-masing metode:
+
+```{r}
+AIC(regweibull)
+AIC(reglog)
+```
+
+Model terbaik diperoleh dari model regresi log logistic, dengan AIC paling terendah yaitu 1435,513:
+
+$$S(t|x)=\frac{1}{1 + (exp([-2.0251 + 0.5293_{age} - 0.7763_{cellAdeno} - 0.7438_{cellSmall} - 0.0388_{cellSquamous} + 0.0359_{perform})]*t)^{0.576}}$$
+
+Jika dilakukan simulasi perhitungan peluang survive untuk dua pasien dengan karakteristik:
+
+* Usia 20 tahun, cell Adeno, skor performa = 20;
+* Usia 50 tahun, cell Squamous, skor performa = 70;
+
+pada saat hari ke-100, diperoleh hasil sebagai berikut:
+
+```{r}
+1/(exp(-2.0251 + 0.5293 +  0.7438  + 0.0359 * 70)*100)^0.576
+```
+
+
+```{r}
+# pasien 1
+
+1/(exp(-2.0251 + 0.5293 +  0.7763  + 0.0359 * 70)*100)^0.576
+```
+
+```{r}
+# pasien 2
+
+1/(exp(-2.0251 + 0.5293 +  0.038  + 0.0359 * 70)*100)^0.576
+```
+
+Maka, pasien usia lebih dari 40 tahub dengan tipe cell squamous pada saat 100 hari mengidap kanker paru peluang bertahan hidup (survive) untuk bertahan hidup lebih tinggi dibandingkan dengan tipe adino. 
+
+### Conclusion
+
+Model regresi survival yang sesuai dengan data pengamatan adalah regresi log logistik. Faktor yang signifikan mempengaruhi laju ketahanan hidup pasien paru-paru berdasarkan data yang diamati, antara lain: usia, tipe sel, dan performa. Pasien dengan tipe sel adeno memiliki risiko paling tinggi dibandingkan lainnya. Dengan hasil pemodelan ini harapannya dapat dijadikan kajian awal untuk meningkatkan tingkat ketahanan hidup pasien paru-paru.
