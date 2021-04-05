@@ -25,7 +25,7 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 
 
 ```{r}
-reviews <- read.csv("assets/03- retail/Womens Clothing E-Commerce Reviews.csv")
+reviews <- read.csv("assets/03-retail/Womens Clothing E-Commerce Reviews.csv")
 head(reviews)
 ```
 
@@ -194,3 +194,500 @@ plot_text_explanations(explanation)
 ```
 
 Dari hasil output observasi kedua terprediksi product tersebut recommended dengan probability 96.31% dan nilai explainer fit menunjukkan seberapa baik LIME dalam menginterpretasikan prediksi untuk observasi ini sebesar 0.89 artinya dapat dikatakan cukup akurat. Teks berlabel biru menunjukkan kata tersebut meningkatkan kemungkinan product tersebut untuk direkomendasikan, sedangkan teks berlabel merah berarti bahwa kata tersebut bertentangan/mengurangi kemungkinan product tersebut untuk direkomendasikan.
+
+##  Customer Segmentation with RFM Analysis (in Python Programming Language)
+
+```{r echo=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "C:/Users/dyahn/anaconda3/envs/data-analytics/python.exe")
+library(reticulate)
+py_run_string("import os")
+py_run_string("os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = 'C:/Users/dyahn/anaconda3/Library/plugins/platforms'")
+```
+
+### Background
+
+Dalam transaksi jual beli, customer memiliki peran penting dalam eksistensi dan kemajuan sebuah industri. Oleh karenanya berbagai strategi marketing dilakukan untuk menarik perhatian customer baru atau untuk mempertahankan loyalitas customer. 
+Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu atau pemberian free product untuk customer tertentu. Strategi marketing ini diterapkan sesuai dengan value yang dimiliki oleh customer. Beberapa value dapat dikategorikan menjadi `low-value customer` (customer dengan frekuensi transaksi rendah dan *spend money* rendah), `medium-value customer` (customer dengan frekuensi transaksi tinggi namun *spend money* rendah atau sebaliknya), dan `high-value customer` (customer dengan frekuensi transaksi tinggi dan *spend money* yang tinggi pula).
+
+Dalam melakukan segmentasi customer ada beberapa faktor yang harus dipertimbangkan. Faktor tersebut umumnya dianalisis berdasarkan data historical transaksi yang dimiliki oleh customer. Dari data historical tersebut dilakukan analisis lebih lanjut untuk mengetahui pattern data dan kemudian dilakukan modelling dengan bantuan algoritma machine learning agar menghasilkan output yang dapat dipertanggungjawabkan. Rangkaian proses ini nantinya diharapkan dapat menjawab beberapa pertanyaan bisnis seperti : 
+`Siapakah customer yang berpotensi untuk *churn*`, `Siapakah loyal customer`, `Siapakah potential customer`, dan lain-lain.
+
+Metode segmentasi yang paling umum digunakan untuk melakukan segmentasi customer adalah RFM analysis. RFM akan melakukan segmentasi berdasarkan 3 poin penting yaitu :
+
+1. Recency : Waktu transaksi terakhir yang dilakukan customer
+2. Frequency : Banyak transaksi yang dilakukan oleh customer
+3. Monetary : Banyak uang yang dikeluarkan ketika melakukan transaksi
+
+Dalam artikel ini, akan dibahas lebih lanjut tentang proses segmentasi customer menggunakan metode RFM dengan bantuan machine learning clustering algorithm. Bahasa yang digunakan adalah bahasa pemrograman python.
+
+```{r out.width="70%", fig.align='center', echo=FALSE}
+knitr::include_graphics("assets/03-retail/RFM.png")
+```
+
+### Modelling Analysis
+
+Pada artikel ini data yang digunakan adalah data online retail di UK yang dapat ditemukan pada [link berikut](https://www.kaggle.com/carrie1/ecommerce-data). Data ini adalah data transaksi yang terjadi pada 01/12/2010 sampai 09/12/2011.
+
+#### Import Library and Read Data
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+```{python}
+ecom = pd.read_csv("assets/03-retail/data_ecom_uk.csv",encoding='latin1')
+```
+
+```{python}
+ecom.head(2)
+```
+
+```{python}
+ecom.shape
+```
+
+Dataframe ini mengandung 541909 observasi dengan jumlah kolom sebanyak 8 yang antara lain adalah :
+
+* InvoiceNo : Nomor invoice yang terdiri dari 6 digit angka unik. Ketika `InvoiceNo` diawali dengan character `C` maka mengindikasikan *cancellation transaction*.
+* StockCode : Kode product yang terdiri dari 5 digit angka unik.
+* Description : Deskripsi nama product.
+* Quantity : Jumlah product yang dibeli pada setiap transaksi.
+* InvoiceDate : Tanggal transaksi berlangsung.
+* UnitPrice : Harga satuan product.
+* CustomerID : ID Customer yang berisi 5 digit angka unik dan berbeda pada setiap customer.
+* Country : Nama negara.
+
+#### Get only transaction in UK
+
+Dikarenakan terdapat beberapa data yang tidak berada pada country United Kingdom (UK), maka perlu dilakukan filter data hanya untuk country daerah UK.
+
+```{python}
+ecom_uk = ecom[ecom['Country']=='United Kingdom']
+ecom_uk.shape
+```
+
+```{python}
+ecom_uk.head(2)
+```
+
+#### Handle Missing Values
+
+Missing value adalah masalah yang umum dihadapi ketika melakukan proses pengolahan data. Missing value terjadi ketika terdapat obeservasi kosong pada sebuah data. 
+
+Pada hasil di bawah ini dapat diketahui informasi bahwa beberapa variable pada data menggandung nilai missing, variable tersebut antara lain adalah `Description` dan `CustomerID`. `CustomerID` adalah variable penting dalam RFM analisis, dikarenakan `CustomerID` mengandung informasi unik ID member. Sedangkan `Description` mengandung informasi terkait deskripsi produk. Jika ditelaah lebih jauh, untuk menangani missing values pada kedua variable tersebut dapat dilakukan dengan cara *deletion*, dikarenakan proses imputasi pada kedua variable tersebut akan menghasilkan informasi yang tidak akurat.
+
+```{python}
+ecom_uk.isna().sum()
+```
+
+Berikut ini adalah proses penghapusan missing values pada data :
+
+```{python}
+ecom_uk.dropna(inplace=True)
+```
+
+#### Select Unique Transaction
+
+Duplicated values atau duplikasi data adalah nilai berulang pada satu atau lebih observasi. Untuk menangani data yang duplikat dapat dilakukan penghapusan dan hanya mempertahankan salah satu observasi.
+
+```{python}
+ecom_uk.drop_duplicates(subset=['InvoiceNo', 'CustomerID'], keep="first", inplace=True)
+```
+
+#### Change Data Types
+
+Dalam pengolahan data transformasi tipe data pada format yang sesuai sangat penting untuk dilakukan, hal ini agar nantinya data-data tersebut siap untuk dilakukan manipulasi lebih lanjut.
+
+```{python}
+ecom_uk.dtypes
+```
+
+```{python}
+ecom_uk['InvoiceDate'] = pd.to_datetime(ecom_uk['InvoiceDate'])
+ecom_uk['Country'] = ecom_uk['Country'].astype('category')
+ecom_uk['CustomerID'] = ecom_uk['CustomerID'].astype('int64')
+```
+
+#### Drop cancelled transaction
+
+Karakter pertama "C" pada `InvoiceNo` menunjukkan bahwa customer melakukan pembatalan terhadap transaksi yang dilakukan. Sehingga data akan kurang relevan jika tetap dipertahankan, maka dari itu perlu dilakukan penghapusan pada observasi tersebut.
+
+```{python}
+ecom_uk = ecom_uk.loc[~ecom_uk.iloc[:,0].str.contains(r'C')]
+```
+
+```{python}
+ecom_uk.head()
+```
+
+### Exploratory Data Analysis
+
+Tahapan Exploratory Data Analysis digunakan untuk mengetahui pattern dari data.
+
+#### Recency
+
+Recency adalah faktor yang menyimpan informasi tentang berapa lama sejak customer melakukan pembelian. Untuk melakukan perhitungan recency pada masing-masing customer dapat dilakukan dengan cara memanipulasi tanggal transaksi customer dan kemudian dikurangi dengan tanggal maksimum yang terdapat pada data. Berikut di bawah ini adalah detail langkah-langkahnya :
+
+a. Manipulasi tanggal transaksi dengan mengekstrak informasi tanggal, bulan dan tahun transaksi.
+
+```{python}
+ecom_uk['Date'] = ecom_uk['InvoiceDate'].dt.date
+```
+
+```{python}
+ecom_uk.head(2)
+```
+
+b. Mengambil tanggal transaksi maksimum pada keseluruhan observasi
+
+```{python}
+last_trans = ecom_uk['Date'].max()
+last_trans
+```
+
+c. Mengekstrak informasi tanggal transaksi maksimum pada tiap customer.
+
+```{python}
+recent = ecom_uk.groupby(by=['CustomerID'],  as_index=False)['Date'].max()
+```
+
+```{python}
+recent.columns = ['CustomerID','Last Transaction']
+recent.head()
+```
+
+d. Menghitung selisih tanggal transaksi maksimum dengan tanggal transaksi terakhir pada tiap customer, kemudian menyimpan jumlah hari pada kolom `Days Recent`.
+
+```{python}
+recent['Days Recent'] = last_trans - recent['Last Transaction']
+recent['Days Recent'] = recent['Days Recent'].dt.days
+```
+
+```{python}
+recent.head()
+```
+
+```{python}
+recent.drop(columns=['Last Transaction'], inplace=True)
+```
+
+#### Frequency
+
+Frequency mengandung infromasi tentang seberapa sering customer melakukan transaksi pembelian dalam kurun waktu tertentu. Nilai frequency dapat diperoleh dengan cara menghitung jumlah transkasi pada setiap unik customer.
+
+```{python}
+temp = ecom_uk[['CustomerID','InvoiceNo']]
+```
+
+```{python}
+trans_cust = temp.groupby(by=['CustomerID']).count()
+trans_cust.rename(columns={'InvoiceNo':'Number of Transaction'})
+trans_cust.reset_index()
+```
+
+Ouptut di atas menunjukkan jumlah transaksi yang dilakukan pada masing-masing customer. CustomerID 12346 melakukan transaksi sebanyak 1 kali saja, CustomerID 12747 melakukan transaksi sebanyak 11 kali, dan seterusnya.
+
+Berikut dibawah ini adalah detail informasi `InvoiceNo` pada setiap transaksi yang dilakukan oleh customer.
+
+```{python}
+table_trans_details = temp.groupby(by=['CustomerID','InvoiceNo']).count()
+```
+
+```{python}
+table_trans_details.head()
+```
+
+#### Monetary
+
+Monetary adalah faktor yang menyimpan jumlah pengeluaran customer dalam transaksi. Nilai monetary dapat dihitung dari harga barang yang dibeli oleh masing-masing customer pada transaksi tertentu dan kemudian dikalkulasikan dengan jumlah barang yang dibeli.
+
+```{python}
+ecom_uk['Total'] = ecom_uk['UnitPrice'] * ecom_uk['Quantity']
+ecom_uk.head(2)
+```
+
+```{python}
+monetary = ecom_uk.groupby(by=['CustomerID'], as_index=False)['Total'].sum()
+```
+
+```{python}
+monetary
+```
+
+#### Merge Column based on CustomerID
+
+Setelah mendapatkan informasi pada setiap faktor penting, langkah selanjutnya adalah menyimpannya kedalam sebuah dataframe baru.
+
+```{python}
+new_ = monetary.merge(trans_cust,on='CustomerID')
+new_data = new_.merge(recent,on='CustomerID')
+new_data.rename(columns={'Total':'Monetary','InvoiceNo':'Frequency','Days Recent':'Recency'}, inplace=True)
+new_data.head()
+```
+
+### Modelling
+
+#### Clustering Recency, Frequency, and Monetary
+
+Proses clustering bertujuan untuk membagi level customer kedalam beberapa segment tertentu meliputi `low-value customer`, `medium-value customer` or `high-value customer`.
+
+#### Recency
+
+Pada faktor Recency, customer yang memiliki *recent* trasaksi akan di kategorikan pada `high-value customer`. Kenapa? Karena customer tersebut berpotensi untuk melakukan pembelian lagi dibanding dengan customer yang sudah lama tidak melakukan pembelian. 
+
+```{python}
+new_data['Recency'].describe()
+```
+
+Teknik elbow mwthod untuk menentukan jumlah cluster yang terbentuk.
+
+```{python}
+from sklearn.cluster import KMeans
+
+
+sse={}
+recency = new_data[['Recency']]
+for k in range(1, 10):
+    kmeans = KMeans(n_clusters=k, max_iter=1000).fit(recency)
+    recency["clusters"] = kmeans.labels_
+    sse[k] = kmeans.inertia_ 
+plt.figure()
+plt.plot(list(sse.keys()), list(sse.values()))
+plt.xlabel("Number of cluster")
+plt.show()
+```
+
+```{python}
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(new_data[['Recency']])
+new_data['RecencyCluster'] = kmeans.predict(new_data[['Recency']])
+```
+
+```{python}
+new_data.groupby('RecencyCluster')['Recency'].describe()
+```
+
+Berdasarkan visualisasi grafik elbow, maka jumlah cluster ideal yang dapat dibentuk adalah sebanyak 3 cluster. Pada hasil di atas menunjukkan bahwa cluster 1 mengandung informasi customer yang melakukan transaksi paling baru (most recent) sedangkan cluster 0 mengandung informasi customer yang sudah lama tidak melakukan transaksi pembelian. 
+
+Untuk keperluan standarisasi, maka perlu dilakukan re-order cluster sehingga cluster 0 akan memuat informasi `low-value customer`, cluster 1 `medium-value customer` dan cluster 2 `high-value customer`.
+Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recency rendah akan dikategorikan pada cluster 2.
+
+Dibawah ini adalah fungsi untuk melakukan reorder cluster :
+
+```{python}
+#function for ordering cluster numbers
+def order_cluster(cluster_field_name, target_field_name,df,ascending):
+    new_cluster_field_name = 'new_' + cluster_field_name
+    df_new = df.groupby(cluster_field_name)[target_field_name].mean().reset_index()
+    df_new = df_new.sort_values(by=target_field_name,ascending=ascending).reset_index(drop=True)
+    df_new['index'] = df_new.index
+    df_final = pd.merge(df,df_new[[cluster_field_name,'index']], on=cluster_field_name)
+    df_final = df_final.drop([cluster_field_name],axis=1)
+    df_final = df_final.rename(columns={"index":cluster_field_name})
+    return df_final
+```
+
+```{python}
+new_data = order_cluster('RecencyCluster', 'Recency',new_data,False)
+```
+
+#### Frequency
+
+Factor penting selanjutnya adalah Frequency. Pada step frequency, customer yang memiliki banyak transaksi pembelian akan dikategorikan pada level `high-value customer`.
+
+```{python}
+new_data['Frequency'].describe()
+```
+
+```{python}
+sse={}
+frequency = new_data[['Frequency']]
+for k in range(1, 10):
+    kmeans = KMeans(n_clusters=k, max_iter=1000).fit(frequency)
+    frequency["clusters"] = kmeans.labels_
+    sse[k] = kmeans.inertia_ 
+plt.figure()
+plt.plot(list(sse.keys()), list(sse.values()))
+plt.xlabel("Number of cluster")
+plt.show()
+```
+
+```{python}
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(new_data[['Frequency']])
+new_data['FrequencyCluster'] = kmeans.predict(new_data[['Frequency']])
+new_data.groupby('FrequencyCluster')['Frequency'].describe()
+```
+
+Sama halnya dengan tahapan pada step Recency, pada step ini juga perlu dilakukan standarisasi cluster dengan melakukan reorder pada cluster. Sehingga cluster 0 dengan nilai frequency yang rendah akan dikategorikan pada level `low-value customer` sedangkan cluster 2 dengan nilai frequency tinggi akan dikategorikan pada level `high-values customer`.
+
+```{python}
+new_data = order_cluster('FrequencyCluster', 'Frequency',new_data,True)
+```
+
+#### Monetary
+
+Faktor penting terakhir pada RFM analysis adalah Monetary. Customer dengan nilai monetary yang tinggi akan dikategorikan pada level `high-value customer` dikarenakan berkontribusi besar dalam pendapatan yang dihasilkan industry.
+
+```{python}
+new_data['Monetary'].describe()
+```
+
+```{python}
+sse={}
+monetary_ = new_data[['Monetary']]
+for k in range(1, 10):
+    kmeans = KMeans(n_clusters=k, max_iter=1000).fit(monetary_)
+    monetary_["clusters"] = kmeans.labels_
+    sse[k] = kmeans.inertia_ 
+plt.figure()
+plt.plot(list(sse.keys()), list(sse.values()))
+plt.xlabel("Number of cluster")
+plt.show()
+```
+
+```{python}
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(new_data[['Monetary']])
+new_data['MonetaryCluster'] = kmeans.predict(new_data[['Monetary']])
+new_data.groupby('MonetaryCluster')['Monetary'].describe()
+```
+
+Reorder cluster untuk standarisasi cluster sehingga cluster 0 dengan nilai monetary rendah akan dikategorikan dalam `low-value customer` sedangkan cluster 2 dengan nilai monetary tinggi akan dikelompokkan pada `high-values customer`.
+
+```{python}
+new_data = order_cluster('MonetaryCluster', 'Monetary',new_data,True)
+```
+
+#### Segmentation Customer based on Cluster
+
+Setelah memperoleh nilai cluster terurut pada setiap observasi data, langkah selanjutnya adalah memberikan label pada masing-masing observasi. Label ini bertujuan untuk mengidentifikasi level pada masing-masing customer apakah tergolong pada `low-value customer`, `medium-value customer` atau `high-value customer`.
+
+Proses pelabelan terdiri dari beberapa tahapan yang antara lain adalah :
+
+```{python}
+new_data.head()
+```
+
+a. Menghitung score pada masing-masing observasi dengan melakukan penjumlahan pada nilai cluster.  
+
+```{python}
+new_data['Score'] = new_data['RecencyCluster'] + new_data['FrequencyCluster'] + new_data['MonetaryCluster']
+new_data.head(2)
+```
+
+```{python}
+print(new_data['Score'].min())
+print(new_data['Score'].max())
+```
+
+Dari hasil di atas diperoleh informasi bahwa minimum score pada data adalah 0, sedangkan maksimum value pada data adalah 4. Sehingga untuk segmentasi label dapat dikategorikan berdasarkan ketentuan berikut :
+
+* Customer dengan score <= 1 akan masuk dalam kategori `low-value customer`
+* Customer dengan score <= 3 akan masuk dalam kategori `medium-value customer`
+* Customer dengan score > 3 akan masuk dalam kategori `high-value customer`
+
+```{python}
+label = []
+
+def label_(data) :
+    if data <= 1 :
+        lab = "Low"
+    elif data <= 3 :
+        lab = "Medium"
+    else :
+        lab = "High"
+    label.append(lab)
+```
+
+```{python}
+new_data['Score'].apply(label_)
+```
+
+```{python}
+new_data['Label'] = label
+```
+
+```{python}
+new_data.head(2)
+```
+
+### Customer's behavior in each factor based on their label
+
+Setelah memberikan label pada masing-masing customer, apakah sudah cukup membantu untuk tim management dalam menentukan strategi marketing yang tepat? Jawabannya dapat Ya atau Tidak. Tidak dikarenakan management perlu untuk mengetahui informasi detail dari behavior (kebiasaan) customer pada setiap level dalam melakukan pembelanjaan. Oleh karena itu, sebelum melangkah lebih jauh, terlebih dahulu lakukan behavior analisis sebagai berikut :
+
+```{python}
+import numpy as np
+
+def neg_to_zero(x):
+    if x <= 0:
+        return 1
+    else:
+        return x
+
+new_data['Recency'] = [neg_to_zero(x) for x in new_data.Recency]
+new_data['Monetary'] = [neg_to_zero(x) for x in new_data.Monetary]
+
+rfm_log = new_data[['Recency', 'Frequency', 'Monetary']].apply(np.log, axis = 1).round(3)
+```
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+    
+scaler = StandardScaler()
+rfm_scaled = scaler.fit_transform(rfm_log)
+
+rfm_scaled = pd.DataFrame(rfm_scaled, index = new_data.index, columns = rfm_log.columns)
+```
+
+```{python}
+rfm_scaled.head()
+```
+
+```{python}
+rfm_scaled['Label'] = new_data.Label
+rfm_scaled['CustomerID'] = new_data.CustomerID
+```
+
+```{python}
+rfm_scaled
+```
+
+```{python}
+rfm_melted = pd.melt(frame= rfm_scaled, id_vars= ['CustomerID', 'Label'], \
+                     var_name = 'Metrics', value_name = 'Value')
+```
+
+```{python}
+rfm_melted
+```
+
+Visualisasi behavior customer pada setiap level.
+
+```{python}
+import seaborn as sns
+
+# a snake plot with RFM
+sns.lineplot(x = 'Metrics', y = 'Value', hue = 'Label', data = rfm_melted)
+plt.title('Customer Behavior based on their Label')
+plt.legend(loc = 'upper right')
+```
+
+Berdasarkan visualisasi di atas diperoleh detail informasi bahwa :
+
+1. Customer dengan `high-value` labels memiliki kecenderungan untuk menghabiskan banyak uang dalam berbelanja (high monetary) dan sering melakukan pembelanjaan (high frequency)
+2. Customer dengan `medium-value` labels tidak terlalu sering melakukan pembelian dan juga tidak banyak menghabiskan uang selama transaksi.
+3. Customer dengan `low-value` labels hanya menghabiskan sedikit uang selama berbelanja, tidak terlalu sering berbelanja, tetapi  memiliki nilai recency yang cukup tinggi dibandingkan level lainnya.
+
+Berdasarkan rules di atas, pihak management dapat mempertimbangkan melakukan strategi marketing dengan cara :
+
+1. Memberikan special promotion atau discount untuk `low-value` customer yang baru-baru saja berkunjung untuk berbelanja, sehingga mereka tertarik untuk berbelanja lagi di lain waktu.
+2. Mempertahankan `medium-value` customer dengan cara memberikan cashback pada pembeliannya.
+3. Memberikan reward pada loyal customer (`high-value`) dengan cara memberikan free product atau cashback pada pembelanjaannya.
+
+### Conclusion
+
+RFM analysis adalah teknik yang umum digunakan untuk melakukan segmentasi terhadap customer berdasarkan value dan behavior selama bertransaksi. Teknik ini sangat membantu pihak management khususnya marketing team dalam menentukan strategi bisnis yang cocok untuk mempertahankan loyal customer dan menarik customer baru.
+
