@@ -12,11 +12,9 @@ description: "This is guide for Product Team Algoritma."
 
 # Introduction
 
+Bookdown berikut ini disusun oleh Tim **Algoritma** yang bertujuan untuk memberikan beberapa contoh *use case* penerapan Machine Learning dalam beberapa industry.
 
-The following bookdown is produced by the team at **Algoritma** for Machine Learning Application in Industry.
-
-**Algoritma** is a data science education center based in Jakarta. We organize workshops and training programs to help working professionals and students gain mastery in various data science sub-fields: data visualization, machine learning, data modeling, statistical inference, etc.
-
+**Algoritma** adalah Data Science Academy yang berlokasi di Jakarta. Algoritma menyediakan beberapa workshop dan training program untuk membantu student ataupun profesional dalam penguasaan berbagai sub-bidang ilmu data meliputi : Data Visualization, Machine Learning, Data Modelling, Statistical Inference, dan lain-lain.
 
 
 ```{r include=FALSE}
