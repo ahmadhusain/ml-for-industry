@@ -4,10 +4,12 @@ author: "Algoritma Team"
 date: "`r format(Sys.Date(), '%d, %B %Y')`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography:
+- book.bib
+- packages.bib
 biblio-style: apalike
 link-citations: yes
-description: "This is guide for Product Team Algoritma."
+description: This is guide for Product Team Algoritma.
 ---
 
 # Introduction

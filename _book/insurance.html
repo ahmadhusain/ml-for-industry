@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Insurance | Machine Learning Application in Industry</title>
   <meta name="description" content="This is guide for Product Team Algoritma." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Insurance | Machine Learning Application in Industry" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="retail.html"/>
 <link rel="next" href="bioinformatics.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,35 +50,36 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
 <script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
 <script src="libs/wordcloud2-0.0.1/hover.js"></script>
 <script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 <link href="libs/plot_text_explanations-0.1.0/plot_text_explanations.css" rel="stylesheet" />
-<script src="libs/plot_text_explanations-binding-0.5.1/plot_text_explanations.js"></script>
+<script src="libs/plot_text_explanations-binding-0.5.2/plot_text_explanations.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -86,9 +88,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -139,60 +141,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="telecommunication.html"><a href="telecommunication.html"><i class="fa fa-check"></i><b>2</b> Telecommunication</a><ul>
-<li class="chapter" data-level="2.1" data-path="telecommunication.html"><a href="telecommunication.html#customer-churn-prediction"><i class="fa fa-check"></i><b>2.1</b> Customer Churn Prediction</a><ul>
+<li class="chapter" data-level="2" data-path="telecommunication.html"><a href="telecommunication.html"><i class="fa fa-check"></i><b>2</b> Telecommunication</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="telecommunication.html"><a href="telecommunication.html#customer-churn-prediction"><i class="fa fa-check"></i><b>2.1</b> Customer Churn Prediction</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>2.1.1</b> Background</a></li>
 <li class="chapter" data-level="2.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>2.1.2</b> Modelling Analysis</a></li>
 <li class="chapter" data-level="2.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>2.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a><ul>
-<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#credit-risk-analysis"><i class="fa fa-check"></i><b>3.1</b> Credit Risk Analysis</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
-<li class="chapter" data-level="3.1.2" data-path="finance.html"><a href="finance.html#modelling-analysis-1"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#credit-risk-analysis"><i class="fa fa-check"></i><b>3.1</b> Credit Risk Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
+<li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
 <li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-2"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
 <li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="retail.html"><a href="retail.html"><i class="fa fa-check"></i><b>4</b> Retail</a><ul>
-<li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="retail.html"><a href="retail.html#background-3"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
+<li class="chapter" data-level="4" data-path="retail.html"><a href="retail.html"><i class="fa fa-check"></i><b>4</b> Retail</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
 <li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
-<li class="chapter" data-level="4.1.3" data-path="retail.html"><a href="retail.html#modelling-2"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
+<li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
+<li class="chapter" data-level="4.2" data-path="retail.html"><a href="retail.html#customer-segmentation-with-rfm-analysis-in-python-programming-language"><i class="fa fa-check"></i><b>4.2</b> Customer Segmentation with RFM Analysis (in Python Programming Language)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>4.2.1</b> Background</a></li>
+<li class="chapter" data-level="4.2.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>4.2.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.2.3</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.2.4" data-path="retail.html"><a href="retail.html#modelling-1"><i class="fa fa-check"></i><b>4.2.4</b> Modelling</a></li>
+<li class="chapter" data-level="4.2.5" data-path="retail.html"><a href="retail.html#customers-behavior-in-each-factor-based-on-their-label"><i class="fa fa-check"></i><b>4.2.5</b> Customer’s behavior in each factor based on their label</a></li>
+<li class="chapter" data-level="4.2.6" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>4.2.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="insurance.html"><a href="insurance.html"><i class="fa fa-check"></i><b>5</b> Insurance</a><ul>
-<li class="chapter" data-level="5.1" data-path="insurance.html"><a href="insurance.html#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>5.1</b> Prediction of Total Claim Amount</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="insurance.html"><a href="insurance.html#background-4"><i class="fa fa-check"></i><b>5.1.1</b> Background</a></li>
-<li class="chapter" data-level="5.1.2" data-path="insurance.html"><a href="insurance.html#modelling-analysis-2"><i class="fa fa-check"></i><b>5.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="5.1.3" data-path="insurance.html"><a href="insurance.html#conclusion-1"><i class="fa fa-check"></i><b>5.1.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="insurance.html"><a href="insurance.html"><i class="fa fa-check"></i><b>5</b> Insurance</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="insurance.html"><a href="insurance.html#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>5.1</b> Prediction of Total Claim Amount</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>5.1.1</b> Background</a></li>
+<li class="chapter" data-level="5.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="5.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>5.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bioinformatics.html"><a href="bioinformatics.html"><i class="fa fa-check"></i><b>6</b> Bioinformatics</a><ul>
-<li class="chapter" data-level="6.1" data-path="bioinformatics.html"><a href="bioinformatics.html#qtl-mapping-for-disease-resistance"><i class="fa fa-check"></i><b>6.1</b> QTL Mapping for Disease Resistance</a><ul>
+<li class="chapter" data-level="6" data-path="bioinformatics.html"><a href="bioinformatics.html"><i class="fa fa-check"></i><b>6</b> Bioinformatics</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bioinformatics.html"><a href="bioinformatics.html#qtl-mapping-for-disease-resistance"><i class="fa fa-check"></i><b>6.1</b> QTL Mapping for Disease Resistance</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="bioinformatics.html"><a href="bioinformatics.html#backgorund"><i class="fa fa-check"></i><b>6.1.1</b> Backgorund</a></li>
-<li class="chapter" data-level="6.1.2" data-path="bioinformatics.html"><a href="bioinformatics.html#modelling-analysis-3"><i class="fa fa-check"></i><b>6.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="6.1.3" data-path="bioinformatics.html"><a href="bioinformatics.html#conclusion-2"><i class="fa fa-check"></i><b>6.1.3</b> Conclusion</a></li>
+<li class="chapter" data-level="6.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>6.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>6.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="public-health.html"><a href="public-health.html"><i class="fa fa-check"></i><b>7</b> Public Health</a><ul>
-<li class="chapter" data-level="7.1" data-path="public-health.html"><a href="public-health.html#survival-analysis-of-patients-with-lung-cancer"><i class="fa fa-check"></i><b>7.1</b> Survival Analysis of Patients with Lung Cancer</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="public-health.html"><a href="public-health.html#import-data-3"><i class="fa fa-check"></i><b>7.1.1</b> Import Data</a></li>
-<li class="chapter" data-level="7.1.2" data-path="public-health.html"><a href="public-health.html#exploratory-data-analysis-3"><i class="fa fa-check"></i><b>7.1.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="7.1.3" data-path="public-health.html"><a href="public-health.html#modelling-analysis-4"><i class="fa fa-check"></i><b>7.1.3</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="7.1.4" data-path="public-health.html"><a href="public-health.html#conclusion-3"><i class="fa fa-check"></i><b>7.1.4</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="public-health.html"><a href="public-health.html"><i class="fa fa-check"></i><b>7</b> Public Health</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="public-health.html"><a href="public-health.html#survival-analysis-of-patients-with-lung-cancer"><i class="fa fa-check"></i><b>7.1</b> Survival Analysis of Patients with Lung Cancer</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="telecommunication.html"><a href="telecommunication.html#import-data"><i class="fa fa-check"></i><b>7.1.1</b> Import Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.1.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>7.1.3</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="7.1.4" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>7.1.4</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="media.html"><a href="media.html"><i class="fa fa-check"></i><b>8</b> Media</a><ul>
-<li class="chapter" data-level="8.1" data-path="media.html"><a href="media.html#causal-impact-on-leads-generation"><i class="fa fa-check"></i><b>8.1</b> Causal Impact on Leads generation</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="media.html"><a href="media.html#background-5"><i class="fa fa-check"></i><b>8.1.1</b> Background</a></li>
-<li class="chapter" data-level="8.1.2" data-path="media.html"><a href="media.html#modelling-analysis-5"><i class="fa fa-check"></i><b>8.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="8" data-path="media.html"><a href="media.html"><i class="fa fa-check"></i><b>8</b> Media</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="media.html"><a href="media.html#causal-impact-on-leads-generation"><i class="fa fa-check"></i><b>8.1</b> Causal Impact on Leads generation</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>8.1.1</b> Background</a></li>
+<li class="chapter" data-level="8.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>8.1.2</b> Modelling Analysis</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -215,131 +241,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="insurance" class="section level1">
+<div id="insurance" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Insurance</h1>
 <style>
 body {
 text-align: justify}
 </style>
-<div id="prediction-of-total-claim-amount" class="section level2">
+<div id="prediction-of-total-claim-amount" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Prediction of Total Claim Amount</h2>
-<div id="background-4" class="section level3">
+<div id="background" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Background</h3>
 <p>Seiring tingkat kompetisi yang semakin tinggi di industri asuransi, perusahaan dituntut untuk selalu memberikan terobosan dan strategi untuk memberikan layanan yang terbaik untuk nasabahnya. Salah satu aset utama perusahaan asuransi tentunya adalah data nasabah dan riwayat polis. Tentunya dengan adanya data yang dimiliki oleh perusahaan, dapat dimanfaatkan dalam upaya pengambilan keputusan strategis.</p>
 <p>Perusahaan memiliki kebutuhan untuk memperhitungkan pembayaran klaim di masa depan. Tanggung jawab tersebut biasa dikenal sebagai cadangan klaim. Karena cadangkan klaim adalah kewajiban yang harus dipersiapkan untuk masa yang akan datang, nilai pastinya tidak diketahui dan harus diperkirakan.</p>
 <p>Risiko yang dimiliki oleh setiap nasabah tentunya bervariasi, faktor-faktor yang berhubungan dengan risiko tentunya membantu dalam memprediksi biaya klaim yang harus dibayarkan. Tujuan dari analysis ini adalah untuk memprediksi besarnya klaim yang harus diberikan oleh perusahaan untuk setiap nasabahnya, hasil prediksi diperoleh dengan mempelajari karakteristik dan profil dari nasabah tersebut.</p>
 </div>
-<div id="modelling-analysis-2" class="section level3">
+<div id="modelling-analysis" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Modelling Analysis</h3>
-<div id="import-data-1" class="section level4">
+<div id="import-data" class="section level4" number="5.1.2.1">
 <h4><span class="header-section-number">5.1.2.1</span> Import Data</h4>
 <p>Data yang digunakan merupakan profil data nasabah asuransi kendaraan beserta total claim dari masing-masing nasabah yang diperoleh dari <a href="https://github.com/ccpintoiu/Prediction-of-Claim-Amount-in-Vehicle-Insurance">link berikut.</a> Data tersebut berisikan 9134 observasi atau sebanyak jumlah nasabah yang dimiliki, beserta 26 kolom. Target variabel pada data ini adalah <code>Total.Claim.Amount</code>, kita akan memprediksi total claim amount untuk setiap nasabah, harapannya perusahaan asuransi dapat mengetahui dana yang harus disiapkan untuk membayar klaim.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">insurance &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/04-insurance/Auto_Insurance_Claims_Sample.csv&quot;</span>)  </a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="kw">head</span>(insurance)</a></code></pre></div>
-<pre><code>#&gt;   Customer Country State.Code    State Claim.Amount Response
-#&gt; 1  BU79786      US         KS   Kansas     276.3519       No
-#&gt; 2  QZ44356      US         NE Nebraska     697.9536       No
-#&gt; 3  AI49188      US         OK Oklahoma    1288.7432       No
-#&gt; 4  WW63253      US         MO Missouri     764.5862       No
-#&gt; 5  HB64268      US         KS   Kansas     281.3693       No
-#&gt; 6  OC83172      US         IA     Iowa     825.6298      Yes
-#&gt;   Coverage Education Effective.To.Date EmploymentStatus Gender
-#&gt; 1    Basic  Bachelor           2/24/11         Employed      F
-#&gt; 2 Extended  Bachelor           1/31/11       Unemployed      F
-#&gt; 3  Premium  Bachelor           2/19/11         Employed      F
-#&gt; 4    Basic  Bachelor           1/20/11       Unemployed      M
-#&gt; 5    Basic  Bachelor            2/3/11         Employed      M
-#&gt; 6    Basic  Bachelor           1/25/11         Employed      F
-#&gt;   Income Location.Code Marital.Status Monthly.Premium.Auto
-#&gt; 1  56274      Suburban        Married                   69
-#&gt; 2      0      Suburban         Single                   94
-#&gt; 3  48767      Suburban        Married                  108
-#&gt; 4      0      Suburban        Married                  106
-#&gt; 5  43836         Rural         Single                   73
-#&gt; 6  62902         Rural        Married                   69
-#&gt;   Months.Since.Last.Claim Months.Since.Policy.Inception
-#&gt; 1                      32                             5
-#&gt; 2                      13                            42
-#&gt; 3                      18                            38
-#&gt; 4                      18                            65
-#&gt; 5                      12                            44
-#&gt; 6                      14                            94
-#&gt;   Number.of.Open.Complaints Number.of.Policies    Policy.Type
-#&gt; 1                         0                  1 Corporate Auto
-#&gt; 2                         0                  8  Personal Auto
-#&gt; 3                         0                  2  Personal Auto
-#&gt; 4                         0                  7 Corporate Auto
-#&gt; 5                         0                  1  Personal Auto
-#&gt; 6                         0                  2  Personal Auto
-#&gt;         Policy Claim.Reason Sales.Channel Total.Claim.Amount
-#&gt; 1 Corporate L3    Collision         Agent           384.8111
-#&gt; 2  Personal L3 Scratch/Dent         Agent          1131.4649
-#&gt; 3  Personal L3    Collision         Agent           566.4722
-#&gt; 4 Corporate L2    Collision   Call Center           529.8813
-#&gt; 5  Personal L1    Collision         Agent           138.1309
-#&gt; 6  Personal L3         Hail           Web           159.3830
-#&gt;   Vehicle.Class Vehicle.Size
-#&gt; 1  Two-Door Car      Medsize
-#&gt; 2 Four-Door Car      Medsize
-#&gt; 3  Two-Door Car      Medsize
-#&gt; 4           SUV      Medsize
-#&gt; 5 Four-Door Car      Medsize
-#&gt; 6  Two-Door Car      Medsize</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="insurance.html#cb221-1" aria-hidden="true"></a>insurance &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/04-insurance/Auto_Insurance_Claims_Sample.csv&quot;</span>)  </span>
+<span id="cb221-2"><a href="insurance.html#cb221-2" aria-hidden="true"></a><span class="kw">head</span>(insurance)</span></code></pre></div>
+<pre><code>#&gt;   Customer Country State.Code    State Claim.Amount Response Coverage Education
+#&gt; 1  BU79786      US         KS   Kansas     276.3519       No    Basic  Bachelor
+#&gt; 2  QZ44356      US         NE Nebraska     697.9536       No Extended  Bachelor
+#&gt; 3  AI49188      US         OK Oklahoma    1288.7432       No  Premium  Bachelor
+#&gt; 4  WW63253      US         MO Missouri     764.5862       No    Basic  Bachelor
+#&gt; 5  HB64268      US         KS   Kansas     281.3693       No    Basic  Bachelor
+#&gt; 6  OC83172      US         IA     Iowa     825.6298      Yes    Basic  Bachelor
+#&gt;   Effective.To.Date EmploymentStatus Gender Income Location.Code Marital.Status
+#&gt; 1           2/24/11         Employed      F  56274      Suburban        Married
+#&gt; 2           1/31/11       Unemployed      F      0      Suburban         Single
+#&gt; 3           2/19/11         Employed      F  48767      Suburban        Married
+#&gt; 4           1/20/11       Unemployed      M      0      Suburban        Married
+#&gt; 5            2/3/11         Employed      M  43836         Rural         Single
+#&gt; 6           1/25/11         Employed      F  62902         Rural        Married
+#&gt;   Monthly.Premium.Auto Months.Since.Last.Claim Months.Since.Policy.Inception
+#&gt; 1                   69                      32                             5
+#&gt; 2                   94                      13                            42
+#&gt; 3                  108                      18                            38
+#&gt; 4                  106                      18                            65
+#&gt; 5                   73                      12                            44
+#&gt; 6                   69                      14                            94
+#&gt;   Number.of.Open.Complaints Number.of.Policies    Policy.Type       Policy
+#&gt; 1                         0                  1 Corporate Auto Corporate L3
+#&gt; 2                         0                  8  Personal Auto  Personal L3
+#&gt; 3                         0                  2  Personal Auto  Personal L3
+#&gt; 4                         0                  7 Corporate Auto Corporate L2
+#&gt; 5                         0                  1  Personal Auto  Personal L1
+#&gt; 6                         0                  2  Personal Auto  Personal L3
+#&gt;   Claim.Reason Sales.Channel Total.Claim.Amount Vehicle.Class Vehicle.Size
+#&gt; 1    Collision         Agent           384.8111  Two-Door Car      Medsize
+#&gt; 2 Scratch/Dent         Agent          1131.4649 Four-Door Car      Medsize
+#&gt; 3    Collision         Agent           566.4722  Two-Door Car      Medsize
+#&gt; 4    Collision   Call Center           529.8813           SUV      Medsize
+#&gt; 5    Collision         Agent           138.1309 Four-Door Car      Medsize
+#&gt; 6         Hail           Web           159.3830  Two-Door Car      Medsize</code></pre>
 </div>
-<div id="exploratory-data-1" class="section level4">
+<div id="exploratory-data" class="section level4" number="5.1.2.2">
 <h4><span class="header-section-number">5.1.2.2</span> Exploratory Data</h4>
 <p>Selanjutnya melihat structure data dari masing-masing variabel, jika terdapat variabel yang belum sesuai tipe datanya perlu dilakukan <code>explicit coercion</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">str</span>(insurance)</a></code></pre></div>
-<pre><code>#&gt; &#39;data.frame&#39;:    9134 obs. of  26 variables:
-#&gt;  $ Customer                     : Factor w/ 9134 levels &quot;AA10041&quot;,&quot;AA11235&quot;,..: 601 5947 97 8017 2489 4948 8434 756 1352 548 ...
-#&gt;  $ Country                      : Factor w/ 1 level &quot;US&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-#&gt;  $ State.Code                   : Factor w/ 5 levels &quot;IA&quot;,&quot;KS&quot;,&quot;MO&quot;,..: 2 4 5 3 2 1 1 4 1 1 ...
-#&gt;  $ State                        : Factor w/ 5 levels &quot;Iowa&quot;,&quot;Kansas&quot;,..: 2 4 5 3 2 1 1 4 1 1 ...
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="insurance.html#cb223-1" aria-hidden="true"></a><span class="kw">str</span>(insurance)</span></code></pre></div>
+<pre><code>#&gt; &#39;data.frame&#39;:	9134 obs. of  26 variables:
+#&gt;  $ Customer                     : chr  &quot;BU79786&quot; &quot;QZ44356&quot; &quot;AI49188&quot; &quot;WW63253&quot; ...
+#&gt;  $ Country                      : chr  &quot;US&quot; &quot;US&quot; &quot;US&quot; &quot;US&quot; ...
+#&gt;  $ State.Code                   : chr  &quot;KS&quot; &quot;NE&quot; &quot;OK&quot; &quot;MO&quot; ...
+#&gt;  $ State                        : chr  &quot;Kansas&quot; &quot;Nebraska&quot; &quot;Oklahoma&quot; &quot;Missouri&quot; ...
 #&gt;  $ Claim.Amount                 : num  276 698 1289 765 281 ...
-#&gt;  $ Response                     : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 1 2 2 1 2 1 ...
-#&gt;  $ Coverage                     : Factor w/ 3 levels &quot;Basic&quot;,&quot;Extended&quot;,..: 1 2 3 1 1 1 1 3 1 2 ...
-#&gt;  $ Education                    : Factor w/ 5 levels &quot;Bachelor&quot;,&quot;College&quot;,..: 1 1 1 1 1 1 2 5 1 2 ...
-#&gt;  $ Effective.To.Date            : Factor w/ 59 levels &quot;1/1/11&quot;,&quot;1/10/11&quot;,..: 48 25 42 13 53 18 48 10 19 40 ...
-#&gt;  $ EmploymentStatus             : Factor w/ 5 levels &quot;Disabled&quot;,&quot;Employed&quot;,..: 2 5 2 5 2 2 2 5 3 2 ...
-#&gt;  $ Gender                       : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 2 2 1 1 2 2 1 ...
+#&gt;  $ Response                     : chr  &quot;No&quot; &quot;No&quot; &quot;No&quot; &quot;No&quot; ...
+#&gt;  $ Coverage                     : chr  &quot;Basic&quot; &quot;Extended&quot; &quot;Premium&quot; &quot;Basic&quot; ...
+#&gt;  $ Education                    : chr  &quot;Bachelor&quot; &quot;Bachelor&quot; &quot;Bachelor&quot; &quot;Bachelor&quot; ...
+#&gt;  $ Effective.To.Date            : chr  &quot;2/24/11&quot; &quot;1/31/11&quot; &quot;2/19/11&quot; &quot;1/20/11&quot; ...
+#&gt;  $ EmploymentStatus             : chr  &quot;Employed&quot; &quot;Unemployed&quot; &quot;Employed&quot; &quot;Unemployed&quot; ...
+#&gt;  $ Gender                       : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; ...
 #&gt;  $ Income                       : int  56274 0 48767 0 43836 62902 55350 0 14072 28812 ...
-#&gt;  $ Location.Code                : Factor w/ 3 levels &quot;Rural&quot;,&quot;Suburban&quot;,..: 2 2 2 2 1 1 2 3 2 3 ...
-#&gt;  $ Marital.Status               : Factor w/ 3 levels &quot;Divorced&quot;,&quot;Married&quot;,..: 2 3 2 2 3 2 2 3 1 2 ...
+#&gt;  $ Location.Code                : chr  &quot;Suburban&quot; &quot;Suburban&quot; &quot;Suburban&quot; &quot;Suburban&quot; ...
+#&gt;  $ Marital.Status               : chr  &quot;Married&quot; &quot;Single&quot; &quot;Married&quot; &quot;Married&quot; ...
 #&gt;  $ Monthly.Premium.Auto         : int  69 94 108 106 73 69 67 101 71 93 ...
 #&gt;  $ Months.Since.Last.Claim      : int  32 13 18 18 12 14 0 0 13 17 ...
 #&gt;  $ Months.Since.Policy.Inception: int  5 42 38 65 44 94 13 68 3 7 ...
 #&gt;  $ Number.of.Open.Complaints    : int  0 0 0 0 0 0 0 0 0 0 ...
 #&gt;  $ Number.of.Policies           : int  1 8 2 7 1 2 9 4 2 8 ...
-#&gt;  $ Policy.Type                  : Factor w/ 3 levels &quot;Corporate Auto&quot;,..: 1 2 2 1 2 2 1 1 1 3 ...
-#&gt;  $ Policy                       : Factor w/ 9 levels &quot;Corporate L1&quot;,..: 3 6 6 2 4 6 3 3 3 8 ...
-#&gt;  $ Claim.Reason                 : Factor w/ 4 levels &quot;Collision&quot;,&quot;Hail&quot;,..: 1 4 1 1 1 2 1 1 1 2 ...
-#&gt;  $ Sales.Channel                : Factor w/ 4 levels &quot;Agent&quot;,&quot;Branch&quot;,..: 1 1 1 3 1 4 1 1 1 2 ...
+#&gt;  $ Policy.Type                  : chr  &quot;Corporate Auto&quot; &quot;Personal Auto&quot; &quot;Personal Auto&quot; &quot;Corporate Auto&quot; ...
+#&gt;  $ Policy                       : chr  &quot;Corporate L3&quot; &quot;Personal L3&quot; &quot;Personal L3&quot; &quot;Corporate L2&quot; ...
+#&gt;  $ Claim.Reason                 : chr  &quot;Collision&quot; &quot;Scratch/Dent&quot; &quot;Collision&quot; &quot;Collision&quot; ...
+#&gt;  $ Sales.Channel                : chr  &quot;Agent&quot; &quot;Agent&quot; &quot;Agent&quot; &quot;Call Center&quot; ...
 #&gt;  $ Total.Claim.Amount           : num  385 1131 566 530 138 ...
-#&gt;  $ Vehicle.Class                : Factor w/ 6 levels &quot;Four-Door Car&quot;,..: 6 1 6 5 1 6 1 1 1 1 ...
-#&gt;  $ Vehicle.Size                 : Factor w/ 3 levels &quot;Large&quot;,&quot;Medsize&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+#&gt;  $ Vehicle.Class                : chr  &quot;Two-Door Car&quot; &quot;Four-Door Car&quot; &quot;Two-Door Car&quot; &quot;SUV&quot; ...
+#&gt;  $ Vehicle.Size                 : chr  &quot;Medsize&quot; &quot;Medsize&quot; &quot;Medsize&quot; &quot;Medsize&quot; ...</code></pre>
 <p>Berikutnya kita perlu inspect persebaran data yang dimilih baik data kategorik dan numerik, kita dapat menggunakan package <code>inspectdf</code> untuk eksplorasi berikut ini.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_cat</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-75-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_num</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-76-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="insurance.html#cb225-1" aria-hidden="true"></a>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_cat</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-135-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="insurance.html#cb226-1" aria-hidden="true"></a>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_num</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-136-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Dari hasil kedua plot diatas berikutnya membuang variabel yang tidak dibutuhkan dalam model. Variabel <code>customer</code> merupakan data unique dari ID setiap customer, oleh karena itu kita akan membuang variabel tersebut. Variabel <code>country</code> tidak banyak memberikan informasi, karena semua observasi berisikan informasi yang sama. Variabel <code>State.Code</code> juga memberikan informasi yang sama dengan variabel <code>State</code>, oleh karena itu kita akan menggunakan salah satu dari kedua variabel tersebut yaitu variabel <code>State</code>. Sedangkan untuk variabel <code>Policy</code> kita hilangkan karena informasi yang diberikan juga sama dengan variabel <code>Policy.Type</code>.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">insurance &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb97-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(Customer, Country, State.Code,</a>
-<a class="sourceLine" id="cb97-3" title="3">            Effective.To.Date, Policy))</a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="insurance.html#cb227-1" aria-hidden="true"></a>insurance &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb227-2"><a href="insurance.html#cb227-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(Customer, Country, State.Code,</span>
+<span id="cb227-3"><a href="insurance.html#cb227-3" aria-hidden="true"></a>            Effective.To.Date, Policy))</span></code></pre></div>
 <p>Selanjutnya, split data menjadi data train dan data test dengan proporsi 80:20.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb98-2" title="2">idx &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> insurance,<span class="dt">prop =</span> <span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb98-3" title="3">claim_train &lt;-<span class="st"> </span><span class="kw">training</span>(idx)</a>
-<a class="sourceLine" id="cb98-4" title="4">claim_test &lt;-<span class="st"> </span><span class="kw">testing</span>(idx)</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="insurance.html#cb228-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb228-2"><a href="insurance.html#cb228-2" aria-hidden="true"></a>idx &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> insurance,<span class="dt">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb228-3"><a href="insurance.html#cb228-3" aria-hidden="true"></a>claim_train &lt;-<span class="st"> </span><span class="kw">training</span>(idx)</span>
+<span id="cb228-4"><a href="insurance.html#cb228-4" aria-hidden="true"></a>claim_test &lt;-<span class="st"> </span><span class="kw">testing</span>(idx)</span></code></pre></div>
 </div>
-<div id="modelling-3" class="section level4">
+<div id="modelling" class="section level4" number="5.1.2.3">
 <h4><span class="header-section-number">5.1.2.3</span> Modelling</h4>
 <p>Kemudian bentuk model random forest, tentukan target variabel dan prediktor yang digunakan.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">library</span>(randomForest)</a>
-<a class="sourceLine" id="cb99-2" title="2">forest_claim &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Total.Claim.Amount<span class="op">~</span>.,<span class="dt">data =</span> claim_train, <span class="dt">localImp =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb99-3" title="3"><span class="co">#saveRDS(forest_claim,&quot;forest_claim.RDS&quot;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">forest_claim &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/forest_claim.RDS&quot;</span>)</a>
-<a class="sourceLine" id="cb100-2" title="2">forest_claim</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="insurance.html#cb229-1" aria-hidden="true"></a><span class="kw">library</span>(randomForest)</span>
+<span id="cb229-2"><a href="insurance.html#cb229-2" aria-hidden="true"></a>forest_claim &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Total.Claim.Amount<span class="op">~</span>.,<span class="dt">data =</span> claim_train, <span class="dt">localImp =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb229-3"><a href="insurance.html#cb229-3" aria-hidden="true"></a><span class="co">#saveRDS(forest_claim,&quot;forest_claim.RDS&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="insurance.html#cb230-1" aria-hidden="true"></a>forest_claim &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/forest_claim.RDS&quot;</span>)</span>
+<span id="cb230-2"><a href="insurance.html#cb230-2" aria-hidden="true"></a>forest_claim</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt; Call:
 #&gt;  randomForest(formula = Total.Claim.Amount ~ ., data = claim_train,      localImp = TRUE) 
@@ -347,37 +359,37 @@ text-align: justify}
 #&gt;                      Number of trees: 500
 #&gt; No. of variables tried at each split: 6
 #&gt; 
-#&gt;           Mean of squared residuals: 12764.93
-#&gt;                     % Var explained: 84.8</code></pre>
+#&gt;           Mean of squared residuals: 13616.34
+#&gt;                     % Var explained: 84.36</code></pre>
 <p>Model memiliki kemampuan menjelaskan variasi data sebesar 84.8%, sedangkan sisanya sebesar 15.2% dijelaskan oleh variabel lain yang tidak digunakan pada model. Untuk mengetahui variabel yang paling berpengaruh pada model, kita dapat melihat <code>variabel importance</code>.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">varImpPlot</span>(forest_claim, <span class="dt">main =</span> <span class="st">&quot;Variable Importance&quot;</span>,<span class="dt">n.var =</span> <span class="dv">5</span>)</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-81-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="insurance.html#cb232-1" aria-hidden="true"></a><span class="kw">varImpPlot</span>(forest_claim, <span class="dt">main =</span> <span class="st">&quot;Variable Importance&quot;</span>,<span class="dt">n.var =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-141-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Nilai importance atau tingkat kepentingannya terdapat dua penilaian yaitu <code>IncMSE</code> dan <code>IncNodePurity</code>. Untuk <code>IncMSE</code> diperoleh dari error pada OOB (out of bag) data, kemudian di rata-ratakan untuk semua pohon, dan dinormalisasi dengan standar deviasi. Untuk <code>IncNodePurity</code> merupakan total penurunan impurity dari masing-masing variabel. Untuk kasus klasifikasi node impurity diperoleh dari nilai gini index, sedangkan untuk kasus regresi diperoleh dari SSE (Sum Square Error).</p>
 <p>Untuk mengetahui peran variabel dalam pembuatan model, kita dapat memanfaatkan package <code>randomForestExplainer</code> yang menyediakan beberapa function untuk memperoleh informasi mengenai variabel importance.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1">mindepth_frame &lt;-<span class="st"> </span><span class="kw">min_depth_distribution</span>(forest_claim)</a>
-<a class="sourceLine" id="cb103-2" title="2"><span class="co">#saveRDS(mindepth_frame, &quot;mindepthframe.rds&quot;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">mindepth_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/mindepthframe.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb104-2" title="2"><span class="kw">plot_min_depth_distribution</span>(mindepth_frame, <span class="dt">mean_sample =</span> <span class="st">&quot;top_trees&quot;</span>)</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-83-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="insurance.html#cb233-1" aria-hidden="true"></a>mindepth_frame &lt;-<span class="st"> </span><span class="kw">min_depth_distribution</span>(forest_claim)</span>
+<span id="cb233-2"><a href="insurance.html#cb233-2" aria-hidden="true"></a><span class="co">#saveRDS(mindepth_frame, &quot;mindepthframe.rds&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="insurance.html#cb234-1" aria-hidden="true"></a>mindepth_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/mindepthframe.rds&quot;</span>)</span>
+<span id="cb234-2"><a href="insurance.html#cb234-2" aria-hidden="true"></a><span class="kw">plot_min_depth_distribution</span>(mindepth_frame, <span class="dt">mean_sample =</span> <span class="st">&quot;top_trees&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-143-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Plot tersebut memberikan informasi mengenai nilai <code>mean minimal dept</code> untuk setiap variabel. Semakin kecil nilai minimal depth artinya semakin penting variabel tersebut pada model. Semakin besar proporsi minimal dept pada warna merah mudah (mendekati 0), artinya variabel tersebut sering dijadikan sebagai root node, yaitu variabel utama yang digunakan untuk menentukan nilai target.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">imp_frame &lt;-<span class="st"> </span><span class="kw">measure_importance</span>(forest_claim)</a>
-<a class="sourceLine" id="cb105-2" title="2"><span class="co">#saveRDS(imp_frame,&quot;imp_frame.rds&quot;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">imp_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/imp_frame.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb106-2" title="2"><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">size_measure =</span> <span class="st">&quot;no_of_nodes&quot;</span>,<span class="dt">no_of_labels =</span> <span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">x_measure =</span> <span class="st">&quot;mse_increase&quot;</span>,</a>
-<a class="sourceLine" id="cb107-2" title="2">                          <span class="dt">size_measure =</span> <span class="st">&quot;p_value&quot;</span>, <span class="dt">no_of_labels =</span> <span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="insurance.html#cb235-1" aria-hidden="true"></a>imp_frame &lt;-<span class="st"> </span><span class="kw">measure_importance</span>(forest_claim)</span>
+<span id="cb235-2"><a href="insurance.html#cb235-2" aria-hidden="true"></a><span class="co">#saveRDS(imp_frame,&quot;imp_frame.rds&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="insurance.html#cb236-1" aria-hidden="true"></a>imp_frame &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/04-insurance/imp_frame.rds&quot;</span>)</span>
+<span id="cb236-2"><a href="insurance.html#cb236-2" aria-hidden="true"></a><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">size_measure =</span> <span class="st">&quot;no_of_nodes&quot;</span>,<span class="dt">no_of_labels =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-145-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="insurance.html#cb237-1" aria-hidden="true"></a><span class="kw">plot_multi_way_importance</span>(imp_frame, <span class="dt">x_measure =</span> <span class="st">&quot;mse_increase&quot;</span>,</span>
+<span id="cb237-2"><a href="insurance.html#cb237-2" aria-hidden="true"></a>                          <span class="dt">size_measure =</span> <span class="st">&quot;p_value&quot;</span>, <span class="dt">no_of_labels =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-146-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Perbandingan dari ketiga plot, terdapat 5 variabel yaitu location code, monthly premium auto, vehicle class, income, dan claim amount yang selalu muncul dari ketiga plot tersebut. Artinya kelima variabel tersebut dapat dikatakan variabel yang paling berpengaruh dan banyak digunakan dalam pembuatan pohon.</p>
 <p>Berikutnya lakukan prediksi untuk data test, kemudian cari nilai error dari hasil prediksi</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1">claim_test<span class="op">$</span>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> forest_claim,<span class="dt">newdata =</span> claim_test)</a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="insurance.html#cb238-1" aria-hidden="true"></a>claim_test<span class="op">$</span>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> forest_claim,<span class="dt">newdata =</span> claim_test)</span></code></pre></div>
 <p>Mencari nilai RMSE (Root Mean Squared Error)</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">MLmetrics<span class="op">::</span><span class="kw">RMSE</span>(<span class="dt">y_pred =</span> claim_test<span class="op">$</span>pred,<span class="dt">y_true =</span> claim_test<span class="op">$</span>Total.Claim.Amount)</a></code></pre></div>
-<pre><code>#&gt; [1] 62.59351</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="insurance.html#cb239-1" aria-hidden="true"></a>MLmetrics<span class="op">::</span><span class="kw">RMSE</span>(<span class="dt">y_pred =</span> claim_test<span class="op">$</span>pred,<span class="dt">y_true =</span> claim_test<span class="op">$</span>Total.Claim.Amount)</span></code></pre></div>
+<pre><code>#&gt; [1] 106.1973</code></pre>
 <p>RMSE merupakan nilai rata rata dari jumlah kuadrat error yang menyatakan ukuran besarnya kesalahan yang dihasilkan oleh model. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh model mendekasi variasi nilai observasinya. Jika dilihat dari 5 number summary variabel total claim amount, nilai RMSE yang diperoleh sebesar 119.9 dapat dikatakan sudah cukup baik.</p>
 </div>
 </div>
-<div id="conclusion-1" class="section level3">
+<div id="conclusion" class="section level3" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Conclusion</h3>
 <p>Untuk memprediksi nilai <code>Total Claim Amount</code> model ini memiliki kemampuan menjelaskan variasi data sebesar 84.8% dan variabel yang paling mempengaruhi target adalah variabel location code, monthly premium auto, vehicle class, income, dan claim amount. Hasil error yang diperoleh dari model tersebut cukup baik dalam memprediksi data.</p>
 

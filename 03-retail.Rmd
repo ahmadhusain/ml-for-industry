@@ -198,8 +198,9 @@ Dari hasil output observasi kedua terprediksi product tersebut recommended denga
 ##  Customer Segmentation with RFM Analysis (in Python Programming Language)
 
 ```{r echo=FALSE}
-Sys.setenv(RETICULATE_PYTHON = "C:/Users/dyahn/anaconda3/envs/data-analytics/python.exe")
 library(reticulate)
+reticulate::use_python(python = 'C:/Users/dyahn/anaconda3/envs/data-analytics/python.exe', required = T)
+sys <- import("sys")
 py_run_string("import os")
 py_run_string("os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = 'C:/Users/dyahn/anaconda3/Library/plugins/platforms'")
 ```

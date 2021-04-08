@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Media | Machine Learning Application in Industry</title>
   <meta name="description" content="This is guide for Product Team Algoritma." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Media | Machine Learning Application in Industry" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="public-health.html"/>
 
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,35 +50,36 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
 <script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
 <script src="libs/wordcloud2-0.0.1/hover.js"></script>
 <script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 <link href="libs/plot_text_explanations-0.1.0/plot_text_explanations.css" rel="stylesheet" />
-<script src="libs/plot_text_explanations-binding-0.5.1/plot_text_explanations.js"></script>
+<script src="libs/plot_text_explanations-binding-0.5.2/plot_text_explanations.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -86,9 +88,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -139,60 +141,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="telecommunication.html"><a href="telecommunication.html"><i class="fa fa-check"></i><b>2</b> Telecommunication</a><ul>
-<li class="chapter" data-level="2.1" data-path="telecommunication.html"><a href="telecommunication.html#customer-churn-prediction"><i class="fa fa-check"></i><b>2.1</b> Customer Churn Prediction</a><ul>
+<li class="chapter" data-level="2" data-path="telecommunication.html"><a href="telecommunication.html"><i class="fa fa-check"></i><b>2</b> Telecommunication</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="telecommunication.html"><a href="telecommunication.html#customer-churn-prediction"><i class="fa fa-check"></i><b>2.1</b> Customer Churn Prediction</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>2.1.1</b> Background</a></li>
 <li class="chapter" data-level="2.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>2.1.2</b> Modelling Analysis</a></li>
 <li class="chapter" data-level="2.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>2.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a><ul>
-<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#credit-risk-analysis"><i class="fa fa-check"></i><b>3.1</b> Credit Risk Analysis</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
-<li class="chapter" data-level="3.1.2" data-path="finance.html"><a href="finance.html#modelling-analysis-1"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#credit-risk-analysis"><i class="fa fa-check"></i><b>3.1</b> Credit Risk Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
+<li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
 <li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-2"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
 <li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="retail.html"><a href="retail.html"><i class="fa fa-check"></i><b>4</b> Retail</a><ul>
-<li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="retail.html"><a href="retail.html#background-3"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
+<li class="chapter" data-level="4" data-path="retail.html"><a href="retail.html"><i class="fa fa-check"></i><b>4</b> Retail</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
 <li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
-<li class="chapter" data-level="4.1.3" data-path="retail.html"><a href="retail.html#modelling-2"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
+<li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
+<li class="chapter" data-level="4.2" data-path="retail.html"><a href="retail.html#customer-segmentation-with-rfm-analysis-in-python-programming-language"><i class="fa fa-check"></i><b>4.2</b> Customer Segmentation with RFM Analysis (in Python Programming Language)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>4.2.1</b> Background</a></li>
+<li class="chapter" data-level="4.2.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>4.2.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.2.3</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.2.4" data-path="retail.html"><a href="retail.html#modelling-1"><i class="fa fa-check"></i><b>4.2.4</b> Modelling</a></li>
+<li class="chapter" data-level="4.2.5" data-path="retail.html"><a href="retail.html#customers-behavior-in-each-factor-based-on-their-label"><i class="fa fa-check"></i><b>4.2.5</b> Customer’s behavior in each factor based on their label</a></li>
+<li class="chapter" data-level="4.2.6" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>4.2.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="insurance.html"><a href="insurance.html"><i class="fa fa-check"></i><b>5</b> Insurance</a><ul>
-<li class="chapter" data-level="5.1" data-path="insurance.html"><a href="insurance.html#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>5.1</b> Prediction of Total Claim Amount</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="insurance.html"><a href="insurance.html#background-4"><i class="fa fa-check"></i><b>5.1.1</b> Background</a></li>
-<li class="chapter" data-level="5.1.2" data-path="insurance.html"><a href="insurance.html#modelling-analysis-2"><i class="fa fa-check"></i><b>5.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="5.1.3" data-path="insurance.html"><a href="insurance.html#conclusion-1"><i class="fa fa-check"></i><b>5.1.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="insurance.html"><a href="insurance.html"><i class="fa fa-check"></i><b>5</b> Insurance</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="insurance.html"><a href="insurance.html#prediction-of-total-claim-amount"><i class="fa fa-check"></i><b>5.1</b> Prediction of Total Claim Amount</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>5.1.1</b> Background</a></li>
+<li class="chapter" data-level="5.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>5.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="5.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>5.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bioinformatics.html"><a href="bioinformatics.html"><i class="fa fa-check"></i><b>6</b> Bioinformatics</a><ul>
-<li class="chapter" data-level="6.1" data-path="bioinformatics.html"><a href="bioinformatics.html#qtl-mapping-for-disease-resistance"><i class="fa fa-check"></i><b>6.1</b> QTL Mapping for Disease Resistance</a><ul>
+<li class="chapter" data-level="6" data-path="bioinformatics.html"><a href="bioinformatics.html"><i class="fa fa-check"></i><b>6</b> Bioinformatics</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bioinformatics.html"><a href="bioinformatics.html#qtl-mapping-for-disease-resistance"><i class="fa fa-check"></i><b>6.1</b> QTL Mapping for Disease Resistance</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="bioinformatics.html"><a href="bioinformatics.html#backgorund"><i class="fa fa-check"></i><b>6.1.1</b> Backgorund</a></li>
-<li class="chapter" data-level="6.1.2" data-path="bioinformatics.html"><a href="bioinformatics.html#modelling-analysis-3"><i class="fa fa-check"></i><b>6.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="6.1.3" data-path="bioinformatics.html"><a href="bioinformatics.html#conclusion-2"><i class="fa fa-check"></i><b>6.1.3</b> Conclusion</a></li>
+<li class="chapter" data-level="6.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>6.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>6.1.3</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="public-health.html"><a href="public-health.html"><i class="fa fa-check"></i><b>7</b> Public Health</a><ul>
-<li class="chapter" data-level="7.1" data-path="public-health.html"><a href="public-health.html#survival-analysis-of-patients-with-lung-cancer"><i class="fa fa-check"></i><b>7.1</b> Survival Analysis of Patients with Lung Cancer</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="public-health.html"><a href="public-health.html#import-data-3"><i class="fa fa-check"></i><b>7.1.1</b> Import Data</a></li>
-<li class="chapter" data-level="7.1.2" data-path="public-health.html"><a href="public-health.html#exploratory-data-analysis-3"><i class="fa fa-check"></i><b>7.1.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="7.1.3" data-path="public-health.html"><a href="public-health.html#modelling-analysis-4"><i class="fa fa-check"></i><b>7.1.3</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="7.1.4" data-path="public-health.html"><a href="public-health.html#conclusion-3"><i class="fa fa-check"></i><b>7.1.4</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="public-health.html"><a href="public-health.html"><i class="fa fa-check"></i><b>7</b> Public Health</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="public-health.html"><a href="public-health.html#survival-analysis-of-patients-with-lung-cancer"><i class="fa fa-check"></i><b>7.1</b> Survival Analysis of Patients with Lung Cancer</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="telecommunication.html"><a href="telecommunication.html#import-data"><i class="fa fa-check"></i><b>7.1.1</b> Import Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.1.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>7.1.3</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="7.1.4" data-path="telecommunication.html"><a href="telecommunication.html#conclusion"><i class="fa fa-check"></i><b>7.1.4</b> Conclusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="media.html"><a href="media.html"><i class="fa fa-check"></i><b>8</b> Media</a><ul>
-<li class="chapter" data-level="8.1" data-path="media.html"><a href="media.html#causal-impact-on-leads-generation"><i class="fa fa-check"></i><b>8.1</b> Causal Impact on Leads generation</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="media.html"><a href="media.html#background-5"><i class="fa fa-check"></i><b>8.1.1</b> Background</a></li>
-<li class="chapter" data-level="8.1.2" data-path="media.html"><a href="media.html#modelling-analysis-5"><i class="fa fa-check"></i><b>8.1.2</b> Modelling Analysis</a></li>
+<li class="chapter" data-level="8" data-path="media.html"><a href="media.html"><i class="fa fa-check"></i><b>8</b> Media</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="media.html"><a href="media.html#causal-impact-on-leads-generation"><i class="fa fa-check"></i><b>8.1</b> Causal Impact on Leads generation</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>8.1.1</b> Background</a></li>
+<li class="chapter" data-level="8.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>8.1.2</b> Modelling Analysis</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -215,136 +241,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="media" class="section level1">
+<div id="media" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Media</h1>
-<div id="causal-impact-on-leads-generation" class="section level2">
+<div id="causal-impact-on-leads-generation" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Causal Impact on Leads generation</h2>
-<div id="background-5" class="section level3">
+<div id="background" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Background</h3>
 <p>Dalam proses bisnis, tim marketing mempunyai peran untuk meningkatkan <em>brand awereness</em> sebuah produk yang dijual. Ketika upaya menarik perhatian pelanggan untuk mencari tahu produk atau layanan yang disediakan sukses akan menghasilkan sebuah <em>leads</em>. Simpelnya, leads adalah orang-orang yang tertarik pada produk atau layanan bisnis. Di era digital, <em>leads</em> dapat diartikan sebagai orang yang mengunjungi website secara langsung maupun melalui iklan, orang yang melakukan like, share terhadap konten atau kampanye yang sedang dilakukan. Selanjutnya, prospek ketertarikan ini nantinya akan disimpan untuk kemudian diarahkan kepada tim sales. Banyak sekali upaya yang dapat dilakukan untuk menghasilkan sebuah <em>leads</em>. Mulai dari membuat konten kreatif, iklan, menulis artikel, membagikan <em>ebook</em>, kode prome dan lain sebagainya.</p>
 <p>Perlu dilakukan analisa seberapa efektif kampanye yang dilakukan untuk menghasilkan peningkatan leads. <em>Causal Impact</em> adalah sebuah analisis yang dapat digunakan untuk mencari kesimpulan secara statistik apakah ada perbedaan yang signifikan untuk <em>lead generation</em> dari periode sebelum kampanye dilakukan. Kesimpulan yang dapat diperoleh, apakah leads tersebut adalah hasil dari kampanye yang dilakukan, atau berasal dari faktor lain yang tidak teramati.</p>
 </div>
-<div id="modelling-analysis-5" class="section level3">
+<div id="modelling-analysis" class="section level3" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Modelling Analysis</h3>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="kw">library</span>(CausalImpact)</a>
-<a class="sourceLine" id="cb162-3" title="3"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb162-4" title="4"><span class="kw">library</span>(forecast)</a>
-<a class="sourceLine" id="cb162-5" title="5"><span class="kw">library</span>(TSstudio)</a></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="media.html#cb293-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb293-2"><a href="media.html#cb293-2" aria-hidden="true"></a><span class="kw">library</span>(CausalImpact)</span>
+<span id="cb293-3"><a href="media.html#cb293-3" aria-hidden="true"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb293-4"><a href="media.html#cb293-4" aria-hidden="true"></a><span class="kw">library</span>(forecast)</span>
+<span id="cb293-5"><a href="media.html#cb293-5" aria-hidden="true"></a><span class="kw">library</span>(TSstudio)</span></code></pre></div>
 <p>Data berasal dari hasil googleanalytics sebuah website. Untuk pemodelan <em>post-period</em>, akan digunakan 37 hari sebelumnya sebagai data training. Pertanyaan bisnisnya yaitu pada hari ke-38 dan seterusnya, setelah kampanye dilakukan, apakah memperoleh peningkatan leads yang signifikan?</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/09-media/analytics.csv&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">glimpse</span>(data)</a></code></pre></div>
-<pre><code>#&gt; Observations: 54
-#&gt; Variables: 9
-#&gt; $ page              &lt;chr&gt; &quot;9fb22be32c347a5acd1d3724b0dae726&quot;, &quot;9...
-#&gt; $ datetime          &lt;dbl&gt; 20180516, 20180517, 20180518, 20180519...
-#&gt; $ page_display      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-#&gt; $ unique_views      &lt;dbl&gt; 1456, 1392, 1281, 658, 616, 1691, 1488...
-#&gt; $ average_page_time &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-#&gt; $ tickets           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-#&gt; $ bounce_rate       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-#&gt; $ exit_percentage   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-#&gt; $ page_value        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="media.html#cb294-1" aria-hidden="true"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/09-media/analytics.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="media.html#cb295-1" aria-hidden="true"></a><span class="kw">glimpse</span>(data)</span></code></pre></div>
+<pre><code>#&gt; Rows: 54
+#&gt; Columns: 9
+#&gt; $ page              [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;9fb22be32c347a5acd1d3724b0dae726&quot;, &quot;9fb22be32c347a5~
+#&gt; $ datetime          [3m[38;5;246m&lt;dbl&gt;[39m[23m 20180516, 20180517, 20180518, 20180519, 20180520, 20~
+#&gt; $ page_display      [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+#&gt; $ unique_views      [3m[38;5;246m&lt;dbl&gt;[39m[23m 1456, 1392, 1281, 658, 616, 1691, 1488, 1316, 1224, ~
+#&gt; $ average_page_time [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+#&gt; $ tickets           [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+#&gt; $ bounce_rate       [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+#&gt; $ exit_percentage   [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~
+#&gt; $ page_value        [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0~</code></pre>
 <p>Kita pilih beberapa kolom yang menjadi fokus analisis ini, yaitu datetime (harian) dan <code>unique views</code> yang berisi informasi berapa banyak orang yang mengunjungi halaman website tersebut.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">actual &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb166-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb166-3" title="3">    <span class="dt">datetime =</span> lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="kw">as.character</span>(datetime))</a>
-<a class="sourceLine" id="cb166-4" title="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb166-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(datetime, unique_views) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb166-6" title="6"><span class="st">  </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb166-7" title="7"></a>
-<a class="sourceLine" id="cb166-8" title="8"><span class="kw">head</span>(actual)</a></code></pre></div>
-<pre><code>#&gt; # A tibble: 6 x 2
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="media.html#cb297-1" aria-hidden="true"></a>actual &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb297-2"><a href="media.html#cb297-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb297-3"><a href="media.html#cb297-3" aria-hidden="true"></a>    <span class="dt">datetime =</span> lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="kw">as.character</span>(datetime))</span>
+<span id="cb297-4"><a href="media.html#cb297-4" aria-hidden="true"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb297-5"><a href="media.html#cb297-5" aria-hidden="true"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(datetime, unique_views) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb297-6"><a href="media.html#cb297-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>()</span>
+<span id="cb297-7"><a href="media.html#cb297-7" aria-hidden="true"></a></span>
+<span id="cb297-8"><a href="media.html#cb297-8" aria-hidden="true"></a><span class="kw">head</span>(actual)</span></code></pre></div>
+<pre><code>#&gt; [38;5;246m# A tibble: 6 x 2[39m
 #&gt;   datetime            unique_views
-#&gt;   &lt;dttm&gt;                     &lt;dbl&gt;
-#&gt; 1 2018-05-16 00:00:00         1456
-#&gt; 2 2018-05-17 00:00:00         1392
-#&gt; 3 2018-05-18 00:00:00         1281
-#&gt; 4 2018-05-19 00:00:00          658
-#&gt; 5 2018-05-20 00:00:00          616
-#&gt; 6 2018-05-21 00:00:00         1691</code></pre>
+#&gt;   [3m[38;5;246m&lt;dttm&gt;[39m[23m                     [3m[38;5;246m&lt;dbl&gt;[39m[23m
+#&gt; [38;5;250m1[39m 2018-05-16 [38;5;246m00:00:00[39m         [4m1[24m456
+#&gt; [38;5;250m2[39m 2018-05-17 [38;5;246m00:00:00[39m         [4m1[24m392
+#&gt; [38;5;250m3[39m 2018-05-18 [38;5;246m00:00:00[39m         [4m1[24m281
+#&gt; [38;5;250m4[39m 2018-05-19 [38;5;246m00:00:00[39m          658
+#&gt; [38;5;250m5[39m 2018-05-20 [38;5;246m00:00:00[39m          616
+#&gt; [38;5;250m6[39m 2018-05-21 [38;5;246m00:00:00[39m         [4m1[24m691</code></pre>
 <p>Leads generation yang dihasilkan paling tinggi ketika hari Rabu. Informasi tersebut dapat dijadikan pertimbangan penentuan hari untuk memulai kampanye.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">actual <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb168-3" title="3">    <span class="dt">wdays =</span> lubridate<span class="op">::</span><span class="kw">wday</span>(datetime, <span class="dt">label =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb168-4" title="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(wdays) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_views =</span> <span class="kw">sum</span>(unique_views)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb168-9" title="9">    <span class="dt">label =</span> scales<span class="op">::</span><span class="kw">comma</span>(total_views)</a>
-<a class="sourceLine" id="cb168-10" title="10">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(</a>
-<a class="sourceLine" id="cb168-12" title="12">    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> wdays, <span class="dt">y =</span> total_views)</a>
-<a class="sourceLine" id="cb168-13" title="13">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb168-14" title="14"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb168-15" title="15"><span class="st">  </span><span class="kw">labs</span>(</a>
-<a class="sourceLine" id="cb168-16" title="16">    <span class="dt">title =</span> <span class="st">&quot;Total Views Per Days&quot;</span>,</a>
-<a class="sourceLine" id="cb168-17" title="17">    <span class="dt">subtitle =</span> <span class="st">&quot;Period: May to July&quot;</span>,</a>
-<a class="sourceLine" id="cb168-18" title="18">    <span class="dt">y =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb168-19" title="19">    <span class="dt">x =</span> <span class="st">&quot;Day of Week&quot;</span></a>
-<a class="sourceLine" id="cb168-20" title="20">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb168-21" title="21"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb168-22" title="22"><span class="st">  </span><span class="kw">geom_text</span>(</a>
-<a class="sourceLine" id="cb168-23" title="23">    <span class="kw">aes</span>(<span class="dt">label =</span> label, <span class="dt">y =</span> total_views <span class="op">+</span><span class="st"> </span><span class="kw">max</span>(total_views) <span class="op">*</span><span class="st"> </span><span class="fl">0.075</span>) , <span class="dt">size =</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb168-24" title="24">  )</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="media.html#cb299-1" aria-hidden="true"></a>actual <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-2"><a href="media.html#cb299-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb299-3"><a href="media.html#cb299-3" aria-hidden="true"></a>    <span class="dt">wdays =</span> lubridate<span class="op">::</span><span class="kw">wday</span>(datetime, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb299-4"><a href="media.html#cb299-4" aria-hidden="true"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-5"><a href="media.html#cb299-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(wdays) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-6"><a href="media.html#cb299-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_views =</span> <span class="kw">sum</span>(unique_views)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-7"><a href="media.html#cb299-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-8"><a href="media.html#cb299-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb299-9"><a href="media.html#cb299-9" aria-hidden="true"></a>    <span class="dt">label =</span> scales<span class="op">::</span><span class="kw">comma</span>(total_views)</span>
+<span id="cb299-10"><a href="media.html#cb299-10" aria-hidden="true"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb299-11"><a href="media.html#cb299-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(</span>
+<span id="cb299-12"><a href="media.html#cb299-12" aria-hidden="true"></a>    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> wdays, <span class="dt">y =</span> total_views)</span>
+<span id="cb299-13"><a href="media.html#cb299-13" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb299-14"><a href="media.html#cb299-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb299-15"><a href="media.html#cb299-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb299-16"><a href="media.html#cb299-16" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Total Views Per Days&quot;</span>,</span>
+<span id="cb299-17"><a href="media.html#cb299-17" aria-hidden="true"></a>    <span class="dt">subtitle =</span> <span class="st">&quot;Period: May to July&quot;</span>,</span>
+<span id="cb299-18"><a href="media.html#cb299-18" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="ot">NULL</span>,</span>
+<span id="cb299-19"><a href="media.html#cb299-19" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="st">&quot;Day of Week&quot;</span></span>
+<span id="cb299-20"><a href="media.html#cb299-20" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb299-21"><a href="media.html#cb299-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb299-22"><a href="media.html#cb299-22" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_text</span>(</span>
+<span id="cb299-23"><a href="media.html#cb299-23" aria-hidden="true"></a>    <span class="kw">aes</span>(<span class="dt">label =</span> label, <span class="dt">y =</span> total_views <span class="op">+</span><span class="st"> </span><span class="kw">max</span>(total_views) <span class="op">*</span><span class="st"> </span><span class="fl">0.075</span>) , <span class="dt">size =</span> <span class="dv">3</span></span>
+<span id="cb299-24"><a href="media.html#cb299-24" aria-hidden="true"></a>  )</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-185-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Seperti yang dijelaskan sebelumnya, akan di-subset 37 hari sebelum kampanye diberikan dan disimpan ke objek <code>pre_campaign</code>. Dari sinilah, kita dapat melihat pergerakan leads dan memperikirakan peningkatan yang dihasilkan sejak kampanye dilakukan.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">pre_campaign &lt;-<span class="st"> </span>actual <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-2" title="2"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">37</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="media.html#cb300-1" aria-hidden="true"></a>pre_campaign &lt;-<span class="st"> </span>actual <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb300-2"><a href="media.html#cb300-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">37</span>)</span></code></pre></div>
 <p>Selanjutnya, membuat objek <em>time series</em> dan melakukan pemodelan untuk menjadikan <em>banchmark</em> dari leads yang dapat kita peroleh jika tidak menggunakan kampanye. Kita akan gunakan Holtwinter sebagai metode untuk melakuan peramalan (forecast) 16 hari kedepan.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">ts_campaign &lt;-<span class="st"> </span><span class="kw">ts</span>(pre_campaign<span class="op">$</span>unique_views, <span class="dt">frequency =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb170-2" title="2">fit_hw &lt;-<span class="st"> </span><span class="kw">HoltWinters</span>(ts_campaign)</a>
-<a class="sourceLine" id="cb170-3" title="3">forecast &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit_hw, <span class="dv">16</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="media.html#cb301-1" aria-hidden="true"></a>ts_campaign &lt;-<span class="st"> </span><span class="kw">ts</span>(pre_campaign<span class="op">$</span>unique_views, <span class="dt">frequency =</span> <span class="dv">7</span>)</span>
+<span id="cb301-2"><a href="media.html#cb301-2" aria-hidden="true"></a>fit_hw &lt;-<span class="st"> </span><span class="kw">HoltWinters</span>(ts_campaign)</span>
+<span id="cb301-3"><a href="media.html#cb301-3" aria-hidden="true"></a>forecast &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit_hw, <span class="dv">16</span>)</span></code></pre></div>
 <p>Kita gabungkan data periode sebelum dilakukan kampanye dan hasil ramalannya yang disimpan ke objek <code>append_data</code>.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">forecast_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb171-2" title="2">  <span class="dt">datetime =</span> lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="kw">seq.Date</span>(<span class="dt">from =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2018-06-24&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>, <span class="dt">length.out =</span> <span class="dv">16</span>)),</a>
-<a class="sourceLine" id="cb171-3" title="3">  <span class="dt">unique_views =</span> forecast<span class="op">$</span>mean</a>
-<a class="sourceLine" id="cb171-4" title="4">)</a>
-<a class="sourceLine" id="cb171-5" title="5"></a>
-<a class="sourceLine" id="cb171-6" title="6"></a>
-<a class="sourceLine" id="cb171-7" title="7">append_data &lt;-<span class="st"> </span>pre_campaign <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb171-8" title="8"><span class="st">  </span><span class="kw">bind_rows</span>(forecast_data)</a></code></pre></div>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> append_data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> datetime, <span class="dt">y =</span> unique_views)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb172-2" title="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb172-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb172-4" title="4"><span class="st">  </span><span class="kw">labs</span>(</a>
-<a class="sourceLine" id="cb172-5" title="5">    <span class="dt">title =</span> <span class="st">&quot;Forecast Projection&quot;</span>,</a>
-<a class="sourceLine" id="cb172-6" title="6">    <span class="dt">y =</span> <span class="st">&quot;Total Unique Views&quot;</span></a>
-<a class="sourceLine" id="cb172-7" title="7">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb172-8" title="8"><span class="st">  </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-129-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="media.html#cb302-1" aria-hidden="true"></a>forecast_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb302-2"><a href="media.html#cb302-2" aria-hidden="true"></a>  <span class="dt">datetime =</span> lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="kw">seq.Date</span>(<span class="dt">from =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2018-06-24&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>, <span class="dt">length.out =</span> <span class="dv">16</span>)),</span>
+<span id="cb302-3"><a href="media.html#cb302-3" aria-hidden="true"></a>  <span class="dt">unique_views =</span> forecast<span class="op">$</span>mean</span>
+<span id="cb302-4"><a href="media.html#cb302-4" aria-hidden="true"></a>)</span>
+<span id="cb302-5"><a href="media.html#cb302-5" aria-hidden="true"></a></span>
+<span id="cb302-6"><a href="media.html#cb302-6" aria-hidden="true"></a></span>
+<span id="cb302-7"><a href="media.html#cb302-7" aria-hidden="true"></a>append_data &lt;-<span class="st"> </span>pre_campaign <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb302-8"><a href="media.html#cb302-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">bind_rows</span>(forecast_data)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="media.html#cb303-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> append_data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> datetime, <span class="dt">y =</span> unique_views)) <span class="op">+</span></span>
+<span id="cb303-2"><a href="media.html#cb303-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb303-3"><a href="media.html#cb303-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb303-4"><a href="media.html#cb303-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb303-5"><a href="media.html#cb303-5" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Forecast Projection&quot;</span>,</span>
+<span id="cb303-6"><a href="media.html#cb303-6" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="st">&quot;Total Unique Views&quot;</span></span>
+<span id="cb303-7"><a href="media.html#cb303-7" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb303-8"><a href="media.html#cb303-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-189-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Dan kita juga mempunyai data aktual untuk periode tersebut. Kita perhatikan terjadi peningkatan total pengunjung website.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">actual <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb173-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> datetime, <span class="dt">y =</span> unique_views)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb173-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb173-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb173-5" title="5"><span class="st">  </span><span class="kw">labs</span>(</a>
-<a class="sourceLine" id="cb173-6" title="6">    <span class="dt">title =</span> <span class="st">&quot;Data aktual jumlah pengunjung website&quot;</span>,</a>
-<a class="sourceLine" id="cb173-7" title="7">    <span class="dt">subtitle =</span> <span class="st">&quot;Periode 16 Mei hingga 17 Juli&quot;</span>,</a>
-<a class="sourceLine" id="cb173-8" title="8">    <span class="dt">y =</span> <span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb173-9" title="9">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb173-10" title="10"><span class="st">  </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-130-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="media.html#cb304-1" aria-hidden="true"></a>actual <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb304-2"><a href="media.html#cb304-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> datetime, <span class="dt">y =</span> unique_views)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb304-3"><a href="media.html#cb304-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb304-4"><a href="media.html#cb304-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb304-5"><a href="media.html#cb304-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb304-6"><a href="media.html#cb304-6" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Data aktual jumlah pengunjung website&quot;</span>,</span>
+<span id="cb304-7"><a href="media.html#cb304-7" aria-hidden="true"></a>    <span class="dt">subtitle =</span> <span class="st">&quot;Periode 16 Mei hingga 17 Juli&quot;</span>,</span>
+<span id="cb304-8"><a href="media.html#cb304-8" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="ot">NULL</span></span>
+<span id="cb304-9"><a href="media.html#cb304-9" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb304-10"><a href="media.html#cb304-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-190-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Untuk memperkirakan efek kausal, kita mulai dengan menentukan periode mana dalam data yang harus digunakan untuk melatih model (periode pra-intervensi) dan periode mana untuk menghitung prediksi kontrafaktual (periode pasca intervensi).</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">pre &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">37</span>)</a>
-<a class="sourceLine" id="cb174-2" title="2">post &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">38</span>, <span class="dv">53</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="media.html#cb305-1" aria-hidden="true"></a>pre &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">37</span>)</span>
+<span id="cb305-2"><a href="media.html#cb305-2" aria-hidden="true"></a>post &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">38</span>, <span class="dv">53</span>)</span></code></pre></div>
 <p>Sintaks diatas berarti, poin observasi ke-1 sampai dengan 37 akan digunakan untuk training, dan poin observasi ke 38 hingga 53 untuk menghitung prediksi, atau kita juga bisa mendefinisikannya ke format interval tanggal (date). Kemudian ubah datanya menjadi format matriks sebagai syarat analisis dengan packages <code>CausalImpact</code>.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">pre &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;2018-05-16&quot;</span>, <span class="st">&quot;2018-06-24&quot;</span>))</a>
-<a class="sourceLine" id="cb175-2" title="2">post &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;2018-06-25&quot;</span>, <span class="st">&quot;2018-07-10&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">time.points &lt;-<span class="st"> </span><span class="kw">seq.Date</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2018-05-16&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;days&quot;</span>, <span class="dt">length.out =</span> <span class="dv">53</span>)</a>
-<a class="sourceLine" id="cb176-2" title="2">data_ci &lt;-<span class="st"> </span><span class="kw">zoo</span>(</a>
-<a class="sourceLine" id="cb176-3" title="3">  <span class="kw">cbind</span>(actual<span class="op">$</span>unique_views, append_data<span class="op">$</span>unique_views), </a>
-<a class="sourceLine" id="cb176-4" title="4">  time.points</a>
-<a class="sourceLine" id="cb176-5" title="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="media.html#cb306-1" aria-hidden="true"></a>pre &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;2018-05-16&quot;</span>, <span class="st">&quot;2018-06-24&quot;</span>))</span>
+<span id="cb306-2"><a href="media.html#cb306-2" aria-hidden="true"></a>post &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;2018-06-25&quot;</span>, <span class="st">&quot;2018-07-10&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="media.html#cb307-1" aria-hidden="true"></a>time.points &lt;-<span class="st"> </span><span class="kw">seq.Date</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2018-05-16&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;days&quot;</span>, <span class="dt">length.out =</span> <span class="dv">53</span>)</span>
+<span id="cb307-2"><a href="media.html#cb307-2" aria-hidden="true"></a>data_ci &lt;-<span class="st"> </span><span class="kw">zoo</span>(</span>
+<span id="cb307-3"><a href="media.html#cb307-3" aria-hidden="true"></a>  <span class="kw">cbind</span>(actual<span class="op">$</span>unique_views, append_data<span class="op">$</span>unique_views), </span>
+<span id="cb307-4"><a href="media.html#cb307-4" aria-hidden="true"></a>  time.points</span>
+<span id="cb307-5"><a href="media.html#cb307-5" aria-hidden="true"></a>)</span></code></pre></div>
 <p>Sekarang kita sudah memiliki data yang siap untuk memverifikasi efek kausal dari kampanye.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">impact &lt;-<span class="st"> </span><span class="kw">CausalImpact</span>(<span class="dt">data =</span> data_ci, <span class="dt">pre.period =</span> pre, <span class="dt">post.period =</span> post)</a>
-<a class="sourceLine" id="cb177-2" title="2"><span class="kw">plot</span>(impact)</a></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-134-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="media.html#cb308-1" aria-hidden="true"></a>impact &lt;-<span class="st"> </span><span class="kw">CausalImpact</span>(<span class="dt">data =</span> data_ci, <span class="dt">pre.period =</span> pre, <span class="dt">post.period =</span> post)</span>
+<span id="cb308-2"><a href="media.html#cb308-2" aria-hidden="true"></a><span class="kw">plot</span>(impact)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-194-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Secara default, plot berisi dari tiga panel. Panel pertama <code>original</code> menunjukkan data dan prediksi kontrafaktual untuk periode pasca kampanye. Panel kedua <code>pointwise</code> menunjukkan perbedaan antara data aktual yang diamati (leads) dan prediksi. Panel ketiga <code>cumulative</code> menggambarkan efek kumulatif dari intervensi (kampanye) yang dilakukan.</p>
 <p>Hasil ini memiliki asumsi bahwa hubungan antara leads generation dan deret waktu pengamatan, sebagaimana ditetapkan selama pre-period, tetap stabil sepanjang post-period.</p>
 <p>Kita dapat lihat informasi statistiknya dengan mengunnakan perintah <code>summary(impact)</code>.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">summary</span>(impact)</a></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="media.html#cb309-1" aria-hidden="true"></a><span class="kw">summary</span>(impact)</span></code></pre></div>
 <pre><code>#&gt; Posterior inference {CausalImpact}
 #&gt; 
 #&gt;                          Average       Cumulative    
@@ -364,9 +390,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; For more details, type: summary(impact, &quot;report&quot;)</code></pre>
 <p>Kita dapat memperoleh informasi dari actual dan predicted effect (average) serta efek absolut dan relatifnya. Output informasi statistik di atas mengatakan, leads generation setelah dilakukan kampanye mengalami peningkatan sebesar 44%, dari perkiraan rata-rata pengunjung websitenya sebanyak 984 orang menjadi 1417 kenyataannya.</p>
 <p>Untuk panduan interpretasi yang benar dari hasil tabel ringkasan, packages <code>CausalImpact</code> menyediakan teks interpretasinya, yang dapat kita print menggunakan perintah:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">interpretasi &lt;-<span class="st"> </span><span class="kw">summary</span>(impact, <span class="st">&quot;report&quot;</span>)</a>
-<a class="sourceLine" id="cb180-2" title="2"></a>
-<a class="sourceLine" id="cb180-3" title="3"><span class="kw">print</span>(interpretasi)</a></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="media.html#cb311-1" aria-hidden="true"></a>interpretasi &lt;-<span class="st"> </span><span class="kw">summary</span>(impact, <span class="st">&quot;report&quot;</span>)</span>
+<span id="cb311-2"><a href="media.html#cb311-2" aria-hidden="true"></a></span>
+<span id="cb311-3"><a href="media.html#cb311-3" aria-hidden="true"></a><span class="kw">print</span>(interpretasi)</span></code></pre></div>
 <p><strong>Hasilnya interpretasi teksnya akan seperti berikut:</strong></p>
 <p>Analysis report {CausalImpact}</p>
 <p>During the post-intervention period, the response variable had an average value of approx. 1.42K. By contrast, in the absence of an intervention, we would have expected an average response of 0.98K. The 95% interval of this counterfactual prediction is [0.87K, 1.09K]. Subtracting this prediction from the observed response yields an estimate of the causal effect the intervention had on the response variable. This effect is 0.43K with a 95% interval of [0.33K, 0.54K]. For a discussion of the significance of this effect, see below.</p>

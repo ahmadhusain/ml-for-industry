@@ -224,7 +224,7 @@ library(ggraph)
 ```
 
 ```{r, eval=FALSE}
-customer <- read_csv("assets/02-finance/consumer_complaints.csv")%>%
+customer <- read_csv("assets/02-finance/data_complaint.csv")%>% 
               mutate_if(is.character, as.factor) %>% 
               data.frame()
 ```

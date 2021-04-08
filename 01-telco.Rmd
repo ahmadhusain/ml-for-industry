@@ -152,7 +152,7 @@ Setelah dilakukan upsample data, terlihat nilai accuracy yang diperoleh lebih be
 ```{r}
 pred <- predict(forest_upc,newdata = data_test,type = "prob")
 pred$result <- as.factor(ifelse(pred$Yes > 0.45, "Yes","No"))
-confusionMatrix(pred$result, data_test$Churn,positive = "Yes")
+confusionMatrix(pred$result, as.factor(data_test$Churn),positive = "Yes")
 ```
 
 Pada kasus ini kita ingin memperoleh nila sensitivity/recall yang lebih besar, dengan menggunakan threshold sebesar 0.4 diperoleh nilai recall sebesar 0.70 dengan accuracy sebesar 0.79 dan precision sebesar 0.59. Dari model yang telah terbentuk kita dapat memperoleh nilai AUC pada model:
