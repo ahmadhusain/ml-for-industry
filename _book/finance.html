@@ -156,12 +156,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
 <li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
-<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
@@ -171,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
-<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
@@ -247,226 +246,389 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Credit Risk Analysis</h2>
 <div id="background" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Background</h3>
-<p>Credit scoring membutuhkan berbagai data profil calon peminjam sehingga tingkat resiko dapat dihitung dengan tepat. Semakin benar dan lengkap data yang disediakan, maka semakin akurat perhitungan yang dilakukan. Proses tersebut tentunya merupakan hal yang baik, namun di sisi calon peminjam proses yang harus dilalui dirasa sangat merepotkan dan membutuhkan waktu untuk menunggu. Dan seiring tingkat kompetisi yang samkin tinggi di industri finansial, customer memiliki
-banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempatan untuk mendapatkan peminjam.</p>
-<p>Tantangan pun muncul, bagaimana mendapatkan pelanggan dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa data - data profil peminjam dan proses pembayaran sehingga dapat mengeluarkan rekomendasi profil pelanggan yang beresiko rendah.</p>
+<p>Credit scoring merupakan sistem yang digunakan oleh bank atau lembaga keuangan lain untuk menentukan apakah seorang nasabah layak atau tidak mendapatkan pinjaman. Credit scoring membutuhkan berbagai data profil calon peminjam sehingga tingkat resiko dapat dihitung dengan tepat. Semakin tepat dan lengkap data yang disediakan, maka semakin akurat perhitungan yang dilakukan.</p>
+<p>Proses tersebut tentunya merupakan hal yang baik, namun di sisi calon peminjam proses yang harus dilalui dirasa sangat merepotkan dan membutuhkan waktu untuk menunggu dan seiring tingginya tingkat kompetisi yang ada di industri finansial, menjadikan nasabah memiliki banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempatan untuk mendapatkan peminjam.</p>
+<p>Tantangan pun muncul, bagaimana mendapatkan peminjam dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa data-data profil peminjam dan proses pembayaran sehingga dapat mengetahui profil peminjam yang memiliki peluang besar untuk melunasi pinjaman dengan lancar.</p>
 <p>Harapannya setelah mempunyai model machine learning dengan perfomance model yang baik, pegawai bank dapat dengan mudah mengidentifikasi karakteristik customer yang memiliki peluang besar untuk melunasi pinjaman dengan lancar. Dengan adanya model machine learning ini tentunya akan mengurangi biaya dan waktu yang lebih cepat.</p>
 </div>
 <div id="modelling-analysis" class="section level3" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Modelling Analysis</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="finance.html#cb24-1" aria-hidden="true"></a>loan &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/02-finance/bankloans-copy.csv&quot;</span>)<span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-2"><a href="finance.html#cb24-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">default =</span> <span class="kw">factor</span>(default, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb24-3"><a href="finance.html#cb24-3" aria-hidden="true"></a>                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;No&quot;</span>,<span class="st">&quot;Yes&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-4"><a href="finance.html#cb24-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">debtcred =</span> creddebt)</span>
-<span id="cb24-5"><a href="finance.html#cb24-5" aria-hidden="true"></a><span class="kw">glimpse</span>(loan)</span></code></pre></div>
-<pre><code>#&gt; Rows: 800
-#&gt; Columns: 9
-#&gt; $ age      [3m[38;5;246m&lt;dbl&gt;[39m[23m 37, 25, 37, 29, 38, 32, 51, 27, 31, 37, 34, 31, 30, 31, 28, 4~
-#&gt; $ ed       [3m[38;5;246m&lt;dbl&gt;[39m[23m 1, 4, 3, 1, 2, 1, 2, 3, 1, 1, 4, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1~
-#&gt; $ employ   [3m[38;5;246m&lt;dbl&gt;[39m[23m 20, 0, 16, 1, 13, 8, 22, 3, 1, 5, 7, 3, 11, 1, 1, 6, 14, 10, ~
-#&gt; $ address  [3m[38;5;246m&lt;dbl&gt;[39m[23m 2, 1, 14, 8, 0, 6, 23, 4, 1, 11, 15, 5, 1, 6, 4, 9, 8, 0, 2, ~
-#&gt; $ income   [3m[38;5;246m&lt;dbl&gt;[39m[23m 56, 18, 50, 31, 59, 26, 120, 35, 24, 27, 40, 16, 33, 21, 16, ~
-#&gt; $ debtinc  [3m[38;5;246m&lt;dbl&gt;[39m[23m 1.9, 33.4, 36.6, 8.0, 2.4, 4.1, 7.6, 13.3, 4.5, 9.4, 6.4, 32.~
-#&gt; $ debtcred [3m[38;5;246m&lt;dbl&gt;[39m[23m 0.542640, 2.801592, 7.320000, 0.156240, 0.407808, 0.326196, 4~
-#&gt; $ othdebt  [3m[38;5;246m&lt;dbl&gt;[39m[23m 0.521360, 3.210408, 10.980000, 2.323760, 1.008192, 0.739804, ~
-#&gt; $ default  [3m[38;5;246m&lt;fct&gt;[39m[23m No, Yes, Yes, No, No, No, No, No, No, NA, No, NA, No, Yes, No~</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="finance.html#cb26-1" aria-hidden="true"></a><span class="kw">head</span>(loan)</span></code></pre></div>
-<pre><code>#&gt; [38;5;246m# A tibble: 6 x 9[39m
-#&gt;     age    ed employ address income debtinc debtcred othdebt default
-#&gt;   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m  [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m  [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;fct&gt;[39m[23m  
-#&gt; [38;5;250m1[39m    37     1     20       2     56     1.9    0.543   0.521 No     
-#&gt; [38;5;250m2[39m    25     4      0       1     18    33.4    2.80    3.21  Yes    
-#&gt; [38;5;250m3[39m    37     3     16      14     50    36.6    7.32   11.0   Yes    
-#&gt; [38;5;250m4[39m    29     1      1       8     31     8      0.156   2.32  No     
-#&gt; [38;5;250m5[39m    38     2     13       0     59     2.4    0.408   1.01  No     
-#&gt; [38;5;250m6[39m    32     1      8       6     26     4.1    0.326   0.740 No</code></pre>
-<div id="exploratory-data-analysis" class="section level4" number="3.1.2.1">
-<h4><span class="header-section-number">3.1.2.1</span> Exploratory Data Analysis</h4>
-<ol style="list-style-type: decimal">
-<li>Eksplorasi hubungan target variabel dengan variabel prediktor</li>
-</ol>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="finance.html#cb28-1" aria-hidden="true"></a>loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb28-2"><a href="finance.html#cb28-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb28-3"><a href="finance.html#cb28-3" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> debtinc, <span class="dt">fill =</span> default)) <span class="op">+</span></span>
-<span id="cb28-4"><a href="finance.html#cb28-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
-<span id="cb28-5"><a href="finance.html#cb28-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(</span>
-<span id="cb28-6"><a href="finance.html#cb28-6" aria-hidden="true"></a>    <span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb28-7"><a href="finance.html#cb28-7" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb28-8"><a href="finance.html#cb28-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span></span>
-<span id="cb28-9"><a href="finance.html#cb28-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;dodgerblue4&quot;</span>,<span class="st">&quot;darkred&quot;</span>)) <span class="op">+</span></span>
-<span id="cb28-10"><a href="finance.html#cb28-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
-<span id="cb28-11"><a href="finance.html#cb28-11" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Debt to Income Rario distribution&quot;</span>,</span>
-<span id="cb28-12"><a href="finance.html#cb28-12" aria-hidden="true"></a>    <span class="dt">subtitle =</span> <span class="st">&quot;estimated using kernel density function&quot;</span>,</span>
-<span id="cb28-13"><a href="finance.html#cb28-13" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="st">&quot;Debt to Income Ratio&quot;</span>,</span>
-<span id="cb28-14"><a href="finance.html#cb28-14" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="st">&quot;Income&quot;</span>,</span>
-<span id="cb28-15"><a href="finance.html#cb28-15" aria-hidden="true"></a>    <span class="dt">fill =</span> <span class="st">&quot;Default Status&quot;</span></span>
-<span id="cb28-16"><a href="finance.html#cb28-16" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb28-17"><a href="finance.html#cb28-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
-<span id="cb28-18"><a href="finance.html#cb28-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(</span>
-<span id="cb28-19"><a href="finance.html#cb28-19" aria-hidden="true"></a>    <span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb28-20"><a href="finance.html#cb28-20" aria-hidden="true"></a>    <span class="dt">legend.key.height =</span> <span class="kw">unit</span>(<span class="dv">12</span>, <span class="st">&quot;pt&quot;</span>),</span>
-<span id="cb28-21"><a href="finance.html#cb28-21" aria-hidden="true"></a>    <span class="dt">legend.key.width =</span> <span class="kw">unit</span>(<span class="dv">36</span>, <span class="st">&quot;pt&quot;</span>),</span>
-<span id="cb28-22"><a href="finance.html#cb28-22" aria-hidden="true"></a>  )</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="finance.html#cb29-1" aria-hidden="true"></a>loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb29-2"><a href="finance.html#cb29-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb29-3"><a href="finance.html#cb29-3" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> debtcred, <span class="dt">y =</span> income)) <span class="op">+</span></span>
-<span id="cb29-4"><a href="finance.html#cb29-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="op">+</span></span>
-<span id="cb29-5"><a href="finance.html#cb29-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">&quot;dodgerblue4&quot;</span>) <span class="op">+</span></span>
-<span id="cb29-6"><a href="finance.html#cb29-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="kw">vars</span>(default), <span class="dt">labeller =</span> <span class="st">&quot;label_both&quot;</span>) <span class="op">+</span></span>
-<span id="cb29-7"><a href="finance.html#cb29-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="kw">dollar_format</span>(<span class="dt">scale =</span> <span class="fl">1e-3</span>, <span class="dt">suffix =</span> <span class="st">&quot;K&quot;</span>)) <span class="op">+</span></span>
-<span id="cb29-8"><a href="finance.html#cb29-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
-<span id="cb29-9"><a href="finance.html#cb29-9" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;The relation of credit to debt ratio and income&quot;</span>,</span>
-<span id="cb29-10"><a href="finance.html#cb29-10" aria-hidden="true"></a>    <span class="dt">subtitle =</span> <span class="st">&quot;for each default status&quot;</span>,</span>
-<span id="cb29-11"><a href="finance.html#cb29-11" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="st">&quot;Debt to Credit Ratio&quot;</span>,</span>
-<span id="cb29-12"><a href="finance.html#cb29-12" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="st">&quot;Income&quot;</span></span>
-<span id="cb29-13"><a href="finance.html#cb29-13" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb29-14"><a href="finance.html#cb29-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Check missing value</li>
-</ol>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="finance.html#cb30-1" aria-hidden="true"></a>loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-2"><a href="finance.html#cb30-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">is.na</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-3"><a href="finance.html#cb30-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">colSums</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-4"><a href="finance.html#cb30-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb30-5"><a href="finance.html#cb30-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(value))</span></code></pre></div>
-<pre><code>#&gt; [38;5;246m# A tibble: 9 x 2[39m
-#&gt;   name     value
-#&gt;   [3m[38;5;246m&lt;chr&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m
-#&gt; [38;5;250m1[39m default    150
-#&gt; [38;5;250m2[39m age          0
-#&gt; [38;5;250m3[39m ed           0
-#&gt; [38;5;250m4[39m employ       0
-#&gt; [38;5;250m5[39m address      0
-#&gt; [38;5;250m6[39m income       0
-#&gt; [38;5;250m7[39m debtinc      0
-#&gt; [38;5;250m8[39m debtcred     0
-#&gt; [38;5;250m9[39m othdebt      0</code></pre>
-<p>Berikutnya akan digunakan data observasi tanpa adanya data missing value</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="finance.html#cb32-1" aria-hidden="true"></a>loan &lt;-<span class="st"> </span>loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb32-2"><a href="finance.html#cb32-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>()</span></code></pre></div>
+<div id="cleaning-data" class="section level4" number="3.1.2.1">
+<h4><span class="header-section-number">3.1.2.1</span> Cleaning data</h4>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="finance.html#cb24-1" aria-hidden="true"></a>credit &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/02-finance/credit_record.csv&quot;</span>)</span>
+<span id="cb24-2"><a href="finance.html#cb24-2" aria-hidden="true"></a>application &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/02-finance/application_record.csv&quot;</span>)</span></code></pre></div>
+<p>Data Description:</p>
+<p><strong>Credit</strong></p>
+<ul>
+<li>ID : Client number</li>
+<li>MONTHS_BALANCE : Record month The month of the extracted data is the starting point, backwards, 0 is the current month, -1 is the previous month, and so on</li>
+<li>STATUS : Status
+<ul>
+<li>0: 1-29 days past due</li>
+<li>1: 30-59 days past due</li>
+<li>2: 60-89 days overdue</li>
+<li>3: 90-119 days overdue</li>
+<li>4: 120-149 days overdue</li>
+<li>5: Overdue or bad debts, write-offs for more than 150 days</li>
+<li>C: paid off that month</li>
+<li>X: No loan for the month</li>
+</ul></li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>ID : Client number</li>
+<li>CODE_GENDER : Gender</li>
+<li>FLAG_OWN_CAR : Is there a car</li>
+<li>FLAG_OWN_REALTY ; Is there a property</li>
+<li>CNT_CHILDREN : Number of children</li>
+<li>AMT_INCOME_TOTAL : Annual income</li>
+<li>NAME_INCOME_TYPE : Income category</li>
+<li>NAME_EDUCATION_TYPE : Education level</li>
+<li>NAME_FAMILY_STATUS : Marital status</li>
+<li>NAME_HOUSING_TYPE : Way of living</li>
+<li>DAYS_BIRTH : Birthday Count backwards from current day (0), -1 means yesterday</li>
+<li>DAYS_EMPLOYED : Start date of employment Count backwards from current day(0). If positive, it means - - the person currently unemployed.</li>
+<li>FLAG_MOBIL : Is there a mobile phone</li>
+<li>FLAG_WORK_PHONE : Is there a work phone</li>
+<li>FLAG_PHONE : Is there a phone</li>
+<li>FLAG_EMAIL : Is there an email</li>
+<li>OCCUPATION_TYPE : Occupation</li>
+<li>CNT_FAM_MEMBERS :Family size</li>
+</ul>
+<p><strong>Check missing values</strong></p>
+<p>Pada data credit tidak terdapat missing value</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="finance.html#cb25-1" aria-hidden="true"></a><span class="kw">colSums</span>(<span class="kw">is.na</span>(credit))</span></code></pre></div>
+<pre><code>#&gt;             ID MONTHS_BALANCE         STATUS 
+#&gt;              0              0              0</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="finance.html#cb27-1" aria-hidden="true"></a><span class="kw">colSums</span>(<span class="kw">is.na</span>(application))</span></code></pre></div>
+<pre><code>#&gt;                  ID         CODE_GENDER        FLAG_OWN_CAR     FLAG_OWN_REALTY 
+#&gt;                   0                   0                   0                   0 
+#&gt;        CNT_CHILDREN    AMT_INCOME_TOTAL    NAME_INCOME_TYPE NAME_EDUCATION_TYPE 
+#&gt;                   0                   0                   0                   0 
+#&gt;  NAME_FAMILY_STATUS   NAME_HOUSING_TYPE          DAYS_BIRTH       DAYS_EMPLOYED 
+#&gt;                   0                   0                   0                   0 
+#&gt;          FLAG_MOBIL     FLAG_WORK_PHONE          FLAG_PHONE          FLAG_EMAIL 
+#&gt;                   0                   0                   0                   0 
+#&gt;     OCCUPATION_TYPE     CNT_FAM_MEMBERS 
+#&gt;              134203                   0</code></pre>
+<p>Pada data application terdapat variabel <code>OCCUPATION_TYPE</code> yang memiliki banyak data missing, kita dapat membuang variabel tersebut. Serta kita akan membuang variabel <code>DAYS_BIRTH</code> dan <code>DAYS_EMPLOYED</code> yang tidak dibutuhkan pada model.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="finance.html#cb29-1" aria-hidden="true"></a>application &lt;-<span class="st"> </span>application <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb29-2"><a href="finance.html#cb29-2" aria-hidden="true"></a><span class="st">               </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(OCCUPATION_TYPE, DAYS_BIRTH, DAYS_EMPLOYED))</span></code></pre></div>
+<p><strong>Menyesuaikan tipe data</strong></p>
+<p>Tahap berikutnya adalah menggabunkan data credit dan application serta menyesuaikan tipe data kategorik yang masih terbaca sebagai character.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="finance.html#cb30-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-2"><a href="finance.html#cb30-2" aria-hidden="true"></a><span class="st">              </span><span class="kw">left_join</span>(application) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-3"><a href="finance.html#cb30-3" aria-hidden="true"></a><span class="st">              </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-4"><a href="finance.html#cb30-4" aria-hidden="true"></a><span class="st">              </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-5"><a href="finance.html#cb30-5" aria-hidden="true"></a><span class="st">              </span><span class="kw">filter</span>(STATUS <span class="op">!=</span><span class="st"> &quot;X&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-6"><a href="finance.html#cb30-6" aria-hidden="true"></a><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">STATUS =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(STATUS <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="st">&quot;good credit&quot;</span>, <span class="st">&quot;bad credit&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-7"><a href="finance.html#cb30-7" aria-hidden="true"></a><span class="st">              </span><span class="kw">mutate_at</span>(<span class="dt">.vars =</span> <span class="kw">c</span>(<span class="st">&quot;FLAG_MOBIL&quot;</span>, <span class="st">&quot;FLAG_WORK_PHONE&quot;</span>,</span>
+<span id="cb30-8"><a href="finance.html#cb30-8" aria-hidden="true"></a>                                  <span class="st">&quot;FLAG_PHONE&quot;</span>, <span class="st">&quot;FLAG_EMAIL&quot;</span>), as.factor) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-9"><a href="finance.html#cb30-9" aria-hidden="true"></a><span class="st">              </span><span class="kw">mutate_if</span>(is.character, as.factor) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-10"><a href="finance.html#cb30-10" aria-hidden="true"></a><span class="st">              </span><span class="kw">data.frame</span>()</span>
+<span id="cb30-11"><a href="finance.html#cb30-11" aria-hidden="true"></a><span class="kw">str</span>(data_clean)</span></code></pre></div>
+<pre><code>#&gt; &#39;data.frame&#39;:	631765 obs. of  16 variables:
+#&gt;  $ MONTHS_BALANCE     : num  0 -1 -2 -3 -4 -5 -6 -7 -8 -9 ...
+#&gt;  $ STATUS             : Factor w/ 2 levels &quot;bad credit&quot;,&quot;good credit&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ CODE_GENDER        : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ FLAG_OWN_CAR       : Factor w/ 2 levels &quot;N&quot;,&quot;Y&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ FLAG_OWN_REALTY    : Factor w/ 2 levels &quot;N&quot;,&quot;Y&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ CNT_CHILDREN       : num  0 0 0 0 0 0 0 0 0 0 ...
+#&gt;  $ AMT_INCOME_TOTAL   : num  427500 427500 427500 427500 427500 ...
+#&gt;  $ NAME_INCOME_TYPE   : Factor w/ 5 levels &quot;Commercial associate&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+#&gt;  $ NAME_EDUCATION_TYPE: Factor w/ 5 levels &quot;Academic degree&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ NAME_FAMILY_STATUS : Factor w/ 5 levels &quot;Civil marriage&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ NAME_HOUSING_TYPE  : Factor w/ 6 levels &quot;Co-op apartment&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+#&gt;  $ FLAG_MOBIL         : Factor w/ 1 level &quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ FLAG_WORK_PHONE    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+#&gt;  $ FLAG_PHONE         : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ FLAG_EMAIL         : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ CNT_FAM_MEMBERS    : num  2 2 2 2 2 2 2 2 2 2 ...</code></pre>
 </div>
-<div id="modelling" class="section level4" number="3.1.2.2">
-<h4><span class="header-section-number">3.1.2.2</span> Modelling</h4>
-<p>Split data train dan data test dengan proporsi 80:20.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="finance.html#cb33-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb33-2"><a href="finance.html#cb33-2" aria-hidden="true"></a>intrain_loan &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> loan, <span class="dt">prop =</span> <span class="fl">0.8</span>, <span class="dt">strata =</span> <span class="st">&quot;default&quot;</span>)</span>
-<span id="cb33-3"><a href="finance.html#cb33-3" aria-hidden="true"></a>train_loan &lt;-<span class="st"> </span><span class="kw">training</span>(intrain_loan)</span>
-<span id="cb33-4"><a href="finance.html#cb33-4" aria-hidden="true"></a>test_loan &lt;-<span class="st"> </span><span class="kw">testing</span>(intrain_loan)</span></code></pre></div>
+<div id="exploratory-data-analysis-eda" class="section level4" number="3.1.2.2">
+<h4><span class="header-section-number">3.1.2.2</span> Exploratory Data Analysis (EDA)</h4>
+<p>Pada data EDA kita ingin mengetahui bagaimana sebaran data kategorik maupun numerik.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="finance.html#cb32-1" aria-hidden="true"></a>data_clean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_cat</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" />
+Pada visualisasi berikut kita akan mendapatkan informasi apakah terdapat variabel yang tidak memiliki banyak informasi pada data, contohnya adalah variabel <code>FLAG_MOBIL</code> dimana keseluruhan data berisikan 1, artinya semua nasabah kita yang melakukan pinjaman memiliki mobil. Data yang tidak memiliki variansi seperti ini tidak diikutsertakan pada model.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="finance.html#cb33-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb33-2"><a href="finance.html#cb33-2" aria-hidden="true"></a><span class="st">              </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(FLAG_MOBIL,FLAG_EMAIL))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="finance.html#cb34-1" aria-hidden="true"></a>data_clean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inspect_num</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_plot</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="modelling-random-forest" class="section level4" number="3.1.2.3">
+<h4><span class="header-section-number">3.1.2.3</span> Modelling Random Forest</h4>
+<p>Split data train dan data test dengan proporsi 80:20. Data train akan digunakan untuk modelling, sedangkan data test akan digunakan untuk evaluasi.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="finance.html#cb35-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb35-2"><a href="finance.html#cb35-2" aria-hidden="true"></a>index &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> data_clean, <span class="dt">prop =</span> <span class="fl">0.8</span>, <span class="dt">strata =</span> <span class="st">&quot;STATUS&quot;</span>)</span>
+<span id="cb35-3"><a href="finance.html#cb35-3" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">training</span>(index)</span>
+<span id="cb35-4"><a href="finance.html#cb35-4" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">testing</span>(index)</span></code></pre></div>
 <p>Cek proporsi dari target variabel</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="finance.html#cb34-1" aria-hidden="true"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(train_loan<span class="op">$</span>default))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="finance.html#cb36-1" aria-hidden="true"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(train<span class="op">$</span>STATUS))</span></code></pre></div>
 <pre><code>#&gt; 
-#&gt;        No       Yes 
-#&gt; 0.6149425 0.3850575</code></pre>
-<p>Untuk membuat data observasi menjadi lebih seimbang, dapat dilakukan upSample dari package caret.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="finance.html#cb36-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb36-2"><a href="finance.html#cb36-2" aria-hidden="true"></a>train_loan_up &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> <span class="kw">select</span>(train_loan, <span class="op">-</span>default),</span>
-<span id="cb36-3"><a href="finance.html#cb36-3" aria-hidden="true"></a>                  <span class="dt">y =</span> train_loan<span class="op">$</span>default, </span>
-<span id="cb36-4"><a href="finance.html#cb36-4" aria-hidden="true"></a>                  <span class="dt">yname =</span> <span class="st">&quot;default&quot;</span>)</span>
-<span id="cb36-5"><a href="finance.html#cb36-5" aria-hidden="true"></a></span>
-<span id="cb36-6"><a href="finance.html#cb36-6" aria-hidden="true"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(train_loan_up<span class="op">$</span>default))</span></code></pre></div>
-<pre><code>#&gt; 
-#&gt;  No Yes 
-#&gt; 0.5 0.5</code></pre>
-<p>Bentuk model random forest dengan 5 k-fold dan 3 repetition</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="finance.html#cb38-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb38-2"><a href="finance.html#cb38-2" aria-hidden="true"></a></span>
-<span id="cb38-3"><a href="finance.html#cb38-3" aria-hidden="true"></a>ctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb38-4"><a href="finance.html#cb38-4" aria-hidden="true"></a>                     <span class="dt">number =</span> <span class="dv">5</span>, </span>
-<span id="cb38-5"><a href="finance.html#cb38-5" aria-hidden="true"></a>                     <span class="dt">repeats =</span> <span class="dv">3</span>,</span>
-<span id="cb38-6"><a href="finance.html#cb38-6" aria-hidden="true"></a>                     <span class="dt">allowParallel=</span><span class="ot">FALSE</span>)</span>
-<span id="cb38-7"><a href="finance.html#cb38-7" aria-hidden="true"></a></span>
-<span id="cb38-8"><a href="finance.html#cb38-8" aria-hidden="true"></a>model_forest &lt;-<span class="st"> </span>caret<span class="op">::</span><span class="kw">train</span>(default <span class="op">~</span>.,</span>
-<span id="cb38-9"><a href="finance.html#cb38-9" aria-hidden="true"></a>                             <span class="dt">data =</span> train_loan_up, </span>
-<span id="cb38-10"><a href="finance.html#cb38-10" aria-hidden="true"></a>                             <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>, </span>
-<span id="cb38-11"><a href="finance.html#cb38-11" aria-hidden="true"></a>                             <span class="dt">trControl =</span> ctrl)</span></code></pre></div>
+#&gt;  bad credit good credit 
+#&gt;   0.4960938   0.5039062</code></pre>
+<p>Bentuk model random forest dengan 3 k-fold dan 2 repetition</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="finance.html#cb38-1" aria-hidden="true"></a><span class="co"># set.seed(100)</span></span>
+<span id="cb38-2"><a href="finance.html#cb38-2" aria-hidden="true"></a><span class="co"># </span></span>
+<span id="cb38-3"><a href="finance.html#cb38-3" aria-hidden="true"></a><span class="co"># ctrl &lt;- trainControl(method = &quot;repeatedcv&quot;,</span></span>
+<span id="cb38-4"><a href="finance.html#cb38-4" aria-hidden="true"></a><span class="co">#                      number = 3, </span></span>
+<span id="cb38-5"><a href="finance.html#cb38-5" aria-hidden="true"></a><span class="co">#                      repeats = 2,</span></span>
+<span id="cb38-6"><a href="finance.html#cb38-6" aria-hidden="true"></a><span class="co">#                      allowParallel=FALSE)</span></span>
+<span id="cb38-7"><a href="finance.html#cb38-7" aria-hidden="true"></a><span class="co"># </span></span>
+<span id="cb38-8"><a href="finance.html#cb38-8" aria-hidden="true"></a><span class="co"># model_forest &lt;- caret::train(STATUS ~.,</span></span>
+<span id="cb38-9"><a href="finance.html#cb38-9" aria-hidden="true"></a><span class="co">#                              data = train, </span></span>
+<span id="cb38-10"><a href="finance.html#cb38-10" aria-hidden="true"></a><span class="co">#                              method = &quot;rf&quot;, </span></span>
+<span id="cb38-11"><a href="finance.html#cb38-11" aria-hidden="true"></a><span class="co">#                              trControl = ctrl)</span></span>
+<span id="cb38-12"><a href="finance.html#cb38-12" aria-hidden="true"></a></span>
+<span id="cb38-13"><a href="finance.html#cb38-13" aria-hidden="true"></a><span class="co">#saveRDS(model_forest, &quot;model_forest.RDS&quot;)</span></span>
+<span id="cb38-14"><a href="finance.html#cb38-14" aria-hidden="true"></a></span>
+<span id="cb38-15"><a href="finance.html#cb38-15" aria-hidden="true"></a>model_forest &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;assets/02-finance/model_forest.RDS&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="finance.html#cb39-1" aria-hidden="true"></a>model_forest</span></code></pre></div>
 <pre><code>#&gt; Random Forest 
 #&gt; 
-#&gt; 642 samples
-#&gt;   8 predictor
-#&gt;   2 classes: &#39;No&#39;, &#39;Yes&#39; 
+#&gt; 80001 samples
+#&gt;    13 predictor
+#&gt;     2 classes: &#39;bad credit&#39;, &#39;good credit&#39; 
 #&gt; 
 #&gt; No pre-processing
-#&gt; Resampling: Cross-Validated (5 fold, repeated 3 times) 
-#&gt; Summary of sample sizes: 514, 513, 513, 514, 514, 513, ... 
+#&gt; Resampling: Cross-Validated (3 fold, repeated 2 times) 
+#&gt; Summary of sample sizes: 53335, 53334, 53333, 53334, 53334, 53334, ... 
 #&gt; Resampling results across tuning parameters:
 #&gt; 
 #&gt;   mtry  Accuracy   Kappa    
-#&gt;   2     0.8483850  0.6967960
-#&gt;   5     0.8359335  0.6718959
-#&gt;   8     0.8317749  0.6635641
+#&gt;    2    0.6432232  0.2846367
+#&gt;   14    0.7487656  0.4973803
+#&gt;   26    0.7114411  0.4230518
 #&gt; 
 #&gt; Accuracy was used to select the optimal model using the largest value.
-#&gt; The final value used for the model was mtry = 2.</code></pre>
-<p>Setelah dilakukan 3 repetition pada model, repetition pertama memiliki accuracy paling besar dengan jumlah mtry sebanyak 2. Confusion matrix yang diperoleh data observasi yang tidak digunakan sebagai sampel diperoleh sebagai berikut:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="finance.html#cb41-1" aria-hidden="true"></a>model_forest<span class="op">$</span>finalModel</span></code></pre></div>
-<pre><code>#&gt; 
-#&gt; Call:
-#&gt;  randomForest(x = x, y = y, mtry = param$mtry) 
-#&gt;                Type of random forest: classification
-#&gt;                      Number of trees: 500
-#&gt; No. of variables tried at each split: 2
-#&gt; 
-#&gt;         OOB estimate of  error rate: 12.15%
-#&gt; Confusion matrix:
-#&gt;      No Yes class.error
-#&gt; No  269  52  0.16199377
-#&gt; Yes  26 295  0.08099688</code></pre>
+#&gt; The final value used for the model was mtry = 14.</code></pre>
+<p>Setelah dilakukan 3 repetition pada model, repetition kedua memiliki accuracy paling tinggi dengan jumlah mtry sebanyak 14.</p>
 <p>Selanjutnya akan dilakukan prediksi untuk data test dan mencari nilai confusion matrix pada hasil prediksi.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="finance.html#cb43-1" aria-hidden="true"></a>test_loan &lt;-<span class="st"> </span>test_loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb43-2"><a href="finance.html#cb43-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pred_forest =</span> <span class="kw">predict</span>(model_forest, <span class="dt">newdata =</span> test_loan))</span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="finance.html#cb44-1" aria-hidden="true"></a>confmat_loan_tune &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_loan<span class="op">$</span>pred_forest, </span>
-<span id="cb44-2"><a href="finance.html#cb44-2" aria-hidden="true"></a>                                 test_loan<span class="op">$</span>default,</span>
-<span id="cb44-3"><a href="finance.html#cb44-3" aria-hidden="true"></a>                                 <span class="dt">mode =</span> <span class="st">&quot;prec_recall&quot;</span>,</span>
-<span id="cb44-4"><a href="finance.html#cb44-4" aria-hidden="true"></a>                                 <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span>
-<span id="cb44-5"><a href="finance.html#cb44-5" aria-hidden="true"></a></span>
-<span id="cb44-6"><a href="finance.html#cb44-6" aria-hidden="true"></a>eval_rf &lt;-<span class="st"> </span><span class="kw">tidy</span>(confmat_loan_tune) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb44-7"><a href="finance.html#cb44-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Random Forest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb44-8"><a href="finance.html#cb44-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(model, term, estimate) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb44-9"><a href="finance.html#cb44-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;precision&quot;</span>, <span class="st">&quot;recall&quot;</span>, <span class="st">&quot;specificity&quot;</span>))</span>
-<span id="cb44-10"><a href="finance.html#cb44-10" aria-hidden="true"></a></span>
-<span id="cb44-11"><a href="finance.html#cb44-11" aria-hidden="true"></a>eval_rf</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="finance.html#cb41-1" aria-hidden="true"></a>pred_rf&lt;-<span class="st"> </span><span class="kw">predict</span>(model_forest, <span class="dt">newdata =</span> test, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb41-2"><a href="finance.html#cb41-2" aria-hidden="true"></a><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">result =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">bad credit</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.45</span>, <span class="st">&quot;bad credit&quot;</span>, <span class="st">&quot;good credit&quot;</span>)),</span>
+<span id="cb41-3"><a href="finance.html#cb41-3" aria-hidden="true"></a>                 <span class="dt">actual =</span> <span class="kw">ifelse</span>(test<span class="op">$</span>STATUS <span class="op">==</span><span class="st"> &#39;good credit&#39;</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb41-4"><a href="finance.html#cb41-4" aria-hidden="true"></a>confmat_rf &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred_rf<span class="op">$</span>result, </span>
+<span id="cb41-5"><a href="finance.html#cb41-5" aria-hidden="true"></a>                                 test<span class="op">$</span>STATUS,</span>
+<span id="cb41-6"><a href="finance.html#cb41-6" aria-hidden="true"></a>                                 <span class="dt">mode =</span> <span class="st">&quot;prec_recall&quot;</span>,</span>
+<span id="cb41-7"><a href="finance.html#cb41-7" aria-hidden="true"></a>                                 <span class="dt">positive =</span> <span class="st">&quot;bad credit&quot;</span>)</span>
+<span id="cb41-8"><a href="finance.html#cb41-8" aria-hidden="true"></a></span>
+<span id="cb41-9"><a href="finance.html#cb41-9" aria-hidden="true"></a>eval_rf &lt;-<span class="st"> </span><span class="kw">tidy</span>(confmat_rf) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb41-10"><a href="finance.html#cb41-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Random Forest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb41-11"><a href="finance.html#cb41-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(model, term, estimate) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb41-12"><a href="finance.html#cb41-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;precision&quot;</span>, <span class="st">&quot;recall&quot;</span>, <span class="st">&quot;specificity&quot;</span>))</span>
+<span id="cb41-13"><a href="finance.html#cb41-13" aria-hidden="true"></a></span>
+<span id="cb41-14"><a href="finance.html#cb41-14" aria-hidden="true"></a>eval_rf</span></code></pre></div>
 <pre><code>#&gt; [38;5;246m# A tibble: 4 x 3[39m
 #&gt;   model         term        estimate
 #&gt;   [3m[38;5;246m&lt;chr&gt;[39m[23m         [3m[38;5;246m&lt;chr&gt;[39m[23m          [3m[38;5;246m&lt;dbl&gt;[39m[23m
-#&gt; [38;5;250m1[39m Random Forest accuracy       0.836
-#&gt; [38;5;250m2[39m Random Forest specificity    0.886
-#&gt; [38;5;250m3[39m Random Forest precision      0.804
-#&gt; [38;5;250m4[39m Random Forest recall         0.755</code></pre>
-<p>Dari hasil confusion matrix dapat diketahui, kemampuan model memprediksi target variabel dapat dikatakan cukup baik. Selanjutnya kita akan mengetahui variable importance pada model yang diperoleh.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="finance.html#cb46-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">varImp</span>(model_forest),<span class="dt">main =</span> <span class="st">&quot;Variable Importance&quot;</span>,)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Dapat diketahui variabel debtinc, employ, debtcred, othdebt, dan income merupakan 5 variable yang paling berpengaruh dan paling sering digunakan dalam pembuatan pohon.</p>
+#&gt; [38;5;250m1[39m Random Forest accuracy       0.810
+#&gt; [38;5;250m2[39m Random Forest specificity    0.814
+#&gt; [38;5;250m3[39m Random Forest precision      0.810
+#&gt; [38;5;250m4[39m Random Forest recall         0.806</code></pre>
 </div>
-</div>
-<div id="recommendation" class="section level3" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> Recommendation</h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="finance.html#cb47-1" aria-hidden="true"></a>eval_rf</span></code></pre></div>
-<pre><code>#&gt; [38;5;246m# A tibble: 4 x 3[39m
+<div id="modelling-xgboost" class="section level4" number="3.1.2.4">
+<h4><span class="header-section-number">3.1.2.4</span> Modelling XGBoost</h4>
+<p>Tahap selanjutnya kita akan implementasikan data menggunakan model XGBoost, kita perlu menyiapkan data untuk model XGBoost terlebih dahulu</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="finance.html#cb43-1" aria-hidden="true"></a>data_xgb &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb43-2"><a href="finance.html#cb43-2" aria-hidden="true"></a><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">STATUS =</span> <span class="kw">ifelse</span>(STATUS <span class="op">==</span><span class="st"> &quot;good credit&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb43-3"><a href="finance.html#cb43-3" aria-hidden="true"></a><span class="st">            </span><span class="kw">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="finance.html#cb44-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb44-2"><a href="finance.html#cb44-2" aria-hidden="true"></a>index &lt;-<span class="st"> </span><span class="kw">initial_split</span>(<span class="dt">data =</span> data_xgb, <span class="dt">prop =</span> <span class="fl">0.8</span>, <span class="dt">strata =</span> <span class="st">&quot;STATUS&quot;</span>)</span>
+<span id="cb44-3"><a href="finance.html#cb44-3" aria-hidden="true"></a>train_xgb &lt;-<span class="st"> </span><span class="kw">training</span>(index)</span>
+<span id="cb44-4"><a href="finance.html#cb44-4" aria-hidden="true"></a>test_xgb &lt;-<span class="st"> </span><span class="kw">testing</span>(index)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="finance.html#cb45-1" aria-hidden="true"></a>label_train &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(train_xgb<span class="op">$</span>STATUS)</span>
+<span id="cb45-2"><a href="finance.html#cb45-2" aria-hidden="true"></a>label_test &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(test_xgb<span class="op">$</span>STATUS)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="finance.html#cb46-1" aria-hidden="true"></a>train_matrix &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(train_xgb[,<span class="op">-</span><span class="dv">2</span>])</span>
+<span id="cb46-2"><a href="finance.html#cb46-2" aria-hidden="true"></a>test_matrix &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(test_xgb[,<span class="op">-</span><span class="dv">2</span>])</span>
+<span id="cb46-3"><a href="finance.html#cb46-3" aria-hidden="true"></a><span class="co"># convert data to Dmatrix</span></span>
+<span id="cb46-4"><a href="finance.html#cb46-4" aria-hidden="true"></a>dtrain &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(<span class="dt">data =</span> train_matrix, <span class="dt">label =</span> label_train)</span>
+<span id="cb46-5"><a href="finance.html#cb46-5" aria-hidden="true"></a>dtest &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(<span class="dt">data =</span> test_matrix, <span class="dt">label =</span> label_test)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="finance.html#cb47-1" aria-hidden="true"></a>params &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">booster =</span> <span class="st">&quot;gbtree&quot;</span>,</span>
+<span id="cb47-2"><a href="finance.html#cb47-2" aria-hidden="true"></a>               <span class="dt">objective =</span> <span class="st">&quot;binary:logistic&quot;</span>,</span>
+<span id="cb47-3"><a href="finance.html#cb47-3" aria-hidden="true"></a>               <span class="dt">eta=</span><span class="fl">0.7</span>, </span>
+<span id="cb47-4"><a href="finance.html#cb47-4" aria-hidden="true"></a>               <span class="dt">gamma=</span><span class="dv">10</span>, </span>
+<span id="cb47-5"><a href="finance.html#cb47-5" aria-hidden="true"></a>               <span class="dt">max_depth=</span><span class="dv">10</span>, </span>
+<span id="cb47-6"><a href="finance.html#cb47-6" aria-hidden="true"></a>               <span class="dt">min_child_weight=</span><span class="dv">3</span>, </span>
+<span id="cb47-7"><a href="finance.html#cb47-7" aria-hidden="true"></a>               <span class="dt">subsample=</span><span class="dv">1</span>, </span>
+<span id="cb47-8"><a href="finance.html#cb47-8" aria-hidden="true"></a>               <span class="dt">colsample_bytree=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="finance.html#cb48-1" aria-hidden="true"></a>xgbcv &lt;-<span class="st"> </span><span class="kw">xgb.cv</span>( <span class="dt">params =</span> params, </span>
+<span id="cb48-2"><a href="finance.html#cb48-2" aria-hidden="true"></a>                 <span class="dt">data =</span> dtrain,</span>
+<span id="cb48-3"><a href="finance.html#cb48-3" aria-hidden="true"></a>                 <span class="dt">nrounds =</span> <span class="dv">1000</span>, </span>
+<span id="cb48-4"><a href="finance.html#cb48-4" aria-hidden="true"></a>                 <span class="dt">showsd =</span> T, </span>
+<span id="cb48-5"><a href="finance.html#cb48-5" aria-hidden="true"></a>                 <span class="dt">nfold =</span> <span class="dv">10</span>,</span>
+<span id="cb48-6"><a href="finance.html#cb48-6" aria-hidden="true"></a>                 <span class="dt">stratified =</span> T, </span>
+<span id="cb48-7"><a href="finance.html#cb48-7" aria-hidden="true"></a>                 <span class="dt">print_every_n =</span> <span class="dv">50</span>, </span>
+<span id="cb48-8"><a href="finance.html#cb48-8" aria-hidden="true"></a>                 <span class="dt">early_stopping_rounds =</span> <span class="dv">20</span>, </span>
+<span id="cb48-9"><a href="finance.html#cb48-9" aria-hidden="true"></a>                 <span class="dt">maximize =</span> F)</span></code></pre></div>
+<pre><code>#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [15:34:08] WARNING: amalgamation/../src/learner.cc:1095: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective &#39;binary:logistic&#39; was changed from &#39;error&#39; to &#39;logloss&#39;. Explicitly set eval_metric if you&#39;d like to restore the old behavior.
+#&gt; [1]	train-logloss:0.657835+0.008359	test-logloss:0.659014+0.008508 
+#&gt; Multiple eval metrics are present. Will use test_logloss for early stopping.
+#&gt; Will train until test_logloss hasn&#39;t improved in 20 rounds.
+#&gt; 
+#&gt; [51]	train-logloss:0.502362+0.002141	test-logloss:0.523349+0.004859 
+#&gt; [101]	train-logloss:0.487041+0.003130	test-logloss:0.511456+0.005289 
+#&gt; [151]	train-logloss:0.480246+0.002629	test-logloss:0.506027+0.005960 
+#&gt; [201]	train-logloss:0.476529+0.001743	test-logloss:0.503253+0.005054 
+#&gt; [251]	train-logloss:0.473638+0.001135	test-logloss:0.500887+0.004853 
+#&gt; [301]	train-logloss:0.470976+0.000924	test-logloss:0.499179+0.004563 
+#&gt; [351]	train-logloss:0.468947+0.001220	test-logloss:0.497893+0.004723 
+#&gt; [401]	train-logloss:0.467192+0.001040	test-logloss:0.496554+0.004479 
+#&gt; [451]	train-logloss:0.465561+0.001008	test-logloss:0.495503+0.004603 
+#&gt; [501]	train-logloss:0.464243+0.001280	test-logloss:0.494370+0.004283 
+#&gt; [551]	train-logloss:0.463161+0.001288	test-logloss:0.493679+0.004757 
+#&gt; [601]	train-logloss:0.462078+0.001320	test-logloss:0.492902+0.005234 
+#&gt; [651]	train-logloss:0.461227+0.001556	test-logloss:0.492334+0.005148 
+#&gt; [701]	train-logloss:0.460708+0.001542	test-logloss:0.491907+0.005247 
+#&gt; [751]	train-logloss:0.460228+0.001541	test-logloss:0.491557+0.005346 
+#&gt; [801]	train-logloss:0.459816+0.001526	test-logloss:0.491173+0.005345 
+#&gt; [851]	train-logloss:0.459306+0.001623	test-logloss:0.491024+0.005399 
+#&gt; [901]	train-logloss:0.459079+0.001518	test-logloss:0.490845+0.005412 
+#&gt; [951]	train-logloss:0.458793+0.001343	test-logloss:0.490583+0.005397 
+#&gt; [1000]	train-logloss:0.458523+0.001349	test-logloss:0.490372+0.005506</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="finance.html#cb50-1" aria-hidden="true"></a><span class="kw">print</span>(xgbcv)</span></code></pre></div>
+<pre><code>#&gt; ##### xgb.cv 10-folds
+#&gt;     iter train_logloss_mean train_logloss_std test_logloss_mean test_logloss_std
+#&gt;        1          0.6578350       0.008358933         0.6590142      0.008508178
+#&gt;        2          0.6328996       0.009530030         0.6361721      0.009246701
+#&gt;        3          0.6146676       0.008940854         0.6200005      0.008948886
+#&gt;        4          0.6026426       0.011825006         0.6092987      0.010625445
+#&gt;        5          0.5889047       0.009177284         0.5968755      0.007583324
+#&gt; ---                                                                             
+#&gt;      996          0.4585228       0.001349444         0.4903715      0.005506051
+#&gt;      997          0.4585228       0.001349444         0.4903715      0.005506051
+#&gt;      998          0.4585228       0.001349444         0.4903716      0.005506139
+#&gt;      999          0.4585228       0.001349444         0.4903715      0.005506051
+#&gt;     1000          0.4585228       0.001349444         0.4903715      0.005506051
+#&gt; Best iteration:
+#&gt;  iter train_logloss_mean train_logloss_std test_logloss_mean test_logloss_std
+#&gt;   996          0.4585228       0.001349444         0.4903715      0.005506051</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="finance.html#cb52-1" aria-hidden="true"></a>xgb1 &lt;-<span class="st"> </span><span class="kw">xgb.train</span> (<span class="dt">params =</span> params, </span>
+<span id="cb52-2"><a href="finance.html#cb52-2" aria-hidden="true"></a>                   <span class="dt">data =</span> dtrain, </span>
+<span id="cb52-3"><a href="finance.html#cb52-3" aria-hidden="true"></a>                   <span class="dt">nrounds =</span> xgbcv<span class="op">$</span>best_iteration, </span>
+<span id="cb52-4"><a href="finance.html#cb52-4" aria-hidden="true"></a>                   <span class="dt">watchlist =</span> <span class="kw">list</span>(<span class="dt">val=</span>dtest,<span class="dt">train=</span>dtrain),</span>
+<span id="cb52-5"><a href="finance.html#cb52-5" aria-hidden="true"></a>                   <span class="dt">print_every_n =</span> <span class="dv">100</span>, </span>
+<span id="cb52-6"><a href="finance.html#cb52-6" aria-hidden="true"></a>                   <span class="dt">early_stoping_rounds =</span> <span class="dv">10</span>, </span>
+<span id="cb52-7"><a href="finance.html#cb52-7" aria-hidden="true"></a>                   <span class="dt">maximize =</span> F , </span>
+<span id="cb52-8"><a href="finance.html#cb52-8" aria-hidden="true"></a>                   <span class="dt">eval_metric =</span> <span class="st">&quot;error&quot;</span>,</span>
+<span id="cb52-9"><a href="finance.html#cb52-9" aria-hidden="true"></a>                   <span class="dt">verbosity =</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>#&gt; [1]	val-error:0.408470	train-error:0.404582 
+#&gt; [101]	val-error:0.259563	train-error:0.238085 
+#&gt; [201]	val-error:0.253613	train-error:0.233447 
+#&gt; [301]	val-error:0.251413	train-error:0.228810 
+#&gt; [401]	val-error:0.248062	train-error:0.226485 
+#&gt; [501]	val-error:0.246562	train-error:0.224297 
+#&gt; [601]	val-error:0.246562	train-error:0.223735 
+#&gt; [701]	val-error:0.246512	train-error:0.222985 
+#&gt; [801]	val-error:0.246312	train-error:0.223010 
+#&gt; [901]	val-error:0.245112	train-error:0.222872 
+#&gt; [996]	val-error:0.243512	train-error:0.222472</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="finance.html#cb54-1" aria-hidden="true"></a>xgbpred_prob &lt;-<span class="kw">predict</span>(<span class="dt">object =</span> xgb1, <span class="dt">newdata =</span> dtest)</span>
+<span id="cb54-2"><a href="finance.html#cb54-2" aria-hidden="true"></a>xgbpred &lt;-<span class="st"> </span><span class="kw">ifelse</span> (xgbpred_prob <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.45</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="finance.html#cb55-1" aria-hidden="true"></a>confmat_xgb &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(<span class="kw">as.factor</span>(xgbpred), <span class="kw">as.factor</span>(label_test), <span class="dt">positive =</span> <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb55-2"><a href="finance.html#cb55-2" aria-hidden="true"></a>confmat_xgb</span></code></pre></div>
+<pre><code>#&gt; Confusion Matrix and Statistics
+#&gt; 
+#&gt;           Reference
+#&gt; Prediction    0    1
+#&gt;          0 7338 2288
+#&gt;          1 2740 7633
+#&gt;                                                
+#&gt;                Accuracy : 0.7486               
+#&gt;                  95% CI : (0.7425, 0.7546)     
+#&gt;     No Information Rate : 0.5039               
+#&gt;     P-Value [Acc &gt; NIR] : &lt; 0.00000000000000022
+#&gt;                                                
+#&gt;                   Kappa : 0.4973               
+#&gt;                                                
+#&gt;  Mcnemar&#39;s Test P-Value : 0.0000000002013      
+#&gt;                                                
+#&gt;             Sensitivity : 0.7694               
+#&gt;             Specificity : 0.7281               
+#&gt;          Pos Pred Value : 0.7359               
+#&gt;          Neg Pred Value : 0.7623               
+#&gt;              Prevalence : 0.4961               
+#&gt;          Detection Rate : 0.3817               
+#&gt;    Detection Prevalence : 0.5187               
+#&gt;       Balanced Accuracy : 0.7487               
+#&gt;                                                
+#&gt;        &#39;Positive&#39; Class : 1                    
+#&gt; </code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="finance.html#cb57-1" aria-hidden="true"></a>confmat_rf &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(pred_rf<span class="op">$</span>result, </span>
+<span id="cb57-2"><a href="finance.html#cb57-2" aria-hidden="true"></a>                                 test<span class="op">$</span>STATUS,</span>
+<span id="cb57-3"><a href="finance.html#cb57-3" aria-hidden="true"></a>                                 <span class="dt">mode =</span> <span class="st">&quot;prec_recall&quot;</span>,</span>
+<span id="cb57-4"><a href="finance.html#cb57-4" aria-hidden="true"></a>                                 <span class="dt">positive =</span> <span class="st">&quot;bad credit&quot;</span>)</span>
+<span id="cb57-5"><a href="finance.html#cb57-5" aria-hidden="true"></a></span>
+<span id="cb57-6"><a href="finance.html#cb57-6" aria-hidden="true"></a>eval_rf &lt;-<span class="st"> </span><span class="kw">tidy</span>(confmat_rf) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-7"><a href="finance.html#cb57-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Random Forest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-8"><a href="finance.html#cb57-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(model, term, estimate) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-9"><a href="finance.html#cb57-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;precision&quot;</span>, <span class="st">&quot;recall&quot;</span>, <span class="st">&quot;specificity&quot;</span>))</span>
+<span id="cb57-10"><a href="finance.html#cb57-10" aria-hidden="true"></a></span>
+<span id="cb57-11"><a href="finance.html#cb57-11" aria-hidden="true"></a>confmat_xgb &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(<span class="kw">as.factor</span>(xgbpred), <span class="kw">as.factor</span>(label_test), <span class="dt">positive =</span> <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb57-12"><a href="finance.html#cb57-12" aria-hidden="true"></a></span>
+<span id="cb57-13"><a href="finance.html#cb57-13" aria-hidden="true"></a>eval_xgb &lt;-<span class="st"> </span><span class="kw">tidy</span>(confmat_xgb) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-14"><a href="finance.html#cb57-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;XGBoost&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-15"><a href="finance.html#cb57-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(model, term, estimate) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-16"><a href="finance.html#cb57-16" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;precision&quot;</span>, <span class="st">&quot;recall&quot;</span>, <span class="st">&quot;specificity&quot;</span>))</span></code></pre></div>
+<p>Setelah diperoleh perfomance model XGBoost kita akan membandingkan dengan perfomance model random forest.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="finance.html#cb58-1" aria-hidden="true"></a>eval_result &lt;-<span class="st"> </span><span class="kw">rbind</span>(eval_rf, eval_xgb)</span>
+<span id="cb58-2"><a href="finance.html#cb58-2" aria-hidden="true"></a>eval_result</span></code></pre></div>
+<pre><code>#&gt; [38;5;246m# A tibble: 8 x 3[39m
 #&gt;   model         term        estimate
 #&gt;   [3m[38;5;246m&lt;chr&gt;[39m[23m         [3m[38;5;246m&lt;chr&gt;[39m[23m          [3m[38;5;246m&lt;dbl&gt;[39m[23m
-#&gt; [38;5;250m1[39m Random Forest accuracy       0.836
-#&gt; [38;5;250m2[39m Random Forest specificity    0.886
-#&gt; [38;5;250m3[39m Random Forest precision      0.804
-#&gt; [38;5;250m4[39m Random Forest recall         0.755</code></pre>
-<p>Model machine learning untuk memprediksi kredit pinjaman customer yang lancar dan tidak lancar memiliki perfomance model yang cukup baik. Nantinya, pegawai bank dapat menggunakan model tersebut dengan mengisikan data pribadi setiap customer, kemudian hasil yang diperoleh dapat di visualisasikan sebagai berikut:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="finance.html#cb49-1" aria-hidden="true"></a><span class="kw">library</span>(lime)</span>
-<span id="cb49-2"><a href="finance.html#cb49-2" aria-hidden="true"></a>train_x &lt;-<span class="st"> </span>train_loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb49-3"><a href="finance.html#cb49-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(default))</span>
-<span id="cb49-4"><a href="finance.html#cb49-4" aria-hidden="true"></a>test_x &lt;-<span class="st"> </span>test_loan <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb49-5"><a href="finance.html#cb49-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(default, pred_forest))</span>
-<span id="cb49-6"><a href="finance.html#cb49-6" aria-hidden="true"></a></span>
-<span id="cb49-7"><a href="finance.html#cb49-7" aria-hidden="true"></a>explainer &lt;-<span class="st"> </span><span class="kw">lime</span>(test_x, model_forest)</span>
-<span id="cb49-8"><a href="finance.html#cb49-8" aria-hidden="true"></a>explanation &lt;-<span class="st"> </span>lime<span class="op">::</span><span class="kw">explain</span>(test_x[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>,],</span>
-<span id="cb49-9"><a href="finance.html#cb49-9" aria-hidden="true"></a>                             explainer, </span>
-<span id="cb49-10"><a href="finance.html#cb49-10" aria-hidden="true"></a>                             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>),</span>
-<span id="cb49-11"><a href="finance.html#cb49-11" aria-hidden="true"></a>                             <span class="dt">n_features =</span> <span class="dv">8</span>)</span>
-<span id="cb49-12"><a href="finance.html#cb49-12" aria-hidden="true"></a></span>
-<span id="cb49-13"><a href="finance.html#cb49-13" aria-hidden="true"></a><span class="kw">plot_features</span>(explanation)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Hasil visualisasi tersebut adalah contoh prediksi salah satu customer, customer tersebut terprediksi yes yang memiliki arti customer tersebut berpeluang besar sebagai customer yang lancar melunasi pembayaran. Tentunya ketika hasil prediksi menyatakan customer tersebut berpeluang besar untuk kredit lancar, artinya bank akan memberikan pinjaman kepada customer tersebut. Dari hasil visual tersebut juga ditunjukkan variabel mana yang support dan contradicts terhadap hasil prediksi yang dihasilkan.</p>
+#&gt; [38;5;250m1[39m Random Forest accuracy       0.810
+#&gt; [38;5;250m2[39m Random Forest specificity    0.814
+#&gt; [38;5;250m3[39m Random Forest precision      0.810
+#&gt; [38;5;250m4[39m Random Forest recall         0.806
+#&gt; [38;5;250m5[39m XGBoost       accuracy       0.749
+#&gt; [38;5;250m6[39m XGBoost       specificity    0.728
+#&gt; [38;5;250m7[39m XGBoost       precision      0.736
+#&gt; [38;5;250m8[39m XGBoost       recall         0.769</code></pre>
+<p>Metrics evaluasi yang kita utamakan adalah recall karena kita ingin meminimalisir mungkin keadaan dimana data actual nasabah tersebut <em>bad credit</em> namun terprediksi sebagai <em>good credit</em>. Dari hasil evaluasi dapat diketahui model XGBoost memiliki nilai recall lebih tinggi dibandingkan model random forest.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="finance.html#cb60-1" aria-hidden="true"></a>var_imp &lt;-<span class="st"> </span><span class="kw">xgb.importance</span>(<span class="dt">model =</span> xgb1,</span>
+<span id="cb60-2"><a href="finance.html#cb60-2" aria-hidden="true"></a>                          <span class="dt">feature_names =</span> <span class="kw">dimnames</span>(dtrain)[[<span class="dv">2</span>]])</span>
+<span id="cb60-3"><a href="finance.html#cb60-3" aria-hidden="true"></a><span class="kw">xgb.ggplot.importance</span>(var_imp,<span class="dt">top_n =</span> <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb60-4"><a href="finance.html#cb60-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></span>
+<span id="cb60-5"><a href="finance.html#cb60-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" />
+Grafik di atas menampilkan informasi mengenai 10 variabel yang paling berpengaruh pada model. Annual income dan months balance merupakan dua variabel terpenting pada model ini.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="finance.html#cb61-1" aria-hidden="true"></a>xgb_result &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">class1 =</span> xgbpred_prob, <span class="dt">actual =</span> <span class="kw">as.factor</span>(label_test))</span>
+<span id="cb61-2"><a href="finance.html#cb61-2" aria-hidden="true"></a></span>
+<span id="cb61-3"><a href="finance.html#cb61-3" aria-hidden="true"></a>auc_xgb &lt;-<span class="st"> </span><span class="kw">roc_auc</span>(<span class="dt">data =</span> xgb_result, <span class="dt">truth =</span> actual,class1) </span>
+<span id="cb61-4"><a href="finance.html#cb61-4" aria-hidden="true"></a>value_roc_xgb &lt;-<span class="st"> </span><span class="kw">prediction</span>(<span class="dt">predictions =</span> xgbpred_prob,</span>
+<span id="cb61-5"><a href="finance.html#cb61-5" aria-hidden="true"></a>                        <span class="dt">labels =</span> label_test)</span>
+<span id="cb61-6"><a href="finance.html#cb61-6" aria-hidden="true"></a></span>
+<span id="cb61-7"><a href="finance.html#cb61-7" aria-hidden="true"></a><span class="co"># ROC curve</span></span>
+<span id="cb61-8"><a href="finance.html#cb61-8" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">performance</span>(value_roc_xgb, <span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>))</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="finance.html#cb62-1" aria-hidden="true"></a>value_auc_xgb &lt;-<span class="st"> </span><span class="kw">performance</span>(value_roc_xgb, <span class="dt">measure =</span> <span class="st">&quot;auc&quot;</span>)</span>
+<span id="cb62-2"><a href="finance.html#cb62-2" aria-hidden="true"></a>value_auc_xgb<span class="op">@</span>y.values</span></code></pre></div>
+<pre><code>#&gt; [[1]]
+#&gt; [1] 0.8427956</code></pre>
+<p>Nilai AUC yang diperoleh pada model model ini sebesar 0.83 artinya model dapat memprediksi dengan baik kedua target class yaitu <code>good credit</code> dan <code>bad credit</code>. Harapannya model ini dapat digunakan oleh pihak bank untuk menentukan credit scoring dengan mengisikan data profil nasabah, kemudian hasil yang diperoleh dapat di visualisasikan sebagai berikut:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="finance.html#cb64-1" aria-hidden="true"></a>explainer &lt;-<span class="st"> </span><span class="kw">lime</span>(train_matrix <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>(), xgb1)</span>
+<span id="cb64-2"><a href="finance.html#cb64-2" aria-hidden="true"></a>explanation &lt;-<span class="st"> </span><span class="kw">explain</span>(test_matrix[<span class="dv">11</span><span class="op">:</span><span class="dv">12</span>,] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>(),</span>
+<span id="cb64-3"><a href="finance.html#cb64-3" aria-hidden="true"></a>                             explainer, </span>
+<span id="cb64-4"><a href="finance.html#cb64-4" aria-hidden="true"></a>                             <span class="dt">labels =</span> <span class="st">&quot;1&quot;</span>,</span>
+<span id="cb64-5"><a href="finance.html#cb64-5" aria-hidden="true"></a>                             <span class="dt">n_features =</span> <span class="dv">3</span>,</span>
+<span id="cb64-6"><a href="finance.html#cb64-6" aria-hidden="true"></a>                             <span class="dt">n_permutations =</span> <span class="dv">5000</span>,</span>
+<span id="cb64-7"><a href="finance.html#cb64-7" aria-hidden="true"></a>                             <span class="dt">dist_fun =</span> <span class="st">&quot;manhattan&quot;</span>,</span>
+<span id="cb64-8"><a href="finance.html#cb64-8" aria-hidden="true"></a>                             <span class="dt">kernel_width =</span> <span class="fl">0.75</span>,</span>
+<span id="cb64-9"><a href="finance.html#cb64-9" aria-hidden="true"></a>                             <span class="dt">feature_select =</span> <span class="st">&quot;highest_weights&quot;</span>)</span>
+<span id="cb64-10"><a href="finance.html#cb64-10" aria-hidden="true"></a></span>
+<span id="cb64-11"><a href="finance.html#cb64-11" aria-hidden="true"></a><span class="kw">plot_features</span>(explanation)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Hasil dari visualisasi tersebut untuk nasabah 1 dan 2 memiliki probability 0.22 dan 0.17 artinya kedua nasabah tersebut akan dikategorikan sebagai <code>good credit</code>. Kedua nasabah tersebut memiliki karakteristik yang mirip karena hasil prediksi mereka didukung oleh kepemilikan model dan juga total income.</p>
+</div>
 </div>
 </div>
 <div id="evaluating-customer-financial-complaints" class="section level2" number="3.2">
@@ -475,34 +637,34 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 <h3><span class="header-section-number">3.2.1</span> Background</h3>
 <p>Penanganan complain customer pada perusahaan saat ini menjadi salah satu kunci utama suatu perusahaan dapat terus tumbuh dan berkembang, karena apabila nasabah merasa tidak mendapatkan layanan yang baik saat menyampaikan keluhan maka nasabah akan mudah berpindah ke perusahaan lain yang dianggap bisa memberikan layanan terhadap komplain dengan baik. Nasabah yang merasa tidak mendapatkan layanan baik biasanya akan mengajukan keluhan ke Consumer Financial Protection Bureau (CFPB), CFPB merupakan instansi yang bertanggung jawab atas perlindungan konsumen di sektor keuangan. CFPB menyediakan data yang berisi keluhan dari customer financial, data keluhan tersebut dapat dianalisa untuk dijadikan pertimbangan pihak perusahaan untuk mengetahui indikator yang memerlukan perbaikan demi meningkatkan kualitas layanan.</p>
 </div>
-<div id="exploratory-data-analysis-1" class="section level3" number="3.2.2">
+<div id="exploratory-data-analysis" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Exploratory Data Analysis</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="finance.html#cb50-1" aria-hidden="true"></a>customer &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/02-finance/data_complaint.csv&quot;</span>)<span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-2"><a href="finance.html#cb50-2" aria-hidden="true"></a><span class="st">              </span><span class="kw">mutate_if</span>(is.character, as.factor) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-3"><a href="finance.html#cb50-3" aria-hidden="true"></a><span class="st">              </span><span class="kw">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="finance.html#cb65-1" aria-hidden="true"></a>customer &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;assets/02-finance/data_complaint.csv&quot;</span>)<span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb65-2"><a href="finance.html#cb65-2" aria-hidden="true"></a><span class="st">              </span><span class="kw">mutate_if</span>(is.character, as.factor) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb65-3"><a href="finance.html#cb65-3" aria-hidden="true"></a><span class="st">              </span><span class="kw">data.frame</span>()</span></code></pre></div>
 <p>Data diperoleh dari <a href="https://www.consumerfinance.gov/">Consumer Financial Protection Bureau (CFPB)</a> yang mengatur penawaran dan penyediaan produk atau layanan nasabah keuangan. CFPB menyediakan pertanyaan-pertanyaan umum dan dapat membantu nasabah terhubung dengan perusahaan keuangan yang terlibat. Data tersebut berisikan keluhan nasabah dari berbagai bank di Amerika Serikat.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="finance.html#cb51-1" aria-hidden="true"></a>top_company &lt;-<span class="st"> </span>customer <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb51-2"><a href="finance.html#cb51-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>(Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb51-3"><a href="finance.html#cb51-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(Company) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb51-4"><a href="finance.html#cb51-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb51-5"><a href="finance.html#cb51-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb51-6"><a href="finance.html#cb51-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="finance.html#cb66-1" aria-hidden="true"></a>top_company &lt;-<span class="st"> </span>customer <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-2"><a href="finance.html#cb66-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">na.omit</span>(Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-3"><a href="finance.html#cb66-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(Company) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-4"><a href="finance.html#cb66-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-5"><a href="finance.html#cb66-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(total)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb66-6"><a href="finance.html#cb66-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">1</span>)</span></code></pre></div>
 <p>Dari 4504 perusahaan pada data, perusahaan yang paling banyak memiliki complain adalah <code>Transunion Intermediate Holdings</code>. Perlu diketahui bahwa banyaknya complain yang diperhitungkan tidak mempertimbangkan volume perusahaan. Misalnya, perusahaan dengan lebih banyak customer tentunya memiliki kemungkinan banyak complain dibandingkan perusahaan yang lebih sedikit pelanggannya dan juga pada analisa ini kita hanya memperhitungkan complain yang dilengkapi dengan narasi dari customer tersebut.</p>
 <p>Berikutnya kita akan fokus untuk menganalisa complai dari perusahaan <code>Transunion Intermediate Holdings</code> yang memiliki paling banyak narasi complain dari data.</p>
 <p>Setelah memperoleh data observasi, selanjutnya membersihkan data text:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="finance.html#cb52-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>data_complaint <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-2"><a href="finance.html#cb52-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-3"><a href="finance.html#cb52-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Consumer.complaint.narrative =</span> Consumer.complaint.narrative <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-4"><a href="finance.html#cb52-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tolower</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-5"><a href="finance.html#cb52-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-6"><a href="finance.html#cb52-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[[:punct:]]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-7"><a href="finance.html#cb52-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[0-9]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-8"><a href="finance.html#cb52-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;xxxx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-9"><a href="finance.html#cb52-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_contraction</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-10"><a href="finance.html#cb52-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_word_elongation</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-11"><a href="finance.html#cb52-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_white</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-12"><a href="finance.html#cb52-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_squish</span>())</span>
-<span id="cb52-13"><a href="finance.html#cb52-13" aria-hidden="true"></a><span class="kw">head</span>(data_clean)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="finance.html#cb67-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>data_complaint <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-2"><a href="finance.html#cb67-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-3"><a href="finance.html#cb67-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Consumer.complaint.narrative =</span> Consumer.complaint.narrative <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-4"><a href="finance.html#cb67-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tolower</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-5"><a href="finance.html#cb67-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-6"><a href="finance.html#cb67-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[[:punct:]]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-7"><a href="finance.html#cb67-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[0-9]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-8"><a href="finance.html#cb67-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;xxxx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-9"><a href="finance.html#cb67-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_contraction</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-10"><a href="finance.html#cb67-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_word_elongation</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-11"><a href="finance.html#cb67-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_white</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-12"><a href="finance.html#cb67-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_squish</span>())</span>
+<span id="cb67-13"><a href="finance.html#cb67-13" aria-hidden="true"></a><span class="kw">head</span>(data_clean)</span></code></pre></div>
 <pre><code>#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Consumer.complaint.narrative
 #&gt; 1 this legal notice being sent and delivered to you persuant to florida statutes notice of order to cease and desist from using personal and private information fl statute violation title xlvi crimes chapter fraudulent practices view entire chapter criminal use of personal identification information as used in this section the term a access device means any card plate code account number electronic serial number mobile identification number personal identification number or other telecommunications service equipment or instrument identifier or other means of account access that can be used alone or in conjunction with another access device to obtain money goods services or any other thing of value or that can be used to initiate a transfer of funds other than a transfer originated solely by paper instrument b authorization means empowerment permission or competence to act c harass means to engage in conduct directed at a specific person that is intended to cause substantial emotional distress to such person and serves no legitimate purpose harass does not mean to use personal identification information for accepted commercial purposes the term does not include constitutionally protected conduct such as organized protests or the use of personal identification information for accepted commercial purposes d individual means a single human being and does not mean a firm association of individuals corporation partnership joint venture sole proprietorship or any other entity e person means a person as defined in s f personal identification information means any name or number that may be used alone or in conjunction with any other information to identify a specific individual including any name postal or electronic mail address telephone number social security number date of birth mother s maiden name official stateissued or united statesissued driver license or identification number alien registration number government passport number employer or taxpayer identification number or food assistance account number bank account number credit or debit card number or personal identification number or code assigned to the holder of a debit card by the issuer to permit authorized electronic use of such card unique biometric data such as fingerprint voice print retina or iris image or other unique physical representation unique electronic identification number address or routing code medical records telecommunication identifying information or access device or other number or information that can be used to access a person s financial resources g counterfeit or fictitious personal identification information means any counterfeit fictitious or fabricated information in the similitude of the data outlined in paragraph f that although not truthful or accurate would in context lead a reasonably prudent person to credit its truthfulness and accuracy a any person who willfully and without authorization fraudulently uses or possesses with intent to fraudulently use personal identification information concerning an individual without first obtaining that individual s consent commits the offense of fraudulent use of personal identification information which is a felony of the third degree punishable as provided in s s or s b any person who willfully and without authorization fraudulently uses personal identification information concerning an individual without first obtaining that individual s consent commits a felony of the second degree punishable as provided in s s or s if the pecuniary benefit the value of the services
 #&gt; 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       transunion continues to report inaccurate negative items on my report that i have previously dispu ted ti methey continuos to report account with no account number inaccurate information that is hurting my credit
@@ -511,16 +673,16 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 #&gt; 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               sent letter to credit reporting agencies telling them the inquiries on my report are unjustified the actions fail to comply with fcra section the letters are attached below credit agencies replied stating they did not need to investigate verify or remove inquiries credit agencies failed to prove requirements and fa iled to remove inquiries from my credit reports
 #&gt; 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      student loans have been discharged and i have a letter from the stating all loans have been discharged the credit bureaus refuse to accept the letter</code></pre>
 <p>Setelah membersihkan data text, selanjutnya kita akan melakukan proses <code>tokenization</code> yaitu memecah 1 kalimat menjadi beberapa <code>term</code>, pada proses berikut ini juga diperoleh frekuensi dari setiap term yang muncul.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="finance.html#cb54-1" aria-hidden="true"></a>text.dat &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-2"><a href="finance.html#cb54-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-3"><a href="finance.html#cb54-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-4"><a href="finance.html#cb54-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-5"><a href="finance.html#cb54-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-6"><a href="finance.html#cb54-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">words =</span> word,</span>
-<span id="cb54-7"><a href="finance.html#cb54-7" aria-hidden="true"></a>         <span class="dt">freq =</span> n) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-8"><a href="finance.html#cb54-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(words <span class="op">!=</span><span class="st"> </span><span class="kw">is.na</span>(words),</span>
-<span id="cb54-9"><a href="finance.html#cb54-9" aria-hidden="true"></a>         freq <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>)</span>
-<span id="cb54-10"><a href="finance.html#cb54-10" aria-hidden="true"></a><span class="kw">head</span>(text.dat)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="finance.html#cb69-1" aria-hidden="true"></a>text.dat &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-2"><a href="finance.html#cb69-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-3"><a href="finance.html#cb69-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-4"><a href="finance.html#cb69-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-5"><a href="finance.html#cb69-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-6"><a href="finance.html#cb69-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">words =</span> word,</span>
+<span id="cb69-7"><a href="finance.html#cb69-7" aria-hidden="true"></a>         <span class="dt">freq =</span> n) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-8"><a href="finance.html#cb69-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(words <span class="op">!=</span><span class="st"> </span><span class="kw">is.na</span>(words),</span>
+<span id="cb69-9"><a href="finance.html#cb69-9" aria-hidden="true"></a>         freq <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>)</span>
+<span id="cb69-10"><a href="finance.html#cb69-10" aria-hidden="true"></a><span class="kw">head</span>(text.dat)</span></code></pre></div>
 <pre><code>#&gt;         words freq
 #&gt; 1      credit 1572
 #&gt; 2      report  774
@@ -529,21 +691,21 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 #&gt; 5 information  503
 #&gt; 6   reporting  358</code></pre>
 <p>Kata yang sudah diperoleh akan divisualisasikan dengan wordcloud. Semakin sering suatu kata digunakan, maka semakin besar pula ukuran kata tersebut ditampilkan dalam wordcloud. Artinya kita dapat mengetahui kata yang paling sering digunakan oleh customer <code>Transunion Intermediate Holdings</code>. Kata <code>credit</code>, <code>report</code>, dan <code>account</code> merupakan kata yang paling sering digunakan oleh customer saat complain.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="finance.html#cb56-1" aria-hidden="true"></a><span class="kw">wordcloud2</span>(<span class="dt">data =</span> text.dat, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&#39;random-dark&#39;</span>, <span class="dt">shuffle =</span> <span class="dv">1</span>)</span></code></pre></div>
-<div id="htmlwidget-f4d0b43c4f644acd40fa" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f4d0b43c4f644acd40fa">{"x":{"word":["credit","report","account","transunion","information","reporting","inquiries","accounts","removed","loan","dispute","letter","nt","debt","reported","bureaus","file","received","told","remove","score","payment","company","late","reports","days","agencies","paid","time","called","card","collection","disputed","request","proof","address","requested","verified","bankruptcy","filed","balance","contacted","inquiry","due","payments","phone","copy","fraudulent","stated","date","listed","fcra","letters","fraud","verify","complaint","provide","correct","incorrect","investigation","identity","hard","law","theft","times","closed","court","bureau","car","negative","unauthorized","deleted","mortgage","security","agency","home","original","check","issue","months","consumer","contact","provided","companies","inaccurate","loans","response","amount","act","call","creditor","items","verification","delete","mail","stating","trans","union","requesting","service","student","updated","victim","contract","mine","required","send","certified","federal","informed","month","pay","person","record","creditors","type","violation","documentation","item","failed","multiple","personal","charge","past","public","documents","immediately","inquires","signature"],"freq":[1572,774,613,529,503,358,300,253,225,218,216,210,199,189,187,185,171,164,160,157,154,153,152,142,140,139,138,138,138,135,131,131,131,130,128,127,124,124,121,120,119,119,118,117,116,110,107,107,104,102,102,100,99,96,96,94,93,92,89,85,83,82,82,82,82,79,79,78,78,78,78,76,76,76,75,73,72,71,70,70,69,69,69,68,68,68,68,67,65,65,65,65,65,63,63,63,63,63,61,61,61,60,60,59,59,59,59,58,58,58,57,57,57,57,56,55,55,54,54,53,53,53,52,52,52,51,51,51,51],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.114503816793893,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":1,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="finance.html#cb71-1" aria-hidden="true"></a><span class="kw">wordcloud2</span>(<span class="dt">data =</span> text.dat, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&#39;random-dark&#39;</span>, <span class="dt">shuffle =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div id="htmlwidget-328dc072afe714636e53" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-328dc072afe714636e53">{"x":{"word":["credit","report","account","transunion","information","reporting","inquiries","accounts","removed","loan","dispute","letter","nt","debt","reported","bureaus","file","received","told","remove","score","payment","company","late","reports","days","agencies","paid","time","called","card","collection","disputed","request","proof","address","requested","verified","bankruptcy","filed","balance","contacted","inquiry","due","payments","phone","copy","fraudulent","stated","date","listed","fcra","letters","fraud","verify","complaint","provide","correct","incorrect","investigation","identity","hard","law","theft","times","closed","court","bureau","car","negative","unauthorized","deleted","mortgage","security","agency","home","original","check","issue","months","consumer","contact","provided","companies","inaccurate","loans","response","amount","act","call","creditor","items","verification","delete","mail","stating","trans","union","requesting","service","student","updated","victim","contract","mine","required","send","certified","federal","informed","month","pay","person","record","creditors","type","violation","documentation","item","failed","multiple","personal","charge","past","public","documents","immediately","inquires","signature"],"freq":[1572,774,613,529,503,358,300,253,225,218,216,210,199,189,187,185,171,164,160,157,154,153,152,142,140,139,138,138,138,135,131,131,131,130,128,127,124,124,121,120,119,119,118,117,116,110,107,107,104,102,102,100,99,96,96,94,93,92,89,85,83,82,82,82,82,79,79,78,78,78,78,76,76,76,75,73,72,71,70,70,69,69,69,68,68,68,68,67,65,65,65,65,65,63,63,63,63,63,61,61,61,60,60,59,59,59,59,58,58,58,57,57,57,57,56,55,55,54,54,53,53,53,52,52,52,51,51,51,51],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.114503816793893,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":1,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 </div>
 <div id="comparing-sentiment-dictionaries" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Comparing Sentiment Dictionaries</h3>
 <p>Semakin banyak informasi yang ditampilkan, dapat membantu pihak marketing mengembangkan strategi yang efektif dalam meningkatkan pelayanan, berikutnya tidak hanya kata yang sering muncul yang akan ditampilkan, namun juga informasi mengenai kata tersebut merupakan kata positif atau negatif yang digunakan oleh customer saat mengajukan complain.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="finance.html#cb57-1" aria-hidden="true"></a>text_dat &lt;-<span class="st">  </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-2"><a href="finance.html#cb57-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-3"><a href="finance.html#cb57-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-4"><a href="finance.html#cb57-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-5"><a href="finance.html#cb57-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word =</span> <span class="kw">wordStem</span>(word)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-6"><a href="finance.html#cb57-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb57-7"><a href="finance.html#cb57-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(word <span class="op">!=</span><span class="st"> </span><span class="kw">is.na</span>(word))</span>
-<span id="cb57-8"><a href="finance.html#cb57-8" aria-hidden="true"></a><span class="kw">head</span>(text_dat,<span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="finance.html#cb72-1" aria-hidden="true"></a>text_dat &lt;-<span class="st">  </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-2"><a href="finance.html#cb72-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-3"><a href="finance.html#cb72-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-4"><a href="finance.html#cb72-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-5"><a href="finance.html#cb72-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word =</span> <span class="kw">wordStem</span>(word)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-6"><a href="finance.html#cb72-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-7"><a href="finance.html#cb72-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(word <span class="op">!=</span><span class="st"> </span><span class="kw">is.na</span>(word))</span>
+<span id="cb72-8"><a href="finance.html#cb72-8" aria-hidden="true"></a><span class="kw">head</span>(text_dat,<span class="dv">20</span>)</span></code></pre></div>
 <pre><code>#&gt;          word    n
 #&gt; 1      credit 1573
 #&gt; 2      report 1462
@@ -565,9 +727,9 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 #&gt; 18    compani  223
 #&gt; 19     receiv  218
 #&gt; 20      agenc  213</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="finance.html#cb59-1" aria-hidden="true"></a>bing_word &lt;-<span class="st"> </span>text_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb59-2"><a href="finance.html#cb59-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">inner_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) </span>
-<span id="cb59-3"><a href="finance.html#cb59-3" aria-hidden="true"></a><span class="kw">head</span>(bing_word)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="finance.html#cb74-1" aria-hidden="true"></a>bing_word &lt;-<span class="st"> </span>text_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb74-2"><a href="finance.html#cb74-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">inner_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) </span>
+<span id="cb74-3"><a href="finance.html#cb74-3" aria-hidden="true"></a><span class="kw">head</span>(bing_word)</span></code></pre></div>
 <pre><code>#&gt;        word   n sentiment
 #&gt; 1      debt 206  negative
 #&gt; 2   correct 150  positive
@@ -575,57 +737,57 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 #&gt; 4     fraud  96  negative
 #&gt; 5 incorrect  89  negative
 #&gt; 6      hard  82  negative</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="finance.html#cb61-1" aria-hidden="true"></a><span class="kw">library</span>(reshape2)</span>
-<span id="cb61-2"><a href="finance.html#cb61-2" aria-hidden="true"></a><span class="kw">library</span>(wordcloud)</span>
-<span id="cb61-3"><a href="finance.html#cb61-3" aria-hidden="true"></a>bing_word <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb61-4"><a href="finance.html#cb61-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">acast</span>(word <span class="op">~</span><span class="st"> </span>sentiment, <span class="dt">value.var =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">fill =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb61-5"><a href="finance.html#cb61-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">comparison.cloud</span>(<span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;gray70&quot;</span>,<span class="st">&quot;gray20&quot;</span>), <span class="dt">max.words =</span> <span class="dv">200</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="finance.html#cb76-1" aria-hidden="true"></a><span class="kw">library</span>(reshape2)</span>
+<span id="cb76-2"><a href="finance.html#cb76-2" aria-hidden="true"></a><span class="kw">library</span>(wordcloud)</span>
+<span id="cb76-3"><a href="finance.html#cb76-3" aria-hidden="true"></a>bing_word <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-4"><a href="finance.html#cb76-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">acast</span>(word <span class="op">~</span><span class="st"> </span>sentiment, <span class="dt">value.var =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">fill =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb76-5"><a href="finance.html#cb76-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">comparison.cloud</span>(<span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;gray70&quot;</span>,<span class="st">&quot;gray20&quot;</span>), <span class="dt">max.words =</span> <span class="dv">200</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Sentiment Analysis yang dilakukan sebelumnya kita memperhitungan kemunculan kata positif dan negatif. Salah satu kelemahan pada pendekatan tersebut terkadang dapat disalah artikan penggunaannya pada sebuah kata, misal <code>correct</code> dan <code>support</code> akan dianggap sebagai kata positif. Namun, arti kata tersebut akan berubah jika terdapat kata <code>not</code> didepannya. Pada analisis berikut ini kita akan menggunakan n-gram untuk melihat seberapa sering <code>word1</code> diikuti oleh <code>word2</code>. Tokenisasi menggunakan n-gram berguna untuk eksplorasi kata yang memiliki hubungan. Ketika kita mengatur <code>n = 2</code> artinya kita akan menampilkan dua kata berturut-turut atau sering disebut dengam bigrams. Hasil dari visualisasi berikut ini menampilkan kata-kata yang berhubungan dengan kata <code>not</code>.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="finance.html#cb62-1" aria-hidden="true"></a>dat_bigrams &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-2"><a href="finance.html#cb62-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(bigram, Consumer.complaint.narrative, <span class="dt">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="dt">n=</span> <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb62-3"><a href="finance.html#cb62-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">separate</span>(bigram, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>,<span class="st">&quot;word2&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(word1 <span class="op">==</span><span class="st"> &quot;not&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-4"><a href="finance.html#cb62-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">inner_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="dt">by =</span> <span class="kw">c</span>(<span class="dt">word2 =</span> <span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-5"><a href="finance.html#cb62-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word1,word2, value, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-6"><a href="finance.html#cb62-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">contribution =</span> n<span class="op">*</span>value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-7"><a href="finance.html#cb62-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">abs</span>(contribution))) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-8"><a href="finance.html#cb62-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(word1) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-9"><a href="finance.html#cb62-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">slice</span>(<span class="kw">seq_len</span>(<span class="dv">20</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-10"><a href="finance.html#cb62-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(word1, <span class="kw">desc</span>(contribution)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb62-11"><a href="finance.html#cb62-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() </span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="finance.html#cb63-1" aria-hidden="true"></a>graph_bigram &lt;-<span class="st"> </span>dat_bigrams <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb63-2"><a href="finance.html#cb63-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">graph_from_data_frame</span>()</span>
-<span id="cb63-3"><a href="finance.html#cb63-3" aria-hidden="true"></a></span>
-<span id="cb63-4"><a href="finance.html#cb63-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb63-5"><a href="finance.html#cb63-5" aria-hidden="true"></a></span>
-<span id="cb63-6"><a href="finance.html#cb63-6" aria-hidden="true"></a>a &lt;-<span class="st"> </span>grid<span class="op">::</span><span class="kw">arrow</span>(<span class="dt">type =</span> <span class="st">&quot;closed&quot;</span>, <span class="dt">length =</span> <span class="kw">unit</span>(.<span class="dv">15</span>, <span class="st">&quot;inches&quot;</span>))</span>
-<span id="cb63-7"><a href="finance.html#cb63-7" aria-hidden="true"></a></span>
-<span id="cb63-8"><a href="finance.html#cb63-8" aria-hidden="true"></a><span class="kw">ggraph</span>(graph_bigram, <span class="dt">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="op">+</span></span>
-<span id="cb63-9"><a href="finance.html#cb63-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_link</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>) <span class="op">+</span></span>
-<span id="cb63-10"><a href="finance.html#cb63-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> value)) <span class="op">+</span></span>
-<span id="cb63-11"><a href="finance.html#cb63-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">color =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
-<span id="cb63-12"><a href="finance.html#cb63-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name),  <span class="dt">repel =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
-<span id="cb63-13"><a href="finance.html#cb63-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb63-14"><a href="finance.html#cb63-14" aria-hidden="true"></a>                       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span></span>
-<span id="cb63-15"><a href="finance.html#cb63-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Negation Bigram Network&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="finance.html#cb77-1" aria-hidden="true"></a>dat_bigrams &lt;-<span class="st"> </span>data_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-2"><a href="finance.html#cb77-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(bigram, Consumer.complaint.narrative, <span class="dt">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="dt">n=</span> <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
+<span id="cb77-3"><a href="finance.html#cb77-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">separate</span>(bigram, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>,<span class="st">&quot;word2&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(word1 <span class="op">==</span><span class="st"> &quot;not&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-4"><a href="finance.html#cb77-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">inner_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="dt">by =</span> <span class="kw">c</span>(<span class="dt">word2 =</span> <span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-5"><a href="finance.html#cb77-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(word1,word2, value, <span class="dt">sort =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-6"><a href="finance.html#cb77-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">contribution =</span> n<span class="op">*</span>value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-7"><a href="finance.html#cb77-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">abs</span>(contribution))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-8"><a href="finance.html#cb77-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(word1) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-9"><a href="finance.html#cb77-9" aria-hidden="true"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">slice</span>(<span class="kw">seq_len</span>(<span class="dv">20</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-10"><a href="finance.html#cb77-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">arrange</span>(word1, <span class="kw">desc</span>(contribution)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb77-11"><a href="finance.html#cb77-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="finance.html#cb78-1" aria-hidden="true"></a>graph_bigram &lt;-<span class="st"> </span>dat_bigrams <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-2"><a href="finance.html#cb78-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">graph_from_data_frame</span>()</span>
+<span id="cb78-3"><a href="finance.html#cb78-3" aria-hidden="true"></a></span>
+<span id="cb78-4"><a href="finance.html#cb78-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb78-5"><a href="finance.html#cb78-5" aria-hidden="true"></a></span>
+<span id="cb78-6"><a href="finance.html#cb78-6" aria-hidden="true"></a>a &lt;-<span class="st"> </span>grid<span class="op">::</span><span class="kw">arrow</span>(<span class="dt">type =</span> <span class="st">&quot;closed&quot;</span>, <span class="dt">length =</span> <span class="kw">unit</span>(.<span class="dv">15</span>, <span class="st">&quot;inches&quot;</span>))</span>
+<span id="cb78-7"><a href="finance.html#cb78-7" aria-hidden="true"></a></span>
+<span id="cb78-8"><a href="finance.html#cb78-8" aria-hidden="true"></a><span class="kw">ggraph</span>(graph_bigram, <span class="dt">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="op">+</span></span>
+<span id="cb78-9"><a href="finance.html#cb78-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_link</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>) <span class="op">+</span></span>
+<span id="cb78-10"><a href="finance.html#cb78-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> value)) <span class="op">+</span></span>
+<span id="cb78-11"><a href="finance.html#cb78-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">color =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
+<span id="cb78-12"><a href="finance.html#cb78-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name),  <span class="dt">repel =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb78-13"><a href="finance.html#cb78-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb78-14"><a href="finance.html#cb78-14" aria-hidden="true"></a>                       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span></span>
+<span id="cb78-15"><a href="finance.html#cb78-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Negation Bigram Network&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="correlation-pairs" class="section level3" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Correlation Pairs</h3>
 <p>Analisis berikutnya, akan dilakukan eksplorasi untuk mengetahui kata-kata yang memiliki kecenderungan muncul bersama pada complain nasabah dengan mencari nilai korelasi antar kata.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="finance.html#cb64-1" aria-hidden="true"></a>data_clean_cor &lt;-<span class="st"> </span>data_complaint <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-2"><a href="finance.html#cb64-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(Consumer.complaint.narrative,Issue,Product) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-3"><a href="finance.html#cb64-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Consumer.complaint.narrative =</span> Consumer.complaint.narrative <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-4"><a href="finance.html#cb64-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tolower</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-5"><a href="finance.html#cb64-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-6"><a href="finance.html#cb64-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[[:punct:]]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-7"><a href="finance.html#cb64-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[0-9]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-8"><a href="finance.html#cb64-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;xxxx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-9"><a href="finance.html#cb64-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_contraction</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-10"><a href="finance.html#cb64-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_word_elongation</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-11"><a href="finance.html#cb64-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_white</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb64-12"><a href="finance.html#cb64-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_squish</span>())</span>
-<span id="cb64-13"><a href="finance.html#cb64-13" aria-hidden="true"></a><span class="kw">head</span>(data_clean_cor)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="finance.html#cb79-1" aria-hidden="true"></a>data_clean_cor &lt;-<span class="st"> </span>data_complaint <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-2"><a href="finance.html#cb79-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(Consumer.complaint.narrative,Issue,Product) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-3"><a href="finance.html#cb79-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Consumer.complaint.narrative =</span> Consumer.complaint.narrative <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-4"><a href="finance.html#cb79-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tolower</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-5"><a href="finance.html#cb79-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-6"><a href="finance.html#cb79-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[[:punct:]]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-7"><a href="finance.html#cb79-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[0-9]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-8"><a href="finance.html#cb79-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_remove_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;xxxx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-9"><a href="finance.html#cb79-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_contraction</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-10"><a href="finance.html#cb79-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_word_elongation</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-11"><a href="finance.html#cb79-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">replace_white</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-12"><a href="finance.html#cb79-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">str_squish</span>())</span>
+<span id="cb79-13"><a href="finance.html#cb79-13" aria-hidden="true"></a><span class="kw">head</span>(data_clean_cor)</span></code></pre></div>
 <pre><code>#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Consumer.complaint.narrative
 #&gt; 1 this legal notice being sent and delivered to you persuant to florida statutes notice of order to cease and desist from using personal and private information fl statute violation title xlvi crimes chapter fraudulent practices view entire chapter criminal use of personal identification information as used in this section the term a access device means any card plate code account number electronic serial number mobile identification number personal identification number or other telecommunications service equipment or instrument identifier or other means of account access that can be used alone or in conjunction with another access device to obtain money goods services or any other thing of value or that can be used to initiate a transfer of funds other than a transfer originated solely by paper instrument b authorization means empowerment permission or competence to act c harass means to engage in conduct directed at a specific person that is intended to cause substantial emotional distress to such person and serves no legitimate purpose harass does not mean to use personal identification information for accepted commercial purposes the term does not include constitutionally protected conduct such as organized protests or the use of personal identification information for accepted commercial purposes d individual means a single human being and does not mean a firm association of individuals corporation partnership joint venture sole proprietorship or any other entity e person means a person as defined in s f personal identification information means any name or number that may be used alone or in conjunction with any other information to identify a specific individual including any name postal or electronic mail address telephone number social security number date of birth mother s maiden name official stateissued or united statesissued driver license or identification number alien registration number government passport number employer or taxpayer identification number or food assistance account number bank account number credit or debit card number or personal identification number or code assigned to the holder of a debit card by the issuer to permit authorized electronic use of such card unique biometric data such as fingerprint voice print retina or iris image or other unique physical representation unique electronic identification number address or routing code medical records telecommunication identifying information or access device or other number or information that can be used to access a person s financial resources g counterfeit or fictitious personal identification information means any counterfeit fictitious or fabricated information in the similitude of the data outlined in paragraph f that although not truthful or accurate would in context lead a reasonably prudent person to credit its truthfulness and accuracy a any person who willfully and without authorization fraudulently uses or possesses with intent to fraudulently use personal identification information concerning an individual without first obtaining that individual s consent commits the offense of fraudulent use of personal identification information which is a felony of the third degree punishable as provided in s s or s b any person who willfully and without authorization fraudulently uses personal identification information concerning an individual without first obtaining that individual s consent commits a felony of the second degree punishable as provided in s s or s if the pecuniary benefit the value of the services
 #&gt; 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       transunion continues to report inaccurate negative items on my report that i have previously dispu ted ti methey continuos to report account with no account number inaccurate information that is hurting my credit
@@ -647,30 +809,30 @@ banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempat
 #&gt; 4 Credit reporting, credit repair services, or other personal consumer reports
 #&gt; 5 Credit reporting, credit repair services, or other personal consumer reports
 #&gt; 6 Credit reporting, credit repair services, or other personal consumer reports</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="finance.html#cb66-1" aria-hidden="true"></a>text_dat_cor &lt;-<span class="st">  </span>data_clean_cor <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-2"><a href="finance.html#cb66-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-3"><a href="finance.html#cb66-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">unnest_tokens</span>(word,Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb66-4"><a href="finance.html#cb66-4" aria-hidden="true"></a><span class="st">                </span><span class="kw">anti_join</span>(stop_words)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="finance.html#cb81-1" aria-hidden="true"></a>text_dat_cor &lt;-<span class="st">  </span>data_clean_cor <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-2"><a href="finance.html#cb81-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">rowid_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-3"><a href="finance.html#cb81-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">unnest_tokens</span>(word,Consumer.complaint.narrative) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-4"><a href="finance.html#cb81-4" aria-hidden="true"></a><span class="st">                </span><span class="kw">anti_join</span>(stop_words)</span></code></pre></div>
 <p>Untuk memperoleh korelasi antar kata dapat menggunakan function <code>pairwise_cor()</code> dari package <code>widyr</code></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="finance.html#cb67-1" aria-hidden="true"></a>words_cors &lt;-<span class="st"> </span>text_dat_cor <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb67-2"><a href="finance.html#cb67-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb67-3"><a href="finance.html#cb67-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">n</span>() <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></span>
-<span id="cb67-4"><a href="finance.html#cb67-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">pairwise_cor</span>(word, Issue, <span class="dt">sort =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="finance.html#cb82-1" aria-hidden="true"></a>words_cors &lt;-<span class="st"> </span>text_dat_cor <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb82-2"><a href="finance.html#cb82-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb82-3"><a href="finance.html#cb82-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">n</span>() <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></span>
+<span id="cb82-4"><a href="finance.html#cb82-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">pairwise_cor</span>(word, Issue, <span class="dt">sort =</span> T) </span></code></pre></div>
 <p>Korelasi antar kata dapat kita tampilkan secar visual menggunakan package <code>ggraph</code>. Pada visualisasi berikut kita hanya ingin menampilkan kata yang memiliki korelasi lebih dari 0.9. Artinya korelasi pada visualisasi berikut memiliki kecenderungan muncul bersamaan saat nasabah mengajukan complain.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="finance.html#cb68-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb68-2"><a href="finance.html#cb68-2" aria-hidden="true"></a></span>
-<span id="cb68-3"><a href="finance.html#cb68-3" aria-hidden="true"></a>words_cors <span class="op">%&gt;%</span></span>
-<span id="cb68-4"><a href="finance.html#cb68-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(correlation <span class="op">&gt;</span><span class="st"> </span><span class="fl">.9</span>) <span class="op">%&gt;%</span></span>
-<span id="cb68-5"><a href="finance.html#cb68-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">graph_from_data_frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb68-6"><a href="finance.html#cb68-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggraph</span>(<span class="dt">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="op">+</span></span>
-<span id="cb68-7"><a href="finance.html#cb68-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_link</span>(<span class="kw">aes</span>(<span class="dt">edge_alpha =</span> correlation)) <span class="op">+</span></span>
-<span id="cb68-8"><a href="finance.html#cb68-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">color =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
-<span id="cb68-9"><a href="finance.html#cb68-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">repel =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
-<span id="cb68-10"><a href="finance.html#cb68-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></span>
-<span id="cb68-11"><a href="finance.html#cb68-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Correlation between Words&quot;</span>)<span class="op">+</span></span>
-<span id="cb68-12"><a href="finance.html#cb68-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb68-13"><a href="finance.html#cb68-13" aria-hidden="true"></a>                       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="finance.html#cb83-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb83-2"><a href="finance.html#cb83-2" aria-hidden="true"></a></span>
+<span id="cb83-3"><a href="finance.html#cb83-3" aria-hidden="true"></a>words_cors <span class="op">%&gt;%</span></span>
+<span id="cb83-4"><a href="finance.html#cb83-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(correlation <span class="op">&gt;</span><span class="st"> </span><span class="fl">.9</span>) <span class="op">%&gt;%</span></span>
+<span id="cb83-5"><a href="finance.html#cb83-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">graph_from_data_frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb83-6"><a href="finance.html#cb83-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggraph</span>(<span class="dt">layout =</span> <span class="st">&quot;fr&quot;</span>) <span class="op">+</span></span>
+<span id="cb83-7"><a href="finance.html#cb83-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_edge_link</span>(<span class="kw">aes</span>(<span class="dt">edge_alpha =</span> correlation)) <span class="op">+</span></span>
+<span id="cb83-8"><a href="finance.html#cb83-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="dt">color =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
+<span id="cb83-9"><a href="finance.html#cb83-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_node_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">repel =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb83-10"><a href="finance.html#cb83-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></span>
+<span id="cb83-11"><a href="finance.html#cb83-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Correlation between Words&quot;</span>)<span class="op">+</span></span>
+<span id="cb83-12"><a href="finance.html#cb83-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb83-13"><a href="finance.html#cb83-13" aria-hidden="true"></a>                       <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Manfaat dari Sentiment Analysis yang telah dilakukan adalah kita dapat mengetahui pesan utama dari pendapat dan pemikiran customer terhadap suatu company atau product. Selain itu, output dari sentiment analysis dapat memberikan gambaran mengenai pelayanan atau product yang belum sesuai. Hal tersebut dapat membantu tim marketing untuk meneliti trend yang dibutuhkan customer dengan lebih baik. Seiring dengan peningkatan kualitas layanan dan pengembangan produk yang lebih baik, tentunya akan mengurangi tingkat churn customer.</p>
 
 </div>

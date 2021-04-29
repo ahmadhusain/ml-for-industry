@@ -156,12 +156,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
 <li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
-<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
@@ -171,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
-<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
@@ -253,24 +252,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="import-data" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Import Data</h3>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="public-health.html#cb261-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb261-2"><a href="public-health.html#cb261-2" aria-hidden="true"></a><span class="kw">library</span>(survival)</span>
-<span id="cb261-3"><a href="public-health.html#cb261-3" aria-hidden="true"></a><span class="kw">library</span>(SurvRegCensCov)</span>
-<span id="cb261-4"><a href="public-health.html#cb261-4" aria-hidden="true"></a><span class="kw">library</span>(survminer)</span>
-<span id="cb261-5"><a href="public-health.html#cb261-5" aria-hidden="true"></a></span>
-<span id="cb261-6"><a href="public-health.html#cb261-6" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">9999</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="public-health.html#cb275-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb275-2"><a href="public-health.html#cb275-2" aria-hidden="true"></a><span class="kw">library</span>(survival)</span>
+<span id="cb275-3"><a href="public-health.html#cb275-3" aria-hidden="true"></a><span class="kw">library</span>(SurvRegCensCov)</span>
+<span id="cb275-4"><a href="public-health.html#cb275-4" aria-hidden="true"></a><span class="kw">library</span>(survminer)</span>
+<span id="cb275-5"><a href="public-health.html#cb275-5" aria-hidden="true"></a></span>
+<span id="cb275-6"><a href="public-health.html#cb275-6" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">9999</span>)</span></code></pre></div>
 <p>Data yang digunakan merupakan data dummy rekam medis dari pasien kanker paru-paru. Sebanyak 137 pasien diobservasi dimana 128 mengalami <em>event</em> meninggal dan sisanya tersensor (dirujuk ke rumah sakit lain). Durasi waktu pengamatan menggukan satuan hari.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="public-health.html#cb262-1" aria-hidden="true"></a>lung &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/06-health/data-paru.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span>
-<span id="cb262-2"><a href="public-health.html#cb262-2" aria-hidden="true"></a></span>
-<span id="cb262-3"><a href="public-health.html#cb262-3" aria-hidden="true"></a><span class="kw">glimpse</span>(lung)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="public-health.html#cb276-1" aria-hidden="true"></a>lung &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/06-health/data-paru.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span>
+<span id="cb276-2"><a href="public-health.html#cb276-2" aria-hidden="true"></a></span>
+<span id="cb276-3"><a href="public-health.html#cb276-3" aria-hidden="true"></a><span class="kw">glimpse</span>(lung)</span></code></pre></div>
 <pre><code>#&gt; Rows: 137
 #&gt; Columns: 6
-#&gt; $ treatment [3m[38;5;246m&lt;int&gt;[39m[23m 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, ~
-#&gt; $ survival  [3m[38;5;246m&lt;int&gt;[39m[23m 1, 1, 2, 3, 4, 7, 7, 7, 8, 8, 8, 8, 10, 10, 11, 12, 12, 13, ~
-#&gt; $ perform   [3m[38;5;246m&lt;int&gt;[39m[23m 20, 50, 40, 30, 40, 50, 20, 40, 40, 20, 80, 50, 20, 40, 70, ~
-#&gt; $ age       [3m[38;5;246m&lt;int&gt;[39m[23m 65, 35, 44, 43, 35, 72, 66, 58, 63, 61, 68, 66, 49, 67, 48, ~
-#&gt; $ status    [3m[38;5;246m&lt;int&gt;[39m[23m 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
-#&gt; $ cell      [3m[38;5;246m&lt;int&gt;[39m[23m 4, 4, 3, 2, 3, 3, 3, 2, 4, 2, 3, 2, 4, 3, 4, 2, 1, 3, 3, 4, ~</code></pre>
+#&gt; $ treatment [3m[38;5;246m&lt;int&gt;[39m[23m 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2~
+#&gt; $ survival  [3m[38;5;246m&lt;int&gt;[39m[23m 1, 1, 2, 3, 4, 7, 7, 7, 8, 8, 8, 8, 10, 10, 11, 12, 12, 13, 13, 15, 15, 16, ~
+#&gt; $ perform   [3m[38;5;246m&lt;int&gt;[39m[23m 20, 50, 40, 30, 40, 50, 20, 40, 40, 20, 80, 50, 20, 40, 70, 50, 40, 60, 30, ~
+#&gt; $ age       [3m[38;5;246m&lt;int&gt;[39m[23m 65, 35, 44, 43, 35, 72, 66, 58, 63, 61, 68, 66, 49, 67, 48, 63, 68, 56, 62, ~
+#&gt; $ status    [3m[38;5;246m&lt;int&gt;[39m[23m 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1~
+#&gt; $ cell      [3m[38;5;246m&lt;int&gt;[39m[23m 4, 4, 3, 2, 3, 3, 3, 2, 4, 2, 3, 2, 4, 3, 4, 2, 1, 3, 3, 4, 1, 3, 3, 3, 2, 2~</code></pre>
 <p>Berikut adalah penjelasan mengenai beberapa informasi yang diamati:</p>
 <ol style="list-style-type: decimal">
 <li><code>treatment</code>: 1 (<em>standard</em>), 2 (<em>test</em>)</li>
@@ -279,27 +278,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>status</code>: 1 (<em>cencored</em> / berhasil survive), 0 (meninggal)</li>
 </ol>
 <p>Menurut Kementerian Kesehatan, kelompok usia yang paling berisiko tinggi mencakup pasien yang berusia &gt; 40 tahun. Maka, pada data akan dikelompokkan menjadi dua kelompok usia.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="public-health.html#cb264-1" aria-hidden="true"></a>lung &lt;-<span class="st"> </span>lung <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb264-2"><a href="public-health.html#cb264-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">time =</span> survival) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb264-3"><a href="public-health.html#cb264-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
-<span id="cb264-4"><a href="public-health.html#cb264-4" aria-hidden="true"></a>    <span class="dt">treatment =</span> <span class="kw">factor</span>(treatment, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;standard&quot;</span>, <span class="st">&quot;test&quot;</span>)),</span>
-<span id="cb264-5"><a href="public-health.html#cb264-5" aria-hidden="true"></a>    <span class="dt">cell =</span> <span class="kw">factor</span>(cell, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;large&quot;</span>, <span class="st">&quot;adeno&quot;</span>,<span class="st">&quot;small&quot;</span>,<span class="st">&quot;squamous&quot;</span>)),</span>
-<span id="cb264-6"><a href="public-health.html#cb264-6" aria-hidden="true"></a>    <span class="dt">age =</span> <span class="kw">case_when</span>(</span>
-<span id="cb264-7"><a href="public-health.html#cb264-7" aria-hidden="true"></a>      age <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">~</span><span class="st"> &quot;&gt;40&quot;</span>,</span>
-<span id="cb264-8"><a href="public-health.html#cb264-8" aria-hidden="true"></a>      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;&lt;=40&quot;</span></span>
-<span id="cb264-9"><a href="public-health.html#cb264-9" aria-hidden="true"></a>    )</span>
-<span id="cb264-10"><a href="public-health.html#cb264-10" aria-hidden="true"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="public-health.html#cb278-1" aria-hidden="true"></a>lung &lt;-<span class="st"> </span>lung <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb278-2"><a href="public-health.html#cb278-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">time =</span> survival) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb278-3"><a href="public-health.html#cb278-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb278-4"><a href="public-health.html#cb278-4" aria-hidden="true"></a>    <span class="dt">treatment =</span> <span class="kw">factor</span>(treatment, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;standard&quot;</span>, <span class="st">&quot;test&quot;</span>)),</span>
+<span id="cb278-5"><a href="public-health.html#cb278-5" aria-hidden="true"></a>    <span class="dt">cell =</span> <span class="kw">factor</span>(cell, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;large&quot;</span>, <span class="st">&quot;adeno&quot;</span>,<span class="st">&quot;small&quot;</span>,<span class="st">&quot;squamous&quot;</span>)),</span>
+<span id="cb278-6"><a href="public-health.html#cb278-6" aria-hidden="true"></a>    <span class="dt">age =</span> <span class="kw">case_when</span>(</span>
+<span id="cb278-7"><a href="public-health.html#cb278-7" aria-hidden="true"></a>      age <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">~</span><span class="st"> &quot;&gt;40&quot;</span>,</span>
+<span id="cb278-8"><a href="public-health.html#cb278-8" aria-hidden="true"></a>      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;&lt;=40&quot;</span></span>
+<span id="cb278-9"><a href="public-health.html#cb278-9" aria-hidden="true"></a>    )</span>
+<span id="cb278-10"><a href="public-health.html#cb278-10" aria-hidden="true"></a>  )</span></code></pre></div>
 </div>
 <div id="exploratory-data-analysis" class="section level3" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> Exploratory Data Analysis</h3>
 <p>Variabel prediktor (treatment, age, perform, cell) akan dianalisis menggunakan regresi survival. Dimana akan dilihat faktor-faktor apa saja yang mempengaruhi ketahanan hidup pasien sampai mengalami sebuah <em>event</em>: meninggal. Namun sebelumnya akan dianalisis menggunakan pendekatan non parametrik yaitu metode <em>Kaplan Meier</em> dan <em>Log-Rank</em>. <em>Kaplan Meier</em> adalah kurva yang menggambarkan hubungan antara waktu pengamatan (survival) dengan estimasi fungsi survival pada waktu ke-t. Kurva yang terbentuk kemudian dibandingkan menggunakan uji <em>Log Rank</em>. Tujuannya untuk mengetahui apakah terdapat perbedaan peluang survive antara level di setiap variabel kategorik.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="public-health.html#cb265-1" aria-hidden="true"></a>lung_surv &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> lung)</span></code></pre></div>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="public-health.html#cb266-1" aria-hidden="true"></a><span class="kw">tibble</span>(</span>
-<span id="cb266-2"><a href="public-health.html#cb266-2" aria-hidden="true"></a>  <span class="dt">time =</span> lung_surv<span class="op">$</span>time,</span>
-<span id="cb266-3"><a href="public-health.html#cb266-3" aria-hidden="true"></a>  <span class="dt">n_risk =</span> lung_surv<span class="op">$</span>n.risk,</span>
-<span id="cb266-4"><a href="public-health.html#cb266-4" aria-hidden="true"></a>  <span class="dt">n_event =</span> lung_surv<span class="op">$</span>n.event,</span>
-<span id="cb266-5"><a href="public-health.html#cb266-5" aria-hidden="true"></a>  <span class="dt">survival =</span> lung_surv<span class="op">$</span>surv</span>
-<span id="cb266-6"><a href="public-health.html#cb266-6" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="public-health.html#cb279-1" aria-hidden="true"></a>lung_surv &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> lung)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="public-health.html#cb280-1" aria-hidden="true"></a><span class="kw">tibble</span>(</span>
+<span id="cb280-2"><a href="public-health.html#cb280-2" aria-hidden="true"></a>  <span class="dt">time =</span> lung_surv<span class="op">$</span>time,</span>
+<span id="cb280-3"><a href="public-health.html#cb280-3" aria-hidden="true"></a>  <span class="dt">n_risk =</span> lung_surv<span class="op">$</span>n.risk,</span>
+<span id="cb280-4"><a href="public-health.html#cb280-4" aria-hidden="true"></a>  <span class="dt">n_event =</span> lung_surv<span class="op">$</span>n.event,</span>
+<span id="cb280-5"><a href="public-health.html#cb280-5" aria-hidden="true"></a>  <span class="dt">survival =</span> lung_surv<span class="op">$</span>surv</span>
+<span id="cb280-6"><a href="public-health.html#cb280-6" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>#&gt; [38;5;246m# A tibble: 101 x 4[39m
 #&gt;     time n_risk n_event survival
 #&gt;    [3m[38;5;246m&lt;dbl&gt;[39m[23m  [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m
@@ -315,25 +314,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [38;5;250m10[39m    13    120       2    0.861
 #&gt; [38;5;246m# ... with 91 more rows[39m</code></pre>
 <p>Baris pertama output menyatakan pada waktu pengamatan hari pertama, ada 137 pasien, 2 diantaranya meninggal pada saat itu. Peluang survive diperoleh menggunakan perhitungan <span class="math inline">\((137-2)/137 = 0.985\)</span>. Pada garis kedua yang menyatakan observasi di hari ke-2, terdapat 135 pasien, dimana satu orang diantaranya meninggal pada saat itu. Peluang survivalnya diperoleh dengan perhitungan <span class="math inline">\((135-1)/137 = 0.978\)</span>. Tabel informasi diatas jika divisualisasikan tampilannya akan seperti berikut:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="public-health.html#cb268-1" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
-<span id="cb268-2"><a href="public-health.html#cb268-2" aria-hidden="true"></a>   lung_surv,</span>
-<span id="cb268-3"><a href="public-health.html#cb268-3" aria-hidden="true"></a>   <span class="dt">color =</span> <span class="st">&quot;#2E9FDF&quot;</span>,</span>
-<span id="cb268-4"><a href="public-health.html#cb268-4" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
-<span id="cb268-5"><a href="public-health.html#cb268-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves all variable&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-168-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="public-health.html#cb282-1" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
+<span id="cb282-2"><a href="public-health.html#cb282-2" aria-hidden="true"></a>   lung_surv,</span>
+<span id="cb282-3"><a href="public-health.html#cb282-3" aria-hidden="true"></a>   <span class="dt">color =</span> <span class="st">&quot;#2E9FDF&quot;</span>,</span>
+<span id="cb282-4"><a href="public-health.html#cb282-4" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
+<span id="cb282-5"><a href="public-health.html#cb282-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves all variable&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-179-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Hasil di atas adalah kurva survival untuk kesuluruhan parameter. Sumbu vertikal merupakan peluang survival dan sumbu horizontal adalah waktu pengamatan. Berdasarkan grafik, terlihat jelas bahwa makin jauh waktu pengamatan, peluang survive akan semakin kecil. Masing-masing variabel juga dapat dicari fungsi survivalnya, untuk memperoleh insight apakah tiap kelompok variabel terdapat perbedaan peluang survive yang signifikan.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="public-health.html#cb269-1" aria-hidden="true"></a>km_cell &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span>cell, <span class="dt">data =</span> lung)</span>
-<span id="cb269-2"><a href="public-health.html#cb269-2" aria-hidden="true"></a></span>
-<span id="cb269-3"><a href="public-health.html#cb269-3" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
-<span id="cb269-4"><a href="public-health.html#cb269-4" aria-hidden="true"></a>   km_cell,</span>
-<span id="cb269-5"><a href="public-health.html#cb269-5" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
-<span id="cb269-6"><a href="public-health.html#cb269-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves for Cell Type Group&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-169-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="public-health.html#cb283-1" aria-hidden="true"></a>km_cell &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span>cell, <span class="dt">data =</span> lung)</span>
+<span id="cb283-2"><a href="public-health.html#cb283-2" aria-hidden="true"></a></span>
+<span id="cb283-3"><a href="public-health.html#cb283-3" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
+<span id="cb283-4"><a href="public-health.html#cb283-4" aria-hidden="true"></a>   km_cell,</span>
+<span id="cb283-5"><a href="public-health.html#cb283-5" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
+<span id="cb283-6"><a href="public-health.html#cb283-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves for Cell Type Group&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-180-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Grafik diatas cukup menjelaskan bahwa keempat kelompok <em>cell type</em> memiliki perbedaan garis yang cukup signifikan. Maka, dapat diduga bahwa kelompok <em>cell type</em> pada data observasi memiliki perbedaan yang signifikan terhadap status survive pasien kanker paru. Akan dilakukan uji eksak, menggunakan <em>Log-Rank</em> untuk memperkuat identifikasi berdasarkan grafik.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="public-health.html#cb270-1" aria-hidden="true"></a><span class="co"># log rank cell type</span></span>
-<span id="cb270-2"><a href="public-health.html#cb270-2" aria-hidden="true"></a></span>
-<span id="cb270-3"><a href="public-health.html#cb270-3" aria-hidden="true"></a>lr_cell &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>cell, <span class="dt">data =</span> lung)</span>
-<span id="cb270-4"><a href="public-health.html#cb270-4" aria-hidden="true"></a>lr_cell</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="public-health.html#cb284-1" aria-hidden="true"></a><span class="co"># log rank cell type</span></span>
+<span id="cb284-2"><a href="public-health.html#cb284-2" aria-hidden="true"></a></span>
+<span id="cb284-3"><a href="public-health.html#cb284-3" aria-hidden="true"></a>lr_cell &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>cell, <span class="dt">data =</span> lung)</span>
+<span id="cb284-4"><a href="public-health.html#cb284-4" aria-hidden="true"></a>lr_cell</span></code></pre></div>
 <pre><code>#&gt; Call:
 #&gt; survdiff(formula = Surv(time, status) ~ cell, data = lung)
 #&gt; 
@@ -345,18 +344,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 
 #&gt;  Chisq= 25.4  on 3 degrees of freedom, p= 0.00001</code></pre>
 <p>Tingkat signifikansi yang digunakan adalah sebesar 5% (0.05). Berdasarkan uji <em>Log-Rank</em>, diperoleh <em>p-value</em> (0.0001) &lt; alpha (0.05) maka kesimpulannya terdapat perbedaan yang signifikan pada fungsi survival keempat kelompok <em>cell</em>.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="public-health.html#cb272-1" aria-hidden="true"></a>km_treatment &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data =</span> lung)</span>
-<span id="cb272-2"><a href="public-health.html#cb272-2" aria-hidden="true"></a></span>
-<span id="cb272-3"><a href="public-health.html#cb272-3" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
-<span id="cb272-4"><a href="public-health.html#cb272-4" aria-hidden="true"></a>   km_treatment,</span>
-<span id="cb272-5"><a href="public-health.html#cb272-5" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
-<span id="cb272-6"><a href="public-health.html#cb272-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves for Treatment group&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-171-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="public-health.html#cb286-1" aria-hidden="true"></a>km_treatment &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> time, <span class="dt">event =</span> status) <span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data =</span> lung)</span>
+<span id="cb286-2"><a href="public-health.html#cb286-2" aria-hidden="true"></a></span>
+<span id="cb286-3"><a href="public-health.html#cb286-3" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(</span>
+<span id="cb286-4"><a href="public-health.html#cb286-4" aria-hidden="true"></a>   km_treatment,</span>
+<span id="cb286-5"><a href="public-health.html#cb286-5" aria-hidden="true"></a>   <span class="dt">ggtheme =</span> ggthemes<span class="op">::</span><span class="kw">theme_pander</span>()) <span class="op">+</span></span>
+<span id="cb286-6"><a href="public-health.html#cb286-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kaplan-Meier Curves for Treatment group&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-182-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Pada hasil grafik di atas, antara pria dan wanita memiliki jarak yang berdekatan. Artinya tidak terdapat perbedaan yang signifikan untuk waktu survivalnya. Untuk memperkuat interpretasi berdasarkan grafik, perlu dilakukan uji hipotesis dengan menggunakan perhitungan eksak, yakni metode Log-Rank.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="public-health.html#cb273-1" aria-hidden="true"></a><span class="co"># log rank treatment</span></span>
-<span id="cb273-2"><a href="public-health.html#cb273-2" aria-hidden="true"></a></span>
-<span id="cb273-3"><a href="public-health.html#cb273-3" aria-hidden="true"></a>lr_treatment &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data =</span> lung)</span>
-<span id="cb273-4"><a href="public-health.html#cb273-4" aria-hidden="true"></a>lr_treatment</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="public-health.html#cb287-1" aria-hidden="true"></a><span class="co"># log rank treatment</span></span>
+<span id="cb287-2"><a href="public-health.html#cb287-2" aria-hidden="true"></a></span>
+<span id="cb287-3"><a href="public-health.html#cb287-3" aria-hidden="true"></a>lr_treatment &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data =</span> lung)</span>
+<span id="cb287-4"><a href="public-health.html#cb287-4" aria-hidden="true"></a>lr_treatment</span></code></pre></div>
 <pre><code>#&gt; Call:
 #&gt; survdiff(formula = Surv(time, status) ~ treatment, data = lung)
 #&gt; 
@@ -366,10 +365,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 
 #&gt;  Chisq= 0  on 1 degrees of freedom, p= 0.9</code></pre>
 <p>Berdasarkan hasil uji <em>Log-Rank</em> diperoleh p-value (0.9) &gt; alpha (0.05) sehingga kesimpulannya tidak terdapat perbedaan yang signifikan untuk kelompok variabel treatment. Artinya baik treament standard maupun treatment test, tidak mempengaruhi waktu survive dari pasien. Adapun variabel lainnya, kelompok usia dan kelompok performa setelah di uji menggunakan <em>Log-Rank</em> diperoleh kesimpulan yang sama yakni, terdapat perbedaan waktu survive yang signifikan untuk kelompok dua variabel tersebut.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="public-health.html#cb275-1" aria-hidden="true"></a><span class="co"># log rank age</span></span>
-<span id="cb275-2"><a href="public-health.html#cb275-2" aria-hidden="true"></a></span>
-<span id="cb275-3"><a href="public-health.html#cb275-3" aria-hidden="true"></a>lr_age &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> lung)</span>
-<span id="cb275-4"><a href="public-health.html#cb275-4" aria-hidden="true"></a>lr_age</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="public-health.html#cb289-1" aria-hidden="true"></a><span class="co"># log rank age</span></span>
+<span id="cb289-2"><a href="public-health.html#cb289-2" aria-hidden="true"></a></span>
+<span id="cb289-3"><a href="public-health.html#cb289-3" aria-hidden="true"></a>lr_age &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> lung)</span>
+<span id="cb289-4"><a href="public-health.html#cb289-4" aria-hidden="true"></a>lr_age</span></code></pre></div>
 <pre><code>#&gt; Call:
 #&gt; survdiff(formula = Surv(time, status) ~ age, data = lung)
 #&gt; 
@@ -378,10 +377,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; age=&gt;40  125      117   120.56     0.105      1.86
 #&gt; 
 #&gt;  Chisq= 1.9  on 1 degrees of freedom, p= 0.2</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="public-health.html#cb277-1" aria-hidden="true"></a><span class="co"># log rank perform</span></span>
-<span id="cb277-2"><a href="public-health.html#cb277-2" aria-hidden="true"></a></span>
-<span id="cb277-3"><a href="public-health.html#cb277-3" aria-hidden="true"></a>lr_perform &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>perform, <span class="dt">data =</span> lung)</span>
-<span id="cb277-4"><a href="public-health.html#cb277-4" aria-hidden="true"></a>lr_perform</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="public-health.html#cb291-1" aria-hidden="true"></a><span class="co"># log rank perform</span></span>
+<span id="cb291-2"><a href="public-health.html#cb291-2" aria-hidden="true"></a></span>
+<span id="cb291-3"><a href="public-health.html#cb291-3" aria-hidden="true"></a>lr_perform &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(time ,status)<span class="op">~</span><span class="st"> </span>perform, <span class="dt">data =</span> lung)</span>
+<span id="cb291-4"><a href="public-health.html#cb291-4" aria-hidden="true"></a>lr_perform</span></code></pre></div>
 <pre><code>#&gt; Call:
 #&gt; survdiff(formula = Surv(time, status) ~ perform, data = lung)
 #&gt; 
@@ -404,8 +403,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="modelling-analysis" class="section level3" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> Modelling Analysis</h3>
 <p>Pada analisa sebelumnya, hanya dibandingkan tiap pengamatan pasien terhadap masing-masing variabelnya saja. Kali ini akan di uji apakah pasien kanker paru-paru memiliki tingkat ketahanan hidup (survive) yang berbeda berdasarkan penyebab tipe sel, performa, dan usia pasien. Pemodelan menggunakan pendekatan 2 metode, yaitu regresi weibull dan regresi log logistik. Masing-masing hasil ringkasan informasinya dapat dilihat pada output dibawah:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="public-health.html#cb279-1" aria-hidden="true"></a>regweibull &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>cell <span class="op">+</span><span class="st"> </span>perform, <span class="dt">data =</span> lung, <span class="dt">dist =</span> <span class="st">&quot;weibull&quot;</span>)</span>
-<span id="cb279-2"><a href="public-health.html#cb279-2" aria-hidden="true"></a><span class="kw">summary</span>(regweibull)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="public-health.html#cb293-1" aria-hidden="true"></a>regweibull &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>cell <span class="op">+</span><span class="st"> </span>perform, <span class="dt">data =</span> lung, <span class="dt">dist =</span> <span class="st">&quot;weibull&quot;</span>)</span>
+<span id="cb293-2"><a href="public-health.html#cb293-2" aria-hidden="true"></a><span class="kw">summary</span>(regweibull)</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt; Call:
 #&gt; survreg(formula = Surv(time, status) ~ age + cell + perform, 
@@ -426,8 +425,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 	Chisq= 65.72 on 5 degrees of freedom, p= 0.0000000000008 
 #&gt; Number of Newton-Raphson Iterations: 5 
 #&gt; n= 137</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="public-health.html#cb281-1" aria-hidden="true"></a>reglog &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>cell <span class="op">+</span><span class="st"> </span>perform, <span class="dt">data =</span> lung, <span class="dt">dist =</span> <span class="st">&quot;loglogistic&quot;</span>)</span>
-<span id="cb281-2"><a href="public-health.html#cb281-2" aria-hidden="true"></a><span class="kw">summary</span>(reglog)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="public-health.html#cb295-1" aria-hidden="true"></a>reglog &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>cell <span class="op">+</span><span class="st"> </span>perform, <span class="dt">data =</span> lung, <span class="dt">dist =</span> <span class="st">&quot;loglogistic&quot;</span>)</span>
+<span id="cb295-2"><a href="public-health.html#cb295-2" aria-hidden="true"></a><span class="kw">summary</span>(reglog)</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt; Call:
 #&gt; survreg(formula = Surv(time, status) ~ age + cell + perform, 
@@ -449,9 +448,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; Number of Newton-Raphson Iterations: 4 
 #&gt; n= 137</code></pre>
 <p>Kriteria yang digunakan dalam pemilihan model terbaik dilihat dari nilai <em>Akaike Information Criterion</em> (AIC). Model yang lebih layak digunakan ketika nilai AIC yang semakin rendah. AIC sangat berguna saat harus memilih model terbaik dari himpunan data yang sama. AIC yang diperoleh dari masing-masing metode:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="public-health.html#cb283-1" aria-hidden="true"></a><span class="kw">AIC</span>(regweibull)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="public-health.html#cb297-1" aria-hidden="true"></a><span class="kw">AIC</span>(regweibull)</span></code></pre></div>
 <pre><code>#&gt; [1] 1444.466</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="public-health.html#cb285-1" aria-hidden="true"></a><span class="kw">AIC</span>(reglog)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="public-health.html#cb299-1" aria-hidden="true"></a><span class="kw">AIC</span>(reglog)</span></code></pre></div>
 <pre><code>#&gt; [1] 1436.513</code></pre>
 <p>Model terbaik diperoleh dari model regresi log logistic, dengan AIC paling terendah yaitu 1435,513:</p>
 <p><span class="math display">\[S(t|x)=\frac{1}{1 + (exp([-2.0251 + 0.5293_{age} - 0.7763_{cellAdeno} - 0.7438_{cellSmall} - 0.0388_{cellSquamous} + 0.0359_{perform})]*t)^{0.576}}\]</span></p>
@@ -461,15 +460,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Usia 50 tahun, cell Squamous, skor performa = 70;</li>
 </ul>
 <p>pada saat hari ke-100, diperoleh hasil sebagai berikut:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="public-health.html#cb287-1" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.7438</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="public-health.html#cb301-1" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.7438</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
 <pre><code>#&gt; [1] 0.02555521</code></pre>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="public-health.html#cb289-1" aria-hidden="true"></a><span class="co"># pasien 1</span></span>
-<span id="cb289-2"><a href="public-health.html#cb289-2" aria-hidden="true"></a></span>
-<span id="cb289-3"><a href="public-health.html#cb289-3" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.7763</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="public-health.html#cb303-1" aria-hidden="true"></a><span class="co"># pasien 1</span></span>
+<span id="cb303-2"><a href="public-health.html#cb303-2" aria-hidden="true"></a></span>
+<span id="cb303-3"><a href="public-health.html#cb303-3" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.7763</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
 <pre><code>#&gt; [1] 0.02508127</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="public-health.html#cb291-1" aria-hidden="true"></a><span class="co"># pasien 2</span></span>
-<span id="cb291-2"><a href="public-health.html#cb291-2" aria-hidden="true"></a></span>
-<span id="cb291-3"><a href="public-health.html#cb291-3" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.038</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="public-health.html#cb305-1" aria-hidden="true"></a><span class="co"># pasien 2</span></span>
+<span id="cb305-2"><a href="public-health.html#cb305-2" aria-hidden="true"></a></span>
+<span id="cb305-3"><a href="public-health.html#cb305-3" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">2.0251</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5293</span> <span class="op">+</span><span class="st">  </span><span class="fl">0.038</span>  <span class="op">+</span><span class="st"> </span><span class="fl">0.0359</span> <span class="op">*</span><span class="st"> </span><span class="dv">70</span>)<span class="op">*</span><span class="dv">100</span>)<span class="op">^</span><span class="fl">0.576</span></span></code></pre></div>
 <pre><code>#&gt; [1] 0.03837407</code></pre>
 <p>Maka, pasien usia lebih dari 40 tahub dengan tipe cell squamous pada saat 100 hari mengidap kanker paru peluang bertahan hidup (survive) untuk bertahan hidup lebih tinggi dibandingkan dengan tipe adino.</p>
 </div>

@@ -3,204 +3,331 @@
 ```{r message=F, warning=F, echo=FALSE}
 library(tidyverse)
 library(rsample)
-library(rpart.plot)
-library(rpart)
 library(tidymodels)
-library(rattle)
 library(caret)
-library(readr)
+library(lime)
+library(xgboost)
+library(ROCR)
+library(inspectdf)
 ```
 ## Credit Risk Analysis 
 
 ### Background
 
-Credit scoring membutuhkan berbagai data profil calon peminjam sehingga tingkat resiko dapat dihitung dengan tepat. Semakin benar dan lengkap data yang disediakan, maka semakin akurat perhitungan yang dilakukan. Proses tersebut tentunya merupakan hal yang baik, namun di sisi calon peminjam proses yang harus dilalui dirasa sangat merepotkan dan membutuhkan waktu untuk menunggu. Dan seiring tingkat kompetisi yang samkin tinggi di industri finansial, customer memiliki
-banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempatan untuk mendapatkan peminjam.
+Credit scoring merupakan sistem yang digunakan oleh bank atau lembaga keuangan lain untuk menentukan apakah seorang nasabah layak atau tidak mendapatkan pinjaman. Credit scoring membutuhkan berbagai data profil calon peminjam sehingga tingkat resiko dapat dihitung dengan tepat. Semakin tepat dan lengkap data yang disediakan, maka semakin akurat perhitungan yang dilakukan. 
 
-Tantangan pun muncul, bagaimana mendapatkan pelanggan dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa data - data profil peminjam dan proses pembayaran sehingga dapat mengeluarkan rekomendasi profil pelanggan yang beresiko rendah.
+Proses tersebut tentunya merupakan hal yang baik, namun di sisi calon peminjam proses yang harus dilalui dirasa sangat merepotkan dan membutuhkan waktu untuk menunggu dan seiring tingginya tingkat kompetisi yang ada di industri finansial, menjadikan nasabah memiliki banyak alternatif. Semakin cepat proses yang ditawarkan, semakin tinggi kesempatan untuk mendapatkan peminjam.
+
+Tantangan pun muncul, bagaimana mendapatkan peminjam dengan proses yang efisien namun akurasi dari credit scoring tetap tinggi. Disinilah machine learning dapat membantu menganalisa data-data profil peminjam dan proses pembayaran sehingga dapat mengetahui profil peminjam yang memiliki peluang besar untuk melunasi pinjaman dengan lancar.
 
 Harapannya setelah mempunyai model machine learning dengan perfomance model yang baik, pegawai bank dapat dengan mudah mengidentifikasi karakteristik customer yang memiliki peluang besar untuk melunasi pinjaman dengan lancar. Dengan adanya model machine learning ini tentunya akan mengurangi biaya dan waktu yang lebih cepat.
 
 ### Modelling Analysis
 
+#### Cleaning data
 ```{r}
-loan <- read_csv("assets/02-finance/bankloans-copy.csv")%>% 
-  mutate(default = factor(default, levels = c(0,1),
-                          labels = c("No","Yes"))) %>% 
-  rename(debtcred = creddebt)
-glimpse(loan)
+credit <- read_csv("assets/02-finance/credit_record.csv")
+application <- read_csv("assets/02-finance/application_record.csv")
+```
+
+Data Description:
+
+**Credit**
+
+- ID : Client number	
+- MONTHS_BALANCE : Record month	The month of the extracted data is the starting point, backwards, 0 is the current month, -1 is the previous month, and so on
+- STATUS : Status	
+    - 0: 1-29 days past due 
+    - 1: 30-59 days past due 
+    - 2: 60-89 days overdue 
+    - 3: 90-119 days overdue 
+    - 4: 120-149 days overdue 
+    - 5: Overdue or bad debts, write-offs for more than 150 days 
+    - C: paid off that month 
+    - X: No loan for the month
+
+**Application**
+
+- ID	: Client number	
+- CODE_GENDER : Gender	
+- FLAG_OWN_CAR : Is there a car	
+- FLAG_OWN_REALTY ; Is there a property	
+- CNT_CHILDREN : Number of children	
+- AMT_INCOME_TOTAL : Annual income	
+- NAME_INCOME_TYPE	: Income category	
+- NAME_EDUCATION_TYPE :	Education level	
+- NAME_FAMILY_STATUS	: Marital status	
+- NAME_HOUSING_TYPE	: Way of living	
+- DAYS_BIRTH	: Birthday	Count backwards from current day (0), -1 means yesterday
+- DAYS_EMPLOYED	: Start date of employment	Count backwards from current day(0). If positive, it means - - the person currently unemployed.
+- FLAG_MOBIL	: Is there a mobile phone	
+- FLAG_WORK_PHONE	: Is there a work phone	
+- FLAG_PHONE	: Is there a phone	
+- FLAG_EMAIL	: Is there an email	
+- OCCUPATION_TYPE	: Occupation	
+- CNT_FAM_MEMBERS	:Family size
+
+**Check missing values**
+
+Pada data credit tidak terdapat missing value
+```{r}
+colSums(is.na(credit))
 ```
 
 ```{r}
-head(loan)
+colSums(is.na(application))
+```
+
+Pada data application terdapat variabel `OCCUPATION_TYPE` yang memiliki banyak data missing, kita dapat membuang variabel tersebut. Serta kita akan membuang variabel `DAYS_BIRTH` dan `DAYS_EMPLOYED` yang tidak dibutuhkan pada model.
+ 
+```{r}
+application <- application %>% 
+               select(-c(OCCUPATION_TYPE, DAYS_BIRTH, DAYS_EMPLOYED))
+```
+
+**Menyesuaikan tipe data**
+
+Tahap berikutnya adalah menggabunkan data credit dan application serta menyesuaikan tipe data kategorik yang masih terbaca sebagai character.
+```{r}
+data_clean <- credit %>% 
+              left_join(application) %>% 
+              na.omit() %>% 
+              select(-ID) %>% 
+              filter(STATUS != "X") %>% 
+              mutate(STATUS = as.factor(ifelse(STATUS == "C", "good credit", "bad credit"))) %>% 
+              mutate_at(.vars = c("FLAG_MOBIL", "FLAG_WORK_PHONE",
+                                  "FLAG_PHONE", "FLAG_EMAIL"), as.factor) %>% 
+              mutate_if(is.character, as.factor) %>% 
+              data.frame()
+str(data_clean)
+```
+```{r, echo=FALSE}
+data_clean <- data_clean %>% head(100000)
 ```
 
 
-#### Exploratory Data Analysis
+#### Exploratory Data Analysis (EDA)
 
-1. Eksplorasi hubungan target variabel dengan variabel prediktor
+Pada data EDA kita ingin mengetahui bagaimana sebaran data kategorik maupun numerik. 
+```{r}
+data_clean %>% inspect_cat() %>% show_plot()
+```
+Pada visualisasi berikut kita akan mendapatkan informasi apakah terdapat variabel yang tidak memiliki banyak informasi pada data, contohnya adalah variabel `FLAG_MOBIL` dimana keseluruhan data berisikan 1, artinya semua nasabah kita yang melakukan pinjaman memiliki mobil. Data yang tidak memiliki variansi seperti ini tidak diikutsertakan pada model.
+```{r}
+data_clean <- data_clean %>% 
+              select(-c(FLAG_MOBIL,FLAG_EMAIL))
+```
 
 ```{r}
-loan %>% 
-  na.omit() %>% 
-ggplot(aes(x = debtinc, fill = default)) +
-  geom_density(alpha = 0.5, colour = FALSE) +
-  scale_x_continuous(
-    expand = expand_scale(mult = c(0, 0))
-  ) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  scale_fill_manual(values = c("dodgerblue4","darkred")) +
-  labs(
-    title = "Debt to Income Rario distribution",
-    subtitle = "estimated using kernel density function",
-    x = "Debt to Income Ratio",
-    y = "Income",
-    fill = "Default Status"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "top",
-    legend.key.height = unit(12, "pt"),
-    legend.key.width = unit(36, "pt"),
-  )
+data_clean %>% inspect_num() %>% show_plot()
 ```
 
-```{r}
-loan %>% 
-  na.omit() %>% 
-ggplot(aes(x = debtcred, y = income)) +
-  geom_point(color = "darkred") +
-  geom_smooth(method = "loess", se = FALSE, color = "dodgerblue4") +
-  facet_wrap(facets = vars(default), labeller = "label_both") +
-  scale_y_continuous(labels = dollar_format(scale = 1e-3, suffix = "K")) +
-  labs(
-    title = "The relation of credit to debt ratio and income",
-    subtitle = "for each default status",
-    x = "Debt to Credit Ratio",
-    y = "Income"
-  ) +
-  theme_minimal()
-```
+#### Modelling Random Forest
 
-2. Check missing value
-
-```{r}
-loan %>% 
-  is.na() %>% 
-  colSums() %>% 
-  enframe() %>% 
-  arrange(desc(value))
-
-```
-Berikutnya akan digunakan data observasi tanpa adanya data missing value
-
-```{r}
-loan <- loan %>% 
-  na.omit()
-```
-
-#### Modelling
-
-Split data train dan data test dengan proporsi 80:20.
+Split data train dan data test dengan proporsi 80:20. Data train akan digunakan untuk modelling, sedangkan data test akan digunakan untuk evaluasi.
 ```{r}
 set.seed(100)
-intrain_loan <- initial_split(data = loan, prop = 0.8, strata = "default")
-train_loan <- training(intrain_loan)
-test_loan <- testing(intrain_loan)
+index <- initial_split(data = data_clean, prop = 0.8, strata = "STATUS")
+train <- training(index)
+test <- testing(index)
 ```
 
 Cek proporsi dari target variabel
 ```{r}
-prop.table(table(train_loan$default))
+prop.table(table(train$STATUS))
 ```
 
-Untuk membuat data observasi menjadi lebih seimbang, dapat dilakukan upSample dari package caret.
+Bentuk model random forest dengan 3 k-fold dan 2 repetition
 ```{r}
-set.seed(47)
-train_loan_up <- upSample(x = select(train_loan, -default),
-                  y = train_loan$default, 
-                  yname = "default")
+# set.seed(100)
+# 
+# ctrl <- trainControl(method = "repeatedcv",
+#                      number = 3, 
+#                      repeats = 2,
+#                      allowParallel=FALSE)
+# 
+# model_forest <- caret::train(STATUS ~.,
+#                              data = train, 
+#                              method = "rf", 
+#                              trControl = ctrl)
 
-prop.table(table(train_loan_up$default))
-```
+#saveRDS(model_forest, "model_forest.RDS")
 
-Bentuk model random forest dengan 5 k-fold dan 3 repetition
-```{r}
-set.seed(47)
-
-ctrl <- trainControl(method = "repeatedcv",
-                     number = 5, 
-                     repeats = 3,
-                     allowParallel=FALSE)
-
-model_forest <- caret::train(default ~.,
-                             data = train_loan_up, 
-                             method = "rf", 
-                             trControl = ctrl)
+model_forest <- readRDS("assets/02-finance/model_forest.RDS")
 ```
 
 ```{r}
 model_forest
 ```
 
-Setelah dilakukan 3 repetition pada model, repetition pertama memiliki accuracy paling besar dengan jumlah mtry sebanyak 2. Confusion matrix yang diperoleh data observasi yang tidak digunakan sebagai sampel diperoleh sebagai berikut:
-
-```{r}
-model_forest$finalModel
-```
+Setelah dilakukan 3 repetition pada model, repetition kedua memiliki accuracy paling tinggi dengan jumlah mtry sebanyak 14. 
 
 Selanjutnya akan dilakukan prediksi untuk data test dan mencari nilai confusion matrix pada hasil prediksi.
 ```{r}
-test_loan <- test_loan %>% 
-  mutate(pred_forest = predict(model_forest, newdata = test_loan))
-```
-
-```{r}
-confmat_loan_tune <- confusionMatrix(test_loan$pred_forest, 
-                                 test_loan$default,
+pred_rf<- predict(model_forest, newdata = test, type = "prob") %>% 
+          mutate(result = as.factor(ifelse(`bad credit` > 0.45, "bad credit", "good credit")),
+                 actual = ifelse(test$STATUS == 'good credit', 0, 1))
+confmat_rf <- confusionMatrix(pred_rf$result, 
+                                 test$STATUS,
                                  mode = "prec_recall",
-                                 positive = "Yes")
+                                 positive = "bad credit")
 
-eval_rf <- tidy(confmat_loan_tune) %>% 
+eval_rf <- tidy(confmat_rf) %>% 
   mutate(model = "Random Forest") %>% 
   select(model, term, estimate) %>% 
   filter(term %in% c("accuracy", "precision", "recall", "specificity"))
 
 eval_rf
 ```
-Dari hasil confusion matrix dapat diketahui, kemampuan model memprediksi target variabel dapat dikatakan cukup baik. Selanjutnya kita akan mengetahui variable importance pada model yang diperoleh.
+
+
+#### Modelling XGBoost
+
+Tahap selanjutnya kita akan implementasikan data menggunakan model XGBoost, kita perlu menyiapkan data untuk model XGBoost terlebih dahulu
 
 ```{r}
-plot(varImp(model_forest),main = "Variable Importance",)
+data_xgb <- data_clean %>% 
+            mutate(STATUS = ifelse(STATUS == "good credit", 0, 1)) %>% 
+            data.frame()
 ```
 
-Dapat diketahui variabel debtinc, employ, debtcred, othdebt, dan income merupakan 5 variable yang paling berpengaruh dan paling sering digunakan dalam pembuatan pohon.
-
-### Recommendation
 
 ```{r}
-eval_rf
+set.seed(100)
+index <- initial_split(data = data_xgb, prop = 0.8, strata = "STATUS")
+train_xgb <- training(index)
+test_xgb <- testing(index)
 ```
-Model machine learning untuk memprediksi kredit pinjaman customer yang lancar dan tidak lancar memiliki perfomance model yang cukup baik. Nantinya, pegawai bank dapat menggunakan model tersebut dengan mengisikan data pribadi setiap customer, kemudian hasil yang diperoleh dapat di visualisasikan sebagai berikut:
 
 ```{r}
+label_train <- as.numeric(train_xgb$STATUS)
+label_test <- as.numeric(test_xgb$STATUS)
+```
 
-library(lime)
-train_x <- train_loan %>% 
-  select(-c(default))
-test_x <- test_loan %>% 
-  select(-c(default, pred_forest))
+```{r}
+train_matrix <- data.matrix(train_xgb[,-2])
+test_matrix <- data.matrix(test_xgb[,-2])
+# convert data to Dmatrix
+dtrain <- xgb.DMatrix(data = train_matrix, label = label_train)
+dtest <- xgb.DMatrix(data = test_matrix, label = label_test)
+```
 
-explainer <- lime(test_x, model_forest)
-explanation <- lime::explain(test_x[2:3,],
+```{r}
+params <- list(booster = "gbtree",
+               objective = "binary:logistic",
+               eta=0.7, 
+               gamma=10, 
+               max_depth=10, 
+               min_child_weight=3, 
+               subsample=1, 
+               colsample_bytree=0.5)
+```
+
+
+```{r}
+xgbcv <- xgb.cv( params = params, 
+                 data = dtrain,
+                 nrounds = 1000, 
+                 showsd = T, 
+                 nfold = 10,
+                 stratified = T, 
+                 print_every_n = 50, 
+                 early_stopping_rounds = 20, 
+                 maximize = F)
+print(xgbcv)
+```
+
+```{r}
+xgb1 <- xgb.train (params = params, 
+                   data = dtrain, 
+                   nrounds = xgbcv$best_iteration, 
+                   watchlist = list(val=dtest,train=dtrain),
+                   print_every_n = 100, 
+                   early_stoping_rounds = 10, 
+                   maximize = F , 
+                   eval_metric = "error",
+                   verbosity = 0)
+
+xgbpred_prob <-predict(object = xgb1, newdata = dtest)
+xgbpred <- ifelse (xgbpred_prob > 0.45,1,0)
+
+```
+
+```{r}
+confmat_xgb <- confusionMatrix(as.factor(xgbpred), as.factor(label_test), positive = "1")
+confmat_xgb
+```
+```{r}
+confmat_rf <- confusionMatrix(pred_rf$result, 
+                                 test$STATUS,
+                                 mode = "prec_recall",
+                                 positive = "bad credit")
+
+eval_rf <- tidy(confmat_rf) %>% 
+  mutate(model = "Random Forest") %>% 
+  select(model, term, estimate) %>% 
+  filter(term %in% c("accuracy", "precision", "recall", "specificity"))
+
+confmat_xgb <- confusionMatrix(as.factor(xgbpred), as.factor(label_test), positive = "1")
+
+eval_xgb <- tidy(confmat_xgb) %>% 
+  mutate(model = "XGBoost") %>% 
+  select(model, term, estimate) %>% 
+  filter(term %in% c("accuracy", "precision", "recall", "specificity"))
+
+```
+
+Setelah diperoleh perfomance model XGBoost kita akan membandingkan dengan perfomance model random forest.
+```{r}
+eval_result <- rbind(eval_rf, eval_xgb)
+eval_result
+```
+Metrics evaluasi yang kita utamakan adalah recall karena kita ingin meminimalisir mungkin keadaan dimana data actual nasabah tersebut *bad credit* namun terprediksi sebagai *good credit*. Dari hasil evaluasi dapat diketahui model XGBoost memiliki nilai recall lebih tinggi dibandingkan model random forest. 
+
+```{r}
+var_imp <- xgb.importance(model = xgb1,
+                          feature_names = dimnames(dtrain)[[2]])
+xgb.ggplot.importance(var_imp,top_n = 10) + 
+  theme_minimal()+
+  theme(legend.position = "none")
+```
+Grafik di atas menampilkan informasi mengenai 10 variabel yang paling berpengaruh pada model. Annual income dan months balance merupakan dua variabel terpenting pada model ini.
+
+```{r}
+xgb_result <- data.frame(class1 = xgbpred_prob, actual = as.factor(label_test))
+
+auc_xgb <- roc_auc(data = xgb_result, truth = actual,class1) 
+value_roc_xgb <- prediction(predictions = xgbpred_prob,
+                        labels = label_test)
+
+# ROC curve
+plot(performance(value_roc_xgb, "tpr", "fpr"))
+
+```
+
+```{r}
+value_auc_xgb <- performance(value_roc_xgb, measure = "auc")
+value_auc_xgb@y.values
+```
+Nilai AUC yang diperoleh pada model model ini sebesar 0.83 artinya model dapat memprediksi dengan baik kedua target class yaitu `good credit` dan `bad credit`. Harapannya model ini dapat digunakan oleh pihak bank untuk menentukan credit scoring dengan mengisikan data profil nasabah, kemudian hasil yang diperoleh dapat di visualisasikan sebagai berikut:
+
+```{r}
+explainer <- lime(train_matrix %>% as.data.frame(), xgb1)
+explanation <- explain(test_matrix[11:12,] %>% as.data.frame(),
                              explainer, 
-                             labels = c("Yes"),
-                             n_features = 8)
+                             labels = "1",
+                             n_features = 3,
+                             n_permutations = 5000,
+                             dist_fun = "manhattan",
+                             kernel_width = 0.75,
+                             feature_select = "highest_weights")
 
 plot_features(explanation)
+
 ```
 
-Hasil visualisasi tersebut adalah contoh prediksi salah satu customer, customer tersebut terprediksi yes yang memiliki arti customer tersebut berpeluang besar sebagai customer yang lancar melunasi pembayaran. Tentunya ketika hasil prediksi menyatakan customer tersebut berpeluang besar untuk kredit lancar, artinya bank akan memberikan pinjaman kepada customer tersebut. Dari hasil visual tersebut juga ditunjukkan variabel mana yang support dan contradicts terhadap hasil prediksi yang dihasilkan.
+Hasil dari visualisasi tersebut untuk nasabah 1 dan 2 memiliki probability 0.22 dan 0.17 artinya kedua nasabah tersebut akan dikategorikan sebagai `good credit`. Kedua nasabah tersebut memiliki karakteristik yang mirip karena hasil prediksi mereka didukung oleh kepemilikan model dan juga total income.
+
 
 ## Evaluating Customer Financial Complaints
 
@@ -333,7 +460,7 @@ dat_bigrams <- data_clean %>%
   mutate(contribution = n*value) %>% 
   arrange(desc(abs(contribution))) %>% 
   group_by(word1) %>% 
-  slice(seq_len(20)) %>% 
+  dplyr::slice(seq_len(20)) %>% 
   arrange(word1, desc(contribution)) %>% 
   ungroup() 
 ```
@@ -391,7 +518,8 @@ Untuk memperoleh korelasi antar kata dapat menggunakan function `pairwise_cor()`
 words_cors <- text_dat_cor %>% 
   group_by(word) %>% 
   filter(n() > 100) %>%
-  pairwise_cor(word, Issue, sort = T)
+  pairwise_cor(word, Issue, sort = T) 
+
 ```
 
 Korelasi antar kata dapat kita tampilkan secar visual menggunakan package `ggraph`. Pada visualisasi berikut kita hanya ingin menampilkan kata yang memiliki korelasi lebih dari 0.9. Artinya korelasi pada visualisasi berikut memiliki kecenderungan muncul bersamaan saat nasabah mengajukan complain.

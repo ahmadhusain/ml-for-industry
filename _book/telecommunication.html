@@ -156,12 +156,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
 <li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
-<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
@@ -171,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
-<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
@@ -256,34 +255,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Data yang digunakan merupakan data profil pelanggan perusahaan telekomunikasi yang diperoleh dar <a href="https://www.kaggle.com/blastchar/telco-customer-churn">link berikut.</a> Data tersebut berisikan 7043 observasi dengan 21 kolom. Target variabel pada data ini adalah <code>Churn</code>, kita akan memprediksi apakah pelanggan akan berhenti berlangganan produk atau akan tetep berlangganan.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="telecommunication.html#cb1-1" aria-hidden="true"></a>customer &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/01-telco/WA_Fn-UseC_-Telco-Customer-Churn.csv&quot;</span>)</span>
 <span id="cb1-2"><a href="telecommunication.html#cb1-2" aria-hidden="true"></a><span class="kw">head</span>(customer)</span></code></pre></div>
-<pre><code>#&gt;   customerID gender SeniorCitizen Partner Dependents tenure PhoneService
-#&gt; 1 7590-VHVEG Female             0     Yes         No      1           No
-#&gt; 2 5575-GNVDE   Male             0      No         No     34          Yes
-#&gt; 3 3668-QPYBK   Male             0      No         No      2          Yes
-#&gt; 4 7795-CFOCW   Male             0      No         No     45           No
-#&gt; 5 9237-HQITU Female             0      No         No      2          Yes
-#&gt; 6 9305-CDSKC Female             0      No         No      8          Yes
-#&gt;      MultipleLines InternetService OnlineSecurity OnlineBackup DeviceProtection
-#&gt; 1 No phone service             DSL             No          Yes               No
-#&gt; 2               No             DSL            Yes           No              Yes
-#&gt; 3               No             DSL            Yes          Yes               No
-#&gt; 4 No phone service             DSL            Yes           No              Yes
-#&gt; 5               No     Fiber optic             No           No               No
-#&gt; 6              Yes     Fiber optic             No           No              Yes
-#&gt;   TechSupport StreamingTV StreamingMovies       Contract PaperlessBilling
-#&gt; 1          No          No              No Month-to-month              Yes
-#&gt; 2          No          No              No       One year               No
-#&gt; 3          No          No              No Month-to-month              Yes
-#&gt; 4         Yes          No              No       One year               No
-#&gt; 5          No          No              No Month-to-month              Yes
-#&gt; 6          No         Yes             Yes Month-to-month              Yes
-#&gt;               PaymentMethod MonthlyCharges TotalCharges Churn
-#&gt; 1          Electronic check          29.85        29.85    No
-#&gt; 2              Mailed check          56.95      1889.50    No
-#&gt; 3              Mailed check          53.85       108.15   Yes
-#&gt; 4 Bank transfer (automatic)          42.30      1840.75    No
-#&gt; 5          Electronic check          70.70       151.65   Yes
-#&gt; 6          Electronic check          99.65       820.50   Yes</code></pre>
+<pre><code>#&gt;   customerID gender SeniorCitizen Partner Dependents tenure PhoneService    MultipleLines
+#&gt; 1 7590-VHVEG Female             0     Yes         No      1           No No phone service
+#&gt; 2 5575-GNVDE   Male             0      No         No     34          Yes               No
+#&gt; 3 3668-QPYBK   Male             0      No         No      2          Yes               No
+#&gt; 4 7795-CFOCW   Male             0      No         No     45           No No phone service
+#&gt; 5 9237-HQITU Female             0      No         No      2          Yes               No
+#&gt; 6 9305-CDSKC Female             0      No         No      8          Yes              Yes
+#&gt;   InternetService OnlineSecurity OnlineBackup DeviceProtection TechSupport StreamingTV
+#&gt; 1             DSL             No          Yes               No          No          No
+#&gt; 2             DSL            Yes           No              Yes          No          No
+#&gt; 3             DSL            Yes          Yes               No          No          No
+#&gt; 4             DSL            Yes           No              Yes         Yes          No
+#&gt; 5     Fiber optic             No           No               No          No          No
+#&gt; 6     Fiber optic             No           No              Yes          No         Yes
+#&gt;   StreamingMovies       Contract PaperlessBilling             PaymentMethod MonthlyCharges
+#&gt; 1              No Month-to-month              Yes          Electronic check          29.85
+#&gt; 2              No       One year               No              Mailed check          56.95
+#&gt; 3              No Month-to-month              Yes              Mailed check          53.85
+#&gt; 4              No       One year               No Bank transfer (automatic)          42.30
+#&gt; 5              No Month-to-month              Yes          Electronic check          70.70
+#&gt; 6             Yes Month-to-month              Yes          Electronic check          99.65
+#&gt;   TotalCharges Churn
+#&gt; 1        29.85    No
+#&gt; 2      1889.50    No
+#&gt; 3       108.15   Yes
+#&gt; 4      1840.75    No
+#&gt; 5       151.65   Yes
+#&gt; 6       820.50   Yes</code></pre>
 <p>Berikut ini merupakan deskripsi untuk setiap variabel:</p>
 <ul>
 <li><code>CustomerID</code>: Customer ID</li>
@@ -311,21 +310,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">2.1.2.2</span> Exploratory Data</h4>
 <p>Sebelum eksplorasi lebih lanjut, perlu diketahui kelengkapan data yang dimiliki:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="telecommunication.html#cb3-1" aria-hidden="true"></a><span class="kw">colSums</span>(<span class="kw">is.na</span>(customer))</span></code></pre></div>
-<pre><code>#&gt;       customerID           gender    SeniorCitizen          Partner 
-#&gt;                0                0                0                0 
-#&gt;       Dependents           tenure     PhoneService    MultipleLines 
-#&gt;                0                0                0                0 
-#&gt;  InternetService   OnlineSecurity     OnlineBackup DeviceProtection 
-#&gt;                0                0                0                0 
-#&gt;      TechSupport      StreamingTV  StreamingMovies         Contract 
-#&gt;                0                0                0                0 
-#&gt; PaperlessBilling    PaymentMethod   MonthlyCharges     TotalCharges 
-#&gt;                0                0                0               11 
+<pre><code>#&gt;       customerID           gender    SeniorCitizen          Partner       Dependents 
+#&gt;                0                0                0                0                0 
+#&gt;           tenure     PhoneService    MultipleLines  InternetService   OnlineSecurity 
+#&gt;                0                0                0                0                0 
+#&gt;     OnlineBackup DeviceProtection      TechSupport      StreamingTV  StreamingMovies 
+#&gt;                0                0                0                0                0 
+#&gt;         Contract PaperlessBilling    PaymentMethod   MonthlyCharges     TotalCharges 
+#&gt;                0                0                0                0               11 
 #&gt;            Churn 
 #&gt;                0</code></pre>
 <p>Dari 7043 observasi ternyata terdapat <code>missing values</code> sebanyak 11 observasi pada kolom <code>TotalCharges</code>. Karena jumlah <code>missing values</code> cukup sedikit kita dapat membuat observasi tersebut. Selain itu, perlu kita buang variabel yang tidak dibutuhkan pada pemodelan yaitu <code>customerID</code> dan juga sesuaikan tipe data yang seharusnya.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="telecommunication.html#cb5-1" aria-hidden="true"></a>customer &lt;-<span class="st"> </span>customer <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-2"><a href="telecommunication.html#cb5-2" aria-hidden="true"></a><span class="st">            </span><span class="kw">select</span>(<span class="op">-</span>customerID) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-2"><a href="telecommunication.html#cb5-2" aria-hidden="true"></a><span class="st">            </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>customerID) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="telecommunication.html#cb5-3" aria-hidden="true"></a><span class="st">            </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-4"><a href="telecommunication.html#cb5-4" aria-hidden="true"></a><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">SeniorCitizen =</span> <span class="kw">as.factor</span>(SeniorCitizen)) </span></code></pre></div>
 <p>Untuk mengetahui proporsi kelas pada setiap variable kategori, kita dapat menggunakan function <code>inspect_cat</code> dari package <code>inspectdf</code> seperti berikut:</p>

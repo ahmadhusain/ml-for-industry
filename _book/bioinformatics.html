@@ -156,12 +156,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
 <li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
-<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
@@ -171,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
-<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
@@ -254,47 +253,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.1.2</span> Modelling Analysis</h3>
 <div id="import-data" class="section level4" number="6.1.2.1">
 <h4><span class="header-section-number">6.1.2.1</span> Import Data</h4>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="bioinformatics.html#cb241-1" aria-hidden="true"></a>pacman<span class="op">::</span><span class="kw">p_load</span>(<span class="st">&quot;ASMap&quot;</span>,<span class="st">&quot;qtlcharts&quot;</span>,<span class="st">&quot;qtl&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;ggpubr&quot;</span>,<span class="st">&quot;ggdendro&quot;</span>, <span class="st">&quot;dendextend&quot;</span>, <span class="st">&quot;factoextra&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;igraph&quot;</span>)</span></code></pre></div>
-<pre><code>#&gt; package &#39;qtl&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;ASMap&#39; successfully unpacked and MD5 sums checked
-#&gt; 
-#&gt; The downloaded binary packages are in
-#&gt; 	C:\Users\dyahn\AppData\Local\Temp\Rtmp8gfNcq\downloaded_packages
-#&gt; package &#39;qtlcharts&#39; successfully unpacked and MD5 sums checked
-#&gt; 
-#&gt; The downloaded binary packages are in
-#&gt; 	C:\Users\dyahn\AppData\Local\Temp\Rtmp8gfNcq\downloaded_packages
-#&gt; package &#39;ggdendro&#39; successfully unpacked and MD5 sums checked
-#&gt; 
-#&gt; The downloaded binary packages are in
-#&gt; 	C:\Users\dyahn\AppData\Local\Temp\Rtmp8gfNcq\downloaded_packages
-#&gt; package &#39;dendextend&#39; successfully unpacked and MD5 sums checked
-#&gt; 
-#&gt; The downloaded binary packages are in
-#&gt; 	C:\Users\dyahn\AppData\Local\Temp\Rtmp8gfNcq\downloaded_packages
-#&gt; package &#39;ellipse&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;flashClust&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;leaps&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;scatterplot3d&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;FactoMineR&#39; successfully unpacked and MD5 sums checked
-#&gt; package &#39;factoextra&#39; successfully unpacked and MD5 sums checked
-#&gt; 
-#&gt; The downloaded binary packages are in
-#&gt; 	C:\Users\dyahn\AppData\Local\Temp\Rtmp8gfNcq\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="bioinformatics.html#cb243-1" aria-hidden="true"></a>dataset &lt;-<span class="st"> </span><span class="kw">read.cross</span>(</span>
-<span id="cb243-2"><a href="bioinformatics.html#cb243-2" aria-hidden="true"></a>  <span class="dt">format =</span> <span class="st">&quot;csv&quot;</span>, </span>
-<span id="cb243-3"><a href="bioinformatics.html#cb243-3" aria-hidden="true"></a>  <span class="dt">dir =</span> <span class="st">&quot;assets/05-bioinformatics/&quot;</span>,</span>
-<span id="cb243-4"><a href="bioinformatics.html#cb243-4" aria-hidden="true"></a>  <span class="dt">file =</span><span class="st">&quot;data.csv&quot;</span>, </span>
-<span id="cb243-5"><a href="bioinformatics.html#cb243-5" aria-hidden="true"></a>  <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, </span>
-<span id="cb243-6"><a href="bioinformatics.html#cb243-6" aria-hidden="true"></a>  <span class="dt">genotypes =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;h&quot;</span>,<span class="st">&quot;b&quot;</span>),</span>
-<span id="cb243-7"><a href="bioinformatics.html#cb243-7" aria-hidden="true"></a>  <span class="dt">alleles =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>)</span>
-<span id="cb243-8"><a href="bioinformatics.html#cb243-8" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="bioinformatics.html#cb256-1" aria-hidden="true"></a>pacman<span class="op">::</span><span class="kw">p_load</span>(<span class="st">&quot;ASMap&quot;</span>,<span class="st">&quot;qtlcharts&quot;</span>,<span class="st">&quot;qtl&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;ggpubr&quot;</span>,<span class="st">&quot;ggdendro&quot;</span>, <span class="st">&quot;dendextend&quot;</span>, <span class="st">&quot;factoextra&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;igraph&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="bioinformatics.html#cb257-1" aria-hidden="true"></a>dataset &lt;-<span class="st"> </span><span class="kw">read.cross</span>(</span>
+<span id="cb257-2"><a href="bioinformatics.html#cb257-2" aria-hidden="true"></a>  <span class="dt">format =</span> <span class="st">&quot;csv&quot;</span>, </span>
+<span id="cb257-3"><a href="bioinformatics.html#cb257-3" aria-hidden="true"></a>  <span class="dt">dir =</span> <span class="st">&quot;assets/05-bioinformatics/&quot;</span>,</span>
+<span id="cb257-4"><a href="bioinformatics.html#cb257-4" aria-hidden="true"></a>  <span class="dt">file =</span><span class="st">&quot;data.csv&quot;</span>, </span>
+<span id="cb257-5"><a href="bioinformatics.html#cb257-5" aria-hidden="true"></a>  <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, </span>
+<span id="cb257-6"><a href="bioinformatics.html#cb257-6" aria-hidden="true"></a>  <span class="dt">genotypes =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;h&quot;</span>,<span class="st">&quot;b&quot;</span>),</span>
+<span id="cb257-7"><a href="bioinformatics.html#cb257-7" aria-hidden="true"></a>  <span class="dt">alleles =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>)</span>
+<span id="cb257-8"><a href="bioinformatics.html#cb257-8" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>#&gt;  --Read the following data:
 #&gt; 	 296  individuals
 #&gt; 	 26  markers
 #&gt; 	 1  phenotypes
 #&gt;  --Cross type: f2</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="bioinformatics.html#cb245-1" aria-hidden="true"></a><span class="kw">summary</span>(dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="bioinformatics.html#cb259-1" aria-hidden="true"></a><span class="kw">summary</span>(dataset)</span></code></pre></div>
 <pre><code>#&gt;     F2 intercross
 #&gt; 
 #&gt;     No. individuals:    296 
@@ -310,15 +283,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;     Percent genotyped:  100 
 #&gt;     Genotypes (%):      aa:24.0  ab:48.4  bb:27.6  not bb:0.0  not aa:0.0</code></pre>
 <p>Diatas merupakan hasil ringkasan dari data. Populasi yang digunakan hasil persilangan tipe F2 <em>intercross</em> yang menghasilkan individu sebanyak 296 jenis. Data fenotipe menjelaskan tentang skoring ketahanan tanaman cabai terhadap <em>Phytophthora capsici</em>. Interval skornya diantara 0 sampai dengan 5. Tanaman cabai yang memiliki resisten terhadap <em>Phytophthora capsici</em> akan diberi skor 0, sedangkan yang rentan akan diberi skor 5. Sebanyak 100% data fenotipe berhasil terbaca, artinya tidak ada data yang hilang (NA). Pada data ini hanya menggunakan 1 kromosom yang diamati, yaitu kromosom ke-5 dari total 11 kromosom cabai.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="bioinformatics.html#cb247-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset<span class="op">$</span>pheno, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>pheno<span class="op">$</span>Score)) <span class="op">+</span></span>
-<span id="cb247-2"><a href="bioinformatics.html#cb247-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
-<span id="cb247-3"><a href="bioinformatics.html#cb247-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
-<span id="cb247-4"><a href="bioinformatics.html#cb247-4" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Distribusi sebaran skor fenotipe&quot;</span>,</span>
-<span id="cb247-5"><a href="bioinformatics.html#cb247-5" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="st">&quot;Skor ketahanan *Phytophthora capsici*&quot;</span></span>
-<span id="cb247-6"><a href="bioinformatics.html#cb247-6" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb247-7"><a href="bioinformatics.html#cb247-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-152-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="bioinformatics.html#cb248-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(dataset<span class="op">$</span>pheno<span class="op">$</span>Score)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="bioinformatics.html#cb261-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset<span class="op">$</span>pheno, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>pheno<span class="op">$</span>Score)) <span class="op">+</span></span>
+<span id="cb261-2"><a href="bioinformatics.html#cb261-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb261-3"><a href="bioinformatics.html#cb261-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb261-4"><a href="bioinformatics.html#cb261-4" aria-hidden="true"></a>    <span class="dt">title =</span> <span class="st">&quot;Distribusi sebaran skor fenotipe&quot;</span>,</span>
+<span id="cb261-5"><a href="bioinformatics.html#cb261-5" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="st">&quot;Skor ketahanan *Phytophthora capsici*&quot;</span></span>
+<span id="cb261-6"><a href="bioinformatics.html#cb261-6" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb261-7"><a href="bioinformatics.html#cb261-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-163-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="bioinformatics.html#cb262-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(dataset<span class="op">$</span>pheno<span class="op">$</span>Score)</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt; 	Shapiro-Wilk normality test
 #&gt; 
@@ -328,84 +301,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="exploratory-data-analysis" class="section level4" number="6.1.2.2">
 <h4><span class="header-section-number">6.1.2.2</span> Exploratory Data Analysis</h4>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="bioinformatics.html#cb250-1" aria-hidden="true"></a>cg &lt;-<span class="st"> </span><span class="kw">comparegeno</span>(dataset)</span>
-<span id="cb250-2"><a href="bioinformatics.html#cb250-2" aria-hidden="true"></a></span>
-<span id="cb250-3"><a href="bioinformatics.html#cb250-3" aria-hidden="true"></a><span class="co">#dendogram clastering</span></span>
-<span id="cb250-4"><a href="bioinformatics.html#cb250-4" aria-hidden="true"></a>dataclust &lt;-<span class="st"> </span><span class="kw">abs</span>(cg <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb250-5"><a href="bioinformatics.html#cb250-5" aria-hidden="true"></a></span>
-<span id="cb250-6"><a href="bioinformatics.html#cb250-6" aria-hidden="true"></a><span class="co"># Dissimilarity matrix</span></span>
-<span id="cb250-7"><a href="bioinformatics.html#cb250-7" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">scale</span>(dataclust)</span>
-<span id="cb250-8"><a href="bioinformatics.html#cb250-8" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="kw">dist</span>(df, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
-<span id="cb250-9"><a href="bioinformatics.html#cb250-9" aria-hidden="true"></a>hc3 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
-<span id="cb250-10"><a href="bioinformatics.html#cb250-10" aria-hidden="true"></a></span>
-<span id="cb250-11"><a href="bioinformatics.html#cb250-11" aria-hidden="true"></a><span class="co">#phylogenetic tree</span></span>
-<span id="cb250-12"><a href="bioinformatics.html#cb250-12" aria-hidden="true"></a>dend_plot &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(</span>
-<span id="cb250-13"><a href="bioinformatics.html#cb250-13" aria-hidden="true"></a>  hc3, <span class="dt">k =</span> <span class="dv">4</span>, <span class="co"># Cut in four groups</span></span>
-<span id="cb250-14"><a href="bioinformatics.html#cb250-14" aria-hidden="true"></a>  <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="co"># label size</span></span>
-<span id="cb250-15"><a href="bioinformatics.html#cb250-15" aria-hidden="true"></a>  <span class="dt">k_colors =</span> <span class="st">&quot;jco&quot;</span></span>
-<span id="cb250-16"><a href="bioinformatics.html#cb250-16" aria-hidden="true"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="bioinformatics.html#cb251-1" aria-hidden="true"></a><span class="co"># extract the dendrogram data</span></span>
-<span id="cb251-2"><a href="bioinformatics.html#cb251-2" aria-hidden="true"></a>dend_data &lt;-<span class="st"> </span><span class="kw">attr</span>(dend_plot, <span class="st">&quot;dendrogram&quot;</span>)</span>
-<span id="cb251-3"><a href="bioinformatics.html#cb251-3" aria-hidden="true"></a></span>
-<span id="cb251-4"><a href="bioinformatics.html#cb251-4" aria-hidden="true"></a><span class="co"># Cut the dendrogram at height h = 10</span></span>
-<span id="cb251-5"><a href="bioinformatics.html#cb251-5" aria-hidden="true"></a>dend_cuts &lt;-<span class="st"> </span><span class="kw">cut</span>(dend_data, <span class="dt">h =</span> <span class="dv">90</span>)</span>
-<span id="cb251-6"><a href="bioinformatics.html#cb251-6" aria-hidden="true"></a></span>
-<span id="cb251-7"><a href="bioinformatics.html#cb251-7" aria-hidden="true"></a></span>
-<span id="cb251-8"><a href="bioinformatics.html#cb251-8" aria-hidden="true"></a><span class="co"># Plot subtree 3</span></span>
-<span id="cb251-9"><a href="bioinformatics.html#cb251-9" aria-hidden="true"></a><span class="kw">fviz_dend</span>(</span>
-<span id="cb251-10"><a href="bioinformatics.html#cb251-10" aria-hidden="true"></a>  dend_cuts<span class="op">$</span>lower[[<span class="dv">3</span>]], <span class="dt">main =</span> <span class="st">&quot;Subtree 3&quot;</span>,</span>
-<span id="cb251-11"><a href="bioinformatics.html#cb251-11" aria-hidden="true"></a>  <span class="dt">lwd =</span> <span class="fl">1.3</span>, <span class="dt">ggtheme =</span> <span class="kw">theme_bw</span>(), <span class="dt">horiz =</span> <span class="ot">TRUE</span></span>
-<span id="cb251-12"><a href="bioinformatics.html#cb251-12" aria-hidden="true"></a>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-155-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="bioinformatics.html#cb264-1" aria-hidden="true"></a>cg &lt;-<span class="st"> </span><span class="kw">comparegeno</span>(dataset)</span>
+<span id="cb264-2"><a href="bioinformatics.html#cb264-2" aria-hidden="true"></a></span>
+<span id="cb264-3"><a href="bioinformatics.html#cb264-3" aria-hidden="true"></a><span class="co">#dendogram clastering</span></span>
+<span id="cb264-4"><a href="bioinformatics.html#cb264-4" aria-hidden="true"></a>dataclust &lt;-<span class="st"> </span><span class="kw">abs</span>(cg <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb264-5"><a href="bioinformatics.html#cb264-5" aria-hidden="true"></a></span>
+<span id="cb264-6"><a href="bioinformatics.html#cb264-6" aria-hidden="true"></a><span class="co"># Dissimilarity matrix</span></span>
+<span id="cb264-7"><a href="bioinformatics.html#cb264-7" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">scale</span>(dataclust)</span>
+<span id="cb264-8"><a href="bioinformatics.html#cb264-8" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="kw">dist</span>(df, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
+<span id="cb264-9"><a href="bioinformatics.html#cb264-9" aria-hidden="true"></a>hc3 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
+<span id="cb264-10"><a href="bioinformatics.html#cb264-10" aria-hidden="true"></a></span>
+<span id="cb264-11"><a href="bioinformatics.html#cb264-11" aria-hidden="true"></a><span class="co">#phylogenetic tree</span></span>
+<span id="cb264-12"><a href="bioinformatics.html#cb264-12" aria-hidden="true"></a>dend_plot &lt;-<span class="st"> </span><span class="kw">fviz_dend</span>(</span>
+<span id="cb264-13"><a href="bioinformatics.html#cb264-13" aria-hidden="true"></a>  hc3, <span class="dt">k =</span> <span class="dv">4</span>, <span class="co"># Cut in four groups</span></span>
+<span id="cb264-14"><a href="bioinformatics.html#cb264-14" aria-hidden="true"></a>  <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="co"># label size</span></span>
+<span id="cb264-15"><a href="bioinformatics.html#cb264-15" aria-hidden="true"></a>  <span class="dt">k_colors =</span> <span class="st">&quot;jco&quot;</span></span>
+<span id="cb264-16"><a href="bioinformatics.html#cb264-16" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="bioinformatics.html#cb265-1" aria-hidden="true"></a><span class="co"># extract the dendrogram data</span></span>
+<span id="cb265-2"><a href="bioinformatics.html#cb265-2" aria-hidden="true"></a>dend_data &lt;-<span class="st"> </span><span class="kw">attr</span>(dend_plot, <span class="st">&quot;dendrogram&quot;</span>)</span>
+<span id="cb265-3"><a href="bioinformatics.html#cb265-3" aria-hidden="true"></a></span>
+<span id="cb265-4"><a href="bioinformatics.html#cb265-4" aria-hidden="true"></a><span class="co"># Cut the dendrogram at height h = 10</span></span>
+<span id="cb265-5"><a href="bioinformatics.html#cb265-5" aria-hidden="true"></a>dend_cuts &lt;-<span class="st"> </span><span class="kw">cut</span>(dend_data, <span class="dt">h =</span> <span class="dv">90</span>)</span>
+<span id="cb265-6"><a href="bioinformatics.html#cb265-6" aria-hidden="true"></a></span>
+<span id="cb265-7"><a href="bioinformatics.html#cb265-7" aria-hidden="true"></a></span>
+<span id="cb265-8"><a href="bioinformatics.html#cb265-8" aria-hidden="true"></a><span class="co"># Plot subtree 3</span></span>
+<span id="cb265-9"><a href="bioinformatics.html#cb265-9" aria-hidden="true"></a><span class="kw">fviz_dend</span>(</span>
+<span id="cb265-10"><a href="bioinformatics.html#cb265-10" aria-hidden="true"></a>  dend_cuts<span class="op">$</span>lower[[<span class="dv">3</span>]], <span class="dt">main =</span> <span class="st">&quot;Subtree 3&quot;</span>,</span>
+<span id="cb265-11"><a href="bioinformatics.html#cb265-11" aria-hidden="true"></a>  <span class="dt">lwd =</span> <span class="fl">1.3</span>, <span class="dt">ggtheme =</span> <span class="kw">theme_bw</span>(), <span class="dt">horiz =</span> <span class="ot">TRUE</span></span>
+<span id="cb265-12"><a href="bioinformatics.html#cb265-12" aria-hidden="true"></a>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-166-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Berdasarkan hasil clusternig di atas, dapat diketahui individu cabai dengan nomor 173, 185, 202, 247, 251, 291, 14, dan 216 berada pada satu cluster yang sama. Hal ini masuk akal, karena individu tersebut berasal dari tetua yang sama tipenya, sehingga karakteristiknya hampir sama. Jika antar individu tidak memiliki kemiripan genotipe, maka akan terpisah jauh atau berada pada branch yang berbeda.</p>
 </div>
 <div id="qtl-analysis" class="section level4" number="6.1.2.3">
 <h4><span class="header-section-number">6.1.2.3</span> QTL Analysis</h4>
 <p>Interval Mapping atau pemetaan interval menjadi pendekatan yang populer pada analisis QTL. Dalam interval mapping, masing-masing penanda sekuen akan dihitung nilai <em>Logarithm of the Odds</em> (LOD). Mudahnya, skor LOD adalah nilai statistik yang digunakan pada data genetika untuk mengukur apakah 2 gen atau lebih yang sedang diamati cenderung terletak berdekatan satu sama lain atau tidak. Skor LOD 3 atau lebih secara umum dapat dipahami bahwa 2 gen tersebut terletak berdekatan pada kromosom.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="bioinformatics.html#cb252-1" aria-hidden="true"></a><span class="co"># Marker regression</span></span>
-<span id="cb252-2"><a href="bioinformatics.html#cb252-2" aria-hidden="true"></a></span>
-<span id="cb252-3"><a href="bioinformatics.html#cb252-3" aria-hidden="true"></a>dataset_rf &lt;-<span class="st"> </span><span class="kw">est.rf</span>(dataset, <span class="dt">maxit =</span> <span class="dv">200</span>, <span class="dt">tol =</span> <span class="fl">1e-8</span>)</span>
-<span id="cb252-4"><a href="bioinformatics.html#cb252-4" aria-hidden="true"></a>out.mr &lt;-<span class="st"> </span><span class="kw">scanone</span>(dataset_rf, <span class="dt">method =</span> <span class="st">&quot;mr&quot;</span>)</span>
-<span id="cb252-5"><a href="bioinformatics.html#cb252-5" aria-hidden="true"></a></span>
-<span id="cb252-6"><a href="bioinformatics.html#cb252-6" aria-hidden="true"></a><span class="co"># Harley-knott regression</span></span>
-<span id="cb252-7"><a href="bioinformatics.html#cb252-7" aria-hidden="true"></a>datalink_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">calc.genoprob</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>, <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>)</span>
-<span id="cb252-8"><a href="bioinformatics.html#cb252-8" aria-hidden="true"></a></span>
-<span id="cb252-9"><a href="bioinformatics.html#cb252-9" aria-hidden="true"></a>out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">1</span>, <span class="dt">method=</span><span class="st">&quot;hk&quot;</span>)</span>
-<span id="cb252-10"><a href="bioinformatics.html#cb252-10" aria-hidden="true"></a></span>
-<span id="cb252-11"><a href="bioinformatics.html#cb252-11" aria-hidden="true"></a></span>
-<span id="cb252-12"><a href="bioinformatics.html#cb252-12" aria-hidden="true"></a><span class="co"># Multiple Imputation</span></span>
-<span id="cb252-13"><a href="bioinformatics.html#cb252-13" aria-hidden="true"></a></span>
-<span id="cb252-14"><a href="bioinformatics.html#cb252-14" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1997</span>)</span>
-<span id="cb252-15"><a href="bioinformatics.html#cb252-15" aria-hidden="true"></a>datalink_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>)</span>
-<span id="cb252-16"><a href="bioinformatics.html#cb252-16" aria-hidden="true"></a>out.imp &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">2</span>, <span class="dt">method=</span><span class="st">&quot;imp&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="bioinformatics.html#cb253-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb253-2"><a href="bioinformatics.html#cb253-2" aria-hidden="true"></a><span class="kw">plot</span>(out.imp, out.hk, out.mr, <span class="dt">ylab=</span><span class="st">&quot;LOD Score&quot;</span>,</span>
-<span id="cb253-3"><a href="bioinformatics.html#cb253-3" aria-hidden="true"></a> <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
-<span id="cb253-4"><a href="bioinformatics.html#cb253-4" aria-hidden="true"></a> <span class="dt">main =</span> <span class="st">&quot;Perbandingan metode IMP, HK, EHK&quot;</span>,</span>
-<span id="cb253-5"><a href="bioinformatics.html#cb253-5" aria-hidden="true"></a> <span class="dt">lwd =</span> <span class="fl">2.5</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
-<span id="cb253-6"><a href="bioinformatics.html#cb253-6" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Multiple Imputation&quot;</span>,</span>
-<span id="cb253-7"><a href="bioinformatics.html#cb253-7" aria-hidden="true"></a> <span class="st">&quot;Harley-Knott Regression&quot;</span>,<span class="st">&quot;Extented</span></span>
-<span id="cb253-8"><a href="bioinformatics.html#cb253-8" aria-hidden="true"></a><span class="st">HK&quot;</span>),</span>
-<span id="cb253-9"><a href="bioinformatics.html#cb253-9" aria-hidden="true"></a> <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">cex=</span><span class="fl">0.7</span>, lwd</span>
-<span id="cb253-10"><a href="bioinformatics.html#cb253-10" aria-hidden="true"></a>=<span class="st"> </span><span class="dv">2</span>,</span>
-<span id="cb253-11"><a href="bioinformatics.html#cb253-11" aria-hidden="true"></a> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-157-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="bioinformatics.html#cb266-1" aria-hidden="true"></a><span class="co"># Marker regression</span></span>
+<span id="cb266-2"><a href="bioinformatics.html#cb266-2" aria-hidden="true"></a></span>
+<span id="cb266-3"><a href="bioinformatics.html#cb266-3" aria-hidden="true"></a>dataset_rf &lt;-<span class="st"> </span><span class="kw">est.rf</span>(dataset, <span class="dt">maxit =</span> <span class="dv">200</span>, <span class="dt">tol =</span> <span class="fl">1e-8</span>)</span>
+<span id="cb266-4"><a href="bioinformatics.html#cb266-4" aria-hidden="true"></a>out.mr &lt;-<span class="st"> </span><span class="kw">scanone</span>(dataset_rf, <span class="dt">method =</span> <span class="st">&quot;mr&quot;</span>)</span>
+<span id="cb266-5"><a href="bioinformatics.html#cb266-5" aria-hidden="true"></a></span>
+<span id="cb266-6"><a href="bioinformatics.html#cb266-6" aria-hidden="true"></a><span class="co"># Harley-knott regression</span></span>
+<span id="cb266-7"><a href="bioinformatics.html#cb266-7" aria-hidden="true"></a>datalink_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">calc.genoprob</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>, <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>)</span>
+<span id="cb266-8"><a href="bioinformatics.html#cb266-8" aria-hidden="true"></a></span>
+<span id="cb266-9"><a href="bioinformatics.html#cb266-9" aria-hidden="true"></a>out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">1</span>, <span class="dt">method=</span><span class="st">&quot;hk&quot;</span>)</span>
+<span id="cb266-10"><a href="bioinformatics.html#cb266-10" aria-hidden="true"></a></span>
+<span id="cb266-11"><a href="bioinformatics.html#cb266-11" aria-hidden="true"></a></span>
+<span id="cb266-12"><a href="bioinformatics.html#cb266-12" aria-hidden="true"></a><span class="co"># Multiple Imputation</span></span>
+<span id="cb266-13"><a href="bioinformatics.html#cb266-13" aria-hidden="true"></a></span>
+<span id="cb266-14"><a href="bioinformatics.html#cb266-14" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1997</span>)</span>
+<span id="cb266-15"><a href="bioinformatics.html#cb266-15" aria-hidden="true"></a>datalink_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(dataset_rf, <span class="dt">step=</span><span class="dv">1</span>, <span class="dt">error.prob=</span><span class="fl">0.001</span>)</span>
+<span id="cb266-16"><a href="bioinformatics.html#cb266-16" aria-hidden="true"></a>out.imp &lt;-<span class="st"> </span><span class="kw">scanone</span>(datalink_<span class="dv">2</span>, <span class="dt">method=</span><span class="st">&quot;imp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="bioinformatics.html#cb267-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb267-2"><a href="bioinformatics.html#cb267-2" aria-hidden="true"></a><span class="kw">plot</span>(out.imp, out.hk, out.mr, <span class="dt">ylab=</span><span class="st">&quot;LOD Score&quot;</span>,</span>
+<span id="cb267-3"><a href="bioinformatics.html#cb267-3" aria-hidden="true"></a> <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb267-4"><a href="bioinformatics.html#cb267-4" aria-hidden="true"></a> <span class="dt">main =</span> <span class="st">&quot;Perbandingan metode IMP, HK, EHK&quot;</span>,</span>
+<span id="cb267-5"><a href="bioinformatics.html#cb267-5" aria-hidden="true"></a> <span class="dt">lwd =</span> <span class="fl">2.5</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb267-6"><a href="bioinformatics.html#cb267-6" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Multiple Imputation&quot;</span>,</span>
+<span id="cb267-7"><a href="bioinformatics.html#cb267-7" aria-hidden="true"></a> <span class="st">&quot;Harley-Knott Regression&quot;</span>,<span class="st">&quot;Extented</span></span>
+<span id="cb267-8"><a href="bioinformatics.html#cb267-8" aria-hidden="true"></a><span class="st">HK&quot;</span>),</span>
+<span id="cb267-9"><a href="bioinformatics.html#cb267-9" aria-hidden="true"></a> <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">cex=</span><span class="fl">0.7</span>, lwd</span>
+<span id="cb267-10"><a href="bioinformatics.html#cb267-10" aria-hidden="true"></a>=<span class="st"> </span><span class="dv">2</span>,</span>
+<span id="cb267-11"><a href="bioinformatics.html#cb267-11" aria-hidden="true"></a> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-168-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Pemilihan motode terbaik berdasarkan skor <em>panelized LOD</em> yang tertinggi. Hasilnya, metode Imputation memperoleh LOD yang tertinggi yaitu 11.53. Selanjutnya, mencari formula regresi menggunakan metode imputation:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="bioinformatics.html#cb254-1" aria-hidden="true"></a>dataqtl.step0 &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(</span>
-<span id="cb254-2"><a href="bioinformatics.html#cb254-2" aria-hidden="true"></a>  <span class="dt">cross =</span> dataset_rf, <span class="dt">step =</span> <span class="dv">0</span>, <span class="dt">error.prob =</span> <span class="fl">0.001</span>,</span>
-<span id="cb254-3"><a href="bioinformatics.html#cb254-3" aria-hidden="true"></a>  <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>, <span class="dt">n.draws =</span> <span class="dv">296</span></span>
-<span id="cb254-4"><a href="bioinformatics.html#cb254-4" aria-hidden="true"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="bioinformatics.html#cb255-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb255-2"><a href="bioinformatics.html#cb255-2" aria-hidden="true"></a>outsw1 &lt;-<span class="st"> </span><span class="kw">stepwiseqtl</span>(dataqtl.step0, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">method =</span> <span class="st">&quot;imp&quot;</span>)</span>
-<span id="cb255-3"><a href="bioinformatics.html#cb255-3" aria-hidden="true"></a>outsw1</span></code></pre></div>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="bioinformatics.html#cb256-1" aria-hidden="true"></a>outsw1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;assets/05-bioinformatics/outsw1.RDS&quot;</span>)</span>
-<span id="cb256-2"><a href="bioinformatics.html#cb256-2" aria-hidden="true"></a>chr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
-<span id="cb256-3"><a href="bioinformatics.html#cb256-3" aria-hidden="true"></a>pos &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">117.34</span>, <span class="fl">159.31</span>, <span class="fl">256.48</span>)</span>
-<span id="cb256-4"><a href="bioinformatics.html#cb256-4" aria-hidden="true"></a>qtl &lt;-<span class="st"> </span><span class="kw">makeqtl</span>(dataqtl.step0, chr, pos)</span>
-<span id="cb256-5"><a href="bioinformatics.html#cb256-5" aria-hidden="true"></a>my.formula &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>Q1 <span class="op">+</span><span class="st"> </span>Q2 <span class="op">+</span><span class="st"> </span>Q3 <span class="op">+</span><span class="st"> </span>Q1<span class="op">:</span>Q2</span>
-<span id="cb256-6"><a href="bioinformatics.html#cb256-6" aria-hidden="true"></a>out.fitqtl &lt;-<span class="st"> </span><span class="kw">fitqtl</span>(dataqtl.step0, <span class="dt">qtl=</span>qtl, <span class="dt">formula=</span>my.formula,</span>
-<span id="cb256-7"><a href="bioinformatics.html#cb256-7" aria-hidden="true"></a><span class="dt">get.ests =</span> F)</span>
-<span id="cb256-8"><a href="bioinformatics.html#cb256-8" aria-hidden="true"></a><span class="kw">summary</span>(out.fitqtl)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="bioinformatics.html#cb268-1" aria-hidden="true"></a>dataqtl.step0 &lt;-<span class="st"> </span><span class="kw">sim.geno</span>(</span>
+<span id="cb268-2"><a href="bioinformatics.html#cb268-2" aria-hidden="true"></a>  <span class="dt">cross =</span> dataset_rf, <span class="dt">step =</span> <span class="dv">0</span>, <span class="dt">error.prob =</span> <span class="fl">0.001</span>,</span>
+<span id="cb268-3"><a href="bioinformatics.html#cb268-3" aria-hidden="true"></a>  <span class="dt">map.function =</span> <span class="st">&quot;haldane&quot;</span>, <span class="dt">n.draws =</span> <span class="dv">296</span></span>
+<span id="cb268-4"><a href="bioinformatics.html#cb268-4" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="bioinformatics.html#cb269-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb269-2"><a href="bioinformatics.html#cb269-2" aria-hidden="true"></a>outsw1 &lt;-<span class="st"> </span><span class="kw">stepwiseqtl</span>(dataqtl.step0, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">method =</span> <span class="st">&quot;imp&quot;</span>)</span>
+<span id="cb269-3"><a href="bioinformatics.html#cb269-3" aria-hidden="true"></a>outsw1</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="bioinformatics.html#cb270-1" aria-hidden="true"></a>outsw1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;assets/05-bioinformatics/outsw1.RDS&quot;</span>)</span>
+<span id="cb270-2"><a href="bioinformatics.html#cb270-2" aria-hidden="true"></a>chr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb270-3"><a href="bioinformatics.html#cb270-3" aria-hidden="true"></a>pos &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">117.34</span>, <span class="fl">159.31</span>, <span class="fl">256.48</span>)</span>
+<span id="cb270-4"><a href="bioinformatics.html#cb270-4" aria-hidden="true"></a>qtl &lt;-<span class="st"> </span><span class="kw">makeqtl</span>(dataqtl.step0, chr, pos)</span>
+<span id="cb270-5"><a href="bioinformatics.html#cb270-5" aria-hidden="true"></a>my.formula &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>Q1 <span class="op">+</span><span class="st"> </span>Q2 <span class="op">+</span><span class="st"> </span>Q3 <span class="op">+</span><span class="st"> </span>Q1<span class="op">:</span>Q2</span>
+<span id="cb270-6"><a href="bioinformatics.html#cb270-6" aria-hidden="true"></a>out.fitqtl &lt;-<span class="st"> </span><span class="kw">fitqtl</span>(dataqtl.step0, <span class="dt">qtl=</span>qtl, <span class="dt">formula=</span>my.formula,</span>
+<span id="cb270-7"><a href="bioinformatics.html#cb270-7" aria-hidden="true"></a><span class="dt">get.ests =</span> F)</span>
+<span id="cb270-8"><a href="bioinformatics.html#cb270-8" aria-hidden="true"></a><span class="kw">summary</span>(out.fitqtl)</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt; 		fitqtl summary
 #&gt; 
@@ -425,16 +398,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 
 #&gt; Drop one QTL at a time ANOVA table: 
 #&gt; ----------------------------------  
-#&gt;                 df Type III SS    LOD   %var F value Pvalue(Chi2)
-#&gt; 5@117.3          6      207.13 15.150 18.068  12.625        0.000
-#&gt; 5@159.3          6      162.96 12.205 14.215   9.933        0.000
-#&gt; 5@256.5          2       31.26  2.528  2.726   5.715        0.003
-#&gt; 5@117.3:5@159.3  4      151.64 11.428 13.227  13.864        0.000
-#&gt;                        Pvalue(F)    
-#&gt; 5@117.3         0.00000000000125 ***
-#&gt; 5@159.3         0.00000000058772 ***
-#&gt; 5@256.5                  0.00368 ** 
-#&gt; 5@117.3:5@159.3 0.00000000024024 ***
+#&gt;                 df Type III SS    LOD   %var F value Pvalue(Chi2)        Pvalue(F)    
+#&gt; 5@117.3          6      207.13 15.150 18.068  12.625        0.000 0.00000000000125 ***
+#&gt; 5@159.3          6      162.96 12.205 14.215   9.933        0.000 0.00000000058772 ***
+#&gt; 5@256.5          2       31.26  2.528  2.726   5.715        0.003          0.00368 ** 
+#&gt; 5@117.3:5@159.3  4      151.64 11.428 13.227  13.864        0.000 0.00000000024024 ***
 #&gt; ---
 #&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Diperoleh formula skor ketahanan terhadap <em>phytophthora capsici</em> sebagai berikut:</p>
@@ -445,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Qi = Marka QTL ke-i</li>
 </ul>
 <p>Jika hasil summary model diatas diringkas kedalam bentuk tabel, maka informasinya seperti berikut:</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="bioinformatics.html#cb258-1" aria-hidden="true"></a><span class="kw">tibble</span>(</span>
-<span id="cb258-2"><a href="bioinformatics.html#cb258-2" aria-hidden="true"></a>  <span class="dt">Variabel =</span> <span class="kw">c</span>(<span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;Q2&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;Q1:Q2&quot;</span>),</span>
-<span id="cb258-3"><a href="bioinformatics.html#cb258-3" aria-hidden="true"></a>  <span class="st">`</span><span class="dt">Kode Marka</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PMMCB81&quot;</span>, <span class="st">&quot;PMMCB34&quot;</span>, <span class="st">&quot;MCA32&quot;</span>, <span class="st">&quot;PMMCB81 : PMMCB34&quot;</span>),</span>
-<span id="cb258-4"><a href="bioinformatics.html#cb258-4" aria-hidden="true"></a>  <span class="st">`</span><span class="dt">% Var</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">18.25</span>, <span class="fl">13.36</span>, <span class="fl">2.79</span>, <span class="fl">12.62</span>)</span>
-<span id="cb258-5"><a href="bioinformatics.html#cb258-5" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="bioinformatics.html#cb272-1" aria-hidden="true"></a><span class="kw">tibble</span>(</span>
+<span id="cb272-2"><a href="bioinformatics.html#cb272-2" aria-hidden="true"></a>  <span class="dt">Variabel =</span> <span class="kw">c</span>(<span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;Q2&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;Q1:Q2&quot;</span>),</span>
+<span id="cb272-3"><a href="bioinformatics.html#cb272-3" aria-hidden="true"></a>  <span class="st">`</span><span class="dt">Kode Marka</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PMMCB81&quot;</span>, <span class="st">&quot;PMMCB34&quot;</span>, <span class="st">&quot;MCA32&quot;</span>, <span class="st">&quot;PMMCB81 : PMMCB34&quot;</span>),</span>
+<span id="cb272-4"><a href="bioinformatics.html#cb272-4" aria-hidden="true"></a>  <span class="st">`</span><span class="dt">% Var</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="fl">18.25</span>, <span class="fl">13.36</span>, <span class="fl">2.79</span>, <span class="fl">12.62</span>)</span>
+<span id="cb272-5"><a href="bioinformatics.html#cb272-5" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>#&gt; [38;5;246m# A tibble: 4 x 3[39m
 #&gt;   Variabel `Kode Marka`      `% Var`
 #&gt;   [3m[38;5;246m&lt;chr&gt;[39m[23m    [3m[38;5;246m&lt;chr&gt;[39m[23m               [3m[38;5;246m&lt;dbl&gt;[39m[23m
@@ -459,17 +427,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [38;5;250m4[39m Q1:Q2    PMMCB81 : PMMCB34   12.6</code></pre>
 <p>Kolom pertama dan kedua menjelaskan tentang simbol model QTL beserta nama markanya. Kolom persentase variansi (%var) adalah estimasi dari variansi fenotipe yang dijelaskan oleh marka PMMCB81, PMMCB34, MCA32, dan interaksi marka PMMCB81:PMMCB34. Total %var sebesar 46,3%. Mempunyai makna bahwa kemampuan seluruh marka dalam model untuk menjelaskan skor variansi fenotipe ketahanan tanaman cabai terhadap bakteri <em>phytophthora capsici</em> adalah sebesar 46,3%, sedangkan sisanya dijelaskan oleh marka lain diluar penelitian.</p>
 <p>Visualisasi peta genetik dengan model QTL yang signifikan dan hasi skor LOD metode multiple imputation disajikan pada gambar dibawah ini.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="bioinformatics.html#cb260-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb260-2"><a href="bioinformatics.html#cb260-2" aria-hidden="true"></a><span class="kw">plot</span>(outsw1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">justdots =</span> F, <span class="dt">show.marker.names =</span> F)</span>
-<span id="cb260-3"><a href="bioinformatics.html#cb260-3" aria-hidden="true"></a><span class="kw">plot</span>(out.imp<span class="op">$</span>lod, out.imp<span class="op">$</span>pos, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;LOD&quot;</span>,</span>
-<span id="cb260-4"><a href="bioinformatics.html#cb260-4" aria-hidden="true"></a> <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">315</span>, <span class="dv">0</span>),<span class="dt">las =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Map Position (cM)&quot;</span>,</span>
-<span id="cb260-5"><a href="bioinformatics.html#cb260-5" aria-hidden="true"></a> <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>,</span>
-<span id="cb260-6"><a href="bioinformatics.html#cb260-6" aria-hidden="true"></a> <span class="dt">main =</span> <span class="st">&quot;Interval Mapping&quot;</span>)</span>
-<span id="cb260-7"><a href="bioinformatics.html#cb260-7" aria-hidden="true"></a><span class="co"># abline(v=tresh[4], lty = &quot;dotted&quot;, lwd=3, col=&quot;darkgrey&quot;)</span></span>
-<span id="cb260-8"><a href="bioinformatics.html#cb260-8" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;Multiple Imputation&quot;</span>,</span>
-<span id="cb260-9"><a href="bioinformatics.html#cb260-9" aria-hidden="true"></a> <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb260-10"><a href="bioinformatics.html#cb260-10" aria-hidden="true"></a> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-162-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="bioinformatics.html#cb274-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb274-2"><a href="bioinformatics.html#cb274-2" aria-hidden="true"></a><span class="kw">plot</span>(outsw1, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">justdots =</span> F, <span class="dt">show.marker.names =</span> F)</span>
+<span id="cb274-3"><a href="bioinformatics.html#cb274-3" aria-hidden="true"></a><span class="kw">plot</span>(out.imp<span class="op">$</span>lod, out.imp<span class="op">$</span>pos, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;LOD&quot;</span>,</span>
+<span id="cb274-4"><a href="bioinformatics.html#cb274-4" aria-hidden="true"></a> <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">315</span>, <span class="dv">0</span>),<span class="dt">las =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Map Position (cM)&quot;</span>,</span>
+<span id="cb274-5"><a href="bioinformatics.html#cb274-5" aria-hidden="true"></a> <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>,</span>
+<span id="cb274-6"><a href="bioinformatics.html#cb274-6" aria-hidden="true"></a> <span class="dt">main =</span> <span class="st">&quot;Interval Mapping&quot;</span>)</span>
+<span id="cb274-7"><a href="bioinformatics.html#cb274-7" aria-hidden="true"></a><span class="co"># abline(v=tresh[4], lty = &quot;dotted&quot;, lwd=3, col=&quot;darkgrey&quot;)</span></span>
+<span id="cb274-8"><a href="bioinformatics.html#cb274-8" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;Multiple Imputation&quot;</span>,</span>
+<span id="cb274-9"><a href="bioinformatics.html#cb274-9" aria-hidden="true"></a> <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.7</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb274-10"><a href="bioinformatics.html#cb274-10" aria-hidden="true"></a> <span class="dt">title =</span> <span class="st">&quot;Metode&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-173-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="conclusion" class="section level3" number="6.1.3">

@@ -156,12 +156,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>3.1.1</b> Background</a></li>
 <li class="chapter" data-level="3.1.2" data-path="telecommunication.html"><a href="telecommunication.html#modelling-analysis"><i class="fa fa-check"></i><b>3.1.2</b> Modelling Analysis</a></li>
-<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#recommendation"><i class="fa fa-check"></i><b>3.1.3</b> Recommendation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#evaluating-customer-financial-complaints"><i class="fa fa-check"></i><b>3.2</b> Evaluating Customer Financial Complaints</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#background-1"><i class="fa fa-check"></i><b>3.2.1</b> Background</a></li>
-<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.2.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#comparing-sentiment-dictionaries"><i class="fa fa-check"></i><b>3.2.3</b> Comparing Sentiment Dictionaries</a></li>
 <li class="chapter" data-level="3.2.4" data-path="finance.html"><a href="finance.html#correlation-pairs"><i class="fa fa-check"></i><b>3.2.4</b> Correlation Pairs</a></li>
 </ul></li>
@@ -171,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="retail.html"><a href="retail.html#e-commerce-clothing-reviews"><i class="fa fa-check"></i><b>4.1</b> E-Commerce Clothing Reviews</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="telecommunication.html"><a href="telecommunication.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
-<li class="chapter" data-level="4.1.2" data-path="retail.html"><a href="retail.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#cleaning-data"><i class="fa fa-check"></i><b>4.1.2</b> Cleaning Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="telecommunication.html"><a href="telecommunication.html#modelling"><i class="fa fa-check"></i><b>4.1.3</b> Modelling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="retail.html"><a href="retail.html#visualize-data-text"><i class="fa fa-check"></i><b>4.1.4</b> Visualize Data Text</a></li>
 </ul></li>
@@ -251,8 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Perbedaan utama saat berbelanja secara online atau offline adalah
 saat akan berbelanja secara online, calon customer tidak dapat memeriksa barang yang akan dibeli secara langsung dan biasanya dibantuk oleh gambar atau deskripsi yang diberikan oleh penjual.
 Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk meminimalisir dampak negatif yang didapat. Untuk membantu customer dalam menentukan product yang akan dibeli, mayoritas e-commerce sekarang ini menyediakan fitur online customer review, dimana online customer review ini dijadikan sebagai salah satu media customer mendapatkan informasi tentang produk dari customer yang telah membeli produk tersebut. Meningkatnya e-commerce di Indonesia, kebutuhan analisa mengenai online customer review dirasa perlu dilakukan untuk mendukung agar customer dapat memiliki pengalaman belanja online yang lebih baik daripada belanja offline. Salah satu implementasi data review customer tersebut dapat dimanfaatkan untuk membuat model yang dapat memprediksi apakah product tersebut direkomendasikan atau tidak direkomendasikan. Harapannya setelah perusahaan dapat menilai product mana yang direkomendasikan dan yang tidak direkomendasikan, dapat membantu perusahaan dalam pertimbangan penentuan top seller. Untuk seller yang memiliki banyak product yang direkomendasikan, dapat dijadikan sebagai top seller.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="retail.html#cb69-1" aria-hidden="true"></a>reviews &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/03-retail/Womens Clothing E-Commerce Reviews.csv&quot;</span>)</span>
-<span id="cb69-2"><a href="retail.html#cb69-2" aria-hidden="true"></a><span class="kw">head</span>(reviews)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="retail.html#cb84-1" aria-hidden="true"></a>reviews &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;assets/03-retail/Womens Clothing E-Commerce Reviews.csv&quot;</span>)</span>
+<span id="cb84-2"><a href="retail.html#cb84-2" aria-hidden="true"></a><span class="kw">head</span>(reviews)</span></code></pre></div>
 <pre><code>#&gt;   X Clothing.ID Age                   Title
 #&gt; 1 0         767  33                        
 #&gt; 2 1        1080  34                        
@@ -267,23 +266,16 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 #&gt; 4                                                                                                                                                                                                                                                                                                                                                                                         I love, love, love this jumpsuit. it&#39;s fun, flirty, and fabulous! every time i wear it, i get nothing but great compliments!
 #&gt; 5                                                                                                                                                                                                                                                                                                                     This shirt is very flattering to all due to the adjustable front tie. it is the perfect length to wear with leggings and it is sleeveless so it pairs well with any cardigan. love this shirt!!!
 #&gt; 6             I love tracy reese dresses, but this one is not for the very petite. i am just under 5 feet tall and usually wear a 0p in this brand. this dress was very pretty out of the package but its a lot of dress. the skirt is long and very full so it overwhelmed my small frame. not a stranger to alterations, shortening and narrowing the skirt would take away from the embellishment of the garment. i love the color and the idea of the style but it just did not work on me. i returned this dress.
-#&gt;   Rating Recommended.IND Positive.Feedback.Count  Division.Name Department.Name
-#&gt; 1      4               1                       0      Initmates        Intimate
-#&gt; 2      5               1                       4        General         Dresses
-#&gt; 3      3               0                       0        General         Dresses
-#&gt; 4      5               1                       0 General Petite         Bottoms
-#&gt; 5      5               1                       6        General            Tops
-#&gt; 6      2               0                       4        General         Dresses
-#&gt;   Class.Name
-#&gt; 1  Intimates
-#&gt; 2    Dresses
-#&gt; 3    Dresses
-#&gt; 4      Pants
-#&gt; 5    Blouses
-#&gt; 6    Dresses</code></pre>
+#&gt;   Rating Recommended.IND Positive.Feedback.Count  Division.Name Department.Name Class.Name
+#&gt; 1      4               1                       0      Initmates        Intimate  Intimates
+#&gt; 2      5               1                       4        General         Dresses    Dresses
+#&gt; 3      3               0                       0        General         Dresses    Dresses
+#&gt; 4      5               1                       0 General Petite         Bottoms      Pants
+#&gt; 5      5               1                       6        General            Tops    Blouses
+#&gt; 6      2               0                       4        General         Dresses    Dresses</code></pre>
 <p>Data yang digunakan merupakan data <a href="https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews">women e-commerce clothing reviews</a>. Terdapat dua variabel yang menjadi fokus analisis ini yaitu <code>Review.Text</code> dan <code>Recommended.IND</code>. Variabel <code>Review.Text</code> merupakan review yang diberikan oleh customer terhadap product dari berbagai e-commerce, sedangkan <code>Recommended.IND</code> merupakan penilaian rekomendasi dari customer, <code>1</code> artinya product tersebut <code>recommended</code> dan <code>0</code> artinya product tersebut <code>not recommended</code>.</p>
 <p>Sebelum masuk cleaning data, kita ingin mengetahui proporsi dari target variabel:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="retail.html#cb71-1" aria-hidden="true"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(reviews<span class="op">$</span>Recommended.IND))</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="retail.html#cb86-1" aria-hidden="true"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(reviews<span class="op">$</span>Recommended.IND))</span></code></pre></div>
 <pre><code>#&gt; 
 #&gt;         0         1 
 #&gt; 0.1776377 0.8223623</code></pre>
@@ -291,8 +283,8 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 <div id="cleaning-data" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Cleaning Data</h3>
 <p>Untuk mengolah data text, kita perlu mengubah data teks dari vector menjadi corpus dengan function <code>Vcorpus()</code>.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="retail.html#cb73-1" aria-hidden="true"></a>reviews_corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(reviews<span class="op">$</span>Review.Text))</span>
-<span id="cb73-2"><a href="retail.html#cb73-2" aria-hidden="true"></a>reviews_corpus</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="retail.html#cb88-1" aria-hidden="true"></a>reviews_corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(reviews<span class="op">$</span>Review.Text))</span>
+<span id="cb88-2"><a href="retail.html#cb88-2" aria-hidden="true"></a>reviews_corpus</span></code></pre></div>
 <pre><code>#&gt; &lt;&lt;VCorpus&gt;&gt;
 #&gt; Metadata:  corpus specific: 0, document level (indexed): 0
 #&gt; Content:  documents: 23486</code></pre>
@@ -304,33 +296,33 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 <li><code>stopwords</code> digunakan untuk menghilangkan kata-kata umum (am,and,or,if).</li>
 <li><code>stripWhitespace</code> digunakan untuk menghapus karakter spasi yang berlebihan.</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="retail.html#cb75-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>reviews_corpus <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb75-2"><a href="retail.html#cb75-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(tolower)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb75-3"><a href="retail.html#cb75-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removePunctuation) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb75-4"><a href="retail.html#cb75-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeNumbers) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb75-5"><a href="retail.html#cb75-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;en&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb75-6"><a href="retail.html#cb75-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(stripWhitespace)) </span>
-<span id="cb75-7"><a href="retail.html#cb75-7" aria-hidden="true"></a><span class="kw">inspect</span>(data_clean[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="retail.html#cb90-1" aria-hidden="true"></a>data_clean &lt;-<span class="st"> </span>reviews_corpus <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-2"><a href="retail.html#cb90-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(tolower)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-3"><a href="retail.html#cb90-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removePunctuation) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-4"><a href="retail.html#cb90-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeNumbers) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-5"><a href="retail.html#cb90-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;en&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-6"><a href="retail.html#cb90-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(stripWhitespace)) </span>
+<span id="cb90-7"><a href="retail.html#cb90-7" aria-hidden="true"></a><span class="kw">inspect</span>(data_clean[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>#&gt; &lt;&lt;PlainTextDocument&gt;&gt;
 #&gt; Metadata:  7
 #&gt; Content:  chars: 43
 #&gt; 
 #&gt; absolutely wonderful silky sexy comfortable</code></pre>
 <p>Setelah melakukan text cleansing, text tersebut akan diubah menjadi Document Term Matrix(DTM) melalui proses tokenization. Tokenization berfungsi memecah 1 teks atau kalimat menjadi beberapa term. Terim bisa berupa 1 kata, 2 kata, dan seterusnya. Pada format DTM, 1 kata akan menjadi 1 feature, secara default nilainya adalah jumlah kata pada dokumen tersebut.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="retail.html#cb77-1" aria-hidden="true"></a>dtm_text &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(data_clean)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="retail.html#cb92-1" aria-hidden="true"></a>dtm_text &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(data_clean)</span></code></pre></div>
 <p>Sebelum membentuk model, tentunya kita perlu split data menjadi data train dan data test dengan proporsi 80:20.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="retail.html#cb78-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb78-2"><a href="retail.html#cb78-2" aria-hidden="true"></a>idx &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dtm_text), <span class="kw">nrow</span>(dtm_text)<span class="op">*</span><span class="fl">0.8</span>)</span>
-<span id="cb78-3"><a href="retail.html#cb78-3" aria-hidden="true"></a>train &lt;-<span class="st"> </span>dtm_text[idx,]</span>
-<span id="cb78-4"><a href="retail.html#cb78-4" aria-hidden="true"></a>test &lt;-<span class="st"> </span>dtm_text[<span class="op">-</span>idx,]</span>
-<span id="cb78-5"><a href="retail.html#cb78-5" aria-hidden="true"></a>train_label &lt;-<span class="st"> </span>reviews[idx,<span class="st">&quot;Recommended.IND&quot;</span>]</span>
-<span id="cb78-6"><a href="retail.html#cb78-6" aria-hidden="true"></a>test_label &lt;-<span class="st">  </span>reviews[<span class="op">-</span>idx,<span class="st">&quot;Recommended.IND&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="retail.html#cb93-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb93-2"><a href="retail.html#cb93-2" aria-hidden="true"></a>idx &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dtm_text), <span class="kw">nrow</span>(dtm_text)<span class="op">*</span><span class="fl">0.8</span>)</span>
+<span id="cb93-3"><a href="retail.html#cb93-3" aria-hidden="true"></a>train &lt;-<span class="st"> </span>dtm_text[idx,]</span>
+<span id="cb93-4"><a href="retail.html#cb93-4" aria-hidden="true"></a>test &lt;-<span class="st"> </span>dtm_text[<span class="op">-</span>idx,]</span>
+<span id="cb93-5"><a href="retail.html#cb93-5" aria-hidden="true"></a>train_label &lt;-<span class="st"> </span>reviews[idx,<span class="st">&quot;Recommended.IND&quot;</span>]</span>
+<span id="cb93-6"><a href="retail.html#cb93-6" aria-hidden="true"></a>test_label &lt;-<span class="st">  </span>reviews[<span class="op">-</span>idx,<span class="st">&quot;Recommended.IND&quot;</span>]</span></code></pre></div>
 <p>Term yang digunakan pada model ini, kita hanya mengambil term yang muncul paling sedikit 100 kali dari seluruh observasi dengan <code>findFreqTerms()</code>.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="retail.html#cb79-1" aria-hidden="true"></a>freq &lt;-<span class="st"> </span><span class="kw">findFreqTerms</span>(dtm_text, <span class="dv">100</span>)</span>
-<span id="cb79-2"><a href="retail.html#cb79-2" aria-hidden="true"></a>train_r &lt;-<span class="st"> </span>train[, freq]</span>
-<span id="cb79-3"><a href="retail.html#cb79-3" aria-hidden="true"></a>test_r &lt;-<span class="st"> </span>test[, freq]</span>
-<span id="cb79-4"><a href="retail.html#cb79-4" aria-hidden="true"></a></span>
-<span id="cb79-5"><a href="retail.html#cb79-5" aria-hidden="true"></a><span class="kw">inspect</span>(train_r)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="retail.html#cb94-1" aria-hidden="true"></a>freq &lt;-<span class="st"> </span><span class="kw">findFreqTerms</span>(dtm_text, <span class="dv">100</span>)</span>
+<span id="cb94-2"><a href="retail.html#cb94-2" aria-hidden="true"></a>train_r &lt;-<span class="st"> </span>train[, freq]</span>
+<span id="cb94-3"><a href="retail.html#cb94-3" aria-hidden="true"></a>test_r &lt;-<span class="st"> </span>test[, freq]</span>
+<span id="cb94-4"><a href="retail.html#cb94-4" aria-hidden="true"></a></span>
+<span id="cb94-5"><a href="retail.html#cb94-5" aria-hidden="true"></a><span class="kw">inspect</span>(train_r)</span></code></pre></div>
 <pre><code>#&gt; &lt;&lt;DocumentTermMatrix (documents: 18788, terms: 870)&gt;&gt;
 #&gt; Non-/sparse entries: 389603/15955957
 #&gt; Sparsity           : 98%
@@ -350,25 +342,25 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 #&gt;   4789      1      0   2     0    0    1    0    1   0    1
 #&gt;   6317      0      0   0     1    1    2    0    0   2    0</code></pre>
 <p>Nilai dari setiap matrix masih berupa angka numerik, dengan range 0-inf. Naive bayes akan memiliki performa lebih bagus ketika variabel numerik diubah menjadi kategorik. Salah satu caranya dengan Bernoulli Converter, yaitu jika jumlah kata yang muncul lebih dari 1, maka kita akan anggap nilainya adalah 1, jika 0 artinya tidak ada kata tersebut.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="retail.html#cb81-1" aria-hidden="true"></a>bernoulli_conv &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb81-2"><a href="retail.html#cb81-2" aria-hidden="true"></a>  x &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb81-3"><a href="retail.html#cb81-3" aria-hidden="true"></a>  <span class="kw">return</span>(x)</span>
-<span id="cb81-4"><a href="retail.html#cb81-4" aria-hidden="true"></a>}</span>
-<span id="cb81-5"><a href="retail.html#cb81-5" aria-hidden="true"></a></span>
-<span id="cb81-6"><a href="retail.html#cb81-6" aria-hidden="true"></a>train.bern &lt;-<span class="st"> </span><span class="kw">apply</span>(train_r, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span>
-<span id="cb81-7"><a href="retail.html#cb81-7" aria-hidden="true"></a>test.bern &lt;-<span class="st"> </span><span class="kw">apply</span>(test_r, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="retail.html#cb96-1" aria-hidden="true"></a>bernoulli_conv &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb96-2"><a href="retail.html#cb96-2" aria-hidden="true"></a>  x &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb96-3"><a href="retail.html#cb96-3" aria-hidden="true"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb96-4"><a href="retail.html#cb96-4" aria-hidden="true"></a>}</span>
+<span id="cb96-5"><a href="retail.html#cb96-5" aria-hidden="true"></a></span>
+<span id="cb96-6"><a href="retail.html#cb96-6" aria-hidden="true"></a>train.bern &lt;-<span class="st"> </span><span class="kw">apply</span>(train_r, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span>
+<span id="cb96-7"><a href="retail.html#cb96-7" aria-hidden="true"></a>test.bern &lt;-<span class="st"> </span><span class="kw">apply</span>(test_r, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span></code></pre></div>
 </div>
 <div id="modelling" class="section level3" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Modelling</h3>
 <p>Selanjutnya, pembentukan model menggunakan naive bayes dan diikuti dengan prediksi data test.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="retail.html#cb82-1" aria-hidden="true"></a>model.nb &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(<span class="dt">x =</span> train.bern, </span>
-<span id="cb82-2"><a href="retail.html#cb82-2" aria-hidden="true"></a>                       <span class="dt">y =</span> <span class="kw">as.factor</span>(train_label), </span>
-<span id="cb82-3"><a href="retail.html#cb82-3" aria-hidden="true"></a>                       <span class="dt">laplace =</span> <span class="dv">1</span>)</span>
-<span id="cb82-4"><a href="retail.html#cb82-4" aria-hidden="true"></a>pred.nb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> model.nb, <span class="dt">newdata=</span> test.bern)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="retail.html#cb97-1" aria-hidden="true"></a>model.nb &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(<span class="dt">x =</span> train.bern, </span>
+<span id="cb97-2"><a href="retail.html#cb97-2" aria-hidden="true"></a>                       <span class="dt">y =</span> <span class="kw">as.factor</span>(train_label), </span>
+<span id="cb97-3"><a href="retail.html#cb97-3" aria-hidden="true"></a>                       <span class="dt">laplace =</span> <span class="dv">1</span>)</span>
+<span id="cb97-4"><a href="retail.html#cb97-4" aria-hidden="true"></a>pred.nb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> model.nb, <span class="dt">newdata=</span> test.bern)</span></code></pre></div>
 <p>Dai hasil prediksi data test, kita akan menampilkan Confusion Matrix untuk mengetahui performa model.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="retail.html#cb83-1" aria-hidden="true"></a><span class="kw">confusionMatrix</span>(<span class="dt">data =</span> <span class="kw">as.factor</span>(pred.nb),</span>
-<span id="cb83-2"><a href="retail.html#cb83-2" aria-hidden="true"></a>                <span class="dt">reference =</span> <span class="kw">as.factor</span>(test_label),</span>
-<span id="cb83-3"><a href="retail.html#cb83-3" aria-hidden="true"></a>                <span class="dt">positive =</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="retail.html#cb98-1" aria-hidden="true"></a><span class="kw">confusionMatrix</span>(<span class="dt">data =</span> <span class="kw">as.factor</span>(pred.nb),</span>
+<span id="cb98-2"><a href="retail.html#cb98-2" aria-hidden="true"></a>                <span class="dt">reference =</span> <span class="kw">as.factor</span>(test_label),</span>
+<span id="cb98-3"><a href="retail.html#cb98-3" aria-hidden="true"></a>                <span class="dt">positive =</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; Confusion Matrix and Statistics
 #&gt; 
 #&gt;           Reference
@@ -400,61 +392,61 @@ Tentunya customer akan mencari informasi mengenai produk yang akan dibeli untuk 
 <div id="visualize-data-text" class="section level3" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> Visualize Data Text</h3>
 <p>Selanjutnya, kita akan coba lakukan prediksi terhadap data test dan juga menampilkan visualisasi text tersebut menggunakan package lime.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="retail.html#cb85-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb85-2"><a href="retail.html#cb85-2" aria-hidden="true"></a>idx &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(reviews), <span class="kw">nrow</span>(reviews)<span class="op">*</span><span class="fl">0.8</span>)</span>
-<span id="cb85-3"><a href="retail.html#cb85-3" aria-hidden="true"></a>train_lime &lt;-<span class="st"> </span>reviews[idx,]</span>
-<span id="cb85-4"><a href="retail.html#cb85-4" aria-hidden="true"></a>test_lime &lt;-<span class="st"> </span>reviews[<span class="op">-</span>idx,]</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="retail.html#cb86-1" aria-hidden="true"></a>tokenize_text &lt;-<span class="st"> </span><span class="cf">function</span>(text){</span>
-<span id="cb86-2"><a href="retail.html#cb86-2" aria-hidden="true"></a>  </span>
-<span id="cb86-3"><a href="retail.html#cb86-3" aria-hidden="true"></a>  <span class="co">#create corpus</span></span>
-<span id="cb86-4"><a href="retail.html#cb86-4" aria-hidden="true"></a>  </span>
-<span id="cb86-5"><a href="retail.html#cb86-5" aria-hidden="true"></a>  data_corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(text))</span>
-<span id="cb86-6"><a href="retail.html#cb86-6" aria-hidden="true"></a>  </span>
-<span id="cb86-7"><a href="retail.html#cb86-7" aria-hidden="true"></a>  <span class="co"># cleansing</span></span>
-<span id="cb86-8"><a href="retail.html#cb86-8" aria-hidden="true"></a>  data_clean &lt;-<span class="st"> </span>data_corpus <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb86-9"><a href="retail.html#cb86-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(tolower)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb86-10"><a href="retail.html#cb86-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removePunctuation) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb86-11"><a href="retail.html#cb86-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeNumbers) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb86-12"><a href="retail.html#cb86-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;en&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb86-13"><a href="retail.html#cb86-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(stripWhitespace)) </span>
-<span id="cb86-14"><a href="retail.html#cb86-14" aria-hidden="true"></a>  </span>
-<span id="cb86-15"><a href="retail.html#cb86-15" aria-hidden="true"></a>  <span class="co">#dtm</span></span>
-<span id="cb86-16"><a href="retail.html#cb86-16" aria-hidden="true"></a>  dtm_text &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(data_clean)</span>
-<span id="cb86-17"><a href="retail.html#cb86-17" aria-hidden="true"></a></span>
-<span id="cb86-18"><a href="retail.html#cb86-18" aria-hidden="true"></a>  <span class="co">#convert to bernoulli</span></span>
-<span id="cb86-19"><a href="retail.html#cb86-19" aria-hidden="true"></a>  data_text &lt;-<span class="st"> </span><span class="kw">apply</span>(dtm_text, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span>
-<span id="cb86-20"><a href="retail.html#cb86-20" aria-hidden="true"></a>  </span>
-<span id="cb86-21"><a href="retail.html#cb86-21" aria-hidden="true"></a>  <span class="kw">return</span>(data_text)</span>
-<span id="cb86-22"><a href="retail.html#cb86-22" aria-hidden="true"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="retail.html#cb87-1" aria-hidden="true"></a>model_type.naiveBayes &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb87-2"><a href="retail.html#cb87-2" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="st">&quot;classification&quot;</span>)</span>
-<span id="cb87-3"><a href="retail.html#cb87-3" aria-hidden="true"></a>}</span>
-<span id="cb87-4"><a href="retail.html#cb87-4" aria-hidden="true"></a></span>
-<span id="cb87-5"><a href="retail.html#cb87-5" aria-hidden="true"></a>predict_model.naiveBayes &lt;-<span class="st"> </span><span class="cf">function</span>(x, newdata, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>) {</span>
-<span id="cb87-6"><a href="retail.html#cb87-6" aria-hidden="true"></a></span>
-<span id="cb87-7"><a href="retail.html#cb87-7" aria-hidden="true"></a>    <span class="co"># return classification probabilities only   </span></span>
-<span id="cb87-8"><a href="retail.html#cb87-8" aria-hidden="true"></a>    res &lt;-<span class="st"> </span><span class="kw">predict</span>(x, newdata, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</span>
-<span id="cb87-9"><a href="retail.html#cb87-9" aria-hidden="true"></a>    </span>
-<span id="cb87-10"><a href="retail.html#cb87-10" aria-hidden="true"></a>    <span class="kw">return</span>(res)</span>
-<span id="cb87-11"><a href="retail.html#cb87-11" aria-hidden="true"></a>}</span>
-<span id="cb87-12"><a href="retail.html#cb87-12" aria-hidden="true"></a></span>
-<span id="cb87-13"><a href="retail.html#cb87-13" aria-hidden="true"></a>text_train &lt;-<span class="st"> </span>train_lime<span class="op">$</span>Review.Text <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-14"><a href="retail.html#cb87-14" aria-hidden="true"></a><span class="st">              </span><span class="kw">as.character</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="retail.html#cb88-1" aria-hidden="true"></a>explainer &lt;-<span class="st"> </span><span class="kw">lime</span>(text_train,</span>
-<span id="cb88-2"><a href="retail.html#cb88-2" aria-hidden="true"></a>                  <span class="dt">model =</span> model.nb,</span>
-<span id="cb88-3"><a href="retail.html#cb88-3" aria-hidden="true"></a>                  <span class="dt">preprocess =</span> tokenize_text)</span></code></pre></div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="retail.html#cb89-1" aria-hidden="true"></a>text_test &lt;-<span class="st"> </span>test_lime<span class="op">$</span>Review.Text <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-2"><a href="retail.html#cb89-2" aria-hidden="true"></a><span class="st">            </span><span class="kw">as.character</span>()</span>
-<span id="cb89-3"><a href="retail.html#cb89-3" aria-hidden="true"></a></span>
-<span id="cb89-4"><a href="retail.html#cb89-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb89-5"><a href="retail.html#cb89-5" aria-hidden="true"></a>explanation &lt;-<span class="st"> </span><span class="kw">explain</span>(text_test[<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>],</span>
-<span id="cb89-6"><a href="retail.html#cb89-6" aria-hidden="true"></a>                       <span class="dt">explainer =</span> explainer,</span>
-<span id="cb89-7"><a href="retail.html#cb89-7" aria-hidden="true"></a>                       <span class="dt">n_labels =</span><span class="dv">1</span>,</span>
-<span id="cb89-8"><a href="retail.html#cb89-8" aria-hidden="true"></a>                       <span class="dt">n_features =</span> <span class="dv">50</span>,</span>
-<span id="cb89-9"><a href="retail.html#cb89-9" aria-hidden="true"></a>                       <span class="dt">single_explanation =</span> F)</span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="retail.html#cb90-1" aria-hidden="true"></a><span class="kw">plot_text_explanations</span>(explanation)</span></code></pre></div>
-<div id="htmlwidget-818190d12959428541a5" style="width:100%;height:auto;" class="plot_text_explanations html-widget"></div>
-<script type="application/json" data-for="htmlwidget-818190d12959428541a5">{"x":{"html":"<div style=\"overflow-y:scroll;font-family:sans-serif;height:100%\"> <p> <span class='negative_1'>Just<\/span> <span class='negative_1'>ordered<\/span> <span class='positive_1'>this<\/span> <span class='negative_1'>in<\/span> a <span class='negative_1'>small<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>me<\/span> (<span class='negative_1'>5'6<\/span>\", <span class='positive_1'>135<\/span>, <span class='positive_1'>size<\/span> <span class='positive_1'>4<\/span>) <span class='negative_1'>and<\/span> <span class='positive_1'>medium<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>my<\/span> mom (<span class='positive_1'>5'3<\/span>\", <span class='positive_1'>130<\/span>, <span class='positive_1'>size<\/span> 8) <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>gorgeous<\/span> - <span class='positive_1'>beautifully<\/span> draped, <span class='negative_1'>all<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>weight<\/span>/warmth <span class='negative_1'>i'll<\/span> <span class='positive_1'>need<\/span> <span class='negative_1'>for<\/span> houston <span class='positive_1'>fall<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>winter<\/span>, <span class='negative_1'>looks<\/span> <span class='negative_1'>polished<\/span> <span class='positive_1'>snapped<\/span> <span class='positive_1'>or<\/span> <span class='negative_1'>unsnapped<\/span>. <span class='positive_1'>age<\/span>-<span class='positive_1'>appropriate<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>both<\/span> <span class='negative_1'>my<\/span> mom (<span class='positive_1'>60<\/span>'<span class='negative_1'>s<\/span>) <span class='negative_1'>and<\/span> myself (<span class='negative_1'>30<\/span>'<span class='negative_1'>s<\/span>). <span class='positive_1'>will<\/span> <span class='negative_1'>look<\/span> <span class='positive_1'>amazing<\/span> with <span class='positive_1'>skinny<\/span> <span class='positive_1'>jeans<\/span> <span class='positive_1'>or<\/span> <span class='positive_1'>leggings<\/span>. <span class='positive_1'>we<\/span> <span class='negative_1'>ordered<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>gray<\/span> <span class='negative_1'>which<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>true<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>photos<\/span>. <\/br> <sub>Label predicted: 1 (100%)<br/>Explainer fit: 0.43<\/sub> <\/p><br/><p> <span class='positive_1'>Super<\/span> <span class='negative_1'>cute<\/span> <span class='positive_1'>and<\/span> <span class='positive_2'>comfy<\/span> <span class='negative_1'>pull<\/span> <span class='negative_1'>over<\/span>. <span class='negative_1'>sizing<\/span> <span class='negative_1'>is<\/span> <span class='negative_1'>accurate<\/span>. <span class='negative_1'>material<\/span> <span class='positive_1'>has<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>little<\/span> <span class='positive_1'>bit<\/span> <span class='positive_1'>of<\/span> <span class='positive_1'>stretch<\/span>. <\/br> <sub>Label predicted: 1 (96.15%)<br/>Explainer fit: 0.9<\/sub> <\/p><br/><p> <span class='positive_1'>Great<\/span> <span class='positive_1'>casual<\/span> <span class='negative_1'>top<\/span> <span class='positive_1'>with<\/span> <span class='positive_1'>flare<\/span>. <span class='negative_1'>looks<\/span> <span class='negative_1'>cute<\/span> <span class='positive_1'>with<\/span> <span class='positive_1'>grey<\/span> <span class='positive_1'>pilcro<\/span> <span class='negative_1'>stet<\/span> <span class='positive_1'>jeans<\/span>. <span class='positive_1'>flattering<\/span> <span class='positive_1'>with<\/span> <span class='negative_1'>peplum<\/span> <span class='negative_1'>in<\/span> <span class='negative_1'>back<\/span>. <span class='positive_1'>nice<\/span> <span class='negative_1'>cut<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>shoulders<\/span> <span class='positive_1'>and<\/span> <span class='negative_1'>neckline<\/span>. <\/br> <sub>Label predicted: 1 (99.04%)<br/>Explainer fit: 0.77<\/sub> <\/p><br/><p> <span class='positive_1'>This<\/span> <span class='negative_1'>poncho<\/span> <span class='positive_1'>is<\/span> <span class='negative_1'>so<\/span> <span class='positive_1'>cute<\/span> <span class='negative_1'>i<\/span> <span class='positive_1'>love<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>plaid<\/span> <span class='negative_1'>check<\/span> <span class='negative_1'>design<\/span>, <span class='negative_1'>the<\/span> <span class='positive_1'>colors<\/span> <span class='negative_1'>look<\/span> <span class='negative_1'>like<\/span> <span class='negative_1'>sorbet<\/span> & <span class='positive_1'>cream<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>will<\/span> <span class='positive_1'>pair<\/span> <span class='positive_1'>well<\/span> <span class='negative_1'>with<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>turtleneck<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>jeans<\/span> <span class='positive_1'>or<\/span> <span class='positive_1'>pencil<\/span> <span class='positive_1'>skirt<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>heels<\/span>. <span class='negative_1'>i<\/span> <span class='positive_1'>love<\/span> <span class='negative_1'>this<\/span> <span class='negative_1'>look<\/span> <span class='positive_1'>for<\/span> <span class='positive_1'>fall<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>can<\/span> <span class='negative_1'>roll<\/span> <span class='positive_1'>right<\/span> <span class='positive_1'>into<\/span> <span class='positive_1'>spring<\/span>. <span class='positive_1'>great<\/span> <span class='positive_1'>buy<\/span>!! <\/br> <sub>Label predicted: 1 (100%)<br/>Explainer fit: 0.37<\/sub> <\/p><br/><p> <span class='negative_1'>Tried<\/span> <span class='positive_1'>this<\/span> <span class='negative_1'>on<\/span> <span class='positive_1'>today<\/span> <span class='positive_1'>at<\/span> <span class='negative_1'>my<\/span> <span class='positive_1'>local<\/span> <span class='negative_1'>retailer<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>had<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>have<\/span> it. it <span class='negative_1'>is<\/span> <span class='positive_1'>so<\/span> <span class='positive_1'>comfortable<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>flattering<\/span>. <span class='positive_1'>it's<\/span> <span class='negative_1'>too<\/span> <span class='negative_1'>bad<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>picture<\/span> <span class='negative_1'>online<\/span> <span class='negative_1'>has<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>model<\/span> tucking it <span class='positive_1'>into<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>skirt<\/span> <span class='positive_1'>because<\/span> you <span class='positive_1'>can't<\/span> <span class='negative_1'>see<\/span> <span class='negative_1'>the<\/span> ruching <span class='negative_1'>across<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>front<\/span>. <span class='positive_1'>a<\/span> <span class='positive_1'>little<\/span> <span class='positive_1'>dressier<\/span> <span class='negative_1'>alternative<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>plain<\/span> <span class='positive_1'>tee<\/span> <span class='negative_1'>and<\/span> <span class='negative_1'>reasonably<\/span> <span class='negative_1'>priced<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>retailer<\/span>. 5'8\"\" <span class='negative_1'>and<\/span> <span class='positive_1'>i<\/span> <span class='negative_1'>generally<\/span> <span class='positive_1'>wear<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>6<\/span>, <span class='negative_1'>the<\/span> <span class='negative_1'>small<\/span> fit <span class='positive_1'>well<\/span>. <span class='positive_1'>will<\/span> <span class='positive_1'>probably<\/span> be <span class='negative_1'>back<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>black<\/span>! <\/br> <sub>Label predicted: 1 (56.66%)<br/>Explainer fit: 0.96<\/sub> <\/p><br/><p> <span class='negative_1'>I<\/span> <span class='negative_1'>bought<\/span> <span class='positive_1'>this<\/span> <span class='positive_1'>item<\/span> <span class='negative_1'>from<\/span> <span class='positive_1'>online<\/span>... <span class='positive_1'>the<\/span> <span class='positive_1'>fit<\/span> <span class='positive_1'>on<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>model<\/span> <span class='positive_1'>looked<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>little<\/span> <span class='negative_1'>loose<\/span> <span class='negative_1'>but<\/span> <span class='negative_1'>when<\/span> <span class='negative_1'>i<\/span> <span class='negative_1'>got<\/span> <span class='negative_1'>mine<\/span> <span class='negative_1'>it<\/span> <span class='positive_1'>seemed<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>bit<\/span> <span class='positive_1'>tight<\/span>! <span class='positive_1'>so<\/span> <span class='negative_1'>i<\/span> <span class='positive_1'>took<\/span> <span class='negative_1'>it<\/span> <span class='positive_1'>back<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>store<\/span> & <span class='positive_1'>ordered<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>larger<\/span> <span class='negative_1'>size<\/span>. <span class='positive_1'>for<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>sale<\/span> <span class='positive_1'>price<\/span> <span class='positive_1'>this<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>great<\/span> <span class='positive_1'>top<\/span>. <\/br> <sub>Label predicted: 0 (85.78%)<br/>Explainer fit: 0.97<\/sub> <\/p> <\/div>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="retail.html#cb100-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb100-2"><a href="retail.html#cb100-2" aria-hidden="true"></a>idx &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(reviews), <span class="kw">nrow</span>(reviews)<span class="op">*</span><span class="fl">0.8</span>)</span>
+<span id="cb100-3"><a href="retail.html#cb100-3" aria-hidden="true"></a>train_lime &lt;-<span class="st"> </span>reviews[idx,]</span>
+<span id="cb100-4"><a href="retail.html#cb100-4" aria-hidden="true"></a>test_lime &lt;-<span class="st"> </span>reviews[<span class="op">-</span>idx,]</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="retail.html#cb101-1" aria-hidden="true"></a>tokenize_text &lt;-<span class="st"> </span><span class="cf">function</span>(text){</span>
+<span id="cb101-2"><a href="retail.html#cb101-2" aria-hidden="true"></a>  </span>
+<span id="cb101-3"><a href="retail.html#cb101-3" aria-hidden="true"></a>  <span class="co">#create corpus</span></span>
+<span id="cb101-4"><a href="retail.html#cb101-4" aria-hidden="true"></a>  </span>
+<span id="cb101-5"><a href="retail.html#cb101-5" aria-hidden="true"></a>  data_corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(text))</span>
+<span id="cb101-6"><a href="retail.html#cb101-6" aria-hidden="true"></a>  </span>
+<span id="cb101-7"><a href="retail.html#cb101-7" aria-hidden="true"></a>  <span class="co"># cleansing</span></span>
+<span id="cb101-8"><a href="retail.html#cb101-8" aria-hidden="true"></a>  data_clean &lt;-<span class="st"> </span>data_corpus <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb101-9"><a href="retail.html#cb101-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(tolower)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb101-10"><a href="retail.html#cb101-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removePunctuation) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb101-11"><a href="retail.html#cb101-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeNumbers) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb101-12"><a href="retail.html#cb101-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;en&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb101-13"><a href="retail.html#cb101-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_map</span>(<span class="kw">content_transformer</span>(stripWhitespace)) </span>
+<span id="cb101-14"><a href="retail.html#cb101-14" aria-hidden="true"></a>  </span>
+<span id="cb101-15"><a href="retail.html#cb101-15" aria-hidden="true"></a>  <span class="co">#dtm</span></span>
+<span id="cb101-16"><a href="retail.html#cb101-16" aria-hidden="true"></a>  dtm_text &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(data_clean)</span>
+<span id="cb101-17"><a href="retail.html#cb101-17" aria-hidden="true"></a></span>
+<span id="cb101-18"><a href="retail.html#cb101-18" aria-hidden="true"></a>  <span class="co">#convert to bernoulli</span></span>
+<span id="cb101-19"><a href="retail.html#cb101-19" aria-hidden="true"></a>  data_text &lt;-<span class="st"> </span><span class="kw">apply</span>(dtm_text, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> bernoulli_conv)</span>
+<span id="cb101-20"><a href="retail.html#cb101-20" aria-hidden="true"></a>  </span>
+<span id="cb101-21"><a href="retail.html#cb101-21" aria-hidden="true"></a>  <span class="kw">return</span>(data_text)</span>
+<span id="cb101-22"><a href="retail.html#cb101-22" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="retail.html#cb102-1" aria-hidden="true"></a>model_type.naiveBayes &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb102-2"><a href="retail.html#cb102-2" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="st">&quot;classification&quot;</span>)</span>
+<span id="cb102-3"><a href="retail.html#cb102-3" aria-hidden="true"></a>}</span>
+<span id="cb102-4"><a href="retail.html#cb102-4" aria-hidden="true"></a></span>
+<span id="cb102-5"><a href="retail.html#cb102-5" aria-hidden="true"></a>predict_model.naiveBayes &lt;-<span class="st"> </span><span class="cf">function</span>(x, newdata, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>) {</span>
+<span id="cb102-6"><a href="retail.html#cb102-6" aria-hidden="true"></a></span>
+<span id="cb102-7"><a href="retail.html#cb102-7" aria-hidden="true"></a>    <span class="co"># return classification probabilities only   </span></span>
+<span id="cb102-8"><a href="retail.html#cb102-8" aria-hidden="true"></a>    res &lt;-<span class="st"> </span><span class="kw">predict</span>(x, newdata, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</span>
+<span id="cb102-9"><a href="retail.html#cb102-9" aria-hidden="true"></a>    </span>
+<span id="cb102-10"><a href="retail.html#cb102-10" aria-hidden="true"></a>    <span class="kw">return</span>(res)</span>
+<span id="cb102-11"><a href="retail.html#cb102-11" aria-hidden="true"></a>}</span>
+<span id="cb102-12"><a href="retail.html#cb102-12" aria-hidden="true"></a></span>
+<span id="cb102-13"><a href="retail.html#cb102-13" aria-hidden="true"></a>text_train &lt;-<span class="st"> </span>train_lime<span class="op">$</span>Review.Text <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb102-14"><a href="retail.html#cb102-14" aria-hidden="true"></a><span class="st">              </span><span class="kw">as.character</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="retail.html#cb103-1" aria-hidden="true"></a>explainer &lt;-<span class="st"> </span><span class="kw">lime</span>(text_train,</span>
+<span id="cb103-2"><a href="retail.html#cb103-2" aria-hidden="true"></a>                  <span class="dt">model =</span> model.nb,</span>
+<span id="cb103-3"><a href="retail.html#cb103-3" aria-hidden="true"></a>                  <span class="dt">preprocess =</span> tokenize_text)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="retail.html#cb104-1" aria-hidden="true"></a>text_test &lt;-<span class="st"> </span>test_lime<span class="op">$</span>Review.Text <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb104-2"><a href="retail.html#cb104-2" aria-hidden="true"></a><span class="st">            </span><span class="kw">as.character</span>()</span>
+<span id="cb104-3"><a href="retail.html#cb104-3" aria-hidden="true"></a></span>
+<span id="cb104-4"><a href="retail.html#cb104-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb104-5"><a href="retail.html#cb104-5" aria-hidden="true"></a>explanation &lt;-<span class="st"> </span><span class="kw">explain</span>(text_test[<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>],</span>
+<span id="cb104-6"><a href="retail.html#cb104-6" aria-hidden="true"></a>                       <span class="dt">explainer =</span> explainer,</span>
+<span id="cb104-7"><a href="retail.html#cb104-7" aria-hidden="true"></a>                       <span class="dt">n_labels =</span><span class="dv">1</span>,</span>
+<span id="cb104-8"><a href="retail.html#cb104-8" aria-hidden="true"></a>                       <span class="dt">n_features =</span> <span class="dv">50</span>,</span>
+<span id="cb104-9"><a href="retail.html#cb104-9" aria-hidden="true"></a>                       <span class="dt">single_explanation =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="retail.html#cb105-1" aria-hidden="true"></a><span class="kw">plot_text_explanations</span>(explanation)</span></code></pre></div>
+<div id="htmlwidget-908e24c4efa97c054bf9" style="width:100%;height:auto;" class="plot_text_explanations html-widget"></div>
+<script type="application/json" data-for="htmlwidget-908e24c4efa97c054bf9">{"x":{"html":"<div style=\"overflow-y:scroll;font-family:sans-serif;height:100%\"> <p> <span class='negative_1'>Just<\/span> <span class='negative_1'>ordered<\/span> <span class='positive_1'>this<\/span> <span class='negative_1'>in<\/span> a <span class='negative_1'>small<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>me<\/span> (<span class='negative_1'>5'6<\/span>\", <span class='positive_1'>135<\/span>, <span class='positive_1'>size<\/span> <span class='positive_1'>4<\/span>) <span class='negative_1'>and<\/span> <span class='positive_1'>medium<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>my<\/span> mom (<span class='positive_1'>5'3<\/span>\", <span class='positive_1'>130<\/span>, <span class='positive_1'>size<\/span> 8) <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>gorgeous<\/span> - <span class='positive_1'>beautifully<\/span> draped, <span class='negative_1'>all<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>weight<\/span>/warmth <span class='negative_1'>i'll<\/span> <span class='positive_1'>need<\/span> <span class='negative_1'>for<\/span> houston <span class='positive_1'>fall<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>winter<\/span>, <span class='negative_1'>looks<\/span> <span class='negative_1'>polished<\/span> <span class='positive_1'>snapped<\/span> <span class='positive_1'>or<\/span> <span class='negative_1'>unsnapped<\/span>. <span class='positive_1'>age<\/span>-<span class='positive_1'>appropriate<\/span> <span class='negative_1'>for<\/span> <span class='negative_1'>both<\/span> <span class='negative_1'>my<\/span> mom (<span class='positive_1'>60<\/span>'<span class='negative_1'>s<\/span>) <span class='negative_1'>and<\/span> myself (<span class='negative_1'>30<\/span>'<span class='negative_1'>s<\/span>). <span class='positive_1'>will<\/span> <span class='negative_1'>look<\/span> <span class='positive_1'>amazing<\/span> with <span class='positive_1'>skinny<\/span> <span class='positive_1'>jeans<\/span> <span class='positive_1'>or<\/span> <span class='positive_1'>leggings<\/span>. <span class='positive_1'>we<\/span> <span class='negative_1'>ordered<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>gray<\/span> <span class='negative_1'>which<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>true<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>photos<\/span>. <\/br> <sub>Label predicted: 1 (100%)<br/>Explainer fit: 0.43<\/sub> <\/p><br/><p> <span class='positive_1'>Super<\/span> <span class='negative_1'>cute<\/span> <span class='positive_1'>and<\/span> <span class='positive_2'>comfy<\/span> <span class='negative_1'>pull<\/span> <span class='negative_1'>over<\/span>. <span class='negative_1'>sizing<\/span> <span class='negative_1'>is<\/span> <span class='negative_1'>accurate<\/span>. <span class='negative_1'>material<\/span> <span class='positive_1'>has<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>little<\/span> <span class='positive_1'>bit<\/span> <span class='positive_1'>of<\/span> <span class='positive_1'>stretch<\/span>. <\/br> <sub>Label predicted: 1 (96.15%)<br/>Explainer fit: 0.9<\/sub> <\/p><br/><p> <span class='positive_1'>Great<\/span> <span class='positive_1'>casual<\/span> <span class='negative_1'>top<\/span> <span class='positive_1'>with<\/span> <span class='positive_1'>flare<\/span>. <span class='negative_1'>looks<\/span> <span class='negative_1'>cute<\/span> <span class='positive_1'>with<\/span> <span class='positive_1'>grey<\/span> <span class='positive_1'>pilcro<\/span> <span class='negative_1'>stet<\/span> <span class='positive_1'>jeans<\/span>. <span class='positive_1'>flattering<\/span> <span class='positive_1'>with<\/span> <span class='negative_1'>peplum<\/span> <span class='negative_1'>in<\/span> <span class='negative_1'>back<\/span>. <span class='positive_1'>nice<\/span> <span class='negative_1'>cut<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>shoulders<\/span> <span class='positive_1'>and<\/span> <span class='negative_1'>neckline<\/span>. <\/br> <sub>Label predicted: 1 (99.04%)<br/>Explainer fit: 0.77<\/sub> <\/p><br/><p> <span class='positive_1'>This<\/span> <span class='negative_1'>poncho<\/span> <span class='positive_1'>is<\/span> <span class='negative_1'>so<\/span> <span class='positive_1'>cute<\/span> <span class='negative_1'>i<\/span> <span class='positive_1'>love<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>plaid<\/span> <span class='negative_1'>check<\/span> <span class='negative_1'>design<\/span>, <span class='negative_1'>the<\/span> <span class='positive_1'>colors<\/span> <span class='negative_1'>look<\/span> <span class='negative_1'>like<\/span> <span class='negative_1'>sorbet<\/span> & <span class='positive_1'>cream<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>will<\/span> <span class='positive_1'>pair<\/span> <span class='positive_1'>well<\/span> <span class='negative_1'>with<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>turtleneck<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>jeans<\/span> <span class='positive_1'>or<\/span> <span class='positive_1'>pencil<\/span> <span class='positive_1'>skirt<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>heels<\/span>. <span class='negative_1'>i<\/span> <span class='positive_1'>love<\/span> <span class='negative_1'>this<\/span> <span class='negative_1'>look<\/span> <span class='positive_1'>for<\/span> <span class='positive_1'>fall<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>it<\/span> <span class='positive_1'>can<\/span> <span class='negative_1'>roll<\/span> <span class='positive_1'>right<\/span> <span class='positive_1'>into<\/span> <span class='positive_1'>spring<\/span>. <span class='positive_1'>great<\/span> <span class='positive_1'>buy<\/span>!! <\/br> <sub>Label predicted: 1 (100%)<br/>Explainer fit: 0.37<\/sub> <\/p><br/><p> <span class='negative_1'>Tried<\/span> <span class='positive_1'>this<\/span> <span class='negative_1'>on<\/span> <span class='positive_1'>today<\/span> <span class='positive_1'>at<\/span> <span class='negative_1'>my<\/span> <span class='positive_1'>local<\/span> <span class='negative_1'>retailer<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>had<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>have<\/span> it. it <span class='negative_1'>is<\/span> <span class='positive_1'>so<\/span> <span class='positive_1'>comfortable<\/span> <span class='negative_1'>and<\/span> <span class='positive_1'>flattering<\/span>. <span class='positive_1'>it's<\/span> <span class='negative_1'>too<\/span> <span class='negative_1'>bad<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>picture<\/span> <span class='negative_1'>online<\/span> <span class='negative_1'>has<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>model<\/span> tucking it <span class='positive_1'>into<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>skirt<\/span> <span class='positive_1'>because<\/span> you <span class='positive_1'>can't<\/span> <span class='negative_1'>see<\/span> <span class='negative_1'>the<\/span> ruching <span class='negative_1'>across<\/span> <span class='negative_1'>the<\/span> <span class='negative_1'>front<\/span>. <span class='positive_1'>a<\/span> <span class='positive_1'>little<\/span> <span class='positive_1'>dressier<\/span> <span class='negative_1'>alternative<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>plain<\/span> <span class='positive_1'>tee<\/span> <span class='negative_1'>and<\/span> <span class='negative_1'>reasonably<\/span> <span class='negative_1'>priced<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>retailer<\/span>. 5'8\"\" <span class='negative_1'>and<\/span> <span class='positive_1'>i<\/span> <span class='negative_1'>generally<\/span> <span class='positive_1'>wear<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>6<\/span>, <span class='negative_1'>the<\/span> <span class='negative_1'>small<\/span> fit <span class='positive_1'>well<\/span>. <span class='positive_1'>will<\/span> <span class='positive_1'>probably<\/span> be <span class='negative_1'>back<\/span> <span class='positive_1'>for<\/span> <span class='negative_1'>the<\/span> <span class='positive_1'>black<\/span>! <\/br> <sub>Label predicted: 1 (56.66%)<br/>Explainer fit: 0.96<\/sub> <\/p><br/><p> <span class='negative_1'>I<\/span> <span class='negative_1'>bought<\/span> <span class='positive_1'>this<\/span> <span class='positive_1'>item<\/span> <span class='negative_1'>from<\/span> <span class='positive_1'>online<\/span>... <span class='positive_1'>the<\/span> <span class='positive_1'>fit<\/span> <span class='positive_1'>on<\/span> <span class='positive_1'>the<\/span> <span class='positive_1'>model<\/span> <span class='positive_1'>looked<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>little<\/span> <span class='negative_1'>loose<\/span> <span class='negative_1'>but<\/span> <span class='negative_1'>when<\/span> <span class='negative_1'>i<\/span> <span class='negative_1'>got<\/span> <span class='negative_1'>mine<\/span> <span class='negative_1'>it<\/span> <span class='positive_1'>seemed<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>bit<\/span> <span class='positive_1'>tight<\/span>! <span class='positive_1'>so<\/span> <span class='negative_1'>i<\/span> <span class='positive_1'>took<\/span> <span class='negative_1'>it<\/span> <span class='positive_1'>back<\/span> <span class='negative_1'>to<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>store<\/span> & <span class='positive_1'>ordered<\/span> <span class='positive_1'>a<\/span> <span class='positive_1'>larger<\/span> <span class='negative_1'>size<\/span>. <span class='positive_1'>for<\/span> <span class='positive_1'>the<\/span> <span class='negative_1'>sale<\/span> <span class='positive_1'>price<\/span> <span class='positive_1'>this<\/span> <span class='positive_1'>is<\/span> <span class='positive_1'>a<\/span> <span class='negative_1'>great<\/span> <span class='positive_1'>top<\/span>. <\/br> <sub>Label predicted: 0 (85.78%)<br/>Explainer fit: 0.97<\/sub> <\/p> <\/div>"},"evals":[],"jsHooks":[]}</script>
 <p>Dari hasil output observasi kedua terprediksi product tersebut recommended dengan probability 96.31% dan nilai explainer fit menunjukkan seberapa baik LIME dalam menginterpretasikan prediksi untuk observasi ini sebesar 0.89 artinya dapat dikatakan cukup akurat. Teks berlabel biru menunjukkan kata tersebut meningkatkan kemungkinan product tersebut untuk direkomendasikan, sedangkan teks berlabel merah berarti bahwa kata tersebut bertentangan/mengurangi kemungkinan product tersebut untuk direkomendasikan.</p>
 </div>
 </div>
@@ -480,17 +472,17 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <p>Pada artikel ini data yang digunakan adalah data online retail di UK yang dapat ditemukan pada <a href="https://www.kaggle.com/carrie1/ecommerce-data">link berikut</a>. Data ini adalah data transaksi yang terjadi pada 01/12/2010 sampai 09/12/2011.</p>
 <div id="import-library-and-read-data" class="section level4" number="4.2.2.1">
 <h4><span class="header-section-number">4.2.2.1</span> Import Library and Read Data</h4>
-<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="retail.html#cb91-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb91-2"><a href="retail.html#cb91-2" aria-hidden="true"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb91-3"><a href="retail.html#cb91-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="retail.html#cb92-1" aria-hidden="true"></a>ecom <span class="op">=</span> pd.read_csv(<span class="st">&quot;assets/03-retail/data_ecom_uk.csv&quot;</span>,encoding<span class="op">=</span><span class="st">&#39;latin1&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="retail.html#cb93-1" aria-hidden="true"></a>ecom.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="retail.html#cb106-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb106-2"><a href="retail.html#cb106-2" aria-hidden="true"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb106-3"><a href="retail.html#cb106-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="retail.html#cb107-1" aria-hidden="true"></a>ecom <span class="op">=</span> pd.read_csv(<span class="st">&quot;assets/03-retail/data_ecom_uk.csv&quot;</span>,encoding<span class="op">=</span><span class="st">&#39;latin1&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="retail.html#cb108-1" aria-hidden="true"></a>ecom.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;   InvoiceNo StockCode  ... CustomerID         Country
 #&gt; 0    536365    85123A  ...    17850.0  United Kingdom
 #&gt; 1    536365     71053  ...    17850.0  United Kingdom
 #&gt; 
 #&gt; [2 rows x 8 columns]</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="retail.html#cb95-1" aria-hidden="true"></a>ecom.shape</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="retail.html#cb110-1" aria-hidden="true"></a>ecom.shape</span></code></pre></div>
 <pre><code>#&gt; (541909, 8)</code></pre>
 <p>Dataframe ini mengandung 541909 observasi dengan jumlah kolom sebanyak 8 yang antara lain adalah :</p>
 <ul>
@@ -507,10 +499,10 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <div id="get-only-transaction-in-uk" class="section level4" number="4.2.2.2">
 <h4><span class="header-section-number">4.2.2.2</span> Get only transaction in UK</h4>
 <p>Dikarenakan terdapat beberapa data yang tidak berada pada country United Kingdom (UK), maka perlu dilakukan filter data hanya untuk country daerah UK.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="retail.html#cb97-1" aria-hidden="true"></a>ecom_uk <span class="op">=</span> ecom[ecom[<span class="st">&#39;Country&#39;</span>]<span class="op">==</span><span class="st">&#39;United Kingdom&#39;</span>]</span>
-<span id="cb97-2"><a href="retail.html#cb97-2" aria-hidden="true"></a>ecom_uk.shape</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="retail.html#cb112-1" aria-hidden="true"></a>ecom_uk <span class="op">=</span> ecom[ecom[<span class="st">&#39;Country&#39;</span>]<span class="op">==</span><span class="st">&#39;United Kingdom&#39;</span>]</span>
+<span id="cb112-2"><a href="retail.html#cb112-2" aria-hidden="true"></a>ecom_uk.shape</span></code></pre></div>
 <pre><code>#&gt; (495478, 8)</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="retail.html#cb99-1" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="retail.html#cb114-1" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;   InvoiceNo StockCode  ... CustomerID         Country
 #&gt; 0    536365    85123A  ...    17850.0  United Kingdom
 #&gt; 1    536365     71053  ...    17850.0  United Kingdom
@@ -521,7 +513,7 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <h4><span class="header-section-number">4.2.2.3</span> Handle Missing Values</h4>
 <p>Missing value adalah masalah yang umum dihadapi ketika melakukan proses pengolahan data. Missing value terjadi ketika terdapat obeservasi kosong pada sebuah data.</p>
 <p>Pada hasil di bawah ini dapat diketahui informasi bahwa beberapa variable pada data menggandung nilai missing, variable tersebut antara lain adalah <code>Description</code> dan <code>CustomerID</code>. <code>CustomerID</code> adalah variable penting dalam RFM analisis, dikarenakan <code>CustomerID</code> mengandung informasi unik ID member. Sedangkan <code>Description</code> mengandung informasi terkait deskripsi produk. Jika ditelaah lebih jauh, untuk menangani missing values pada kedua variable tersebut dapat dilakukan dengan cara <em>deletion</em>, dikarenakan proses imputasi pada kedua variable tersebut akan menghasilkan informasi yang tidak akurat.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="retail.html#cb101-1" aria-hidden="true"></a>ecom_uk.isna().<span class="bu">sum</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="retail.html#cb116-1" aria-hidden="true"></a>ecom_uk.isna().<span class="bu">sum</span>()</span></code></pre></div>
 <pre><code>#&gt; InvoiceNo           0
 #&gt; StockCode           0
 #&gt; Description      1454
@@ -532,7 +524,7 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; Country             0
 #&gt; dtype: int64</code></pre>
 <p>Berikut ini adalah proses penghapusan missing values pada data :</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="retail.html#cb103-1" aria-hidden="true"></a>ecom_uk.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="retail.html#cb118-1" aria-hidden="true"></a>ecom_uk.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;string&gt;:1: SettingWithCopyWarning: 
 #&gt; A value is trying to be set on a copy of a slice from a DataFrame
 #&gt; 
@@ -541,12 +533,12 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <div id="select-unique-transaction" class="section level4" number="4.2.2.4">
 <h4><span class="header-section-number">4.2.2.4</span> Select Unique Transaction</h4>
 <p>Duplicated values atau duplikasi data adalah nilai berulang pada satu atau lebih observasi. Untuk menangani data yang duplikat dapat dilakukan penghapusan dan hanya mempertahankan salah satu observasi.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="retail.html#cb105-1" aria-hidden="true"></a>ecom_uk.drop_duplicates(subset<span class="op">=</span>[<span class="st">&#39;InvoiceNo&#39;</span>, <span class="st">&#39;CustomerID&#39;</span>], keep<span class="op">=</span><span class="st">&quot;first&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="retail.html#cb120-1" aria-hidden="true"></a>ecom_uk.drop_duplicates(subset<span class="op">=</span>[<span class="st">&#39;InvoiceNo&#39;</span>, <span class="st">&#39;CustomerID&#39;</span>], keep<span class="op">=</span><span class="st">&quot;first&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="change-data-types" class="section level4" number="4.2.2.5">
 <h4><span class="header-section-number">4.2.2.5</span> Change Data Types</h4>
 <p>Dalam pengolahan data transformasi tipe data pada format yang sesuai sangat penting untuk dilakukan, hal ini agar nantinya data-data tersebut siap untuk dilakukan manipulasi lebih lanjut.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="retail.html#cb106-1" aria-hidden="true"></a>ecom_uk.dtypes</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="retail.html#cb121-1" aria-hidden="true"></a>ecom_uk.dtypes</span></code></pre></div>
 <pre><code>#&gt; InvoiceNo       object
 #&gt; StockCode       object
 #&gt; Description     object
@@ -556,20 +548,20 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; CustomerID     float64
 #&gt; Country         object
 #&gt; dtype: object</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="retail.html#cb108-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>] <span class="op">=</span> pd.to_datetime(ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="retail.html#cb123-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>] <span class="op">=</span> pd.to_datetime(ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>])</span></code></pre></div>
 <pre><code>#&gt; &lt;string&gt;:1: SettingWithCopyWarning: 
 #&gt; A value is trying to be set on a copy of a slice from a DataFrame.
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
 #&gt; 
 #&gt; See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="retail.html#cb110-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Country&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;Country&#39;</span>].astype(<span class="st">&#39;category&#39;</span>)</span>
-<span id="cb110-2"><a href="retail.html#cb110-2" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;CustomerID&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;CustomerID&#39;</span>].astype(<span class="st">&#39;int64&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb125-1"><a href="retail.html#cb125-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Country&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;Country&#39;</span>].astype(<span class="st">&#39;category&#39;</span>)</span>
+<span id="cb125-2"><a href="retail.html#cb125-2" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;CustomerID&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;CustomerID&#39;</span>].astype(<span class="st">&#39;int64&#39;</span>)</span></code></pre></div>
 </div>
 <div id="drop-cancelled-transaction" class="section level4" number="4.2.2.6">
 <h4><span class="header-section-number">4.2.2.6</span> Drop cancelled transaction</h4>
 <p>Karakter pertama “C” pada <code>InvoiceNo</code> menunjukkan bahwa customer melakukan pembatalan terhadap transaksi yang dilakukan. Sehingga data akan kurang relevan jika tetap dipertahankan, maka dari itu perlu dilakukan penghapusan pada observasi tersebut.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="retail.html#cb111-1" aria-hidden="true"></a>ecom_uk <span class="op">=</span> ecom_uk.loc[<span class="op">~</span>ecom_uk.iloc[:,<span class="dv">0</span>].<span class="bu">str</span>.contains(<span class="vs">r&#39;C&#39;</span>)]</span></code></pre></div>
-<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="retail.html#cb112-1" aria-hidden="true"></a>ecom_uk.head()</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="retail.html#cb126-1" aria-hidden="true"></a>ecom_uk <span class="op">=</span> ecom_uk.loc[<span class="op">~</span>ecom_uk.iloc[:,<span class="dv">0</span>].<span class="bu">str</span>.contains(<span class="vs">r&#39;C&#39;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb127-1"><a href="retail.html#cb127-1" aria-hidden="true"></a>ecom_uk.head()</span></code></pre></div>
 <pre><code>#&gt;    InvoiceNo StockCode  ... CustomerID         Country
 #&gt; 0     536365    85123A  ...      17850  United Kingdom
 #&gt; 7     536366     22633  ...      17850  United Kingdom
@@ -589,8 +581,8 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <ol style="list-style-type: lower-alpha">
 <li>Manipulasi tanggal transaksi dengan mengekstrak informasi tanggal, bulan dan tahun transaksi.</li>
 </ol>
-<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="retail.html#cb114-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Date&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>].dt.date</span></code></pre></div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="retail.html#cb115-1" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="retail.html#cb129-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Date&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;InvoiceDate&#39;</span>].dt.date</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="retail.html#cb130-1" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;   InvoiceNo StockCode  ...         Country        Date
 #&gt; 0    536365    85123A  ...  United Kingdom  2010-12-01
 #&gt; 7    536366     22633  ...  United Kingdom  2010-12-01
@@ -599,15 +591,15 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Mengambil tanggal transaksi maksimum pada keseluruhan observasi</li>
 </ol>
-<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="retail.html#cb117-1" aria-hidden="true"></a>last_trans <span class="op">=</span> ecom_uk[<span class="st">&#39;Date&#39;</span>].<span class="bu">max</span>()</span>
-<span id="cb117-2"><a href="retail.html#cb117-2" aria-hidden="true"></a>last_trans</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="retail.html#cb132-1" aria-hidden="true"></a>last_trans <span class="op">=</span> ecom_uk[<span class="st">&#39;Date&#39;</span>].<span class="bu">max</span>()</span>
+<span id="cb132-2"><a href="retail.html#cb132-2" aria-hidden="true"></a>last_trans</span></code></pre></div>
 <pre><code>#&gt; datetime.date(2011, 12, 9)</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Mengekstrak informasi tanggal transaksi maksimum pada tiap customer.</li>
 </ol>
-<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="retail.html#cb119-1" aria-hidden="true"></a>recent <span class="op">=</span> ecom_uk.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>],  as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">&#39;Date&#39;</span>].<span class="bu">max</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="retail.html#cb120-1" aria-hidden="true"></a>recent.columns <span class="op">=</span> [<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;Last Transaction&#39;</span>]</span>
-<span id="cb120-2"><a href="retail.html#cb120-2" aria-hidden="true"></a>recent.head()</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="retail.html#cb134-1" aria-hidden="true"></a>recent <span class="op">=</span> ecom_uk.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>],  as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">&#39;Date&#39;</span>].<span class="bu">max</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb135-1"><a href="retail.html#cb135-1" aria-hidden="true"></a>recent.columns <span class="op">=</span> [<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;Last Transaction&#39;</span>]</span>
+<span id="cb135-2"><a href="retail.html#cb135-2" aria-hidden="true"></a>recent.head()</span></code></pre></div>
 <pre><code>#&gt;    CustomerID Last Transaction
 #&gt; 0       12346       2011-01-18
 #&gt; 1       12747       2011-12-07
@@ -617,23 +609,23 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Menghitung selisih tanggal transaksi maksimum dengan tanggal transaksi terakhir pada tiap customer, kemudian menyimpan jumlah hari pada kolom <code>Days Recent</code>.</li>
 </ol>
-<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="retail.html#cb122-1" aria-hidden="true"></a>recent[<span class="st">&#39;Days Recent&#39;</span>] <span class="op">=</span> last_trans <span class="op">-</span> recent[<span class="st">&#39;Last Transaction&#39;</span>]</span>
-<span id="cb122-2"><a href="retail.html#cb122-2" aria-hidden="true"></a>recent[<span class="st">&#39;Days Recent&#39;</span>] <span class="op">=</span> recent[<span class="st">&#39;Days Recent&#39;</span>].dt.days</span></code></pre></div>
-<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="retail.html#cb123-1" aria-hidden="true"></a>recent.head()</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb137-1"><a href="retail.html#cb137-1" aria-hidden="true"></a>recent[<span class="st">&#39;Days Recent&#39;</span>] <span class="op">=</span> last_trans <span class="op">-</span> recent[<span class="st">&#39;Last Transaction&#39;</span>]</span>
+<span id="cb137-2"><a href="retail.html#cb137-2" aria-hidden="true"></a>recent[<span class="st">&#39;Days Recent&#39;</span>] <span class="op">=</span> recent[<span class="st">&#39;Days Recent&#39;</span>].dt.days</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="retail.html#cb138-1" aria-hidden="true"></a>recent.head()</span></code></pre></div>
 <pre><code>#&gt;    CustomerID Last Transaction  Days Recent
 #&gt; 0       12346       2011-01-18          325
 #&gt; 1       12747       2011-12-07            2
 #&gt; 2       12748       2011-12-09            0
 #&gt; 3       12749       2011-12-06            3
 #&gt; 4       12820       2011-12-06            3</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb125-1"><a href="retail.html#cb125-1" aria-hidden="true"></a>recent.drop(columns<span class="op">=</span>[<span class="st">&#39;Last Transaction&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="retail.html#cb140-1" aria-hidden="true"></a>recent.drop(columns<span class="op">=</span>[<span class="st">&#39;Last Transaction&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="frequency" class="section level4" number="4.2.3.2">
 <h4><span class="header-section-number">4.2.3.2</span> Frequency</h4>
 <p>Frequency mengandung infromasi tentang seberapa sering customer melakukan transaksi pembelian dalam kurun waktu tertentu. Nilai frequency dapat diperoleh dengan cara menghitung jumlah transkasi pada setiap unik customer.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="retail.html#cb126-1" aria-hidden="true"></a>temp <span class="op">=</span> ecom_uk[[<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>]]</span></code></pre></div>
-<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb127-1"><a href="retail.html#cb127-1" aria-hidden="true"></a>trans_cust <span class="op">=</span> temp.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>]).count()</span>
-<span id="cb127-2"><a href="retail.html#cb127-2" aria-hidden="true"></a>trans_cust.rename(columns<span class="op">=</span>{<span class="st">&#39;InvoiceNo&#39;</span>:<span class="st">&#39;Number of Transaction&#39;</span>})</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a href="retail.html#cb141-1" aria-hidden="true"></a>temp <span class="op">=</span> ecom_uk[[<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="retail.html#cb142-1" aria-hidden="true"></a>trans_cust <span class="op">=</span> temp.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>]).count()</span>
+<span id="cb142-2"><a href="retail.html#cb142-2" aria-hidden="true"></a>trans_cust.rename(columns<span class="op">=</span>{<span class="st">&#39;InvoiceNo&#39;</span>:<span class="st">&#39;Number of Transaction&#39;</span>})</span></code></pre></div>
 <pre><code>#&gt;             Number of Transaction
 #&gt; CustomerID                       
 #&gt; 12346                           1
@@ -649,7 +641,7 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; 18287                           3
 #&gt; 
 #&gt; [3921 rows x 1 columns]</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="retail.html#cb129-1" aria-hidden="true"></a>trans_cust.reset_index()</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="retail.html#cb144-1" aria-hidden="true"></a>trans_cust.reset_index()</span></code></pre></div>
 <pre><code>#&gt;       CustomerID  InvoiceNo
 #&gt; 0          12346          1
 #&gt; 1          12747         11
@@ -666,8 +658,8 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; [3921 rows x 2 columns]</code></pre>
 <p>Ouptut di atas menunjukkan jumlah transaksi yang dilakukan pada masing-masing customer. CustomerID 12346 melakukan transaksi sebanyak 1 kali saja, CustomerID 12747 melakukan transaksi sebanyak 11 kali, dan seterusnya.</p>
 <p>Berikut dibawah ini adalah detail informasi <code>InvoiceNo</code> pada setiap transaksi yang dilakukan oleh customer.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb131-1"><a href="retail.html#cb131-1" aria-hidden="true"></a>table_trans_details <span class="op">=</span> temp.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>]).count()</span></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="retail.html#cb132-1" aria-hidden="true"></a>table_trans_details.head()</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="retail.html#cb146-1" aria-hidden="true"></a>table_trans_details <span class="op">=</span> temp.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>]).count()</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb147-1"><a href="retail.html#cb147-1" aria-hidden="true"></a>table_trans_details.head()</span></code></pre></div>
 <pre><code>#&gt; Empty DataFrame
 #&gt; Columns: []
 #&gt; Index: [(12346, 541431), (12747, 537215), (12747, 538537), (12747, 541677), (12747, 545321)]</code></pre>
@@ -675,15 +667,15 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <div id="monetary" class="section level4" number="4.2.3.3">
 <h4><span class="header-section-number">4.2.3.3</span> Monetary</h4>
 <p>Monetary adalah faktor yang menyimpan jumlah pengeluaran customer dalam transaksi. Nilai monetary dapat dihitung dari harga barang yang dibeli oleh masing-masing customer pada transaksi tertentu dan kemudian dikalkulasikan dengan jumlah barang yang dibeli.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="retail.html#cb134-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Total&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;UnitPrice&#39;</span>] <span class="op">*</span> ecom_uk[<span class="st">&#39;Quantity&#39;</span>]</span>
-<span id="cb134-2"><a href="retail.html#cb134-2" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="retail.html#cb149-1" aria-hidden="true"></a>ecom_uk[<span class="st">&#39;Total&#39;</span>] <span class="op">=</span> ecom_uk[<span class="st">&#39;UnitPrice&#39;</span>] <span class="op">*</span> ecom_uk[<span class="st">&#39;Quantity&#39;</span>]</span>
+<span id="cb149-2"><a href="retail.html#cb149-2" aria-hidden="true"></a>ecom_uk.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;   InvoiceNo StockCode  ...        Date  Total
 #&gt; 0    536365    85123A  ...  2010-12-01   15.3
 #&gt; 7    536366     22633  ...  2010-12-01   11.1
 #&gt; 
 #&gt; [2 rows x 10 columns]</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="retail.html#cb136-1" aria-hidden="true"></a>monetary <span class="op">=</span> ecom_uk.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">&#39;Total&#39;</span>].<span class="bu">sum</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb137"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb137-1"><a href="retail.html#cb137-1" aria-hidden="true"></a>monetary</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="retail.html#cb151-1" aria-hidden="true"></a>monetary <span class="op">=</span> ecom_uk.groupby(by<span class="op">=</span>[<span class="st">&#39;CustomerID&#39;</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">&#39;Total&#39;</span>].<span class="bu">sum</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="retail.html#cb152-1" aria-hidden="true"></a>monetary</span></code></pre></div>
 <pre><code>#&gt;       CustomerID     Total
 #&gt; 0          12346  77183.60
 #&gt; 1          12747    689.49
@@ -702,10 +694,10 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <div id="merge-column-based-on-customerid" class="section level4" number="4.2.3.4">
 <h4><span class="header-section-number">4.2.3.4</span> Merge Column based on CustomerID</h4>
 <p>Setelah mendapatkan informasi pada setiap faktor penting, langkah selanjutnya adalah menyimpannya kedalam sebuah dataframe baru.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a href="retail.html#cb139-1" aria-hidden="true"></a>new_ <span class="op">=</span> monetary.merge(trans_cust,on<span class="op">=</span><span class="st">&#39;CustomerID&#39;</span>)</span>
-<span id="cb139-2"><a href="retail.html#cb139-2" aria-hidden="true"></a>new_data <span class="op">=</span> new_.merge(recent,on<span class="op">=</span><span class="st">&#39;CustomerID&#39;</span>)</span>
-<span id="cb139-3"><a href="retail.html#cb139-3" aria-hidden="true"></a>new_data.rename(columns<span class="op">=</span>{<span class="st">&#39;Total&#39;</span>:<span class="st">&#39;Monetary&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>:<span class="st">&#39;Frequency&#39;</span>,<span class="st">&#39;Days Recent&#39;</span>:<span class="st">&#39;Recency&#39;</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb139-4"><a href="retail.html#cb139-4" aria-hidden="true"></a>new_data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="retail.html#cb154-1" aria-hidden="true"></a>new_ <span class="op">=</span> monetary.merge(trans_cust,on<span class="op">=</span><span class="st">&#39;CustomerID&#39;</span>)</span>
+<span id="cb154-2"><a href="retail.html#cb154-2" aria-hidden="true"></a>new_data <span class="op">=</span> new_.merge(recent,on<span class="op">=</span><span class="st">&#39;CustomerID&#39;</span>)</span>
+<span id="cb154-3"><a href="retail.html#cb154-3" aria-hidden="true"></a>new_data.rename(columns<span class="op">=</span>{<span class="st">&#39;Total&#39;</span>:<span class="st">&#39;Monetary&#39;</span>,<span class="st">&#39;InvoiceNo&#39;</span>:<span class="st">&#39;Frequency&#39;</span>,<span class="st">&#39;Days Recent&#39;</span>:<span class="st">&#39;Recency&#39;</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb154-4"><a href="retail.html#cb154-4" aria-hidden="true"></a>new_data.head()</span></code></pre></div>
 <pre><code>#&gt;    CustomerID  Monetary  Frequency  Recency
 #&gt; 0       12346  77183.60          1      325
 #&gt; 1       12747    689.49         11        2
@@ -723,7 +715,7 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 <div id="recency-1" class="section level4" number="4.2.4.2">
 <h4><span class="header-section-number">4.2.4.2</span> Recency</h4>
 <p>Pada faktor Recency, customer yang memiliki <em>recent</em> trasaksi akan di kategorikan pada <code>high-value customer</code>. Kenapa? Karena customer tersebut berpotensi untuk melakukan pembelian lagi dibanding dengan customer yang sudah lama tidak melakukan pembelian.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a href="retail.html#cb141-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Recency&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="retail.html#cb156-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Recency&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt; count    3921.000000
 #&gt; mean       91.722265
 #&gt; std        99.528532
@@ -734,15 +726,15 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; max       373.000000
 #&gt; Name: Recency, dtype: float64</code></pre>
 <p>Teknik elbow mwthod untuk menentukan jumlah cluster yang terbentuk.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb143-1"><a href="retail.html#cb143-1" aria-hidden="true"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb143-2"><a href="retail.html#cb143-2" aria-hidden="true"></a></span>
-<span id="cb143-3"><a href="retail.html#cb143-3" aria-hidden="true"></a></span>
-<span id="cb143-4"><a href="retail.html#cb143-4" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
-<span id="cb143-5"><a href="retail.html#cb143-5" aria-hidden="true"></a>recency <span class="op">=</span> new_data[[<span class="st">&#39;Recency&#39;</span>]]</span>
-<span id="cb143-6"><a href="retail.html#cb143-6" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
-<span id="cb143-7"><a href="retail.html#cb143-7" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(recency)</span>
-<span id="cb143-8"><a href="retail.html#cb143-8" aria-hidden="true"></a>    recency[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
-<span id="cb143-9"><a href="retail.html#cb143-9" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="retail.html#cb158-1" aria-hidden="true"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb158-2"><a href="retail.html#cb158-2" aria-hidden="true"></a></span>
+<span id="cb158-3"><a href="retail.html#cb158-3" aria-hidden="true"></a></span>
+<span id="cb158-4"><a href="retail.html#cb158-4" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
+<span id="cb158-5"><a href="retail.html#cb158-5" aria-hidden="true"></a>recency <span class="op">=</span> new_data[[<span class="st">&#39;Recency&#39;</span>]]</span>
+<span id="cb158-6"><a href="retail.html#cb158-6" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
+<span id="cb158-7"><a href="retail.html#cb158-7" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(recency)</span>
+<span id="cb158-8"><a href="retail.html#cb158-8" aria-hidden="true"></a>    recency[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
+<span id="cb158-9"><a href="retail.html#cb158-9" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
 <pre><code>#&gt; &lt;string&gt;:3: SettingWithCopyWarning: 
 #&gt; A value is trying to be set on a copy of a slice from a DataFrame.
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
@@ -788,46 +780,46 @@ Cara yang paling umum dilakukan adalah pemberian diskon pada product tertentu at
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
 #&gt; 
 #&gt; See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb145-1"><a href="retail.html#cb145-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="retail.html#cb160-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
 <pre><code>#&gt; &lt;Figure size 700x500 with 0 Axes&gt;</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb147-1"><a href="retail.html#cb147-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
-<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x00000221B241EE80&gt;]</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="retail.html#cb149-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="retail.html#cb162-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
+<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x000001F2B25781C0&gt;]</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="retail.html#cb164-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; Text(0.5, 0, &#39;Number of cluster&#39;)</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="retail.html#cb151-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-104-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="retail.html#cb152-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb152-2"><a href="retail.html#cb152-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Recency&#39;</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="retail.html#cb166-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-115-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="retail.html#cb167-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb167-2"><a href="retail.html#cb167-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Recency&#39;</span>]])</span></code></pre></div>
 <pre><code>#&gt; KMeans(n_clusters=3)</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="retail.html#cb154-1" aria-hidden="true"></a>new_data[<span class="st">&#39;RecencyCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Recency&#39;</span>]])</span></code></pre></div>
-<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="retail.html#cb155-1" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;RecencyCluster&#39;</span>)[<span class="st">&#39;Recency&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="retail.html#cb169-1" aria-hidden="true"></a>new_data[<span class="st">&#39;RecencyCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Recency&#39;</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="retail.html#cb170-1" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;RecencyCluster&#39;</span>)[<span class="st">&#39;Recency&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt;                  count        mean        std  ...    50%     75%    max
 #&gt; RecencyCluster                                 ...                      
-#&gt; 0               2640.0   31.902273  25.336528  ...   25.0   51.00   93.0
+#&gt; 0                723.0  154.673582  37.878377  ...  155.0  186.00  222.0
 #&gt; 1                558.0  293.175627  45.309128  ...  283.5  325.75  373.0
-#&gt; 2                723.0  154.673582  37.878377  ...  155.0  186.00  222.0
+#&gt; 2               2640.0   31.902273  25.336528  ...   25.0   51.00   93.0
 #&gt; 
 #&gt; [3 rows x 8 columns]</code></pre>
 <p>Berdasarkan visualisasi grafik elbow, maka jumlah cluster ideal yang dapat dibentuk adalah sebanyak 3 cluster. Pada hasil di atas menunjukkan bahwa cluster 1 mengandung informasi customer yang melakukan transaksi paling baru (most recent) sedangkan cluster 0 mengandung informasi customer yang sudah lama tidak melakukan transaksi pembelian.</p>
 <p>Untuk keperluan standarisasi, maka perlu dilakukan re-order cluster sehingga cluster 0 akan memuat informasi <code>low-value customer</code>, cluster 1 <code>medium-value customer</code> dan cluster 2 <code>high-value customer</code>.
 Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recency rendah akan dikategorikan pada cluster 2.</p>
 <p>Dibawah ini adalah fungsi untuk melakukan reorder cluster :</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="retail.html#cb157-1" aria-hidden="true"></a><span class="co">#function for ordering cluster numbers</span></span>
-<span id="cb157-2"><a href="retail.html#cb157-2" aria-hidden="true"></a><span class="kw">def</span> order_cluster(cluster_field_name, target_field_name,df,ascending):</span>
-<span id="cb157-3"><a href="retail.html#cb157-3" aria-hidden="true"></a>    new_cluster_field_name <span class="op">=</span> <span class="st">&#39;new_&#39;</span> <span class="op">+</span> cluster_field_name</span>
-<span id="cb157-4"><a href="retail.html#cb157-4" aria-hidden="true"></a>    df_new <span class="op">=</span> df.groupby(cluster_field_name)[target_field_name].mean().reset_index()</span>
-<span id="cb157-5"><a href="retail.html#cb157-5" aria-hidden="true"></a>    df_new <span class="op">=</span> df_new.sort_values(by<span class="op">=</span>target_field_name,ascending<span class="op">=</span>ascending).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb157-6"><a href="retail.html#cb157-6" aria-hidden="true"></a>    df_new[<span class="st">&#39;index&#39;</span>] <span class="op">=</span> df_new.index</span>
-<span id="cb157-7"><a href="retail.html#cb157-7" aria-hidden="true"></a>    df_final <span class="op">=</span> pd.merge(df,df_new[[cluster_field_name,<span class="st">&#39;index&#39;</span>]], on<span class="op">=</span>cluster_field_name)</span>
-<span id="cb157-8"><a href="retail.html#cb157-8" aria-hidden="true"></a>    df_final <span class="op">=</span> df_final.drop([cluster_field_name],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb157-9"><a href="retail.html#cb157-9" aria-hidden="true"></a>    df_final <span class="op">=</span> df_final.rename(columns<span class="op">=</span>{<span class="st">&quot;index&quot;</span>:cluster_field_name})</span>
-<span id="cb157-10"><a href="retail.html#cb157-10" aria-hidden="true"></a>    <span class="cf">return</span> df_final</span></code></pre></div>
-<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="retail.html#cb158-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;RecencyCluster&#39;</span>, <span class="st">&#39;Recency&#39;</span>,new_data,<span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="retail.html#cb172-1" aria-hidden="true"></a><span class="co">#function for ordering cluster numbers</span></span>
+<span id="cb172-2"><a href="retail.html#cb172-2" aria-hidden="true"></a><span class="kw">def</span> order_cluster(cluster_field_name, target_field_name,df,ascending):</span>
+<span id="cb172-3"><a href="retail.html#cb172-3" aria-hidden="true"></a>    new_cluster_field_name <span class="op">=</span> <span class="st">&#39;new_&#39;</span> <span class="op">+</span> cluster_field_name</span>
+<span id="cb172-4"><a href="retail.html#cb172-4" aria-hidden="true"></a>    df_new <span class="op">=</span> df.groupby(cluster_field_name)[target_field_name].mean().reset_index()</span>
+<span id="cb172-5"><a href="retail.html#cb172-5" aria-hidden="true"></a>    df_new <span class="op">=</span> df_new.sort_values(by<span class="op">=</span>target_field_name,ascending<span class="op">=</span>ascending).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb172-6"><a href="retail.html#cb172-6" aria-hidden="true"></a>    df_new[<span class="st">&#39;index&#39;</span>] <span class="op">=</span> df_new.index</span>
+<span id="cb172-7"><a href="retail.html#cb172-7" aria-hidden="true"></a>    df_final <span class="op">=</span> pd.merge(df,df_new[[cluster_field_name,<span class="st">&#39;index&#39;</span>]], on<span class="op">=</span>cluster_field_name)</span>
+<span id="cb172-8"><a href="retail.html#cb172-8" aria-hidden="true"></a>    df_final <span class="op">=</span> df_final.drop([cluster_field_name],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb172-9"><a href="retail.html#cb172-9" aria-hidden="true"></a>    df_final <span class="op">=</span> df_final.rename(columns<span class="op">=</span>{<span class="st">&quot;index&quot;</span>:cluster_field_name})</span>
+<span id="cb172-10"><a href="retail.html#cb172-10" aria-hidden="true"></a>    <span class="cf">return</span> df_final</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="retail.html#cb173-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;RecencyCluster&#39;</span>, <span class="st">&#39;Recency&#39;</span>,new_data,<span class="va">False</span>)</span></code></pre></div>
 </div>
 <div id="frequency-1" class="section level4" number="4.2.4.3">
 <h4><span class="header-section-number">4.2.4.3</span> Frequency</h4>
 <p>Factor penting selanjutnya adalah Frequency. Pada step frequency, customer yang memiliki banyak transaksi pembelian akan dikategorikan pada level <code>high-value customer</code>.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="retail.html#cb159-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Frequency&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="retail.html#cb174-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Frequency&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt; count    3921.000000
 #&gt; mean        4.246111
 #&gt; std         7.205750
@@ -837,12 +829,12 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; 75%         5.000000
 #&gt; max       210.000000
 #&gt; Name: Frequency, dtype: float64</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb161-1"><a href="retail.html#cb161-1" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
-<span id="cb161-2"><a href="retail.html#cb161-2" aria-hidden="true"></a>frequency <span class="op">=</span> new_data[[<span class="st">&#39;Frequency&#39;</span>]]</span>
-<span id="cb161-3"><a href="retail.html#cb161-3" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
-<span id="cb161-4"><a href="retail.html#cb161-4" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(frequency)</span>
-<span id="cb161-5"><a href="retail.html#cb161-5" aria-hidden="true"></a>    frequency[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
-<span id="cb161-6"><a href="retail.html#cb161-6" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="retail.html#cb176-1" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
+<span id="cb176-2"><a href="retail.html#cb176-2" aria-hidden="true"></a>frequency <span class="op">=</span> new_data[[<span class="st">&#39;Frequency&#39;</span>]]</span>
+<span id="cb176-3"><a href="retail.html#cb176-3" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
+<span id="cb176-4"><a href="retail.html#cb176-4" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(frequency)</span>
+<span id="cb176-5"><a href="retail.html#cb176-5" aria-hidden="true"></a>    frequency[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
+<span id="cb176-6"><a href="retail.html#cb176-6" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
 <pre><code>#&gt; &lt;string&gt;:3: SettingWithCopyWarning: 
 #&gt; A value is trying to be set on a copy of a slice from a DataFrame.
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
@@ -888,33 +880,33 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
 #&gt; 
 #&gt; See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="retail.html#cb163-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="retail.html#cb178-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
 <pre><code>#&gt; &lt;Figure size 700x500 with 0 Axes&gt;</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="retail.html#cb165-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
-<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x00000221B2485D30&gt;]</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="retail.html#cb167-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="retail.html#cb180-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
+<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x000001F2B26179D0&gt;]</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="retail.html#cb182-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; Text(0.5, 0, &#39;Number of cluster&#39;)</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="retail.html#cb169-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-110-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="retail.html#cb170-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb170-2"><a href="retail.html#cb170-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Frequency&#39;</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="retail.html#cb184-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-121-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="retail.html#cb185-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb185-2"><a href="retail.html#cb185-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Frequency&#39;</span>]])</span></code></pre></div>
 <pre><code>#&gt; KMeans(n_clusters=3)</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="retail.html#cb172-1" aria-hidden="true"></a>new_data[<span class="st">&#39;FrequencyCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Frequency&#39;</span>]])</span>
-<span id="cb172-2"><a href="retail.html#cb172-2" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;FrequencyCluster&#39;</span>)[<span class="st">&#39;Frequency&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="retail.html#cb187-1" aria-hidden="true"></a>new_data[<span class="st">&#39;FrequencyCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Frequency&#39;</span>]])</span>
+<span id="cb187-2"><a href="retail.html#cb187-2" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;FrequencyCluster&#39;</span>)[<span class="st">&#39;Frequency&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt;                    count        mean        std  ...   50%     75%    max
 #&gt; FrequencyCluster                                 ...                     
-#&gt; 0                 3612.0    2.848837   2.195982  ...   2.0    4.00   10.0
-#&gt; 1                    6.0  116.833333  47.562240  ...  95.0  117.25  210.0
-#&gt; 2                  303.0   18.673267   9.738069  ...  15.0   21.00   63.0
+#&gt; 0                 3729.0    3.130598   2.672453  ...   2.0    4.00   13.0
+#&gt; 1                  186.0   22.978495  10.302955  ...  19.0   26.00   63.0
+#&gt; 2                    6.0  116.833333  47.562240  ...  95.0  117.25  210.0
 #&gt; 
 #&gt; [3 rows x 8 columns]</code></pre>
 <p>Sama halnya dengan tahapan pada step Recency, pada step ini juga perlu dilakukan standarisasi cluster dengan melakukan reorder pada cluster. Sehingga cluster 0 dengan nilai frequency yang rendah akan dikategorikan pada level <code>low-value customer</code> sedangkan cluster 2 dengan nilai frequency tinggi akan dikategorikan pada level <code>high-values customer</code>.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="retail.html#cb174-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;FrequencyCluster&#39;</span>, <span class="st">&#39;Frequency&#39;</span>,new_data,<span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="retail.html#cb189-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;FrequencyCluster&#39;</span>, <span class="st">&#39;Frequency&#39;</span>,new_data,<span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="monetary-1" class="section level4" number="4.2.4.4">
 <h4><span class="header-section-number">4.2.4.4</span> Monetary</h4>
 <p>Faktor penting terakhir pada RFM analysis adalah Monetary. Customer dengan nilai monetary yang tinggi akan dikategorikan pada level <code>high-value customer</code> dikarenakan berkontribusi besar dalam pendapatan yang dihasilkan industry.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="retail.html#cb175-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Monetary&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="retail.html#cb190-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Monetary&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt; count      3921.000000
 #&gt; mean        293.299913
 #&gt; std        3261.756525
@@ -924,12 +916,12 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; 75%         124.500000
 #&gt; max      168471.250000
 #&gt; Name: Monetary, dtype: float64</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="retail.html#cb177-1" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
-<span id="cb177-2"><a href="retail.html#cb177-2" aria-hidden="true"></a>monetary_ <span class="op">=</span> new_data[[<span class="st">&#39;Monetary&#39;</span>]]</span>
-<span id="cb177-3"><a href="retail.html#cb177-3" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
-<span id="cb177-4"><a href="retail.html#cb177-4" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(monetary_)</span>
-<span id="cb177-5"><a href="retail.html#cb177-5" aria-hidden="true"></a>    monetary_[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
-<span id="cb177-6"><a href="retail.html#cb177-6" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="retail.html#cb192-1" aria-hidden="true"></a>sse<span class="op">=</span>{}</span>
+<span id="cb192-2"><a href="retail.html#cb192-2" aria-hidden="true"></a>monetary_ <span class="op">=</span> new_data[[<span class="st">&#39;Monetary&#39;</span>]]</span>
+<span id="cb192-3"><a href="retail.html#cb192-3" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
+<span id="cb192-4"><a href="retail.html#cb192-4" aria-hidden="true"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(monetary_)</span>
+<span id="cb192-5"><a href="retail.html#cb192-5" aria-hidden="true"></a>    monetary_[<span class="st">&quot;clusters&quot;</span>] <span class="op">=</span> kmeans.labels_</span>
+<span id="cb192-6"><a href="retail.html#cb192-6" aria-hidden="true"></a>    sse[k] <span class="op">=</span> kmeans.inertia_ </span></code></pre></div>
 <pre><code>#&gt; &lt;string&gt;:3: SettingWithCopyWarning: 
 #&gt; A value is trying to be set on a copy of a slice from a DataFrame.
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
@@ -975,34 +967,34 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; Try using .loc[row_indexer,col_indexer] = value instead
 #&gt; 
 #&gt; See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb179-1"><a href="retail.html#cb179-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="retail.html#cb194-1" aria-hidden="true"></a>plt.figure()</span></code></pre></div>
 <pre><code>#&gt; &lt;Figure size 700x500 with 0 Axes&gt;</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="retail.html#cb181-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
-<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x00000221B24548B0&gt;]</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb183-1"><a href="retail.html#cb183-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="retail.html#cb196-1" aria-hidden="true"></a>plt.plot(<span class="bu">list</span>(sse.keys()), <span class="bu">list</span>(sse.values()))</span></code></pre></div>
+<pre><code>#&gt; [&lt;matplotlib.lines.Line2D object at 0x000001F2B25EAD30&gt;]</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="retail.html#cb198-1" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Number of cluster&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; Text(0.5, 0, &#39;Number of cluster&#39;)</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb185-1"><a href="retail.html#cb185-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
-<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-114-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="retail.html#cb186-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb186-2"><a href="retail.html#cb186-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Monetary&#39;</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="retail.html#cb200-1" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="bookmlindustry_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="retail.html#cb201-1" aria-hidden="true"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb201-2"><a href="retail.html#cb201-2" aria-hidden="true"></a>kmeans.fit(new_data[[<span class="st">&#39;Monetary&#39;</span>]])</span></code></pre></div>
 <pre><code>#&gt; KMeans(n_clusters=3)</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="retail.html#cb188-1" aria-hidden="true"></a>new_data[<span class="st">&#39;MonetaryCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Monetary&#39;</span>]])</span>
-<span id="cb188-2"><a href="retail.html#cb188-2" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;MonetaryCluster&#39;</span>)[<span class="st">&#39;Monetary&#39;</span>].describe()</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="retail.html#cb203-1" aria-hidden="true"></a>new_data[<span class="st">&#39;MonetaryCluster&#39;</span>] <span class="op">=</span> kmeans.predict(new_data[[<span class="st">&#39;Monetary&#39;</span>]])</span>
+<span id="cb203-2"><a href="retail.html#cb203-2" aria-hidden="true"></a>new_data.groupby(<span class="st">&#39;MonetaryCluster&#39;</span>)[<span class="st">&#39;Monetary&#39;</span>].describe()</span></code></pre></div>
 <pre><code>#&gt;                   count           mean  ...         75%        max
 #&gt; MonetaryCluster                         ...                       
-#&gt; 0                3914.0     189.384371  ...     123.200   17895.28
+#&gt; 0                   6.0   40051.213333  ...   41519.325   77183.60
 #&gt; 1                   1.0  168471.250000  ...  168471.250  168471.25
-#&gt; 2                   6.0   40051.213333  ...   41519.325   77183.60
+#&gt; 2                3914.0     189.384371  ...     123.200   17895.28
 #&gt; 
 #&gt; [3 rows x 8 columns]</code></pre>
 <p>Reorder cluster untuk standarisasi cluster sehingga cluster 0 dengan nilai monetary rendah akan dikategorikan dalam <code>low-value customer</code> sedangkan cluster 2 dengan nilai monetary tinggi akan dikelompokkan pada <code>high-values customer</code>.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="retail.html#cb190-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;MonetaryCluster&#39;</span>, <span class="st">&#39;Monetary&#39;</span>,new_data,<span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="retail.html#cb205-1" aria-hidden="true"></a>new_data <span class="op">=</span> order_cluster(<span class="st">&#39;MonetaryCluster&#39;</span>, <span class="st">&#39;Monetary&#39;</span>,new_data,<span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="segmentation-customer-based-on-cluster" class="section level4" number="4.2.4.5">
 <h4><span class="header-section-number">4.2.4.5</span> Segmentation Customer based on Cluster</h4>
 <p>Setelah memperoleh nilai cluster terurut pada setiap observasi data, langkah selanjutnya adalah memberikan label pada masing-masing observasi. Label ini bertujuan untuk mengidentifikasi level pada masing-masing customer apakah tergolong pada <code>low-value customer</code>, <code>medium-value customer</code> atau <code>high-value customer</code>.</p>
 <p>Proses pelabelan terdiri dari beberapa tahapan yang antara lain adalah :</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="retail.html#cb191-1" aria-hidden="true"></a>new_data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="retail.html#cb206-1" aria-hidden="true"></a>new_data.head()</span></code></pre></div>
 <pre><code>#&gt;    CustomerID  Monetary  ...  FrequencyCluster  MonetaryCluster
 #&gt; 0       12346  77183.60  ...                 0                1
 #&gt; 1       15098  39916.50  ...                 0                1
@@ -1014,16 +1006,16 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 <ol style="list-style-type: lower-alpha">
 <li>Menghitung score pada masing-masing observasi dengan melakukan penjumlahan pada nilai cluster.</li>
 </ol>
-<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="retail.html#cb193-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Score&#39;</span>] <span class="op">=</span> new_data[<span class="st">&#39;RecencyCluster&#39;</span>] <span class="op">+</span> new_data[<span class="st">&#39;FrequencyCluster&#39;</span>] <span class="op">+</span> new_data[<span class="st">&#39;MonetaryCluster&#39;</span>]</span>
-<span id="cb193-2"><a href="retail.html#cb193-2" aria-hidden="true"></a>new_data.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb208-1"><a href="retail.html#cb208-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Score&#39;</span>] <span class="op">=</span> new_data[<span class="st">&#39;RecencyCluster&#39;</span>] <span class="op">+</span> new_data[<span class="st">&#39;FrequencyCluster&#39;</span>] <span class="op">+</span> new_data[<span class="st">&#39;MonetaryCluster&#39;</span>]</span>
+<span id="cb208-2"><a href="retail.html#cb208-2" aria-hidden="true"></a>new_data.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;    CustomerID  Monetary  Frequency  ...  FrequencyCluster  MonetaryCluster  Score
 #&gt; 0       12346   77183.6          1  ...                 0                1      1
 #&gt; 1       15098   39916.5          3  ...                 0                1      2
 #&gt; 
 #&gt; [2 rows x 8 columns]</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="retail.html#cb195-1" aria-hidden="true"></a><span class="bu">print</span>(new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">min</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="retail.html#cb210-1" aria-hidden="true"></a><span class="bu">print</span>(new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">min</span>())</span></code></pre></div>
 <pre><code>#&gt; 0</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="retail.html#cb197-1" aria-hidden="true"></a><span class="bu">print</span>(new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">max</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="retail.html#cb212-1" aria-hidden="true"></a><span class="bu">print</span>(new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">max</span>())</span></code></pre></div>
 <pre><code>#&gt; 4</code></pre>
 <p>Dari hasil di atas diperoleh informasi bahwa minimum score pada data adalah 0, sedangkan maksimum value pada data adalah 4. Sehingga untuk segmentasi label dapat dikategorikan berdasarkan ketentuan berikut :</p>
 <ul>
@@ -1031,17 +1023,17 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 <li>Customer dengan score &lt;= 3 akan masuk dalam kategori <code>medium-value customer</code></li>
 <li>Customer dengan score &gt; 3 akan masuk dalam kategori <code>high-value customer</code></li>
 </ul>
-<div class="sourceCode" id="cb199"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a href="retail.html#cb199-1" aria-hidden="true"></a>label <span class="op">=</span> []</span>
-<span id="cb199-2"><a href="retail.html#cb199-2" aria-hidden="true"></a></span>
-<span id="cb199-3"><a href="retail.html#cb199-3" aria-hidden="true"></a><span class="kw">def</span> label_(data) :</span>
-<span id="cb199-4"><a href="retail.html#cb199-4" aria-hidden="true"></a>    <span class="cf">if</span> data <span class="op">&lt;=</span> <span class="dv">1</span> :</span>
-<span id="cb199-5"><a href="retail.html#cb199-5" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;Low&quot;</span></span>
-<span id="cb199-6"><a href="retail.html#cb199-6" aria-hidden="true"></a>    <span class="cf">elif</span> data <span class="op">&lt;=</span> <span class="dv">3</span> :</span>
-<span id="cb199-7"><a href="retail.html#cb199-7" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;Medium&quot;</span></span>
-<span id="cb199-8"><a href="retail.html#cb199-8" aria-hidden="true"></a>    <span class="cf">else</span> :</span>
-<span id="cb199-9"><a href="retail.html#cb199-9" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;High&quot;</span></span>
-<span id="cb199-10"><a href="retail.html#cb199-10" aria-hidden="true"></a>    label.append(lab)</span></code></pre></div>
-<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="retail.html#cb200-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">apply</span>(label_)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="retail.html#cb214-1" aria-hidden="true"></a>label <span class="op">=</span> []</span>
+<span id="cb214-2"><a href="retail.html#cb214-2" aria-hidden="true"></a></span>
+<span id="cb214-3"><a href="retail.html#cb214-3" aria-hidden="true"></a><span class="kw">def</span> label_(data) :</span>
+<span id="cb214-4"><a href="retail.html#cb214-4" aria-hidden="true"></a>    <span class="cf">if</span> data <span class="op">&lt;=</span> <span class="dv">1</span> :</span>
+<span id="cb214-5"><a href="retail.html#cb214-5" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;Low&quot;</span></span>
+<span id="cb214-6"><a href="retail.html#cb214-6" aria-hidden="true"></a>    <span class="cf">elif</span> data <span class="op">&lt;=</span> <span class="dv">3</span> :</span>
+<span id="cb214-7"><a href="retail.html#cb214-7" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;Medium&quot;</span></span>
+<span id="cb214-8"><a href="retail.html#cb214-8" aria-hidden="true"></a>    <span class="cf">else</span> :</span>
+<span id="cb214-9"><a href="retail.html#cb214-9" aria-hidden="true"></a>        lab <span class="op">=</span> <span class="st">&quot;High&quot;</span></span>
+<span id="cb214-10"><a href="retail.html#cb214-10" aria-hidden="true"></a>    label.append(lab)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="retail.html#cb215-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Score&#39;</span>].<span class="bu">apply</span>(label_)</span></code></pre></div>
 <pre><code>#&gt; 0       None
 #&gt; 1       None
 #&gt; 2       None
@@ -1054,8 +1046,8 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; 3919    None
 #&gt; 3920    None
 #&gt; Name: Score, Length: 3921, dtype: object</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb202-1"><a href="retail.html#cb202-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Label&#39;</span>] <span class="op">=</span> label</span></code></pre></div>
-<div class="sourceCode" id="cb203"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="retail.html#cb203-1" aria-hidden="true"></a>new_data.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="retail.html#cb217-1" aria-hidden="true"></a>new_data[<span class="st">&#39;Label&#39;</span>] <span class="op">=</span> label</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb218-1"><a href="retail.html#cb218-1" aria-hidden="true"></a>new_data.head(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt;    CustomerID  Monetary  Frequency  ...  MonetaryCluster  Score   Label
 #&gt; 0       12346   77183.6          1  ...                1      1     Low
 #&gt; 1       15098   39916.5          3  ...                1      2  Medium
@@ -1066,34 +1058,34 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 <div id="customers-behavior-in-each-factor-based-on-their-label" class="section level3" number="4.2.5">
 <h3><span class="header-section-number">4.2.5</span> Customer’s behavior in each factor based on their label</h3>
 <p>Setelah memberikan label pada masing-masing customer, apakah sudah cukup membantu untuk tim management dalam menentukan strategi marketing yang tepat? Jawabannya dapat Ya atau Tidak. Tidak dikarenakan management perlu untuk mengetahui informasi detail dari behavior (kebiasaan) customer pada setiap level dalam melakukan pembelanjaan. Oleh karena itu, sebelum melangkah lebih jauh, terlebih dahulu lakukan behavior analisis sebagai berikut :</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="retail.html#cb205-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb205-2"><a href="retail.html#cb205-2" aria-hidden="true"></a></span>
-<span id="cb205-3"><a href="retail.html#cb205-3" aria-hidden="true"></a><span class="kw">def</span> neg_to_zero(x):</span>
-<span id="cb205-4"><a href="retail.html#cb205-4" aria-hidden="true"></a>    <span class="cf">if</span> x <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
-<span id="cb205-5"><a href="retail.html#cb205-5" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb205-6"><a href="retail.html#cb205-6" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
-<span id="cb205-7"><a href="retail.html#cb205-7" aria-hidden="true"></a>        <span class="cf">return</span> x</span>
-<span id="cb205-8"><a href="retail.html#cb205-8" aria-hidden="true"></a></span>
-<span id="cb205-9"><a href="retail.html#cb205-9" aria-hidden="true"></a>new_data[<span class="st">&#39;Recency&#39;</span>] <span class="op">=</span> [neg_to_zero(x) <span class="cf">for</span> x <span class="kw">in</span> new_data.Recency]</span>
-<span id="cb205-10"><a href="retail.html#cb205-10" aria-hidden="true"></a>new_data[<span class="st">&#39;Monetary&#39;</span>] <span class="op">=</span> [neg_to_zero(x) <span class="cf">for</span> x <span class="kw">in</span> new_data.Monetary]</span>
-<span id="cb205-11"><a href="retail.html#cb205-11" aria-hidden="true"></a></span>
-<span id="cb205-12"><a href="retail.html#cb205-12" aria-hidden="true"></a>rfm_log <span class="op">=</span> new_data[[<span class="st">&#39;Recency&#39;</span>, <span class="st">&#39;Frequency&#39;</span>, <span class="st">&#39;Monetary&#39;</span>]].<span class="bu">apply</span>(np.log, axis <span class="op">=</span> <span class="dv">1</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="retail.html#cb206-1" aria-hidden="true"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb206-2"><a href="retail.html#cb206-2" aria-hidden="true"></a>    </span>
-<span id="cb206-3"><a href="retail.html#cb206-3" aria-hidden="true"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb206-4"><a href="retail.html#cb206-4" aria-hidden="true"></a>rfm_scaled <span class="op">=</span> scaler.fit_transform(rfm_log)</span>
-<span id="cb206-5"><a href="retail.html#cb206-5" aria-hidden="true"></a></span>
-<span id="cb206-6"><a href="retail.html#cb206-6" aria-hidden="true"></a>rfm_scaled <span class="op">=</span> pd.DataFrame(rfm_scaled, index <span class="op">=</span> new_data.index, columns <span class="op">=</span> rfm_log.columns)</span></code></pre></div>
-<div class="sourceCode" id="cb207"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a href="retail.html#cb207-1" aria-hidden="true"></a>rfm_scaled.head()</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb220-1"><a href="retail.html#cb220-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb220-2"><a href="retail.html#cb220-2" aria-hidden="true"></a></span>
+<span id="cb220-3"><a href="retail.html#cb220-3" aria-hidden="true"></a><span class="kw">def</span> neg_to_zero(x):</span>
+<span id="cb220-4"><a href="retail.html#cb220-4" aria-hidden="true"></a>    <span class="cf">if</span> x <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb220-5"><a href="retail.html#cb220-5" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb220-6"><a href="retail.html#cb220-6" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
+<span id="cb220-7"><a href="retail.html#cb220-7" aria-hidden="true"></a>        <span class="cf">return</span> x</span>
+<span id="cb220-8"><a href="retail.html#cb220-8" aria-hidden="true"></a></span>
+<span id="cb220-9"><a href="retail.html#cb220-9" aria-hidden="true"></a>new_data[<span class="st">&#39;Recency&#39;</span>] <span class="op">=</span> [neg_to_zero(x) <span class="cf">for</span> x <span class="kw">in</span> new_data.Recency]</span>
+<span id="cb220-10"><a href="retail.html#cb220-10" aria-hidden="true"></a>new_data[<span class="st">&#39;Monetary&#39;</span>] <span class="op">=</span> [neg_to_zero(x) <span class="cf">for</span> x <span class="kw">in</span> new_data.Monetary]</span>
+<span id="cb220-11"><a href="retail.html#cb220-11" aria-hidden="true"></a></span>
+<span id="cb220-12"><a href="retail.html#cb220-12" aria-hidden="true"></a>rfm_log <span class="op">=</span> new_data[[<span class="st">&#39;Recency&#39;</span>, <span class="st">&#39;Frequency&#39;</span>, <span class="st">&#39;Monetary&#39;</span>]].<span class="bu">apply</span>(np.log, axis <span class="op">=</span> <span class="dv">1</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="retail.html#cb221-1" aria-hidden="true"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb221-2"><a href="retail.html#cb221-2" aria-hidden="true"></a>    </span>
+<span id="cb221-3"><a href="retail.html#cb221-3" aria-hidden="true"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb221-4"><a href="retail.html#cb221-4" aria-hidden="true"></a>rfm_scaled <span class="op">=</span> scaler.fit_transform(rfm_log)</span>
+<span id="cb221-5"><a href="retail.html#cb221-5" aria-hidden="true"></a></span>
+<span id="cb221-6"><a href="retail.html#cb221-6" aria-hidden="true"></a>rfm_scaled <span class="op">=</span> pd.DataFrame(rfm_scaled, index <span class="op">=</span> new_data.index, columns <span class="op">=</span> rfm_log.columns)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="retail.html#cb222-1" aria-hidden="true"></a>rfm_scaled.head()</span></code></pre></div>
 <pre><code>#&gt;     Recency  Frequency  Monetary
 #&gt; 0  1.389971  -1.049966  4.788147
 #&gt; 1  0.996792   0.170733  4.359157
 #&gt; 2 -0.064790   3.551812  4.038228
 #&gt; 3 -1.121628   3.203041  4.098768
 #&gt; 4 -2.530970   3.178605  4.172979</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb209-1"><a href="retail.html#cb209-1" aria-hidden="true"></a>rfm_scaled[<span class="st">&#39;Label&#39;</span>] <span class="op">=</span> new_data.Label</span>
-<span id="cb209-2"><a href="retail.html#cb209-2" aria-hidden="true"></a>rfm_scaled[<span class="st">&#39;CustomerID&#39;</span>] <span class="op">=</span> new_data.CustomerID</span></code></pre></div>
-<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="retail.html#cb210-1" aria-hidden="true"></a>rfm_scaled</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb224-1"><a href="retail.html#cb224-1" aria-hidden="true"></a>rfm_scaled[<span class="st">&#39;Label&#39;</span>] <span class="op">=</span> new_data.Label</span>
+<span id="cb224-2"><a href="retail.html#cb224-2" aria-hidden="true"></a>rfm_scaled[<span class="st">&#39;CustomerID&#39;</span>] <span class="op">=</span> new_data.CustomerID</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="retail.html#cb225-1" aria-hidden="true"></a>rfm_scaled</span></code></pre></div>
 <pre><code>#&gt;        Recency  Frequency  Monetary   Label  CustomerID
 #&gt; 0     1.389971  -1.049966  4.788147     Low       12346
 #&gt; 1     0.996792   0.170733  4.359157  Medium       15098
@@ -1108,9 +1100,9 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; 3920 -2.530970  -0.280226  5.296556    High       16446
 #&gt; 
 #&gt; [3921 rows x 5 columns]</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="retail.html#cb212-1" aria-hidden="true"></a>rfm_melted <span class="op">=</span> pd.melt(frame<span class="op">=</span> rfm_scaled, id_vars<span class="op">=</span> [<span class="st">&#39;CustomerID&#39;</span>, <span class="st">&#39;Label&#39;</span>], <span class="op">\</span></span>
-<span id="cb212-2"><a href="retail.html#cb212-2" aria-hidden="true"></a>                     var_name <span class="op">=</span> <span class="st">&#39;Metrics&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;Value&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="retail.html#cb213-1" aria-hidden="true"></a>rfm_melted</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="retail.html#cb227-1" aria-hidden="true"></a>rfm_melted <span class="op">=</span> pd.melt(frame<span class="op">=</span> rfm_scaled, id_vars<span class="op">=</span> [<span class="st">&#39;CustomerID&#39;</span>, <span class="st">&#39;Label&#39;</span>], <span class="op">\</span></span>
+<span id="cb227-2"><a href="retail.html#cb227-2" aria-hidden="true"></a>                     var_name <span class="op">=</span> <span class="st">&#39;Metrics&#39;</span>, value_name <span class="op">=</span> <span class="st">&#39;Value&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb228-1"><a href="retail.html#cb228-1" aria-hidden="true"></a>rfm_melted</span></code></pre></div>
 <pre><code>#&gt;        CustomerID   Label   Metrics     Value
 #&gt; 0           12346     Low   Recency  1.389971
 #&gt; 1           15098  Medium   Recency  0.996792
@@ -1126,15 +1118,15 @@ Dikarenakan step ini adalah step Recency, maka cluster yang memiliki nilai recen
 #&gt; 
 #&gt; [11763 rows x 4 columns]</code></pre>
 <p>Visualisasi behavior customer pada setiap level.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="retail.html#cb215-1" aria-hidden="true"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb215-2"><a href="retail.html#cb215-2" aria-hidden="true"></a></span>
-<span id="cb215-3"><a href="retail.html#cb215-3" aria-hidden="true"></a><span class="co"># a snake plot with RFM</span></span>
-<span id="cb215-4"><a href="retail.html#cb215-4" aria-hidden="true"></a>sns.lineplot(x <span class="op">=</span> <span class="st">&#39;Metrics&#39;</span>, y <span class="op">=</span> <span class="st">&#39;Value&#39;</span>, hue <span class="op">=</span> <span class="st">&#39;Label&#39;</span>, data <span class="op">=</span> rfm_melted)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb230-1"><a href="retail.html#cb230-1" aria-hidden="true"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb230-2"><a href="retail.html#cb230-2" aria-hidden="true"></a></span>
+<span id="cb230-3"><a href="retail.html#cb230-3" aria-hidden="true"></a><span class="co"># a snake plot with RFM</span></span>
+<span id="cb230-4"><a href="retail.html#cb230-4" aria-hidden="true"></a>sns.lineplot(x <span class="op">=</span> <span class="st">&#39;Metrics&#39;</span>, y <span class="op">=</span> <span class="st">&#39;Value&#39;</span>, hue <span class="op">=</span> <span class="st">&#39;Label&#39;</span>, data <span class="op">=</span> rfm_melted)</span></code></pre></div>
 <pre><code>#&gt; &lt;AxesSubplot:xlabel=&#39;Metrics&#39;, ylabel=&#39;Value&#39;&gt;</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="retail.html#cb217-1" aria-hidden="true"></a>plt.title(<span class="st">&#39;Customer Behavior based on their Label&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb232-1"><a href="retail.html#cb232-1" aria-hidden="true"></a>plt.title(<span class="st">&#39;Customer Behavior based on their Label&#39;</span>)</span></code></pre></div>
 <pre><code>#&gt; Text(0.5, 1.0, &#39;Customer Behavior based on their Label&#39;)</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="retail.html#cb219-1" aria-hidden="true"></a>plt.legend(loc <span class="op">=</span> <span class="st">&#39;upper right&#39;</span>)</span></code></pre></div>
-<pre><code>#&gt; &lt;matplotlib.legend.Legend object at 0x00000221B2402220&gt;</code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb234-1"><a href="retail.html#cb234-1" aria-hidden="true"></a>plt.legend(loc <span class="op">=</span> <span class="st">&#39;upper right&#39;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;matplotlib.legend.Legend object at 0x000001F2B2802670&gt;</code></pre>
 <p>Berdasarkan visualisasi di atas diperoleh detail informasi bahwa :</p>
 <ol style="list-style-type: decimal">
 <li>Customer dengan <code>high-value</code> labels memiliki kecenderungan untuk menghabiskan banyak uang dalam berbelanja (high monetary) dan sering melakukan pembelanjaan (high frequency)</li>
