@@ -692,3 +692,204 @@ Berdasarkan rules di atas, pihak management dapat mempertimbangkan melakukan str
 
 RFM analysis adalah teknik yang umum digunakan untuk melakukan segmentasi terhadap customer berdasarkan value dan behavior selama bertransaksi. Teknik ini sangat membantu pihak management khususnya marketing team dalam menentukan strategi bisnis yang cocok untuk mempertahankan loyal customer dan menarik customer baru.
 
+## Feature Recommendation on Mobile Games
+
+### Background
+
+Dalam suatu proses bisnis, pemberian fasilitas atau fitur produk yang sesuai dengan kebutuhan dan kenyamanan user atau customer adalah hal yang penting untuk diperhatikan. Salah satu cara untuk mengetahui minat user adalah dengan melakukan A/B Testing. Di A/B Testing, terdapat 2 grup A dan B yang diberikan perlakuan yang berbeda yang kemudian akan dibandingkan performansi dari masing-masing grup. 
+
+Pada artikel ini, digunakan data dari kaggle (https://www.kaggle.com/yufengsui/mobile-games-ab-testing) untuk melakukan proses A/B Testing. Data ini berisi tentang perilaku user pada Mobile Games yang berjudul Cookie Cats. Cookie Cats merupakan permainan populer yang dikembangkan oleh  Tactile Entertainment. 
+
+Pada saat pemain melalui level-level dalam game, mereka terkadang akan menemukan gate yang memaksa mereka untuk menunggu waktu tertentu atau melakukan pembelian dalam aplikasi untuk melanjutkan permainan. Selain mendorong pembelian dalam aplikasi, gate ini juga memiliki tujuan untuk memberikan pemain istirahat dari bermain game. Sehingga dapat meningkatkan dan memperpanjang kenyamanan pemain dalam bermain game.
+
+Nah, tetapi di manakah gate itu perlu ditempatkan? Pada awalnya, gate ditempatkan di level 30. Akan tetapi perusahaan akan mencoba untuk melakukan pemindahan gate tersebut di Cookie Cats dari level 30 ke level 40. Untuk melakukan eksperimen tersebut, perusahaan memutuskan melakukan A/B Testing dan melakukan analisis apakah pemindahan tersebut berpengaruh pada kenyamanan pemain atau tidak.
+
+### Data Preparation
+
+Sebelum melakukan pemodelan, perlu dilakukan persiapan data. Data yang dipersiapkan dipastikan telah memiliki kualitas yang baik agara model yang dibangun nantinya juga model yang baik.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+```{python}
+df=pd.read_csv('cookie_cats.csv')
+```
+
+```{python}
+df.head()
+```
+
+Data ini diambil dari 90.189 pemain yang melakukan instalasi pada game pada saat A/B Testing dijalankan.
+
+Variabel-variabelnya adalah :
+1. userid - nomor unik yang mengidentifikasikan setiap pemain.
+2. version - kategori apakah pemain diletakkan di the control group (gate_30 - a gate at level 30) atau di grup dengan gate yang berpindah (gate_40 - a gate at level 40).
+3. sum_gamerounds - banyaknya ronde permainan yang dimainkan pemain selama 14 hari pertama setelah instalasi. 
+4. retention_1 - apakah pemain datang kembali dan main pada saat 1 hari setelah melakukan instalasi? 
+5. retention_7 - apakah pemain datang kembali dan main pada saat 7 hari setelah melakukan instalasi? 
+
+### Exploratory Data Analysis
+
+Mari melakukan eksplorasi pada data yang kita punya untuk lebih memahaminya!
+
+```{python}
+# EDA
+
+df.groupby("version")['sum_gamerounds'].agg(["min", "max", pd.Series.mode, "median", "mean", "std", "count"])
+```
+
+```{python}
+#memeriksa ilustrasi distribusi data
+
+def plot_distribution(dataframe):
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    sns.histplot(dataframe, x="sum_gamerounds", label='histogram', multiple="dodge", hue="version",
+                 shrink=.8, binwidth=10, ax=axes[0])
+    sns.boxplot(x=dataframe['version'], y=dataframe['sum_gamerounds'], ax=axes[1])
+
+    axes[0].set_xlim(0, 200)
+    axes[1].set_yscale('log')
+    axes[0].set_title('Distribution histogram', fontsize=14)
+    axes[1].set_title('Distribution version', fontsize=14)
+    plt.show()
+```
+
+```{python}
+plot_distribution(df)
+```
+
+Dari summary dan visualisasi data, dapat dilihat bahwa rataan dan distribusi banyaknya ronde permainan yang dimainkan pemain selama 14 hari pertama setelah instalasi pada gate_30 dan gate_40 diduga hampir sama.
+
+### Modeling
+
+#### A/B Testing
+
+Sejauh ini, ada 2 tipe A/B Testing yang sering digunakan.
+1. Tradisional Statistika : menggunakan uji hipotesis signifikansi rataan
+2. Bayesian A/B Testing : menggunakan prinsip bayesian
+
+Dalam artikel ini, akan digunakan 2 metode itu untuk analisis
+
+#### Traditional Statistics
+
+Dalam model ini, digunakan kolom sum_gamerounds pada data.
+
+```{python}
+A = df[df['version'] == "gate_30"]['sum_gamerounds']
+B = df[df['version'] == "gate_40"]['sum_gamerounds']
+```
+
+##### Uji Normalitas
+
+Sebelum menentukan jenis metode yang digunakan dalam A/B Testing secara tradisional, akan dilakukan uji normalitas. Uji ini digunakan untuk memeriksa jenis distribusi dari data. Dalam hal ini dilakukan uji Saphiro-Wilk dengan hipotesis nol adalah data berdistribusi normal sedanglkan hipotesis alternatifnya adalah data tidak berdistribusi normal.
+
+```{python}
+#Cek Asumsi
+from scipy.stats import shapiro
+import scipy.stats as stats
+shapiro(A)
+shapiro(B)
+```
+
+Didapatkan nilai pvalue sangat kecil dan kurang dari 0.05 (batas signifikansi yang ditentukan). Maka hipotesis nol ditolak. Artinya, data tidak berdistribusi normal.
+
+Karena data tidak berdistribusi normal, kemudia untuk menghindari asumsi distribusi, digunakan uji non-parameterik 'Mann Whitney-U'
+
+##### Uji Hipotesis
+
+Dalam Mann Whitney-U, hipotesis nolnya adalah 2 populasi sama dan hipotesis alternatifnya adalah dua populasi tidak sama.
+
+```{python}
+_, pvalue = stats.mannwhitneyu(A, B)
+pvalue
+```
+
+Didapatkan p-value kurang dari 0.05. Artinya, hipotesis nol ditolak. Dua populasi tersebut tidak sama. Namun sampai sejauh ini, kita belum dapat menentukan mana populasi yang lebih baik.
+
+#### Bayesian A/B Testing
+
+Bayesian A/B Testing menggunakan metode inferensi bayesian yang memberikan peluang seberapa baik/buruk grup A dari pada grup B. Dalam model ini digunakan kolom retention_1 pada data. 
+
+```{python}
+import pymc3 as pm
+```
+
+```{python}
+N_A = 44700
+N_B = 45489
+
+observations_A = df[df['version'] == 'gate_30']['retention_1'].values.astype(int)
+observations_B = df[df['version'] == 'gate_40']['retention_1'].values.astype(int)
+
+print('Banyaknya user yang kembali setelah 1 hari di grup A:', observations_A.sum())
+print('Banyaknya user yang kembali setelah 1 hari di grup B:', observations_B.sum())
+```
+
+```{python}
+#Bayesian 
+
+true_p_A = 0.448188
+true_p_B = 0.442283
+with pm.Model() as model:
+    p_A = pm.Beta("p_A", 11, 14)
+    p_B = pm.Beta("p_B", 11, 14)
+    delta = pm.Deterministic("delta", p_A - p_B)
+    obs_A = pm.Bernoulli("obs_A", p_A, observed=observations_A)
+    obs_B = pm.Bernoulli("obs_B", p_B, observed=observations_B)
+    step = pm.Metropolis()
+    trace = pm.sample(200, step=step) 
+    burned_trace=trace[10:]
+```
+
+```{python}
+p_A_samples = burned_trace["p_A"]
+p_B_samples = burned_trace["p_B"]
+delta_samples = burned_trace["delta"]
+```
+
+```{python}
+
+from IPython.core.pylabtools import figsize
+figsize(12.5, 10)
+
+
+ax = plt.subplot(311)
+
+plt.hist(p_A_samples, histtype='stepfilled', bins=25, alpha=0.85,
+         label="posterior of $p_A$", color="#A60628", density=True)
+plt.vlines(true_p_A, 0, 80, linestyle="--", label="true $p_A$ (unknown)")
+plt.legend(loc="upper right")
+plt.title("Posterior distributions of $p_A$, $p_B$, and delta unknowns")
+
+ax = plt.subplot(312)
+
+plt.hist(p_B_samples, histtype='stepfilled', bins=25, alpha=0.85,
+         label="posterior of $p_B$", color="#467821", density=True)
+plt.vlines(true_p_B, 0, 80, linestyle="--", label="true $p_B$ (unknown)")
+plt.legend(loc="upper right")
+
+ax = plt.subplot(313)
+plt.hist(delta_samples, histtype='stepfilled', bins=30, alpha=0.85,
+         label="posterior of delta", color="#7A68A6", density=True)
+plt.vlines(true_p_A - true_p_B, 0, 60, linestyle="--",
+           label="true delta (unknown)")
+plt.vlines(0, 0, 60, color="black", alpha=0.2)
+plt.legend(loc="upper right")
+```
+
+```{python}
+import numpy as np
+
+print("Peluang grup A lebih buruk dari grup B: %.3f" % \
+    np.mean(delta_samples < 0))
+
+print("Peluang grup A lebih baik dari grup B: %.3f" % \
+    np.mean(delta_samples > 0))
+```
+
+### Conclusion
+
+Setelah melakukan A/B Testing dengan tradisional stastitik (Mann Whitney-U), didapatkan bahwa gate_30 dan gate_40 adalah dua populasi yang tidak sama. Setelah menggunakan A/B Testing dengan Bayesian, didapatkan bahwa gate_30 lebih baik dari gate_40. Artinya, perusahaan tidak perlu memindahkan gate ke level 40 dan tetap meletakkan gate di level 30.
