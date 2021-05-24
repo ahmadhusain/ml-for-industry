@@ -1,0 +1,814 @@
+# Travel and Accomodation
+
+```{r setup, include=FALSE}
+# clear-up the environment
+rm(list = ls())
+
+# chunk options
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  comment = "#>",
+  echo = TRUE
+)
+
+# scientific notation
+options(scipen = 9999)
+
+library(bookdown)
+```
+
+
+## Topic Modelling and Sentiment Analysis on Hotel Reviews Data in Europe
+
+```{r echo=FALSE}
+#Sys.setenv(RETICULATE_PYTHON = "/Users/ariqleesta/opt/anaconda3/envs/ariq/bin/python")
+library(reticulate)
+
+reticulate::use_python(python = '/Users/ariqleesta/opt/anaconda3/envs/ariq/bin/python', required = T)
+sys <- import("sys")
+py_run_string("import os")
+py_run_string("os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = '/Users/ariqleesta/opt/anaconda3/plugins/platforms'")
+```
+
+### Background
+Benua Eropa merupakan benua yang menjadi destinasi impian bagi para wisatawan di berbagai belahan dunia. Hal ini karena Benua Eropa memiliki banyak situs wisata yang menarik perhatian akan keunikan dan keindahannya. Tentunya para wisatawan membutuhkan tempat untuk singgah sementara selama menikmati liburan. Untuk meningkatkan kepuasan para wisatawan, dibutuhkan pemilihan hotel yang tepat agar dapat memberikan wisatawan pengalaman beristirahat yang terbaik. Untuk itu, melihat seberapa baik tingkat pelayanan hotel secara teliti tentunya diperlukan. Tingkat pelayanan hotel dapat dilihat salah-satunya melalui *rating* dari hotel tersebut. Meskipun demikian, *rating* dari hotel tidak sepenuhnya merepresentasikan tingkat kelayakan dari hotel tersebut, terutama untuk fasilitas-fasilitasnya secara spesifik. Maka dari itu, perlu dilakukan analisis sentimen berdasarkan ulasan dari wisatawan lain yang pernah singgah di hotel tersebut. Sentimen analisis diperlukan untuk memberikan penilaian terhadap fasilitas-fasilitas dan pelayanan hotel yang disediakan karena sering kali kita tidak ingin membaca setiap ulasan hotel-hotel tersebut satu per satu. Harapannya, dengan analisis ini, hasil penilaian dari setiap aspek pelayanan dari hotel-hotel ini dapat dijadikan pertimbangan dalam memilih hotel dengan pengalaman menginap yang terbaik. 
+
+### Data Preparation
+
+Dataset yang digunakan adalah dataset yang bersumber dari kaggle (https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe) yang memuat 515 ribu ulasan dari hotel-hotel yang berada di ibukota negara-negara di Benua Eropa.
+
+```{python, include = False}
+import sys
+print(sys.executable)
+```
+
+```{python}
+# Environment
+import os
+
+# Data Manipulation Tools
+import pandas as pd
+import numpy as np
+from fuzzymatcher import link_table, fuzzy_left_join
+import difflib
+import re # for regular expressions
+pd.options.display.max_rows = 1000
+pd.options.display.max_columns = 100
+
+# Data Visualization Tools
+import matplotlib.pyplot as plt
+import seaborn as sns
+#%matplotlib inline
+plt.style.use('bmh')
+
+# libraries for displaying images
+from IPython.display import HTML, Image 
+from IPython.core.display import HTML 
+from IPython.display import display
+import selenium
+
+# NLP Module
+import nltk # Natural language processing toolkit
+from nltk import FreqDist # Frequency distribution
+from nltk.corpus import stopwords
+from wordcloud import WordCloud,STOPWORDS 
+from textblob import TextBlob
+from nltk.stem import WordNetLemmatizer 
+from nltk import sent_tokenize
+from math import pi
+import pickle 
+import pyLDAvis
+
+
+# Network
+from nltk import bigrams, ngrams
+import networkx as nx 
+import itertools
+import collections
+
+# Location Modules
+import folium
+
+# Ignore Warnings
+import warnings
+warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore", category= DeprecationWarning)
+
+```
+
+
+```{python}
+df = pd.read_csv('https://archive.org/download/hotel-reviews/Hotel_Reviews.csv')
+print(df.shape)
+df.head(2)
+```
+
+```{python}
+len(df['Hotel_Address'].unique())
+```
+
+Dataset ini memiliki 515738 baris dan 17 kolom dengan jumlah hotel sebanyak 1493. Sebelum memulai analisis lebih lanjut, kita perlu mengetahui tipe data dari setiap kolom dataset tersebut.
+
+```{python}
+df.dtypes
+```
+
+Kemudian kita perlu meninjau mengenai *missing value* atau data yang hilang dari dataset tersebut. Pengamatan data yang hilang dapat dilakukan secara visual dengan bantuan *library* missingno.
+
+```{python}
+import missingno as msno
+plt.figure()
+msno.matrix(df, figsize = (20,8))
+plt.show()
+```
+
+```{python}
+df.isnull().sum()
+```
+
+Kolom *lat* dan *lng* yang merupakan komponen koordinat dari dataset tidak tersedia untuk beberapa hotel. Jumlah baris yang tidak memiliki data koordinat sangat sedikit jika dibandingkan total data keseluruhan sehingga baris-baris ini dapat dihilangkan karena koordinat diperlukan untuk memberikan informasi lokasi dari hotel tersebut kepada para wisatawan.
+
+```{python}
+# drop null coordinates
+df.dropna(inplace = True)
+```
+
+### Exploratory Data Analysis
+
+Kata *No Negative* pada kolom *Negative Review* dan *No Positive* pada kolom *Positive Review* menandakan bahwa review tersebut tidak mengandung ulasan positif atau ulasan negatif. Sehingga kata *No Negative* dan *No Positive* dapat diganti dengan *empty string* saja.
+
+```{python}
+# replace No Negative and No Positive with empty string
+df['Negative_Review'] = df['Negative_Review'].replace({'No Negative': ''})
+df['Positive_Review'] = df['Positive_Review'].replace({'No Positive': ''})
+```
+
+Berikut adalah distribusi dari nilai *rating* rata-rata yang diberikan oleh pemberi ulasan terkait hotel-hotel pada dataset ini. *Average Score* memiliki rentang 5.2 untuk nilai terendah dan 9.9 untuk nilai tertinggi.
+
+```{python}
+# Plot average score
+
+data_plot = df[["Hotel_Name","Average_Score"]].drop_duplicates()
+fig, ax = plt.subplots(figsize= (30,7))
+sns.countplot(ax = ax,x = "Average_Score",data=data_plot)
+ax.set_xlabel('Average Score')
+ax.set_ylabel('Score Counts')
+plt.show()
+```
+
+Berikut akan dilakukan analisis teks, tahap-tahap yang akan dilakukan antara lain:
+* Mendefinisikan *Stopword* <br>
+ *Stopword* adalah kata-kata yang tidak atau sedikit mengandung makna dari kalimat keseluruhan. *Stopword* biasanya berupa partikel (*eg: a, an, the, is, am, are*) atau kata penghubung (*eg: and, or, of*).
+* Membuat semua kata menjadi huruf kecil/*lowercase* <br>
+Untuk mempermudah memproses data tekstual, perlu dilakukan *lowercasing* karena algoritma dalam text processing membedakan huruf besar dan huruf kecil atau *case sensitive*.
+* Menghilangkan *character* yang tidak diinginkan <br>
+ *Character* yang tidak diinginkan bisa berupa simbol simbol seperti titik, koma, tanda seru, tanda tanya, dan lain-lain.
+* Menghilangkan kata-kata yang pendek (kurang dari 4 huruf)
+* *Lemmatizing* <br>
+ *Lemmatizing* adalah mengembalikan kosa kata menjadi kata dasar dari kata tersebut. Sebagai contoh,, kata *studying* dan *studied* memiliki kata dasar yang sama yaitu *study*.
+* Menghilangkan *Stopwords*
+
+* *Tokenization*
+ *Tokenization* adalah proses memecah kalimat menjadi kumpulan kata-kata. Kumpulan kata-kata dalam satu kalimat dimuat dalam satu buah *iterable* atau *list*. Sebagai contoh, untuk kata yang telah di *lemmatizing*, "*Hotel service good*" menjadi ["Hotel", "Service", "Good"].
+
+
+    
+
+```{python}
+# A function to remove stopwords
+def remove_stopwords(rev):
+    rev_new = " ".join([i for i in rev if i not in stop_words])
+    return rev_new
+
+# A function to count the most frequent words
+def freq_words(x, terms = 30):
+    all_words = ' '.join([text for text in x])
+    all_words = all_words.split()
+
+    fdist = FreqDist(all_words)
+    words_df = pd.DataFrame({'word':list(fdist.keys()), 'count':list(fdist.values())})
+
+    # selecting top 20 most frequent words
+    d = words_df.nlargest(columns="count", n = terms) 
+    plt.figure(1, figsize=(20,5))
+    ax = sns.barplot(data=d, x= "word", y = "count")
+    ax.set(ylabel = 'Count')
+    plt.xticks(rotation = 90)
+    plt.show()
+
+# A function to draw word cloud
+def wordcloud_draw(data, color = 'black'):
+    words = ' '.join(data)
+    cleaned_word = ' '.join([word for word in words.split()
+                            if 'http' not in word
+                                and not word.startswith('@')
+                                and not word.startswith('#')
+                                and word != 'RT'
+                            ])
+    
+    wordcloud = WordCloud(collocations=False,
+              stopwords=STOPWORDS,
+              background_color=color,
+              width=500,
+              height=100,).generate(cleaned_word)
+    plt.figure(1,figsize=(13, 13))
+    plt.imshow(wordcloud)
+    plt.axis('off')
+    plt.show()
+    
+# Create a function to get the subjectivity
+def getSubjectivity(text):
+    return TextBlob(text).sentiment.subjectivity
+
+# Create a function to get the polarity
+def getPolarity(text):
+    return TextBlob(text).sentiment.polarity
+```
+
+```{python}
+df_reviews = df[['Hotel_Name', 'Negative_Review', 'Positive_Review']]
+df_reviews.head()
+
+# Define stopwords
+stop_words = stopwords.words('english')
+
+# make entire text lowercase
+df_reviews['Positive_Review'] = [r.lower() for r in df_reviews['Positive_Review']] 
+df_reviews['Negative_Review'] = [r.lower() for r in df_reviews['Negative_Review']]
+
+# Remove unwanted characters, numbers and symbols
+df_reviews['Positive_Review'] = df_reviews['Positive_Review'].str.replace("[^a-zA-Z#]", " ")
+df_reviews['Negative_Review'] = df_reviews['Negative_Review'].str.replace("[^a-zA-Z#]", " ")
+
+# remove short words (length < 4)
+df_reviews['Positive_Review'] = df_reviews['Positive_Review'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>3]))
+df_reviews['Negative_Review'] = df_reviews['Negative_Review'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>3]))
+
+# Lemmatizing 
+lemmatizer = WordNetLemmatizer() 
+df_reviews['Positive_Review'] = [' '.join([lemmatizer.lemmatize(word) for word in r.split(' ')]) for r in df_reviews['Positive_Review']]
+df_reviews['Negative_Review'] = [' '.join([lemmatizer.lemmatize(word) for word in r.split(' ')]) for r in df_reviews['Negative_Review']]
+
+# remove stopwords from the text
+df_reviews['Positive_Review'] = [remove_stopwords(r.split()) for r in df_reviews['Positive_Review']]
+df_reviews['Negative_Review'] = [remove_stopwords(r.split()) for r in df_reviews['Negative_Review']]
+
+
+# Tokenization
+df_reviews['Positive_Review'] = [r.split() for r in df_reviews['Positive_Review']]
+df_reviews['Negative_Review'] = [r.split() for r in df_reviews['Negative_Review']]
+```
+
+```{python}
+def flatten(data):
+    l = []
+    for i in data:
+        for word in i:
+            l.append(word)
+    return l
+pos = flatten(df_reviews['Positive_Review'].tolist())       
+neg = flatten(df_reviews['Negative_Review'].tolist())  
+```
+
+Berikut adalah grafik frekuensi tertinggi untuk kata-kata yang berada pada kolom *Positive Review* dan *Negative Review*. Pada kolom *Positive Review*, kata yang paling banyak diucapkan adalah *staff*, *location*, dan *room*, sedangkan Pada kolom *Negative Review*, kata yang paling banyak diucapkan adalah *room*, *hotel*, dan *breakfast*.
+
+```{python}
+freq_words(pos, 30)# Frequency distribution of common words in positive reviews
+```
+
+```{python}
+freq_words(neg, 30) # Checking frequency of most used words in negative reviews
+```
+
+Kita dapat melihat kata-kata yang sering muncul dengan bantuan visualisasi *wordcloud*. Kata yang lebih sering muncul akan berukuran lebih besar daripada yang lain.
+
+```{python}
+# Using wordcloud to visually represent the text data
+print("Positive reviews")
+wordcloud_draw(pos,'white')
+
+```
+```{python}
+# Using wordcloud to visually represent the text data
+print("Negative reviews")
+wordcloud_draw(neg)
+```
+### Modelling
+
+Dalam menyarankan para wisatawan mengenai hotel dengan pelayanan terbaik, kita perlu meninjau terlebih dahulu aspek-aspek apa yang relevan dalam ulasan-ulasan tersebut sebelum bisa dilanjutkan ke penilaian. Aspek-aspek ini dapat berupa fasilitas-fasilitas atau pelayanan yang diberikan oleh hotel tersebut tergantung seberapa banyak dan relevan hal tersebut dibicarakan di dalam ulasan. Sebagai contoh, anggaplah kita tidak mengetahui fasilitas-fasilitas apa yang diberikan hotel. Dari review tersebut ada yang membicarakan mengenai kamar, kolam renang, kafe, *rollercoaster* bahkan kebun binatang. Bagaimana kita tahu bahwa topik yang relevan adalah kamar, kolam renang, dan kafe? Bisa saja suatu hotel memiliki *rollercoaster* atau berada di dekat kebun binatang. Untuk menentukan topik-topik yang relevan dalam penilaian, dibutuhkan suatu proses bernama *Topic Modelling*. *Topic Modelling* menilai seberapa relevan suatu kata terhadap kalimat yang membawa pengaruh terbesar dalam pemaknaan suatu kalimat. Salah satu metode dalam *Topic Modelling* dan yang akan digunakan dalam analisis ini adalah metode *Latent Dirichlet Allocation (LDA)*. LDA memodelkan topik berdasarkan probabilitas dengan mengasumsikan setiap topik merupakan gabungan dari beberapa pasangan kata, dan setiap dokumen merupakan gabungan dari beberapa topik.
+
+Untuk melakukan *Topic Modelling* dengan metode LDA dapat dilakukan dengan bantuan suatu *library* bernama gensim. 
+
+```{python}
+import gensim
+from gensim.utils import simple_preprocess
+LDA = gensim.models.ldamodel.LdaModel
+```
+
+```{python}
+import gensim.corpora as corpora
+# Create Dictionary
+id2word_pos = corpora.Dictionary(df_reviews['Positive_Review'])
+id2word_neg = corpora.Dictionary(df_reviews['Negative_Review'])
+# Create Corpus
+texts_pos = df_reviews['Positive_Review']
+texts_neg = df_reviews['Negative_Review']
+# Term Document Frequency
+corpus_pos = [id2word_pos.doc2bow(text) for text in texts_pos]
+corpus_neg = [id2word_neg.doc2bow(text) for text in texts_neg]
+```
+
+```{python}
+from pprint import pprint
+# number of topics
+num_topics = 10
+# Build LDA model
+lda_model_pos = gensim.models.LdaMulticore(corpus=corpus_pos,
+                                       id2word=id2word_pos,
+                                       num_topics=num_topics)
+
+lda_model_neg = gensim.models.LdaMulticore(corpus=corpus_neg,
+                                       id2word=id2word_neg,
+                                       num_topics=num_topics)
+```
+
+Berikut adalah hasil pemilihan 10 kumpulan topik untuk ulasan positif
+
+```{python}
+pprint(lda_model_pos.print_topics())
+```
+
+Berikut adalah hasil pemilihan 10 kumpulan topik untuk ulasan negatif
+
+```{python}
+pprint(lda_model_neg.print_topics())
+```
+
+Berikut adalah potongan kode untuk melakukan visualisasi pemilihan topik dengan model LDA.
+
+```{python}
+# Visualize the topics
+
+def ldaviz(lda_model, corpus, id2word, num_topics, filename):
+    pyLDAvis.enable_notebook()
+    LDAvis_data_filepath = os.path.join(os.getcwd()+str(num_topics))
+    # # this is a bit time consuming - make the if statement True
+    # # if you want to execute visualization prep yourself
+    if True:
+        LDAvis_prepared = pyLDAvis.gensim.prepare(lda_model, corpus, id2word)
+        with open(LDAvis_data_filepath, 'wb') as f:
+            pickle.dump(LDAvis_prepared, f)
+    # load the pre-prepared pyLDAvis data from disk
+    with open(LDAvis_data_filepath, 'rb') as f:
+        LDAvis_prepared = pickle.load(f)
+    return pyLDAvis.save_html(LDAvis_prepared, os.getcwd()+ '/' + filename +'.html')
+    #return LDAvis_prepared
+```
+
+```{python}
+# Visualization for Positive Reviews
+# ldaviz(lda_model_pos, corpus_pos, id2word_pos, num_topics, 'ldavizpos')
+```
+
+```{python}
+# Visualization for Negative Reviews
+# daviz(lda_model_neg, corpus_neg, id2word_neg, num_topics, 'ldavizneg')
+```
+
+Topik-topik tersebut di *extract* dan dihitung skor kumulatif untuk masing-masing topik.
+
+```{python}
+# Extract all topics from negative and positive
+
+topics_pos = []
+topics_neg = []
+
+scores_pos = []
+scores_neg = []
+
+for pos, neg in zip(lda_model_pos.print_topics(), lda_model_neg.print_topics()):
+    
+    topic_pos = re.findall("(?<=\")[a-z]+(?=\")",pos[1])
+    topics_pos = topics_pos + topic_pos
+    
+    score_pos = re.findall("\d\.\d+",pos[1])
+    scores_pos = scores_pos + score_pos
+
+    topic_neg = re.findall("(?<=\")[a-z]+(?=\")",neg[1])
+    topics_neg = topics_neg + topic_neg
+    
+    score_neg = re.findall("\d\.\d+",pos[1])
+    scores_neg = scores_neg + score_neg
+    
+positive_topics = pd.DataFrame({'Topics':topics_pos, 'Score':scores_pos})
+positive_topics['Score'] = positive_topics['Score'].astype(float)
+positive_topics = positive_topics.groupby('Topics').sum().reset_index()\
+.sort_values('Score',ascending = False)
+
+negative_topics = pd.DataFrame({'Topics':topics_neg, 'Score':scores_neg})
+negative_topics['Score'] = negative_topics['Score'].astype(float)
+negative_topics = negative_topics.groupby('Topics').sum().reset_index()\
+.sort_values('Score',ascending = False)
+```
+
+Maka diperoleh kumpulan topik beserta *score* seberapa relevan suatu topik terhadap ulasan yang diberikan yang ditabulasikan sebagai berikut.
+
+
+
+```{python}
+#inner join to see topics that belongs to each other
+pd.merge(positive_topics, negative_topics, 'inner', 'Topics')
+```
+
+Dalam hal ini, kita dapat memilih secara manual atau memilih dengan mengambil topik dengan skor yang paling besar. Tahap ini disebut *Topic Labelling*. Namun dalam hal ini kita cukup memilih topik secara manual dengan mengandalkan pengetahuan kita mengenai fasilitas apa yang sering atau selalu disediakan oleh pihak hotel.
+
+```{python}
+# Topic labelling
+aspects = ['staff', 'room', 'breakfast', 'service', 'view', 'restaurant', 'bathroom', 'pool']
+```
+
+Untuk memperoleh hasil yang merepresentasikan tiap hotel, alangkah lebih semua review dijadikan menjadi satu dokumen untuk tiap hotel. Sehingga kita dapat memperoleh satu buah dokumen penuh berisi review untuk tiap-tiap hotel.
+
+```{python}
+df_reviews = df_reviews.groupby('Hotel_Name')['Negative_Review','Positive_Review'].sum()
+```
+
+Dari aspek-aspek ini, kita akan menentukan *word correlation* dari aspek yang kita inginkan, yaitu mencari kata sebelum dan sesudah dari topik yang diinginkan. Hal ini bertujuan untuk melihat hubungan dari aspek (fasilitas) yang diberikan hotel terhadap kata yang diberikan oleh wisatawan melalui ulasannnya. Sebagai contoh, kita ingin melihat ruangan, namun kita perlu tahu ruangan itu seperti apa menurut para wisatawan. Bisa jadi ruangan itu baik, buruk, sempit, luas, mengecewakan, dan lain-lain. Metode ini bernama *ngram* yaitu **memasangkan kata dengan kata disebelahnya (baik sebelum atau sesudahnya)**.
+
+Kita ambil contoh untuk satu dokumen (satu buah hotel). Misalkan aspek yang ingin dilihat adalah **room** dengan jumlah kata dalam satu pasangan **n** adalah 2.
+
+```{python}
+# let's take a look at example
+# if we want to extract only room
+
+n = 2
+example = df_reviews['Negative_Review'][2]
+terms_ngram = [list(ngrams(w,n)) for w in [example]]
+room_ngram = [i for i in terms_ngram[0] if 'room' in i]
+room_ngram[:5]
+```
+
+Untuk mendapatkan sebagian dokumen yang hanya membicarakan **room**, kita perlu menggabungkan semua **ngram** menjadi satu dokumen dengan metode **chain**.
+
+```{python}
+# Flatten list of room ngrams in clean list
+
+room_ngram_flatten = list(itertools.chain(*room_ngram))
+room_ngram_flatten[:6]
+```
+
+Kita dapat menghitung jumlah pasangan kata yang sama dalam satu dokumen dengan menggunakan *method* **collections.Counter**.
+
+```{python}
+ngram_counts = collections.Counter(room_ngram)
+ngram_df = pd.DataFrame(ngram_counts.most_common(20),
+                             columns=['ngram', 'count'])
+
+ngram_df.head()
+```
+
+Setelah itu, kita akan melakukan visualisasi mengenai **word correlation** dari aspek **room** yang kita pilih sebelumnya dengan bantuan *library* **networkx**. Sebelum, melakukan visualisasi, tabel frekuensi **ngram_df** alangkah lebih baik diubah ke dalam bentuk *dictionary*. Hasil dari visualisasi i ni menampilkan korelasi kata-kata terhadap aspek yang kita pilih. Semakin dekat kata-kata tersebut satu sama lain, semakin tinggi frekuensi dari kemunculan pasangan kata tersebut.
+
+```{python}
+# we visualize
+# transform to dict first
+d = ngram_df.set_index('ngram').T.to_dict('records')
+d[0]
+```
+
+```{python}
+# Create network plot 
+G = nx.Graph()
+
+# Create connections between nodes
+for k, v in d[0].items():
+    G.add_edge(k[0], k[1], weight=(v * 10))
+
+fig, ax = plt.subplots(figsize=(10, 8))
+
+pos = nx.spring_layout(G, k=2)
+
+# Plot networks
+nx.draw_networkx(G, pos,
+                 font_size=16,
+                 width=3,
+                 edge_color='grey',
+                 node_color='purple',
+                 with_labels = False,
+                 ax=ax)
+
+# Create offset labels
+for key, value in pos.items():
+    x, y = value[0]+.135, value[1]+.045
+    ax.text(x, y,
+            s=key,
+            bbox=dict(facecolor='red', alpha=0.25),
+            horizontalalignment='center', fontsize=13)
+    
+plt.show()
+```
+
+Agar *script* dapat digunakan berulang-ulang, alangkah lebih baik jika dimuat dalam bentuk *function*. Dengan *function*, kita juga dapat mengganti nilai **n** dalam **ngrams** sesuai kebutuhan.
+
+```{python}
+## create functions to be utilized for further observation
+
+# Function to create ngrams (for only 1 topics)
+def create_ngrams(text_array, n, aspect):
+    terms_ngram = [list(ngrams(w,n)) for w in [text_array]]
+    ngram = [i for i in terms_ngram[0] if aspect in i]
+    return ngram
+
+#create_ngrams(example, 2, aspect = 'room')
+
+def ngrams_flatten(ngram):
+    # Flatten list of bigrams in clean tweets
+    ngram = list(itertools.chain(*ngram))
+    return ngram
+
+# Function to count the frequency
+def ngrams_frequency(ngram,  num_most_common):
+    ngram_counts = collections.Counter(ngram)
+    ngram_df = pd.DataFrame(ngram_counts.most_common(num_most_common),
+                             columns=['ngram', 'count'])
+    return ngram_df
+
+#ngrams_frequency(create_ngrams(example, 2, aspect = 'room'), 10)
+
+# Create network plot 
+
+def plot_network(dataframe):
+    
+    try:
+        # transform to dict first
+        d = dataframe.set_index('ngram').T.to_dict('records')
+        d[0]
+        G = nx.Graph()
+
+        # Create connections between nodes
+        for k, v in d[0].items():
+            G.add_edge(k[0], k[1], weight=(v * 10))
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+    
+        pos = nx.spring_layout(G, k=2)
+
+        # Plot networks
+        nx.draw_networkx(G, pos,
+                         font_size=16,
+                         width=3,
+                         edge_color='grey',
+                         node_color='purple',
+                         with_labels = False,
+                         ax=ax)
+
+        # Create offset labels
+        for key, value in pos.items():
+            x, y = value[0]+.135, value[1]+.045
+            ax.text(x, y,
+                    s=key,
+                    bbox=dict(facecolor='red', alpha=0.25),
+                    horizontalalignment='center', fontsize=13)
+    
+        plt.show()
+        
+    except:
+        return "No Particular Topic"
+```
+
+```{python}
+#let's see what they said about staff
+plot_network(ngrams_frequency(create_ngrams(example, 3, aspect = 'staff'), 25))
+```
+
+```{python}
+# How about breakfast?
+plot_network(ngrams_frequency(create_ngrams(example, 4, aspect = 'breakfast'), 25))
+```
+
+Kita telah mendapatkan aspek-aspek yang akan kita jadikan variabel penilaian terkait hotel di dataset ini yang telah disimpan di dalam variabel **aspects**. Berdasarkan aspek-aspek tersebut, dilakukan sentimen analisis untuk menilai seberapa baik fasilitas dan pelayanan hotel berdasarkan review yang disajikan dalam sebuah nilai. Hasil dari sentiment analysis memiliki rentang -1 (paling buruk) sampai 1 (paling baik) yang nantinya dinormalisasi dalam rentang 0 - 10.
+
+```{python}
+# let's do sentiment analysis for each aspects of each hotels
+aspects
+```
+
+Sebelum melakukan analisis sentimen, kolom *Negative Review* dan *Positive Review* digabungkan agar tidak terjadi bias dalam penilaian. Selanjutnya untuk setiap aspek dimuat dalam **ngrams** dengan n = 3 (biasa disebut *trigrams*). Hasil dari *trigrams* ini digabungkan (diratakan dengan metode *flatten*) sehingga didapat satu dokumen baru yang hanya membahas aspek tersebut. Satu dokumen tersebut dihitung skor sentimennya berdasarkan *polarity* atau ekspresi sentimen dari wisatawan terkait aspek tersebut.
+
+```{python}
+# Combine the review
+df_reviews['Review'] = df_reviews['Negative_Review'] + df_reviews['Positive_Review']
+
+#plot_network(ngrams_frequency(create_ngrams(example, 3, aspect = 'staff'), 25))
+# extract each ngrams from each Hotel Reviews based on aspects
+from tqdm import tqdm
+
+n = 3
+for aspect in tqdm(aspects):
+    # create empty list to store sentiment score
+    sent_list = []
+    for i in df_reviews['Review']:
+        # create ngrams
+        ngram_i = create_ngrams(i, n, aspect = aspect)
+        # flatten ngrams to make clean list
+        ngram_flatten_i = ngrams_flatten(ngram_i)
+        # Get polarity
+        polarity_i = getPolarity(' '.join(ngram_flatten_i))
+        sent_list.append(polarity_i)
+    
+    df_reviews[aspect] = sent_list
+```
+
+Sehingga didapat nilai untuk masing-masing aspek untuk setiap hotel yang dimuat pada dataframe berikut.
+
+```{python}
+df_reviews.head(2)
+```
+
+Perlu diperhatikan bahwa nilai sentimen masih berupa nilai dalam rentang -1 hingga 1. Untuk mempermudah pemilihan hotel, alangkah lebih baik nilai sentimen dinormalisasi menjadi skor dengan rentang 0 - 10.
+
+```{python}
+# Normalize sentiment in range of 0 - 10
+def normalizeSentiment(x):
+    if max(x) <= 1:
+        return (x-(-1))/(1+1)*10
+    else:
+        return (x)
+
+df_reviews[aspects] = df_reviews[aspects].apply(normalizeSentiment)
+df_reviews.head(2)
+```
+
+Gabungkan kolom-kolom yang memuat informasi tambahan yang dibutuhkan ke dataframe.
+
+```{python}
+col_df = ['Average_Score', 'Total_Number_of_Reviews','Hotel_Name', 'Hotel_Address','lat','lng']
+
+df_merge = pd.merge(df_reviews, df[col_df].drop_duplicates(), how = 'left', on = 'Hotel_Name')
+
+
+def join_list(my_list):
+    return " ".join(my_list)
+
+
+df_merge['Review'] = df_merge['Review'].apply(lambda x: join_list(x))
+df_merge['Negative_Review'] = df_merge['Negative_Review'].apply(lambda x: join_list(x))
+df_merge['Positive_Review'] = df_merge['Positive_Review'].apply(lambda x: join_list(x))
+
+df_merge.head(3)
+```
+
+### Dashboard Ideas
+
+Salah satu cara terbaik untuk memberikan informasi adalah melalui *dashboard* interaktif yang dapat dioperasikan langsung oleh penggunanya. Tentunya kemudahan yang diberikan akan meningkatkan penyerapan informasi oleh pengguna. berikut adalah beberapa ide-ide fitur yang akan dimuat di dalam dashboard tersebut.
+
+```{python}
+# Function for dashboard
+
+def radar_plot(data): # data categories must be stored as index
+
+    plt.figure(figsize=(10,10))
+    # number of variable
+    categories=s.index
+    N = len(s)
+ 
+    # We are going to plot the first line of the data frame.
+    # But we need to repeat the first value to close the circular graph:
+    values= s.iloc[:,0].values.flatten().tolist()
+    values += values[:1]
+    values
+ 
+    # What will be the angle of each axis in the plot? (we divide the plot / number of variable)
+    angles = [n / float(N) * 2 * pi for n in range(N)]
+    angles += angles[:1]
+ 
+    # Initialise the spider plot
+    ax = plt.subplot(111, polar=True)
+
+    # Draw one axe per variable + add labels labels yet
+    plt.xticks(angles[:-1], categories, color='blue', size=20)
+ 
+    # Draw ylabels
+    ax.set_rlabel_position(90)
+    plt.yticks([2,4,6,8], ["2","4","6","8"], color="grey", size=20)
+    plt.ylim(0,10)
+ 
+    # Plot data
+    ax.plot(angles, values, linewidth=2, linestyle='solid')
+ 
+    # Fill area
+    ax.fill(angles, values, 'b', alpha=0.1)
+    
+def plot_coordinate(lat, lng , name = pd.Series(['']), address = pd.Series(['']),  zoom_start = 10, color = 'red', fill_color = 'blue'):   
+    m = folium.Map(location=[lat,lng], zoom_start=zoom_start)
+
+    folium.CircleMarker(
+            [lat.values[0], lng.values[0]],
+            radius=10,
+            color=color,
+            popup='Name: ' + name.values[0] + '\n\n Address: ' + address.values[0],
+            fill = True,
+            fill_color = fill_color,
+            fill_opacity=0.6
+        ).add_to(m)
+    return m
+```
+
+Search bar berfungsi untuk melakukan pemenggalan data (*querying*) untuk mengambil data yang menjadi fokus bagi penggunanya.
+
+```{python}
+# Search Bar
+search = '25hours Hotel beim MuseumsQuartier'
+
+search_data = df_merge[df_merge['Hotel_Name'] == search]
+search_data
+```
+
+Average score menampilkan rating rata-rata yang diberikan oleh wisatawan terdahulu terhadap pengalaman singgah di hotel tersebut.
+
+```{python}
+# Average Score
+search_data['Average_Score'].values[0]
+```
+
+Jumlah orang yang memberikan ulasan juga perlu ditampilkan. Semakin banyak ulasan, semakin *reliable* penilaian tersebut.
+
+```{python}
+# Total Number of Reviews
+search_data['Total_Number_of_Reviews'].values[0]
+```
+
+Titik koordinat diperlukan untuk menyampaikan informasi mengenai lokasi dari hotel tersebut. Hal ini juga bertujuan untuk memberikan informasi mengenai kondisi di sekitar hotel terkait seberapa strategis lokasi hotel tersebut (dekat dengan pusat wisata, pusat pembelanjaan, dan lain-lain).
+
+```{python}
+plot_coordinate(search_data.lat, search_data.lng, search_data.Hotel_Name, search_data.Hotel_Address, zoom_start = 15)
+```
+
+Hasil dari analisis sentimen terkait aspek (fasilitas dan pelayanan) hotel dimuat dalam bentuk visualisasi *radar plot* untuk mempermudah pengambilan keputusan dalam memilih hotel yang akan dijadikan tempat singgah sementara.
+
+```{python}
+# Sentiment Score
+
+s = search_data[aspects].T
+radar_plot(s)
+```
+
+Diagram jaringan (*network diagram*) untuk melihat korelasi kata-kata dengan aspek yang dipilih.
+
+```{python}
+#let's see what they said about staff
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'staff'), 20))
+```
+
+```{python}
+#let's see what they said about room
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'room'), 20))
+```
+
+```{python}
+#let's see what they said about breakfast
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'breakfast'), 20))
+```
+
+```{python}
+#let's see what they said about service
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'service'), 20))
+```
+
+```{python}
+#let's see what they said about view
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'view'), 20))
+```
+
+```{python}
+#let's see what they said about restaurant
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'restaurant'), 20))
+```
+
+```{python}
+#let's see what they said about pool
+plot_network(ngrams_frequency(create_ngrams(search_data['Review'].values[0].split(), 3, aspect = 'pool'), 20))
+```
+
+*Wordcloud* untuk review hotel tersebut untuk melihat kata-kata yang paling sering muncul dalam ulasan wisatawan.
+
+```{python}
+# Draw WordCloud
+wordcloud_draw(search_data['Review'].values[0].split(),'white')
+```
+
+Fungsi untuk mengekspor dataset yang telah diolah untuk pembuatan dashboard.
+
+```{python}
+#df_merge.to_csv('dashboard_data.csv')
+#df_merge.to_excel('dashboard_data.xlsx')
+```
+
+Hasil dari dashboard yang telah dirancang dapat dilihat di laman berikut: https://europehoteldashboard.herokuapp.com/
+
+### Conclusion
+
+Hasil dari analisis ini berupa dashboard yang dapat digunakan para wisatawan untuk menentukan hotel mana yang terbaik dipilih sebagai tempat tinggal sementara selama menikmati liburan. Tentunya dengan adanya dashboard ini, diharapkan para wisatawan mendapatkan pengalaman terbaik dalam menginap. Dashboard ini menampilkan penilaian tidak hanya melalui *rating score* tapi juga mengenai nilai sentimen para wisatawan terdahulu terkait fasilitas-fasilitas dan pelayanan pada hotel tersebut. Fasilitas-fasilitas dan pelayanan yang menjadi aspek penilaian antara lain ruangan, staf hotel, kolam renang, kamar mandi, restoran, pemandangan, pelayanan, dan sarapan. 
+

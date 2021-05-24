@@ -1,6 +1,5 @@
 # Retail
 
-
 ```{r message=F, warning=F, echo=FALSE}
 library(tidyverse)
 library(textclean)
@@ -197,13 +196,16 @@ Dari hasil output observasi kedua terprediksi product tersebut recommended denga
 
 ##  Customer Segmentation with RFM Analysis (in Python Programming Language)
 
+
 ```{r echo=FALSE}
 library(reticulate)
-reticulate::use_python(python = 'C:/Users/dyahn/anaconda3/envs/data-analytics/python.exe', required = T)
+reticulate::use_python(python = '/Users/ariqleesta/opt/anaconda3/envs/ariq/bin/python', required = T)
 sys <- import("sys")
 py_run_string("import os")
-py_run_string("os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = 'C:/Users/dyahn/anaconda3/Library/plugins/platforms'")
+py_run_string("os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = '/Users/ariqleesta/opt/anaconda3/plugins/platforms'")
 ```
+
+
 
 ### Background
 
@@ -715,7 +717,7 @@ import seaborn as sns
 ```
 
 ```{python}
-df=pd.read_csv('cookie_cats.csv')
+df=pd.read_csv('assets/03-retail/cookie_cats.csv')
 ```
 
 ```{python}
@@ -852,8 +854,11 @@ delta_samples = burned_trace["delta"]
 
 ```{python}
 
+
+plt.figure(figsize=(12.5, 10))
 from IPython.core.pylabtools import figsize
 figsize(12.5, 10)
+
 
 
 ax = plt.subplot(311)
@@ -878,6 +883,8 @@ plt.vlines(true_p_A - true_p_B, 0, 60, linestyle="--",
            label="true delta (unknown)")
 plt.vlines(0, 0, 60, color="black", alpha=0.2)
 plt.legend(loc="upper right")
+plt.show()
+
 ```
 
 ```{python}
@@ -893,3 +900,4 @@ print("Peluang grup A lebih baik dari grup B: %.3f" % \
 ### Conclusion
 
 Setelah melakukan A/B Testing dengan tradisional stastitik (Mann Whitney-U), didapatkan bahwa gate_30 dan gate_40 adalah dua populasi yang tidak sama. Setelah menggunakan A/B Testing dengan Bayesian, didapatkan bahwa gate_30 lebih baik dari gate_40. Artinya, perusahaan tidak perlu memindahkan gate ke level 40 dan tetap meletakkan gate di level 30.
+
